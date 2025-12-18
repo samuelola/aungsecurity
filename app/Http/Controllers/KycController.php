@@ -7,24 +7,40 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Kyc;
 use App\Models\State;
+use App\Models\Lga;
 use App\Http\Requests\BioRequest;
+use App\Http\Requests\DocRequest;
 
 
 class KycController extends Controller
 {
-     public function index()
-    {
-         $tenant = app('tenant');
-         $user = auth()->user();
+     
+        public function index()
+     {
+        $tenant = app('tenant');
+        $user = auth()->user();
 
-         $kyc = Kyc::firstOrCreate([
+        $kyc = Kyc::firstOrCreate([
             'user_id' => $user->id,
             'tenant_id' => $tenant->id,
-         ]);
+        ]);
 
-         $allStates = State::all();
-         return view('dashboard.user.kyc.kyc_verification',compact('kyc', 'user','allStates'));
+        $allStates = State::all();
+
+        // Load LGAs if state already selected (for reloads)
+        $lgas = [];
+        if ($kyc->state_id) {
+            $lgas = Lga::where('state_id', $kyc->state_id)->get();
+        }
+
+        return view('dashboard.user.kyc.kyc_verification', compact(
+            'kyc',
+            'user',
+            'allStates',
+            'lgas'
+        ));
     }
+
 
     public function lgas(State $state)
     {
@@ -46,6 +62,7 @@ class KycController extends Controller
             'address' => $request->address,
             'lga_id' => $request->lga_id,
             'state_id' => $request->state_id,
+            'current_step' => 'document',
             'bio_completed' => true,
         ]);
 
@@ -56,7 +73,7 @@ class KycController extends Controller
     }
 
 
-    public function storeDoc(Request $request)
+    public function storeDoc(DocRequest $request)
     {
         $tenant = app('tenant');
         $user = auth()->user();
@@ -83,6 +100,7 @@ class KycController extends Controller
             'id_document' => $path,
             'doc_completed' => true,
             'kyc_completed' => true,
+            'current_step' => 'completed',
         ]);
 
         return response()->json([
@@ -92,6 +110,7 @@ class KycController extends Controller
     }
 
 
-    
+   
+
     
 }

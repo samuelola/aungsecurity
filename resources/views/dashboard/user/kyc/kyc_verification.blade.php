@@ -19,6 +19,8 @@ input {
 label{
   cursor: text !important;
 }
+
+
  </style>
 
    <div class="page-body">
@@ -74,14 +76,14 @@ label{
                                     </div>
                                   </a>
                                     
-                                    <!-- <a class="nav-link" id="finish-wizard-tab" data-bs-toggle="pill" href="#finish-wizard" role="tab" aria-controls="finish-wizard" aria-selected="false" tabindex="-1">
+                                    <a class="nav-link  disabled" id="finish-wizard-tab" data-bs-toggle="pill" href="#finish-wizard" role="tab" aria-controls="finish-wizard" aria-selected="false" tabindex="-1">
                                     <div class="cart-options">
                                       <div class="stroke-icon-wizard"><i class="fa-solid fa-square-check"></i></div>
                                       <div class="cart-options-content"> 
                                         <h6 class="f-w-700">Finish</h6>
                                       </div>
                                     </div>
-                                    </a> -->
+                                    </a>
                                 </div>
                               </div>
                               <div class="col-12"> 
@@ -103,7 +105,7 @@ label{
                                       </div>
                                       <div class="col-sm-6">
                                         <label class="form-label" for="customContact">Phone Number<span class="text-danger">*</span></label>
-                                        <input class="form-control" id="customContact" name="phone" type="number" placeholder="Enter number">
+                                        <input class="form-control" id="customContact" name="phone" type="number" value="{{ old('phone', $kyc->phone) }}" placeholder="Enter number">
                                         <div class="valid-feedback">Looks good!</div>
                                       </div>
                                       <div class="col-sm-6">
@@ -113,7 +115,9 @@ label{
                                       </div>
                                       <div class="col-12"> 
                                         <label class="form-label" for="exampleFormControlTextarea33">Address <span class="text-danger">*</span></label>
-                                        <textarea class="form-control" name="address" id="exampleFormControlTextarea33" rows="3"></textarea>
+                                        <textarea class="form-control" name="address"  id="exampleFormControlTextarea33" rows="3">
+                                          {{ old('address', $kyc->address) }}
+                                        </textarea>
                                       </div>
                                       <div class="col-sm-4">
                                         <label class="form-label" for="customState-wizard">State of Origin <span class="text-danger">*</span></label>
@@ -121,7 +125,10 @@ label{
                                         <select id="state" name="state_id" class="form-select">
                                             <option value="">Select State</option>
                                             @foreach($allStates as $state)
-                                                <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                                <option value="{{ $state->id }}"
+                                                    {{ $kyc->state_id == $state->id ? 'selected' : '' }}>
+                                                    {{ $state->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                         <div style="color:#dc3545;" class="invalid-feedback">Please select a valid state.</div>
@@ -130,7 +137,12 @@ label{
                                           <label class="form-label" for="customState-wizard">Select Lga <span class="text-danger">*</span></label> 
                                           <select id="lga" name="lga_id" class="form-select">
                                             <option value="">Select Lga</option>
-                                            
+                                            @foreach($lgas as $lga)
+                                                <option value="{{ $lga->id }}"
+                                                    {{ $kyc->lga_id == $lga->id ? 'selected' : '' }}>
+                                                    {{ $lga->name }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                       </div>
 
@@ -161,20 +173,22 @@ label{
                                             <div class="col-sm-3"></div>
                                             <div class="col-sm-6">
                                               <label class="form-label" for="customState-wizard">Select ID</label>
-                                              <select class="form-select" id="customState-wizard" required="">
-                                                <option selected="" disabled="" value="">Select ID</option>
+                                              <select class="form-select" id="id_type">
+                                                <option selected="" disabled="">Select Document</option>
                                                 <option>National ID</option>
                                                 <option>Passport </option>
                                                 <option>Driver’s license</option>
                                               </select>
                                               <div style="color:#dc3545;" class="invalid-feedback">Please select a valid id.</div>
-                                              <input type="file" name="id_document" required>
+                                              <input type="file" name="id_document">
                                             </div>
                                            <div class="col-sm-3"></div>
                                             
                                             
                                             <div class="col-12 text-end">
-                                              <button type="submit" class="btn btn-primary">Finish Kyc<i class="fa-solid fa-truck proceed-next pe-2"> </i></button>
+                                              <button type="submit" class="btn btn-primary">Finish Kyc
+                                               <i class="fa-solid fa-square-check proceed-next pe-2"></i>
+                                            </button>
                                             </div>
                                     </form>
                                       
@@ -190,6 +204,8 @@ label{
                                       
                                     </div>
                                   </div>
+
+                                  
                                 </div>
                               </div>
                             </div>
@@ -228,63 +244,102 @@ $('#state').on('change', function () {
 </script>
 
 <script>
+window.KYC_STEP = "{{ $kyc->current_step }}"; // bio | document | completed
+</script>
 
- $(document).on('input change', '#bioForm input, #bioForm select, #bioForm textarea', function () {
+<script>
+/* ===========================
+   CLEAR FIELD ERRORS ON INPUT
+=========================== */
+$(document).on('input change', '#bioForm input, #bioForm select, #bioForm textarea', function () {
     $(this).removeClass('is-invalid');
     $(this).next('.invalid-feedback').remove();
 });
- 
 
+/* ===========================
+   ENABLE TAB HELPER
+=========================== */
+function enableTab(tabId) {
+    const tab = document.querySelector(tabId);
+    if (!tab) return;
 
+    tab.classList.remove('disabled');
+    tab.removeAttribute('tabindex');
+    tab.setAttribute('aria-selected', 'false');
+}
+
+/* ===========================
+   RESTORE STEP + STATE ON LOAD
+=========================== */
 document.addEventListener('DOMContentLoaded', function () {
 
-    // BIO FORM
-    $('#bioForm').on('submit', function (e) {
+    const step = window.KYC_STEP || 'bio';
+
+    const stepsMap = {
+        bio: '#bio-tab',
+        document: '#doc-tab',
+        completed: '#finish-wizard-tab'
+    };
+
+    // Enable completed steps
+    if (['document', 'completed'].includes(step)) {
+        enableTab('#doc-tab');
+    }
+
+    if (step === 'completed') {
+        enableTab('#finish-wizard-tab');
+    }
+
+    // Show correct step
+    if (stepsMap[step]) {
+        new bootstrap.Tab(document.querySelector(stepsMap[step])).show();
+    }
+
+    // Auto redirect if fully completed
+    if (step === 'completed') {
+        setTimeout(() => {
+            window.location.href = "{{ route('tenant_user_dashboard', app('tenant')->subdomain) }}";
+        }, 3000);
+    }
+});
+
+/* ===========================
+   BIO FORM SUBMIT
+=========================== */
+$('#bioForm').on('submit', function (e) {
     e.preventDefault();
 
     let form = $(this);
-    let url = form.attr('action');
 
-    // Clear previous errors
     $('.invalid-feedback').remove();
     $('.is-invalid').removeClass('is-invalid');
 
     $.ajax({
-        url: url,
+        url: form.attr('action'),
         method: 'POST',
         data: form.serialize(),
-        success: function (res) {
-            if (res.success) {
-                
-                // 1️⃣ Enable Doc tab
-                $('#doc-tab')
-                    .removeClass('disabled')
-                    .removeAttr('tabindex')
-                    .attr('aria-selected', 'true');
 
-                // 2️⃣ Move to Doc tab
-                new bootstrap.Tab(document.querySelector('#doc-tab')).show();
-            }
+        success: function () {
+            enableTab('#doc-tab');
+            new bootstrap.Tab(document.querySelector('#doc-tab')).show();
         },
+
         error: function (xhr) {
             if (xhr.status === 422) {
-                let errors = xhr.responseJSON.errors;
-
-                $.each(errors, function (field, messages) {
+                $.each(xhr.responseJSON.errors, function (field, messages) {
                     let input = $('[name="' + field + '"]');
-
                     input.addClass('is-invalid');
-                    input.after(
-                        `<div style="color:#dc3545;" class="invalid-feedback">${messages[0]}</div>`
-                    );
+                    input.after(`<div style="color:#dc3545;"  class="invalid-feedback">${messages[0]}</div>`);
                 });
             }
         }
     });
 });
 
-    // DOCUMENT FORM
-    $('#docForm').on('submit', function (e) {
+/* ===========================
+   DOCUMENT FORM SUBMIT
+=========================== */
+$('#docForm').on('submit', function (e) {
     e.preventDefault();
 
     let formData = new FormData(this);
@@ -298,31 +353,34 @@ document.addEventListener('DOMContentLoaded', function () {
         data: formData,
         processData: false,
         contentType: false,
-        success: function (res) {
-            if (res.success) {
-                window.location.href = res.redirect;
-            }
+
+        success: function () {
+            enableTab('#finish-wizard-tab');
+            new bootstrap.Tab(document.querySelector('#finish-wizard-tab')).show();
         },
+
         error: function (xhr) {
             if (xhr.status === 422) {
-                let errors = xhr.responseJSON.errors;
-
-                Object.keys(errors).forEach(field => {
+                $.each(xhr.responseJSON.errors, function (field, messages) {
                     let input = $('[name="' + field + '"]');
-
                     input.addClass('is-invalid');
-                    input.after(
-                        `<div style="color:#dc3545;" class="invalid-feedback">${errors[field][0]}</div>`
-                    );
+                    input.after(`<div style="color:#dc3545;" class="invalid-feedback">${messages[0]}</div>`);
                 });
             }
         }
     });
 });
 
-
+/* ===========================
+   BLOCK DISABLED TABS
+=========================== */
+$(document).on('click', '.nav-link.disabled', function (e) {
+    e.preventDefault();
 });
 </script>
+
+
+
 
 @endsection
 

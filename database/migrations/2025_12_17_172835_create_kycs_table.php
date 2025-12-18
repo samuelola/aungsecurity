@@ -30,6 +30,7 @@ return new class extends Migration
         $table->boolean('doc_completed')->default(false);
         $table->boolean('face_completed')->default(false);
         $table->boolean('kyc_completed')->default(false);
+        $table->string('current_step')->default('bio');
 
         $table->timestamps();
     });

@@ -8,7 +8,7 @@ use App\Http\Controllers\TenantUserController;
 use App\Http\Controllers\ResidentController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\KycController;
-
+use App\Http\Controllers\FaceVerificationController;
 
 
 
@@ -45,10 +45,6 @@ Route::domain('{tenant}.' . $domain)
       
        });
 
-
-       
-
-
        Route::middleware(['tenant.auth', 'role:user'])->group(function () {
 
             // Route::get('/kyc', [KycController::class, 'index'])->name('kyc.verify');
@@ -59,7 +55,15 @@ Route::domain('{tenant}.' . $domain)
                  Route::post('/kyc/doc', [KycController::class, 'storeDoc'])->name('kyc.doc');
                  Route::get('/all_states', 'state')->name('states.lgas');
                  
+                 
             });
+
+            Route::controller(FaceVerificationController::class)->group(function () {
+                     
+                    Route::get('/facial', 'index')->name('facial.verify'); 
+            });
+
+            
 
             Route::post('/estate_logout', [TenantUserController::class, 'logout'])->name('tenant.logout');
            
