@@ -7,6 +7,10 @@ use App\Http\Controllers\TenantDashboardController;
 use App\Http\Controllers\TenantUserController;
 use App\Http\Controllers\ResidentController;
 use App\Http\Controllers\WalletController;
+use App\Http\Controllers\KycController;
+
+
+
 
 
 $domain = parse_url(config('app.url'), PHP_URL_HOST);
@@ -27,6 +31,8 @@ Route::controller(TenantController::class)->group(function () {
 });
 
 
+Route::get('/lgas/{state}', [KycController::class, 'lgas'])->name('lgas');
+
 
 Route::domain('{tenant}.' . $domain)
      ->middleware('tenant')->group(function () {
@@ -39,9 +45,27 @@ Route::domain('{tenant}.' . $domain)
       
        });
 
+
+       
+
+
        Route::middleware(['tenant.auth', 'role:user'])->group(function () {
 
+            // Route::get('/kyc', [KycController::class, 'index'])->name('kyc.verify');
+            Route::controller(KycController::class)->group(function () {
+           
+                 Route::get('/kyc', 'index')->name('kyc.verify');
+                 Route::post('/kyc/bio', [KycController::class, 'storeBio'])->name('kyc.bio');
+                 Route::post('/kyc/doc', [KycController::class, 'storeDoc'])->name('kyc.doc');
+                 Route::get('/all_states', 'state')->name('states.lgas');
+                 
+            });
+
             Route::post('/estate_logout', [TenantUserController::class, 'logout'])->name('tenant.logout');
+           
+         Route::middleware(['tenant.auth', 'role:user','kyc.completed'])->group(function () {
+              
+           
             Route::controller(TenantDashboardController::class)->group(function () {
              Route::get('/estate_dashboard', 'index')->name('tenant_user_dashboard');
             });
@@ -57,6 +81,10 @@ Route::domain('{tenant}.' . $domain)
                   Route::post('/savefundWallet', 'saveFundWallet')->name('savefundWallet');
                   Route::get('/wallet', 'allWallet')->name('allwallet');
             });
+              
+         });
+            
+            
 
        });
 

@@ -6,6 +6,7 @@ use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Kyc;
 
 class TenantUserController extends Controller
 {
@@ -35,6 +36,8 @@ class TenantUserController extends Controller
             'role' => 'user',
       ]);
 
+       
+
       // Automatically log in the user
       Auth::login($user);
 
@@ -52,7 +55,8 @@ class TenantUserController extends Controller
 
   public function userStore(Request $request, $subdomain)
     {
-        $tenant = Tenant::where('subdomain', $subdomain)->firstOrFail();
+        //$tenant = Tenant::where('subdomain', $subdomain)->firstOrFail();
+        $tenant = app('tenant');
 
         $credentials = $request->validate([
             'email' => 'required|email',
@@ -62,11 +66,14 @@ class TenantUserController extends Controller
         // Only allow login if user belongs to this tenant
         $user = User::where('email', $credentials['email'])
                     ->where('tenant_id', $tenant->id)
-                    ->first();            
+                    ->first();  
+                    
+                    
 
         if ($user && Auth::attempt(['email' => $user->email, 'password' => $credentials['password']])) {
             $request->session()->regenerate();
             if($user->isUser()){
+
                 return redirect()->route('tenant_user_dashboard', $tenant->subdomain);
             }elseif ($user->isAdmin()) {
                 return redirect()->route('tenant_admin_dashboard', $tenant->subdomain);

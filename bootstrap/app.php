@@ -17,6 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
              'tenant' => \App\Http\Middleware\IdentifyTenant::class,
              'tenant.auth' => \App\Http\Middleware\TenantAuth::class,
              'role' => \App\Http\Middleware\RoleMiddleware::class,
+             'face.verified' => \App\Http\Middleware\EnsureFaceVerified::class,
+             'kyc.completed' => \App\Http\Middleware\EnsureKycCompleted::class,
+
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

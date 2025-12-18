@@ -39,8 +39,11 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'face_verified' => 'boolean',
         ];
     }
+
+    
 
     // Helper function
     public function isUser(): bool
@@ -51,5 +54,15 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
+    }
+
+    public function isFaceVerified(): bool
+    {
+        return $this->face_verified;
+    }
+
+    public function kyc()
+    {
+        return $this->hasOne(Kyc::class);
     }
 }

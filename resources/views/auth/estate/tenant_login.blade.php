@@ -68,7 +68,7 @@ input {
                   </div>
                  
                   
-                  <p class="mt-4 mb-0 text-center">Don't have account?<a class="ms-2" href="{{route('tenant_user_reg',$tenant->subdomain)}}">Create Account</a></p>
+                  <p class="mt-4 mb-0 text-center"><span style="color:#292929">Don't have account?<span><a style="font-weight:600;" class="ms-2" href="{{route('tenant_user_reg',$tenant->subdomain)}}">Create Account</a></p>
                 </form>
               </div>
             </div>
