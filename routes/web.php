@@ -34,9 +34,11 @@ Route::controller(TenantController::class)->group(function () {
 Route::get('/lgas/{state}', [KycController::class, 'lgas'])->name('lgas');
 
 
+
+
 Route::domain('{tenant}.' . $domain)
      ->middleware('tenant')->group(function () {
-
+    
       Route::controller(TenantUserController::class)->group(function () {
          Route::get('/estate_register', 'showRegistrationForm')->name('tenant_user_reg');
          Route::post('/estate_registerr', 'storeRegister')->name('tenant_user_store_reg');
@@ -51,10 +53,11 @@ Route::domain('{tenant}.' . $domain)
             Route::controller(KycController::class)->group(function () {
            
                  Route::get('/kyc', 'index')->name('kyc.verify');
-                 Route::post('/kyc/bio', [KycController::class, 'storeBio'])->name('kyc.bio');
-                 Route::post('/kyc/doc', [KycController::class, 'storeDoc'])->name('kyc.doc');
+                 Route::post('/kyc/bio', 'storeBio')->name('kyc.bio');
+                 Route::post('/kyc/doc', 'storeDoc')->name('kyc.doc');
                  Route::get('/all_states', 'state')->name('states.lgas');
-                 
+                 Route::post('/kyc/face/compare', 'compareFace')->name('kyc.face.compare');
+
                  
             });
 
@@ -63,11 +66,10 @@ Route::domain('{tenant}.' . $domain)
                     Route::get('/facial', 'index')->name('facial.verify'); 
             });
 
-            
-
+          
             Route::post('/estate_logout', [TenantUserController::class, 'logout'])->name('tenant.logout');
            
-         Route::middleware(['tenant.auth', 'role:user','kyc.completed'])->group(function () {
+        Route::middleware(['tenant.auth', 'role:user','kyc.completed'])->group(function () {
               
            
             Route::controller(TenantDashboardController::class)->group(function () {

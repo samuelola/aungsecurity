@@ -61,6 +61,15 @@ label{
                                       </div>
                                     </div>
                                   </a>
+
+                                  <a class="nav-link" id="facee-tab" data-bs-toggle="pill" href="#face" role="tab" aria-controls="face" aria-selected="false" tabindex="-1">
+                                    <div class="cart-options">
+                                      <div class="stroke-icon-wizard"><i class="fa-solid fa-money-bill"></i></div>
+                                      <div class="cart-options-content">
+                                        <h6 class="f-w-700">Facial Verification</h6>
+                                      </div>
+                                    </div></a>
+
                                     <a class="nav-link " id="doc-tab" data-bs-toggle="pill" href="#doc" role="tab" aria-controls="doc" aria-selected="false" tabindex="-1">
                                     <div class="cart-options">
                                       <div class="stroke-icon-wizard"><i class="fa-solid fa-id-badge"></i></div>
@@ -69,17 +78,8 @@ label{
                                       </div>
                                     </div>
                                   </a>
-
-                                  <a class="nav-link " id="facee-tab" data-bs-toggle="pill" href="#facee" role="tab" aria-controls="facee" aria-selected="false" tabindex="-1">
-                                    <div class="cart-options">
-                                      <div class="stroke-icon-wizard"><i class="fa-solid fa-id-badge"></i></div>
-                                      <div class="cart-options-content">
-                                        <h6 class="f-w-700">Image Capture</h6>
-                                      </div>
-                                    </div>
-                                  </a>
                                     
-                                    <a class="nav-link  " id="finish-wizard-tab" data-bs-toggle="pill" href="#finish-wizard" role="tab" aria-controls="finish-wizard" aria-selected="false" tabindex="-1">
+                                    <a class="nav-link  disabled" id="finish-wizard-tab" data-bs-toggle="pill" href="#finish-wizard" role="tab" aria-controls="finish-wizard" aria-selected="false" tabindex="-1">
                                     <div class="cart-options">
                                       <div class="stroke-icon-wizard"><i class="fa-solid fa-square-check"></i></div>
                                       <div class="cart-options-content"> 
@@ -149,113 +149,103 @@ label{
                                         </select>
                                       </div>
 
-                                     
+                                      
+                                      
+                                      <!-- <div class="col-sm-4">
+                                        <label class="form-label" for="custom-zipcode">Zip Code</label>
+                                        <input class="form-control" id="custom-zipcode" type="number" required="">
+                                        <div class="invalid-feedback">Please provide a valid zip.</div>
+                                      </div> -->
+                                      
                                       
                                       <div class="col-12 text-end">
                                         
-                                        <button type="submit" class="btn btn-primary">Proceed to Next<i class="fa-solid fa-id-badge proceed-next pe-2"> </i></button>
+                                        <button type="submit" class="btn btn-primary">Next<i class="fa-solid fa-arrow-left proceed-next  pe-2"> </i></button>
                                         
                                       </div>
                                     </form>
                                   </div>
-
-
-                                  <div class="tab-pane fade shipping-wizard" id="doc" role="tabpanel" aria-labelledby="doc-tab"> 
-                                    <h5 class="f-w-600">ID Document Information</h5>
-                                    <p>Upload your ID information (National ID, Passport, driver’s license)</p>
-                                     
-
+                                  <div class="tab-pane fade shipping-wizard" id="face" role="tabpanel" aria-labelledby="facee-tab"> 
+                                    <h5 class="f-w-600">Facial Capture</h5>
+                                    <p>Hold Still for your facial capture</p>
+                                    
+                                    <!--row-->
                                     <div class="row g-3">
+                                       <video id="video" autoplay playsinline></video>
+                                        <button class="btn btn-primary" id="capture">Capture Face</button>
 
-                                        <form method="post" action="{{route('kyc.doc',$tenant->subdomain)}}" class="row g-3 needs-validation basic-form" id="docForm" enctype="multipart/form-data">
-                                           @csrf
-                                            <div class="col-sm-3"></div>
-                                            <div class="col-sm-6">
-                                                  <label class="form-label" for="customState-wizard">Select Document</label>
-                                                  <select class="form-select" id="id_type">
-                                                    <option selected="" disabled="">Select Document</option>
-                                                    <option value="National ID">National ID</option>
-                                                    <option value="Passport">Passport </option>
-                                                    <option value="Driver License">Driver’s license</option>
-                                                  </select>
-                                                  <div style="color:#dc3545;" class="invalid-feedback">Please select a valid id.</div>
-                                                  <div style="margin-top:12px;">
-                                                         <input class="form-control" type="file" name="id_document">
+                                        <canvas id="canvas" style="display:none;"></canvas>
 
-                                                  </div>
-                                                  
+                                        <form method="POST" action="#">
+                                            @csrf
+                                            <input type="hidden" name="image" id="image">
+                                            
 
-                                            </div>
-
-                                             <div class="col-sm-3"></div>
-                                             <div class="d-flex justify-content-between">
+                                            <div class="col-12 d-flex justify-content-between">
                                               <button type="button" class="btn btn-primary" id="back-to-bio">
                                                   <i class="fa-solid fa-arrow-right proceed-next me-1"></i> Back
                                               </button>
 
                                               <button type="submit" class="btn btn-primary">
-                                                  proceed to Capture <i class="fa-solid fa-square-check proceed-next pe-2"></i>
+                                                  Proceed <i class="fa-solid fa-arrow-left proceed-next pe-2"></i>
                                               </button>
-                                           </div>
-                                        </form>     
+                                            </div>
+                                        </form>
+                                      
                                     </div>
 
-                                  
+                                    <!--end of row-->
                                     
                                   </div>
 
-                                  <!--Image Capture-->
-                                  <div class="tab-pane fade shipping-wizard" id="facee" role="tabpanel" aria-labelledby="facee-tab"> 
-                                    <h5 class="f-w-600">Capture and verify</h5>
-                                    <p>Face the camera for Image capture</p>
-
-
+                                  <div class="tab-pane fade shipping-wizard" id="doc" role="tabpanel" aria-labelledby="doc-tab"> 
+                                    <h5 class="f-w-600">ID Document Information</h5>
+                                    <p>Upload you ID information (National ID, Passport, driver’s license)</p>
                                     
-                                     <form id="faceForm" action="{{ route('kyc.face.compare', $tenant->subdomain) }}">
-                                      @csrf
-                                      <input type="hidden" name="image" id="image">
+                                    <!--row-->
+                                    <div class="row g-3">
+                                       <form method="post" action="{{route('kyc.doc',$tenant->subdomain)}}" class="row g-3 needs-validation basic-form" id="docForm" enctype="multipart/form-data">
+                                           @csrf
+                                            <div class="col-sm-3"></div>
+                                            <div class="col-sm-6">
+                                              <label class="form-label" for="customState-wizard">Select ID</label>
+                                              <select class="form-select" id="id_type">
+                                                <option selected="" disabled="">Select Document</option>
+                                                <option>National ID</option>
+                                                <option>Passport </option>
+                                                <option>Driver’s license</option>
+                                              </select>
+                                              <div style="color:#dc3545;" class="invalid-feedback">Please select a valid id.</div>
+                                              <input type="file" name="id_document">
+                                            </div>
+                                           <div class="col-sm-3"></div>
 
-                                      <video id="video" autoplay playsinline class="w-100 rounded"></video>
-                                      <canvas id="canvas" class="d-none"></canvas>
+                                           <div class="col-12 d-flex justify-content-between">
+                                              <button type="button" class="btn btn-primary" id="back-to-bio">
+                                                  <i class="fa-solid fa-arrow-right proceed-next me-1"></i> Back
+                                              </button>
 
-                                      <div class="mt-3 d-flex justify-content-between">
-                                          <button type="button" class="btn btn-primary" id="back-to-doc">
-                                              <i class="fa-solid fa-arrow-right proceed-next me-1"></i> Back
-                                          </button>
+                                              <button type="submit" class="btn btn-primary">
+                                                  Finish Kyc <i class="fa-solid fa-square-check proceed-next pe-2"></i>
+                                              </button>
+                                           </div>
+                                            
+                                            
+                                            
+                                    </form>
+                                      
+                                    </div>
 
-                                          <button type="button" class="btn btn-primary" id="capture">
-                                              Capture & Verify
-                                          </button>
-                                      </div>
-                                  </form>
-
-
+                                    <!--end of row-->
+                                    
                                   </div>
                                   
                                   <div class="tab-pane fade shipping-wizard finish-wizard1" id="finish-wizard" role="tabpanel" aria-labelledby="finish-wizard-tab">
-                                    
-                                        <div class="row">
-
-                                             <div class="col-md-12">
-                                               <div class="order-confirm"><img src="{{asset('assets/images/gif/success/successful.gif')}}" alt="popper">
-                                                <h4 class="f-w-600">Thank you! for Completing Your KYC.</h4>
-                                                
-                                              </div>
-                                              
-                                                <div class="text-center mt-4">
-                                                    <button type="button" class="btn btn-primary" id="back-to-doc">
-                                                        <i class="fa-solid fa-arrow-right proceed-next me-1"></i> Back
-                                                    </button>
-                                                    <button type="button" class="btn btn-primary">
-                                                         Click Finish
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        
+                                    <div class="order-confirm"><img src="../assets/images/gif/success/successful.gif" alt="popper">
+                                      <h4 class="f-w-600">Thank you! for Completing Your KYC.</h4>
+                                      
+                                    </div>
                                   </div>
-                                  
 
                                   
                                 </div>
@@ -329,26 +319,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const stepsMap = {
         bio: '#bio-tab',
+        face: '#facee-tab',
         document: '#doc-tab',
         completed: '#finish-wizard-tab'
     };
 
     // Enable completed steps
-    if (step === 'bio') {
-    // only bio enabled
+    if (['face', 'completed'].includes(step)) {
+        enableTab('#facee-tab');
     }
 
-    if (step === 'document') {
-        enableTab('#bio-tab');
+    if (['document', 'completed'].includes(step)) {
         enableTab('#doc-tab');
     }
 
     if (step === 'completed') {
-        enableTab('#bio-tab');
-        enableTab('#doc-tab');
         enableTab('#finish-wizard-tab');
     }
-
 
     // Show correct step
     if (stepsMap[step]) {
@@ -397,6 +384,12 @@ $('#bioForm').on('submit', function (e) {
 });
 
 /* ===========================
+   Facial Capture and verify
+=========================== */
+
+
+
+/* ===========================
    DOCUMENT FORM SUBMIT
 =========================== */
 $('#docForm').on('submit', function (e) {
@@ -439,78 +432,24 @@ $(document).on('click', '.nav-link.disabled', function (e) {
 });
 </script>
 
-<script>
-/* ===========================
-   BACK BUTTON HANDLERS
-=========================== */
-
-// Back from DOC → BIO
-$(document).on('click', '#back-to-bio', function () {
-    enableTab('#bio-tab');
-    new bootstrap.Tab(document.querySelector('#bio-tab')).show();
-});
-
-// Back from FINISH → DOC
-$(document).on('click', '#back-to-doc', function () {
-    enableTab('#doc-tab');
-    new bootstrap.Tab(document.querySelector('#doc-tab')).show();
-});
-
-// Back from Caputur  → DOC
-$(document).on('click', '#back-to-facee', function () {
-    enableTab('#facee-tab');
-    new bootstrap.Tab(document.querySelector('#doc-tab')).show();
-});
-</script>
-
 
 
 <script>
-/* ===========================
-   JS — Camera + Capture + Verify
-=========================== */ 
 const video = document.getElementById('video');
-const canvas = document.getElementById('canvas');
-const imageInput = document.getElementById('image');
 
-// Start Camera
 navigator.mediaDevices.getUserMedia({ video: true })
-    .then(stream => video.srcObject = stream)
-    .catch(() => alert('Camera access denied'));
+  .then(stream => video.srcObject = stream);
 
-
-$('#capture').on('click', function () {
-
+document.getElementById('capture').onclick = () => {
     const canvas = document.getElementById('canvas');
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
+
     canvas.getContext('2d').drawImage(video, 0, 0);
-
-    $('#image').val(canvas.toDataURL('image/jpeg'));
-
-    $.ajax({
-        url: "{{ route('kyc.face.compare', $tenant->subdomain) }}",
-        method: 'POST',
-        data: $('#faceForm').serialize(),
-
-        success: function (res) {
-            alert(`Face verified (${res.confidence}%)`);
-
-            enableTab('#finish-wizard-tab');
-            new bootstrap.Tab(
-                document.querySelector('#finish-wizard-tab')
-            ).show();
-        },
-
-        error: function (xhr) {
-            alert(xhr.responseJSON.message || 'Face verification failed');
-        }
-    });
-});
-
+    document.getElementById('image').value =
+        canvas.toDataURL('image/jpeg');
+};
 </script>
-
-
 
 
 @endsection

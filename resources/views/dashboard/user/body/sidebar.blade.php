@@ -37,7 +37,7 @@
                  <h6 class="f-w-600">KYC</h6><i class="ti-arrow-right arrow-toggle"></i></a>
                 <ul class="sidebar-submenu">
                   <li> <a href="{{route('kyc.verify',$tenant->subdomain)}}">KYC Verification</a></li>
-                   <li> <a href="{{route('facial.verify',$tenant->subdomain)}}">Facial Verification</a></li>
+                   
                 </ul>
 
               </li>

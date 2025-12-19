@@ -53,7 +53,7 @@ input {
                       <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
                      @enderror 
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label class="col-form-label">Password</label>
                     <div class="form-input position-relative">
                       <input class="form-control" type="password" name="login[password]"  placeholder="*********">
@@ -62,7 +62,7 @@ input {
                      @error('password')
                     <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
                     @enderror 
-                  </div>
+                  </div> -->
                   <div class="form-group mb-0 checkbox-checked">
                    
                     <div class="text-end mt-3">

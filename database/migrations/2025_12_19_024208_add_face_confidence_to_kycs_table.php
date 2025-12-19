@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('states')) {
-        Schema::create('states', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('kycs', function (Blueprint $table) {
+            $table->float('face_confidence')->nullable();
+            $table->boolean('face_verified')->default(false);
         });
-        }
     }
 
     /**
@@ -24,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('states');
+        Schema::table('kycs', function (Blueprint $table) {
+            $table->dropColumn('face_confidence');
+            $table->dropColumn('face_verified');
+        });
     }
 };

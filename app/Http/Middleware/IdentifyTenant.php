@@ -18,7 +18,7 @@ class IdentifyTenant
     {
         $subdomain = $request->route('tenant');
         $tenant = Tenant::where('subdomain', $subdomain)->first();
-
+    
         if (! $tenant) {
             abort(404, "Tenant not found");
         }

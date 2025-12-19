@@ -36,8 +36,9 @@ return [
     ],
 
     'facepp' => [
-      'key' => env('FACEPP_KEY'),
-      'secret' => env('FACEPP_SECRET'),
+        'key' => env('FACEPP_API_KEY'),
+        'secret' => env('FACEPP_API_SECRET'),
+        'compare' => env('FACEPP_COMPARE_URL'),
      ],
 
 ];

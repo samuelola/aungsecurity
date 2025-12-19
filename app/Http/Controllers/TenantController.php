@@ -29,7 +29,8 @@ class TenantController extends Controller
     ]);
 
     $host = request()->getHost();
-    return redirect("http://{$tenant->subdomain}.{$host}/estate_register");
+    //return redirect("http://{$tenant->subdomain}.{$host}/estate_register");
+    return redirect("http://{$tenant->subdomain}.localhost/estate_register");
    
     // return redirect("http://{$tenant->subdomain}.aungsecurity.test");
 }
