@@ -88,9 +88,11 @@ class KycController extends Controller
             return response()->json(['message' => 'Complete bio first'], 403);
         }
 
+        //face ++ does not support pdf
+
         $request->validate([
             'id_type' => 'required|string',
-            'id_document' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'id_document' => 'required|image|mimes:jpg,jpeg,png|max:5120',
         ]);
 
         $path = $request->file('id_document')->store(
@@ -102,93 +104,121 @@ class KycController extends Controller
             'id_document' => $path,
             'doc_completed' => true,
             'kyc_completed' => true,
-            'current_step' => 'completed',
+            'current_step' => 'face',
         ]);
 
         return response()->json([
             'success' => true,
-            'redirect' => route('tenant_user_dashboard', $tenant->subdomain),
+            // 'redirect' => route('tenant_user_dashboard', $tenant->subdomain),
+            'next' => 'face',
         ]);
     }
 
 
-        public function compareFace(Request $request)
-    {
-        $tenant = app('tenant');
-        $user = auth()->user();
+      public function compareFace(Request $request)
+{
+    $tenant = app('tenant');
+    $user = auth()->user();
 
-        $kyc = Kyc::where('user_id', $user->id)
-            ->where('tenant_id', $tenant->id)
-            ->firstOrFail();
+    $kyc = Kyc::where('user_id', $user->id)
+        ->where('tenant_id', $tenant->id)
+        ->firstOrFail();
 
-        if (!$kyc->doc_completed) {
-            return response()->json(['message' => 'Upload ID first'], 403);
-        }
+    if (!$kyc->doc_completed) {
+        return response()->json(['message' => 'Upload ID first'], 403);
+    }
 
-        $request->validate([
-            'image' => 'required|string',
-        ]);
+    $request->validate([
+        'image' => 'required|string',
+    ]);
 
-        // Save live face
-        $imageData = preg_replace('/^data:image\/\w+;base64,/', '', $request->image);
-        $imageData = base64_decode($imageData);
+    /* ===========================
+       SAVE LIVE FACE IMAGE
+    ============================ */
+    $imageData = preg_replace('/^data:image\/\w+;base64,/', '', $request->image);
+    $imageData = base64_decode($imageData);
 
-        $liveFacePath = "kyc_faces/tenant_{$tenant->id}/live_{$user->id}.jpg";
-        Storage::put($liveFacePath, $imageData);
+    $liveFacePath = "kyc_faces/tenant_{$tenant->id}/live_{$user->id}.jpg";
+    Storage::disk('local')->put($liveFacePath, $imageData);
 
-        // Face++ Compare
-        $response = Http::asMultipart()->post(
-            config('services.facepp.compare'),
-            [
-                ['name' => 'api_key', 'contents' => config('services.facepp.key')],
-                ['name' => 'api_secret', 'contents' => config('services.facepp.secret')],
-                [
-                    'name' => 'image_file1',
-                    'contents' => Storage::get($kyc->id_document),
-                    'filename' => 'id.jpg'
-                ],
-                [
-                    'name' => 'image_file2',
-                    'contents' => Storage::get($liveFacePath),
-                    'filename' => 'live.jpg'
-                ],
-            ]
-        );
+    /* ===========================
+       DEFINE BOTH IMAGE PATHS
+    ============================ */
+    $image1Path = Storage::disk('local')->path($kyc->id_document); // ID document
+    $image2Path = Storage::disk('local')->path($liveFacePath);     // Live face
 
-        if (!$response->successful()) {
-            return response()->json(['message' => 'Face comparison failed'], 422);
-        }
+    if (
+    !Storage::disk('local')->exists($kyc->id_document) ||
+    !Storage::disk('local')->exists($liveFacePath)
+) {
+    return response()->json([
+        'message' => 'Image files not found',
+        'doc_exists' => Storage::disk('local')->exists($kyc->id_document),
+        'face_exists' => Storage::disk('local')->exists($liveFacePath),
+    ], 422);
+}
 
-        $result = $response->json();
 
-        if (!isset($result['confidence'])) {
-            return response()->json(['message' => 'No face match result'], 422);
-        }
+    /* ===========================
+       FACE++ COMPARE
+    ============================ */
+    $response = Http::withOptions([
+        'force_ip_resolve' => 'v4',
+        'timeout' => 30,
+        "verify"=>false
+    ])->withoutVerifying()->attach(
+        'image_file1', fopen($image1Path, 'r')
+    )->attach(
+        'image_file2', fopen($image2Path, 'r')
+    )->post(config('services.facepp.compare'), [
+        'api_key'    => config('services.facepp.key'),
+        'api_secret' => config('services.facepp.secret'),
+    ]);
 
-        $confidence = $result['confidence'];
-
-        // 🔒 Threshold
-        if ($confidence < 80) {
-            return response()->json([
-                'message' => 'Face does not match ID',
-                'confidence' => $confidence,
-            ], 422);
-        }
-
-        // ✅ Verified
-        $kyc->update([
-            'face_image' => $liveFacePath,
-            'face_confidence' => $confidence,
-            'face_verified' => true,
-            'face_completed' => true,
-            'kyc_completed' => true,
-            'current_step' => 'completed',
-        ]);
-
+    if (!$response->successful()) {
+        Storage::delete($liveFacePath);
         return response()->json([
-            'success' => true,
+            'message' => 'Face comparison failed',
+            'error' => $response->body()
+        ], 422);
+    }
+
+    $result = $response->json();
+
+    if (!isset($result['confidence'])) {
+        return response()->json(['message' => 'No face detected'], 422);
+    }
+
+    $confidence = $result['confidence'];
+
+
+    /* ===========================
+       VERIFY CONFIDENCE
+    ============================ */
+    if ($confidence < 80) {
+        return response()->json([
+            'message' => 'Face does not match ID',
             'confidence' => $confidence,
-        ]);
-    }   
+        ], 422);
+    }
+
+    /* ===========================
+       SUCCESS → UPDATE KYC
+    ============================ */
+    $kyc->update([
+        'face_image'      => $liveFacePath,
+        'face_confidence' => $confidence,
+        'face_verified'   => true,
+        'face_completed'  => true,
+        'kyc_completed'   => true,
+        'current_step'    => 'completed',
+    ]);
+
+    return response()->json([
+        'success' => true,
+        'confidence' => $confidence,
+    ]);
+}
+
 
 }

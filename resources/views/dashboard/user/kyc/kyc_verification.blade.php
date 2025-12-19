@@ -61,7 +61,7 @@ label{
                                       </div>
                                     </div>
                                   </a>
-                                    <a class="nav-link " id="doc-tab" data-bs-toggle="pill" href="#doc" role="tab" aria-controls="doc" aria-selected="false" tabindex="-1">
+                                    <a class="nav-link disabled" id="doc-tab" data-bs-toggle="pill" href="#doc" role="tab" aria-controls="doc" aria-selected="false" tabindex="-1">
                                     <div class="cart-options">
                                       <div class="stroke-icon-wizard"><i class="fa-solid fa-id-badge"></i></div>
                                       <div class="cart-options-content">
@@ -70,7 +70,7 @@ label{
                                     </div>
                                   </a>
 
-                                  <a class="nav-link " id="facee-tab" data-bs-toggle="pill" href="#facee" role="tab" aria-controls="facee" aria-selected="false" tabindex="-1">
+                                  <a class="nav-link disabled" id="facee-tab" data-bs-toggle="pill" href="#facee" role="tab" aria-controls="facee" aria-selected="false" tabindex="-1">
                                     <div class="cart-options">
                                       <div class="stroke-icon-wizard"><i class="fa-solid fa-id-badge"></i></div>
                                       <div class="cart-options-content">
@@ -79,7 +79,7 @@ label{
                                     </div>
                                   </a>
                                     
-                                    <a class="nav-link  " id="finish-wizard-tab" data-bs-toggle="pill" href="#finish-wizard" role="tab" aria-controls="finish-wizard" aria-selected="false" tabindex="-1">
+                                    <a class="nav-link  disabled" id="finish-wizard-tab" data-bs-toggle="pill" href="#finish-wizard" role="tab" aria-controls="finish-wizard" aria-selected="false" tabindex="-1">
                                     <div class="cart-options">
                                       <div class="stroke-icon-wizard"><i class="fa-solid fa-square-check"></i></div>
                                       <div class="cart-options-content"> 
@@ -170,22 +170,72 @@ label{
                                         <form method="post" action="{{route('kyc.doc',$tenant->subdomain)}}" class="row g-3 needs-validation basic-form" id="docForm" enctype="multipart/form-data">
                                            @csrf
                                             <div class="col-sm-3"></div>
-                                            <div class="col-sm-6">
-                                                  <label class="form-label" for="customState-wizard">Select Document</label>
-                                                  <select class="form-select" id="id_type">
-                                                    <option selected="" disabled="">Select Document</option>
-                                                    <option value="National ID">National ID</option>
-                                                    <option value="Passport">Passport </option>
-                                                    <option value="Driver License">Driver’s license</option>
-                                                  </select>
-                                                  <div style="color:#dc3545;" class="invalid-feedback">Please select a valid id.</div>
-                                                  <div style="margin-top:12px;">
-                                                         <input class="form-control" type="file" name="id_document">
+                                            <div class="col-sm-6 mx-auto">
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+
+            <h6 class="fw-semibold mb-3">
+                Upload Identification Document
+            </h6>
+
+            <!-- Document Type -->
+            <div class="mb-3">
+                <label class="form-label fw-medium">
+                    Select Document Type <span class="text-danger">*</span>
+                </label>
+                <select class="form-select" name="id_type" id="id_type" required>
+                    <option value="" selected disabled>Select Document</option>
+                    <option value="National ID">National ID</option>
+                    <option value="Passport">Passport</option>
+                    <option value="Driver License">Driver’s License</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please select a document type.
+                </div>
+            </div>
+
+                                          <!-- Upload Box -->
+                                          <div class="mb-3">
+                                              <label class="form-label fw-medium">
+                                                  Upload Document <span class="text-danger">*</span>
+                                              </label>
+
+                                              <div class="border border-dashed rounded-3 p-4 text-center bg-light position-relative">
+
+                                                  <i class="fa-solid fa-cloud-arrow-up fs-1 text-primary mb-2"></i>
+
+                                                  <p class="mb-1 fw-medium">
+                                                      Drag & drop your document here
+                                                  </p>
+
+                                                  <small class="text-muted">
+                                                      JPG, PNG or PDF (Max 2MB)
+                                                  </small>
+
+                                                  <input
+                                                      type="file"
+                                                      class="form-control position-absolute top-0 start-0 w-100 h-100 opacity-0"
+                                                      name="id_document"
+                                                      id="id_document"
+                                                      accept=".jpg,.jpeg,.png,.pdf"
+                                                      
+                                                  >
+                                              </div>
+
+                                              <div class="invalid-feedback mt-1">
+                                                  Please upload a valid document.
+                                              </div>
+                                          </div>
+
+                                                      <!-- Preview -->
+                                                      <div id="docPreview" class="d-none mt-3 text-center">
+                                                          <img class="img-fluid rounded shadow-sm mb-2" id="previewImg" style="max-height: 180px;">
+                                                          <p class="small text-muted mb-0">Document preview</p>
+                                                      </div>
 
                                                   </div>
-                                                  
-
-                                            </div>
+                                              </div>
+                                          </div>
 
                                              <div class="col-sm-3"></div>
                                              <div class="d-flex justify-content-between">
@@ -330,6 +380,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const stepsMap = {
         bio: '#bio-tab',
         document: '#doc-tab',
+        face : '#facee-tab',
         completed: '#finish-wizard-tab'
     };
 
@@ -343,9 +394,16 @@ document.addEventListener('DOMContentLoaded', function () {
         enableTab('#doc-tab');
     }
 
+    if (step === 'face') {
+        enableTab('#bio-tab');
+        enableTab('#doc-tab');
+        enableTab('#facee-tab');
+    }
+
     if (step === 'completed') {
         enableTab('#bio-tab');
         enableTab('#doc-tab');
+        enableTab('#facee-tab');
         enableTab('#finish-wizard-tab');
     }
 
@@ -380,6 +438,7 @@ $('#bioForm').on('submit', function (e) {
         data: form.serialize(),
 
         success: function () {
+            alert('Bio Data Completed');
             enableTab('#doc-tab');
             new bootstrap.Tab(document.querySelector('#doc-tab')).show();
         },
@@ -415,8 +474,11 @@ $('#docForm').on('submit', function (e) {
         contentType: false,
 
         success: function () {
-            enableTab('#finish-wizard-tab');
-            new bootstrap.Tab(document.querySelector('#finish-wizard-tab')).show();
+            alert('Document Upload Completed');
+            // enableTab('#finish-wizard-tab');
+            // new bootstrap.Tab(document.querySelector('#finish-wizard-tab')).show();
+            enableTab('#facee-tab');
+            new bootstrap.Tab(document.querySelector('#facee-tab')).show();
         },
 
         error: function (xhr) {
@@ -495,7 +557,7 @@ $('#capture').on('click', function () {
 
         success: function (res) {
             alert(`Face verified (${res.confidence}%)`);
-
+            console.log(res.confidence);
             enableTab('#finish-wizard-tab');
             new bootstrap.Tab(
                 document.querySelector('#finish-wizard-tab')
@@ -511,6 +573,21 @@ $('#capture').on('click', function () {
 </script>
 
 
+<script>
+document.getElementById('id_document').addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        document.getElementById('previewImg').src = e.target.result;
+        document.getElementById('docPreview').classList.remove('d-none');
+    };
+    reader.readAsDataURL(file);
+});
+</script>
 
 
 @endsection
