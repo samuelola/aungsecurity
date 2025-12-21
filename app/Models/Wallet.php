@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AddFaceImageToKycsTable extends Model
+class Wallet extends Model
 {
-    //
+    protected $table ='resident_wallets';
 }

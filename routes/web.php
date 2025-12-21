@@ -38,6 +38,9 @@ Route::get('/lgas/{state}', [KycController::class, 'lgas'])->name('lgas');
 
 Route::domain('{tenant}.' . $domain)
      ->middleware('tenant')->group(function () {
+
+      Route::get('kyc/document/preview', [KycController::class, 'documentPreview'])
+    ->name('kyc.document.preview')->middleware('tenant.auth');
     
       Route::controller(TenantUserController::class)->group(function () {
          Route::get('/estate_register', 'showRegistrationForm')->name('tenant_user_reg');
@@ -49,7 +52,6 @@ Route::domain('{tenant}.' . $domain)
 
        Route::middleware(['tenant.auth', 'role:user'])->group(function () {
 
-            // Route::get('/kyc', [KycController::class, 'index'])->name('kyc.verify');
             Route::controller(KycController::class)->group(function () {
            
                  Route::get('/kyc', 'index')->name('kyc.verify');
@@ -57,8 +59,7 @@ Route::domain('{tenant}.' . $domain)
                  Route::post('/kyc/doc', 'storeDoc')->name('kyc.doc');
                  Route::get('/all_states', 'state')->name('states.lgas');
                  Route::post('/kyc/face/compare', 'compareFace')->name('kyc.face.compare');
-
-                 
+                  
             });
 
             Route::controller(FaceVerificationController::class)->group(function () {

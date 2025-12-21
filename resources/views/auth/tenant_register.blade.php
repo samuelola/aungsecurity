@@ -38,17 +38,17 @@ input {
                     <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
                     @enderror 
                   </div>
-                  <!-- <div class="form-group">
-                    <label class="col-form-label">Email Address</label>
-                    <input class="form-control" name="email" type="email" value="{{ old('email') }}"  placeholder="Test@gmail.com">
-                     @error('email')
+                  <div class="form-group">
+                    <label class="col-form-label">Estate Name</label>
+                    <input class="form-control" name="estate_name" type="text" value="{{ old('estate_name') }}"  placeholder="Enter Estate name">
+                     @error('estate_name')
                         <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
                      @enderror 
-                  </div> -->
+                  </div>
                   <div class="form-group">
                     <label class="col-form-label">Subdomain Name</label>
                     <input class="form-control" name="subdomain" type="text" value="{{ old('subdomain') }}"  placeholder="Enter estate name, e.g goodwill">
-                    <p class="mb-0 text-title-gray">No spaces between for the subdomain name</p>
+                    <p class="mb-0 text-title-gray" style="color:#2f2c2b;">Note : No spaces between for the subdomain name</p>
                      @error('subdomain')
                       <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
                      @enderror 

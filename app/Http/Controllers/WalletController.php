@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\TopupRequest;
 use App\Models\Tenant;
+use App\Models\Wallet;
 
 class WalletController extends Controller
 {
@@ -25,7 +26,9 @@ class WalletController extends Controller
      public function allWallet(Request $request, $subdomain){
 
         $tenant = app('tenant');
-        return view('dashboard.user.wallet.index',compact('tenant'));
+        $user = auth()->user();
+        $wallet = Wallet::where('user_id',$user->id)->first();
+        return view('dashboard.user.wallet.index',compact('tenant','wallet'));
     }
 
     

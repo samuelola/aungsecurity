@@ -7,9 +7,22 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Kyc;
+use App\Services\AuthService;
+
 
 class TenantUserController extends Controller
 {
+
+    public AuthService $authService;
+    
+    public function __construct(AuthService $authService){
+
+         $this->authService = $authService;
+         
+    }
+
+    
+
     public function showRegistrationForm($subdomain)
   {
     // Find tenant by subdomain or $tenant
@@ -41,6 +54,9 @@ class TenantUserController extends Controller
       // Automatically log in the user
       Auth::login($user);
 
+      // use the service here
+      $this->authService->addWallet($user->id);
+
       return redirect()->route('tenant_user_dashboard',$tenant->subdomain);
 
   }
@@ -71,9 +87,12 @@ class TenantUserController extends Controller
                     
 
         if ($user && Auth::attempt(['email' => $user->email, 'password' => $credentials['password']])) {
+            // use the service here
+            $this->authService->addWallet($user->id);
+
             $request->session()->regenerate();
             if($user->isUser()){
-
+                
                 return redirect()->route('tenant_user_dashboard', $tenant->subdomain);
             }elseif ($user->isAdmin()) {
                 return redirect()->route('tenant_admin_dashboard', $tenant->subdomain);

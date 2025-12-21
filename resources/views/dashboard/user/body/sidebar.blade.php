@@ -74,6 +74,17 @@
 
               <li class="sidebar-main-title">
                 <div>
+                  <h5 class="f-w-700 sidebar-title pt-3">Subscription</h5>
+                </div>
+              </li>
+              <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
+                <a class="sidebar-link" href="#">
+                  <i class="fa-solid fa-bookmark"></i>
+                  <h6 class="f-w-600">Subscription</h6></a>
+              </li>
+
+              <li class="sidebar-main-title">
+                <div>
                   <h5 class="f-w-700 sidebar-title pt-3">Visitor Management</h5>
                 </div>
               </li>

@@ -26,6 +26,11 @@
             </div>
           </div>
           <!-- Container-fluid starts-->
+           @php
+                $currencyExchangeRateNgn = DB::table('currency')->where('code','NGN')->first();
+                $currencyExchangeRateUsd = DB::table('currency')->where('code','USD')->first();
+                $Usdbal = ($wallet->balance)/($currencyExchangeRateUsd->rate);
+           @endphp
           <div class="container-fluid default-dashboard">
             <div class="row">
                
@@ -35,12 +40,12 @@
                     <div class="row card-body pb-0 m-0">
                       <div class="col-xl-9 col-lg-8 col-9 p-0">
                         <h3 class="mb-2">Total Balance</h3>
-                        <h3 style="font-size: 15px;">₦31,939</h3>
+                        <h3 style="font-size: 15px;">{{$currencyExchangeRateNgn->symbol}}{{number_format($wallet->balance ?? 0,2,'.',',')}}</h3>
                         <h3 style="margin-top: 15px;"></h3>
                         <span></span>
                       </div>
                       <div class="col-xl-3 col-lg-4 col-3 text-end p-0">
-                        <h6 class="text-success"><i class="fa-solid fa-money-bill"></i></h6>
+                        <h6 class="text-success"><i style="color: #1d194b;font-weight: bolder;" class="fa-solid fa-money-bill"></i></h6>
                       </div>
                     </div>
                     
@@ -54,12 +59,13 @@
                     <div class="row card-body pb-0 m-0">
                       <div class="col-xl-9 col-lg-8 col-9 p-0">
                         <h3 class="mb-2">Total Balance</h3>
-                        <h3 style="font-size: 15px;">$31,939</h3>
+                        <h3 style="font-size: 15px;">{{$currencyExchangeRateUsd->symbol}}{{number_format($Usdbal ?? 0,2,'.',',')}} 
+                        </h3>
                         <h3 style="margin-top: 15px;"></h3>
                         <span></span>
                       </div>
                       <div class="col-xl-3 col-lg-4 col-3 text-end p-0">
-                        <h6 class="text-success"><i class="fa-solid fa-money-bill"></i></h6>
+                        <h6 class="text-success"><i style="color: #1d194b;font-weight: bolder;" class="fa-solid fa-money-bill"></i></h6>
                       </div>
                     </div>
                     
@@ -79,7 +85,7 @@
                         <span></span>
                       </div>
                       <div class="col-xl-3 col-lg-4 col-3 text-end p-0">
-                        <h6 class="text-success"><i class="fa-solid fa-money-bill"></i></h6>
+                        <h6 class="text-success"><i style="color: #1d194b;font-weight: bolder;" class="fa-solid fa-wallet"></i></h6>
                       </div>
                     </div>
                     

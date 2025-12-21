@@ -15,11 +15,13 @@
                   <p class="mb-0 text-title-gray">Welcome back! Let’s start from where you left.</p>
                 </div>
                 <div class="col-sm-6 col-12">
-                  <!-- <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html"><i class="iconly-Home icli svg-color"></i></a></li>
-                    <li class="breadcrumb-item">Dashboard</li>
-                    <li class="breadcrumb-item active">Default</li>
-                  </ol> -->
+                  <ol class="breadcrumb">
+                    
+                    <li class="breadcrumb-item" style="font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;">ID:{{$kyc->resident_id}}</li>
+                    
+                  </ol>
                 </div>
               </div>
             </div>
@@ -28,19 +30,26 @@
           <div class="container-fluid default-dashboard">
             <div class="row">
               
-
+              @php
+                $currencyExchangeRateNgn = DB::table('currency')->where('code','NGN')->first();
+                $currencyExchangeRateUsd = DB::table('currency')->where('code','USD')->first();
+             
+              @endphp
               <div class="col-xl-3">
                 <div class="card overflow-hidden" style="background-color: rgba(219, 218, 229, 1) !important;">
                   <div class="chart-widget-top">
                     <div class="row card-body pb-0 m-0">
                       <div class="col-xl-9 col-lg-8 col-9 p-0">
                         <h3 class="mb-2">Total Balance</h3>
-                        <h3 style="font-size: 15px;">&#8358;31,939</h3>
+                        <h3 style="font-size: 15px;">
+                          
+                          {{$currencyExchangeRateNgn->symbol}}{{number_format($wallet->balance ?? 0,2,'.',',')}} 
+                        </h3>
                         <h3 style="margin-top: 15px;"></h3>
                         <span></span>
                       </div>
                       <div class="col-xl-3 col-lg-4 col-3 text-end p-0">
-                        <h6 class="text-success"><i class="fa-solid fa-money-bill"></i></h6>
+                        <h6 class="text-success"><i style="color: #1d194b;font-weight: bolder;" class="fa-solid fa-money-bill"></i></h6>
                       </div>
                     </div>
                     
@@ -54,12 +63,18 @@
                     <div class="row card-body pb-0 m-0">
                       <div class="col-xl-9 col-lg-8 col-9 p-0">
                         <h3 class="mb-2">Status </h3>
-                        <h3 style="font-size: 15px;">Verified</h3>
+                        <h3 style="font-size: 15px;">
+                           @if($kyc->kyc_completed == 1)
+                              Verified
+                           @else
+                              Not Verified   
+                           @endif
+                        </h3>
                         <h3 style="margin-top: 15px;"></h3>
                         <span></span>
                       </div>
                       <div class="col-xl-3 col-lg-4 col-3 text-end p-0">
-                        <h6 class="text-success"><i class="ti-shield"></i></h6>
+                        <h6 class="text-success"><i style="color: #1d194b;font-weight: bolder;" class="fa-solid fa-shield"></i></h6>
                       </div>
                     </div>
                     
@@ -72,12 +87,12 @@
                     <div class="row card-body pb-0 m-0">
                       <div class="col-xl-9 col-lg-8 col-9 p-0">
                         <h3 class="mb-2">Visitors Daily</h3>
-                        <h3 style="font-size: 15px;">10</h3>
+                        <h3 style="font-size: 15px;">0</h3>
                         <h3 style="margin-top: 15px;"></h3>
                         <span></span>
                       </div>
                       <div class="col-xl-3 col-lg-4 col-3 text-end p-0">
-                        <h6 class="text-success"><i class="ti-user"></i></h6>
+                        <h6 class="text-success"><i style="color: #1d194b;font-weight: bolder;" class="fa-solid fa-user"></i></h6>
                       </div>
                     </div>
                     
@@ -95,7 +110,7 @@
                         <span></span>
                       </div>
                       <div class="col-xl-3 col-lg-4 col-3 text-end p-0">
-                        <h6 class="text-success"><i class="ti-credit-card"></i></h6>
+                        <h6 class="text-success"><i style="color: #1d194b;font-weight: bolder;" class="fa-solid fa-credit-card"></i></h6>
                       </div>
                     </div>
                     

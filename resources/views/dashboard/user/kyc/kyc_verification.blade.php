@@ -79,14 +79,14 @@ label{
                                     </div>
                                   </a>
                                     
-                                    <a class="nav-link  disabled" id="finish-wizard-tab" data-bs-toggle="pill" href="#finish-wizard" role="tab" aria-controls="finish-wizard" aria-selected="false" tabindex="-1">
+                                    <!-- <a class="nav-link  disabled" id="finish-wizard-tab" data-bs-toggle="pill" href="#finish-wizard" role="tab" aria-controls="finish-wizard" aria-selected="false" tabindex="-1">
                                     <div class="cart-options">
                                       <div class="stroke-icon-wizard"><i class="fa-solid fa-square-check"></i></div>
                                       <div class="cart-options-content"> 
                                         <h6 class="f-w-700">Finish</h6>
                                       </div>
                                     </div>
-                                    </a>
+                                    </a> -->
                                 </div>
                               </div>
                               <div class="col-12"> 
@@ -108,7 +108,7 @@ label{
                                       </div>
                                       <div class="col-sm-6">
                                         <label class="form-label" for="customContact">Phone Number<span class="text-danger">*</span></label>
-                                        <input class="form-control" id="customContact" name="phone" type="number" value="{{ old('phone', $kyc->phone) }}" placeholder="Enter number">
+                                        <input class="form-control" id="customContact" name="phone" type="number" value="{{ old('phone', $kyc->phone ?? '') }}" placeholder="Enter number">
                                         <div class="valid-feedback">Looks good!</div>
                                       </div>
                                       <div class="col-sm-6">
@@ -119,7 +119,7 @@ label{
                                       <div class="col-12"> 
                                         <label class="form-label" for="exampleFormControlTextarea33">Address <span class="text-danger">*</span></label>
                                         <textarea class="form-control" name="address"  id="exampleFormControlTextarea33" rows="3">
-                                          {{ old('address', $kyc->address) }}
+                                          {{ old('address', $kyc->address ?? '') }}
                                         </textarea>
                                       </div>
                                       <div class="col-sm-4">
@@ -148,6 +148,17 @@ label{
                                             @endforeach
                                         </select>
                                       </div>
+                                      <div class="col-sm-4">
+                                        <label class="form-label" for="customEmail01">Enter occupants per household   <span class="text-danger">*</span></label>
+                                        <input class="form-control" id="customEmail01" name="occupants" type="number"   value="{{$kyc->occupants ?? ''}}" >
+                                        <div style="color:#dc3545;" class="valid-feedback">Looks good!</div>
+                                      </div>
+
+                                      <div class="col-sm-4">
+                                        <label class="form-label" for="customEmail01">Digital Residency ID<span class="text-danger">*</span></label>
+                                        <input class="form-control" id="customEmail01" name="resident_id" type="text" value="{{ $kyc->resident_id ?? '' }}">
+                                        <div style="color:#dc3545;" class="valid-feedback">Looks good!</div>
+                                      </div>
 
                                      
                                       
@@ -171,28 +182,29 @@ label{
                                            @csrf
                                             <div class="col-sm-3"></div>
                                             <div class="col-sm-6 mx-auto">
-    <div class="card shadow-sm border-0">
-        <div class="card-body">
+                                    <div class="card shadow-sm border-0">
+                                        <div class="card-body">
 
-            <h6 class="fw-semibold mb-3">
-                Upload Identification Document
-            </h6>
+                                            <h6 class="fw-semibold mb-3">
+                                                Upload Identification Document
+                                            </h6>
 
-            <!-- Document Type -->
-            <div class="mb-3">
-                <label class="form-label fw-medium">
-                    Select Document Type <span class="text-danger">*</span>
-                </label>
-                <select class="form-select" name="id_type" id="id_type" required>
-                    <option value="" selected disabled>Select Document</option>
-                    <option value="National ID">National ID</option>
-                    <option value="Passport">Passport</option>
-                    <option value="Driver License">Driver’s License</option>
-                </select>
-                <div class="invalid-feedback">
-                    Please select a document type.
-                </div>
-            </div>
+                                            <!-- Document Type -->
+                                      <div class="mb-3">
+                                          <label class="form-label fw-medium">
+                                              Select Document Type <span class="text-danger">*</span>
+                                          </label>
+                                          <select class="form-select" name="id_type" id="id_type" required>
+                                              <option value="" disabled>Select Document</option>
+                                              <option value="National ID" {{ $kyc->id_type === 'National ID' ? 'selected' : '' }}>National ID</option>
+                                              <option value="Passport" {{ $kyc->id_type === 'Passport' ? 'selected' : '' }}>Passport</option>
+                                              <option value="Driver License" {{ $kyc->id_type === 'Driver License' ? 'selected' : '' }}>Driver’s License</option>
+                                          </select>
+
+                                          <div class="invalid-feedback">
+                                              Please select a document type.
+                                          </div>
+                                      </div>
 
                                           <!-- Upload Box -->
                                           <div class="mb-3">
@@ -209,7 +221,7 @@ label{
                                                   </p>
 
                                                   <small class="text-muted">
-                                                      JPG, PNG or PDF (Max 2MB)
+                                                      JPG, PNG or (Max 2MB)
                                                   </small>
 
                                                   <input
@@ -217,7 +229,7 @@ label{
                                                       class="form-control position-absolute top-0 start-0 w-100 h-100 opacity-0"
                                                       name="id_document"
                                                       id="id_document"
-                                                      accept=".jpg,.jpeg,.png,.pdf"
+                                                      accept="image/jpeg,image/png"
                                                       
                                                   >
                                               </div>
@@ -227,11 +239,37 @@ label{
                                               </div>
                                           </div>
 
-                                                      <!-- Preview -->
-                                                      <div id="docPreview" class="d-none mt-3 text-center">
-                                                          <img class="img-fluid rounded shadow-sm mb-2" id="previewImg" style="max-height: 180px;">
-                                                          <p class="small text-muted mb-0">Document preview</p>
-                                                      </div>
+                                                      
+                                                      <!-- Preview container always exists -->
+                                                    <div id="docPreview" class="mt-3 text-center {{ $kyc->id_document ? '' : 'd-none' }}">
+                                                      @php
+                                                          $ext = $kyc->id_document ? pathinfo($kyc->id_document, PATHINFO_EXTENSION) : '';
+                                                      @endphp
+
+                                                      @if($kyc->id_document && in_array($ext, ['jpg','jpeg','png']))
+                                                          <img id="previewImg"
+                                                              src="{{ Storage::url($kyc->id_document) }}"
+                                                              class="img-fluid rounded shadow-sm mb-2"
+                                                              style="max-height:180px">
+                                                      @else
+                                                          <img id="previewImg" class="img-fluid rounded shadow-sm mb-2" style="max-height:180px; display:none;">
+                                                      @endif
+
+                                                      @if($kyc->id_document && !in_array($ext, ['jpg','jpeg','png']))
+                                                          <p class="fw-medium text-success">
+                                                              <i class="fa-solid fa-file-pdf me-1"></i>
+                                                              Document uploaded successfully
+                                                          </p>
+                                                      @endif
+
+                                                      @if($kyc->id_document)
+                                                          <p class="small text-muted mb-0">Previously uploaded document</p>
+                                                      @endif
+                                                  </div>
+
+
+
+
 
                                                   </div>
                                               </div>
@@ -266,6 +304,9 @@ label{
                                       <input type="hidden" name="image" id="image">
 
                                       <video id="video" autoplay playsinline class="w-100 rounded"></video>
+                                      <p id="face-status" class="mt-2 text-muted small d-none">
+                                          Processing image, please hold still…
+                                      </p>
                                       <canvas id="canvas" class="d-none"></canvas>
 
                                       <div class="mt-3 d-flex justify-content-between">
@@ -273,8 +314,12 @@ label{
                                               <i class="fa-solid fa-arrow-right proceed-next me-1"></i> Back
                                           </button>
 
-                                          <button type="button" class="btn btn-primary" id="capture">
+                                          <!-- <button type="button" class="btn btn-primary" id="capture">
                                               Capture & Verify
+                                          </button> -->
+                                          <button type="button" class="btn btn-primary" id="capture">
+                                              <span id="capture-text">Capture & Verify</span>
+                                              <span id="capture-spinner" class="spinner-border spinner-border-sm d-none ms-2"></span>
                                           </button>
                                       </div>
                                   </form>
@@ -292,14 +337,14 @@ label{
                                                 
                                               </div>
                                               
-                                                <div class="text-center mt-4">
+                                                <!-- <div class="text-center mt-4">
                                                     <button type="button" class="btn btn-primary" id="back-to-doc">
                                                         <i class="fa-solid fa-arrow-right proceed-next me-1"></i> Back
                                                     </button>
                                                     <button type="button" class="btn btn-primary">
                                                          Click Finish
                                                     </button>
-                                                </div>
+                                                </div> -->
                                             </div>
 
                                         </div>
@@ -347,6 +392,33 @@ $('#state').on('change', function () {
 
 <script>
 window.KYC_STEP = "{{ $kyc->current_step }}"; // bio | document | completed
+
+
+/* ===========================
+   JS — Camera + Capture + Verify
+=========================== */ 
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const imageInput = document.getElementById('image');
+let stream = null;
+// Start Camera
+
+navigator.mediaDevices.getUserMedia({ video: true })
+  .then(s => {
+      stream = s;               // save the stream globally
+      video.srcObject = stream;
+  })
+  .catch(() => alert('Camera access denied'));
+
+
+  // Stop Camera
+
+function stopCamera() {
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop()); // stops all tracks
+        video.srcObject = null;  // remove video feed
+    }
+}
 </script>
 
 <script>
@@ -405,6 +477,12 @@ document.addEventListener('DOMContentLoaded', function () {
         enableTab('#doc-tab');
         enableTab('#facee-tab');
         enableTab('#finish-wizard-tab');
+        // Stop the camera if user was on face step
+        // stopCamera();
+
+        // setTimeout(() => {
+        //     window.location.href = "{{ route('tenant_user_dashboard', app('tenant')->subdomain) }}";
+        // }, 3000);
     }
 
 
@@ -414,11 +492,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Auto redirect if fully completed
-    if (step === 'completed') {
-        setTimeout(() => {
-            window.location.href = "{{ route('tenant_user_dashboard', app('tenant')->subdomain) }}";
-        }, 3000);
-    }
+    // if (step === 'completed') {
+        
+    // }
 });
 
 /* ===========================
@@ -437,8 +513,11 @@ $('#bioForm').on('submit', function (e) {
         method: 'POST',
         data: form.serialize(),
 
-        success: function () {
+        success: function (response) {
             alert('Bio Data Completed');
+            if (response.resident_id) {
+                $('input[name="resident_id"]').val(response.resident_id);
+            }
             enableTab('#doc-tab');
             new bootstrap.Tab(document.querySelector('#doc-tab')).show();
         },
@@ -501,6 +580,7 @@ $(document).on('click', '.nav-link.disabled', function (e) {
 });
 </script>
 
+
 <script>
 /* ===========================
    BACK BUTTON HANDLERS
@@ -528,21 +608,21 @@ $(document).on('click', '#back-to-facee', function () {
 
 
 <script>
-/* ===========================
-   JS — Camera + Capture + Verify
-=========================== */ 
-const video = document.getElementById('video');
-const canvas = document.getElementById('canvas');
-const imageInput = document.getElementById('image');
-
-// Start Camera
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then(stream => video.srcObject = stream)
-    .catch(() => alert('Camera access denied'));
-
 
 $('#capture').on('click', function () {
 
+    const btn = $('#capture');
+    const text = $('#capture-text');
+    const spinner = $('#capture-spinner');
+    const status = $('#face-status');
+
+    // Disable button + show loading UI
+    btn.prop('disabled', true);
+    spinner.removeClass('d-none');
+    status.removeClass('d-none');
+    text.text('Verifying...');
+
+    // Capture frame
     const canvas = document.getElementById('canvas');
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
@@ -556,19 +636,27 @@ $('#capture').on('click', function () {
         data: $('#faceForm').serialize(),
 
         success: function (res) {
-            alert(`Face verified (${res.confidence}%)`);
-            console.log(res.confidence);
-            enableTab('#finish-wizard-tab');
-            new bootstrap.Tab(
-                document.querySelector('#finish-wizard-tab')
-            ).show();
+            //alert(`Face verified successfully (${res.confidence}%)`);
+            alert(`Face verified successfully`);
+
+            stopCamera(); // stop webcam stream
+
+            window.location.href =
+                "{{ route('tenant_user_dashboard', app('tenant')->subdomain) }}";
         },
 
         error: function (xhr) {
-            alert(xhr.responseJSON.message || 'Face verification failed');
+            alert(xhr.responseJSON?.message || 'Face verification failed');
+
+            // Re-enable UI
+            btn.prop('disabled', false);
+            spinner.addClass('d-none');
+            status.addClass('d-none');
+            text.text('Capture & Verify');
         }
     });
 });
+
 
 </script>
 
@@ -578,15 +666,24 @@ document.getElementById('id_document').addEventListener('change', function (e) {
     const file = e.target.files[0];
     if (!file) return;
 
-    if (!file.type.startsWith('image/')) return;
+    const preview = document.getElementById('docPreview');
+    const img = document.getElementById('previewImg');
 
-    const reader = new FileReader();
-    reader.onload = function (e) {
-        document.getElementById('previewImg').src = e.target.result;
-        document.getElementById('docPreview').classList.remove('d-none');
-    };
-    reader.readAsDataURL(file);
+    if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            img.src = e.target.result;
+            img.style.display = 'block';
+            preview.classList.remove('d-none');
+        };
+        reader.readAsDataURL(file);
+    } else {
+        img.style.display = 'none';
+        preview.classList.remove('d-none');
+    }
 });
+
+
 </script>
 
 

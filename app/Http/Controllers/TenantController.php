@@ -12,7 +12,8 @@ class TenantController extends Controller
     $request->validate([
     'first_name' => ['required', 'string', 'regex:/^[A-Za-z\s\-]+$/'],
     'last_name'  => ['required', 'string', 'regex:/^[A-Za-z\s\-]+$/'],
-
+    'estate_name'  => ['required', 'string', 'regex:/^[A-Za-z\s\-]+$/'],
+    
     'subdomain' => [
         'required',
         'regex:/^[a-z0-9-]+$/', // no spaces, lowercase, hyphens allowed
@@ -24,7 +25,7 @@ class TenantController extends Controller
     $tenant = Tenant::create([
         'first_name' => $request->first_name,
         'last_name' => $request->last_name,
-        //'email'=>   $request->email,
+        'estate_name'=>   $request->estate_name,
         'subdomain' => strtolower($request->subdomain)
     ]);
 

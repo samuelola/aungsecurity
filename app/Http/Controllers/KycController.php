@@ -10,6 +10,7 @@ use App\Models\State;
 use App\Models\Lga;
 use App\Http\Requests\BioRequest;
 use App\Http\Requests\DocRequest;
+use App\Models\Tenant;
 
 
 class KycController extends Controller
@@ -56,18 +57,43 @@ class KycController extends Controller
         $kyc = Kyc::where('user_id', $user->id)
                 ->where('tenant_id', $tenant->id)
                 ->firstOrFail();
+        $subdomain_name = Tenant::where('subdomain',$tenant->subdomain)->first();        
+
+        //Generate Digital Residency ID only if not exists
+        if (!$kyc->resident_id) {
+
+            $tenantPrefix = strtoupper(str_replace(' ', '', $subdomain_name->subdomain));
+
+            // Get last ID number for this tenant
+            $lastId = Kyc::where('tenant_id', $tenant->id)
+                ->whereNotNull('resident_id')
+                ->orderBy('id', 'desc')
+                ->value('resident_id');
+
+            $number = 1;
+
+            if ($lastId) {
+                $number = (int) substr($lastId, strrpos($lastId, '-') + 1) + 1;
+            }
+
+            $residentId = $tenantPrefix . '-' . str_pad($number, 6, '0', STR_PAD_LEFT);
+
+            $kyc->resident_id = $residentId;
+        }        
 
         $kyc->update([
             'phone' => $request->phone,
             'address' => $request->address,
             'lga_id' => $request->lga_id,
             'state_id' => $request->state_id,
+            'occupants' => $request->occupants,
             'current_step' => 'document',
             'bio_completed' => true,
         ]);
 
         return response()->json([
             'success' => true,
+            'resident_id' => $kyc->resident_id,
             'next' => 'doc',
         ]);
     }
@@ -92,12 +118,36 @@ class KycController extends Controller
 
         $request->validate([
             'id_type' => 'required|string',
-            'id_document' => 'required|image|mimes:jpg,jpeg,png|max:5120',
+            'id_document' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
+
+
+        /* ===========================
+           DELETE OLD DOCUMENT (IF ANY)
+         ============================ */
+        if ($kyc->id_document && Storage::disk('public')->exists($kyc->id_document)) {
+            Storage::disk('public')->delete($kyc->id_document);
+        }
+
+        /* ===========================
+          STORE NEW DOCUMENT
+        ============================ */
         $path = $request->file('id_document')->store(
-            "kyc_docs/tenant_{$tenant->id}"
+            "kyc_docs/tenant_{$tenant->id}",
+            'public'
         );
+
+        /* ===========================
+          RESET FACE VERIFICATION
+         (IMPORTANT when re-uploading)
+        ============================ */
+        if ($kyc->face_image && Storage::disk('public')->exists($kyc->face_image)) {
+            Storage::disk('public')->delete($kyc->face_image);
+        }
+
+
+        
 
         $kyc->update([
             'id_type' => $request->id_type,
@@ -109,14 +159,12 @@ class KycController extends Controller
 
         return response()->json([
             'success' => true,
-            // 'redirect' => route('tenant_user_dashboard', $tenant->subdomain),
             'next' => 'face',
         ]);
     }
 
 
-      public function compareFace(Request $request)
-{
+    public function compareFace(Request $request) {
     $tenant = app('tenant');
     $user = auth()->user();
 
@@ -139,22 +187,22 @@ class KycController extends Controller
     $imageData = base64_decode($imageData);
 
     $liveFacePath = "kyc_faces/tenant_{$tenant->id}/live_{$user->id}.jpg";
-    Storage::disk('local')->put($liveFacePath, $imageData);
+    Storage::disk('public')->put($liveFacePath, $imageData);
 
     /* ===========================
        DEFINE BOTH IMAGE PATHS
     ============================ */
-    $image1Path = Storage::disk('local')->path($kyc->id_document); // ID document
-    $image2Path = Storage::disk('local')->path($liveFacePath);     // Live face
+    $image1Path = Storage::disk('public')->path($kyc->id_document); // ID document
+    $image2Path = Storage::disk('public')->path($liveFacePath);     // Live face
 
     if (
-    !Storage::disk('local')->exists($kyc->id_document) ||
-    !Storage::disk('local')->exists($liveFacePath)
+    !Storage::disk('public')->exists($kyc->id_document) ||
+    !Storage::disk('public')->exists($liveFacePath)
 ) {
     return response()->json([
         'message' => 'Image files not found',
-        'doc_exists' => Storage::disk('local')->exists($kyc->id_document),
-        'face_exists' => Storage::disk('local')->exists($liveFacePath),
+        'doc_exists' => Storage::disk('public ')->exists($kyc->id_document),
+        'face_exists' => Storage::disk('public')->exists($liveFacePath),
     ], 422);
 }
 
@@ -162,18 +210,14 @@ class KycController extends Controller
     /* ===========================
        FACE++ COMPARE
     ============================ */
-    $response = Http::withOptions([
-        'force_ip_resolve' => 'v4',
-        'timeout' => 30,
-        "verify"=>false
-    ])->withoutVerifying()->attach(
-        'image_file1', fopen($image1Path, 'r')
-    )->attach(
-        'image_file2', fopen($image2Path, 'r')
-    )->post(config('services.facepp.compare'), [
-        'api_key'    => config('services.facepp.key'),
+    $response = Http::withoutVerifying()
+    ->attach('image_file1', fopen($image1Path, 'r'))
+    ->attach('image_file2', fopen($image2Path, 'r'))
+    ->post(config('services.facepp.compare'), [
+        'api_key' => config('services.facepp.key'),
         'api_secret' => config('services.facepp.secret'),
     ]);
+
 
     if (!$response->successful()) {
         Storage::delete($liveFacePath);
@@ -214,11 +258,39 @@ class KycController extends Controller
         'current_step'    => 'completed',
     ]);
 
-    return response()->json([
-        'success' => true,
-        'confidence' => $confidence,
+        return response()->json([
+            'success' => true,
+            'confidence' => $confidence,
+        ]);
+    }
+    
+
+    // KycController.php
+    public function documentPreview(Request $request)
+{
+    $user = auth()->user();
+    $tenant = app('tenant');
+
+    $kyc = Kyc::where('user_id', $user->id)
+              ->where('tenant_id', $tenant->id)
+              ->firstOrFail();
+
+    $path = $kyc->id_document;
+
+    if (!$path || !Storage::exists($path)) {
+        abort(404);
+    }
+
+    $fullPath = storage_path("app/$path");
+    $mime = Storage::mimeType($path);
+
+    return response()->file($fullPath, [
+        'Content-Type' => $mime,
     ]);
 }
+
+
+
 
 
 }

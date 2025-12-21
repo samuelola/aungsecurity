@@ -21,8 +21,9 @@ class BioRequest extends FormRequest
      */
     public function rules(): array
     {
+        $userId = auth()->id();
         return [
-             'phone'     => ['required', 'digits_between:11,15'],
+            'phone'     => 'required|digits_between:11,15|unique:kycs,phone',
             'address'   => ['required', 'string'],
             'state_id'  => ['required'],
             'lga_id'    => ['required'],
