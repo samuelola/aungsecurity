@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Tenant;
 use App\Models\Kyc;
 use App\Models\Wallet;
+use App\Models\Transaction;
 
 class TenantDashboardController extends Controller
 {
@@ -20,8 +21,9 @@ class TenantDashboardController extends Controller
         ]);
 
         $wallet = Wallet::where('user_id',$user->id)->first();
+        $transactions = Transaction::where('user_id',auth()->id())->get();
         //$tenant = Tenant::where('subdomain', $subdomain)->firstOrFail();
-        return view('dashboard.user.tenant_index',compact('tenant','kyc','wallet'));
+        return view('dashboard.user.tenant_index',compact('tenant','kyc','wallet','transactions'));
     }
 
     public function adminIndex(Request $request, $subdomain){

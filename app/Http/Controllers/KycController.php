@@ -76,7 +76,8 @@ class KycController extends Controller
                 $number = (int) substr($lastId, strrpos($lastId, '-') + 1) + 1;
             }
 
-            $residentId = $tenantPrefix . '-' . str_pad($number, 6, '0', STR_PAD_LEFT);
+            $rr = '-ESTATE';
+            $residentId = $tenantPrefix . $rr. '-' . str_pad($number, 6, '0', STR_PAD_LEFT);
 
             $kyc->resident_id = $residentId;
         }        

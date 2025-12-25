@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tenant;
+use App\Models\Transaction;
 
 class ResidentController extends Controller
 {
     public function residentTransaction(Request $request, $subdomain){
 
         $tenant = app('tenant');
-        return view('dashboard.user.transaction.index');
+        $transactions = Transaction::where('user_id',auth()->id())->get();
+        return view('dashboard.user.transaction.index',compact('transactions'));
     }
 
     public function adminTransaction(Request $request, $subdomain){

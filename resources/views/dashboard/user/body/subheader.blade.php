@@ -40,56 +40,56 @@
               <li class="custom-dropdown">
                 <a href="javascript:void(0)">
                     <i class="ti-bell"></i>
-                 </a><span class="badge rounded-pill badge-primary">4</span>
-                <div class="custom-menu notification-dropdown py-0 overflow-hidden">
-                  <h3 class="title bg-primary-light dropdown-title">Notification <span class="font-primary">View all</span></h3>
-                  <ul class="activity-timeline">
-                    <li class="d-flex align-items-start">
-                      <div class="activity-line"></div>
-                      <div class="activity-dot-primary"></div>
-                      <div class="flex-grow-1">
-                        <h6 class="f-w-600 font-primary">30-04-2024<span>Today</span><span class="circle-dot-primary float-end">
-                            <svg class="circle-color">
-                              <use href="https://admin.pixelstrap.net/admiro/assets/svg/iconly-sprite.svg#circle"></use>
-                            </svg></span></h6>
-                        <h5>Alice Goodwin</h5>
-                        <p class="mb-0">Fashion should be fun. It shouldn't be labelled intellectual.</p>
-                      </div>
-                    </li>
-                                  <li class="d-flex align-items-start">
-                                    <div class="activity-dot-secondary"></div>
-                                    <div class="flex-grow-1">
-                                      <h6 class="f-w-600 font-secondary">28-06-2024<span>1 hour ago</span><span class="float-end circle-dot-secondary">
-                                          <svg class="circle-color">
-                                            <use href="https://admin.pixelstrap.net/admiro/assets/svg/iconly-sprite.svg#circle"></use>
-                                          </svg></span></h6>
-                                      <h5>Herry Venter</h5>
-                                      <p>I am convinced that there can be luxury in simplicity.</p>
-                                    </div>
-                                  </li>
-                                  <li class="d-flex align-items-start">
-                                    <div class="activity-dot-primary"></div>
-                                    <div class="flex-grow-1">
-                                      <h6 class="f-w-600 font-primary">04-08-2024<span>Today</span><span class="float-end circle-dot-primary">
-                                          <svg class="circle-color">
-                                            <use href="https://admin.pixelstrap.net/admiro/assets/svg/iconly-sprite.svg#circle"></use>
-                                          </svg></span></h6>
-                                      <h5>Loain Deo</h5>
-                                      <p>I feel that things happen for open new opportunities.</p>
-                                    </div>
-                                  </li>
-                                  <li class="d-flex align-items-start">
-                                    <div class="activity-dot-secondary"></div>
-                                    <div class="flex-grow-1">
-                                      <h6 class="f-w-600 font-secondary">12-11-2024<span>Yesterday</span><span class="float-end circle-dot-secondary">
-                                          <svg class="circle-color">
-                                            <use href="https://admin.pixelstrap.net/admiro/assets/svg/iconly-sprite.svg#circle"></use>
-                                          </svg></span></h6>
-                                      <h5>Fenter Jessy</h5>
-                                      <p>Sometimes the simplest things are the most profound.</p>
-                                    </div>
-                                  </li>
-                  </ul>
+                 </a>
+              @if(auth()->user()->unreadNotifications->count() > 0)   
+              <span class="badge rounded-pill badge-primary"> {{ auth()->user()->unreadNotifications->count() }}</span>
+
+               @else
+                 <span class="badge rounded-pill badge-primary"> 0 </span>
+                @endif
+
+                
+                <div class="custom-menu notification-dropdown py-0 overflow-y-auto"
+     style="max-height: 400px;">
+
+                  <h3 class="title bg-primary-light dropdown-title">Notification 
+                   
+                    <a class="font-primary" href="{{route('notifications.index',$tenant->subdomain)}}">View All</a>
+                  </h3>
+                   @foreach(auth()->user()->notifications as $notification)
+                       @php
+                          $isUnread = is_null($notification->read_at);
+                          $tenant = app('tenant');
+                       @endphp
+                      <a href="{{route('notifications.read',['notif'=>$notification->id,'tenant'=>$tenant->subdomain]) }}">
+                        
+                      <ul class="activity-timeline">
+                        <li class="d-flex align-items-start">
+                          <div class="activity-line"></div>
+                          <div class="activity-dot-primary"></div>
+                          <div class="flex-grow-1">
+                            <h6 class="f-w-600 font-primary">
+                              {{ $notification->created_at->diffForHumans() }}  
+                            <span class="circle-dot-primary float-end">
+                                <svg class="circle-color">
+                                  <use href="https://admin.pixelstrap.net/admiro/assets/svg/iconly-sprite.svg#circle"></use>
+                                </svg></span></h6>
+                            <h5> {{ is_array($notification->data['title'] ?? null)
+                                ? implode(', ', $notification->data['title'])
+                                : ($notification->data['title'] ?? 'Notification') }}</h5>
+                            <p class="mb-0">
+                               {{ \Illuminate\Support\Str::limit(
+                                implode(', ', (array) ($notification->data['message'] ?? 'Notification')),
+                                50,
+                                '...'
+                            ) }}
+                            </p>
+                          </div>
+                        </li>
+                                            
+                      </ul>
+                      </a>
+                    @endforeach 
                 </div>
               </li>
               

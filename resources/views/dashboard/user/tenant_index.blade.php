@@ -11,15 +11,17 @@
             <div class="page-title">
               <div class="row">
                 <div class="col-sm-6 col-12"> 
-                  <h2>User Dashboard</h2>
+                  <h2>Resident Dashboard</h2>
                   <p class="mb-0 text-title-gray">Welcome back! Let’s start from where you left.</p>
                 </div>
                 <div class="col-sm-6 col-12">
                   <ol class="breadcrumb">
                     
-                    <li class="breadcrumb-item" style="font-size: 20px;
+                    <li class="breadcrumb-item" style="font-size: 18px;
     font-weight: 700;
-    letter-spacing: 0.5px;">ID:{{$kyc->resident_id}}</li>
+    letter-spacing: 0.5px;">ID:{{$kyc->resident_id}}
+     <p class="mb-0 text-title-gray" style="color:#000;">This is your resident Identification Number </p>
+  </li>
                     
                   </ol>
                 </div>
@@ -143,165 +145,77 @@
                     <h3>Transition History</h3>
                   </div>
                   <div class="card-body transaction-history pt-0">
-                    <div class="table-responsive theme-scrollbar">
-                      <table class="table display table-bordernone" id="transaction" style="width:100%">
-                        <thead>
-                          <tr> 
-                            <th>Item Name</th>
-                            <th>Invoice No.</th>
-                            <th>Credit/Debit</th>
-                            <th>Date/Time</th>
-                            <th class="text-center">Status</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center gap-3">
-                                <div class="flex-shrink-0"><img src="../assets/images/dashboard-1/icon/1.png" alt=""/></div>
-                                <div class="flex-grow-1"><a href="product-page.html">
-                                    <h6>Samsung TV</h6></a>
-                                  <p>Item Sold</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td> #px0101</td>
-                            <td class="text-success">+ $3460</td>
-                            <td>
-                              <div class="d-flex"> 
-                                <div class="flex-grow-1">
-                                  <h6>Jan 25</h6>
-                                  <p>08:35:65</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="text-end">
-                              <div class="btn bg-light-success border-light-success text-success">Completed</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center gap-3">
-                                <div class="flex-shrink-0"><img src="../assets/images/dashboard-1/icon/2.png" alt=""/></div>
-                                <div class="flex-grow-1"><a href="product-page.html">
-                                    <h6>Spring Bed</h6></a>
-                                  <p>Bought item</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td> #rf304f</td>
-                            <td class="text-danger">- $910</td>
-                            <td>
-                              <div class="d-flex"> 
-                                <div class="flex-grow-1">
-                                  <h6>Feb 20</h6>
-                                  <p>12:35:00  </p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="text-end">
-                              <div class="btn bg-light-success border-light-success text-success">Completed</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center gap-3">
-                                <div class="flex-shrink-0"><img src="../assets/images/dashboard-1/icon/3.png" alt=""/></div>
-                                <div class="flex-grow-1"><a href="product-page.html">
-                                    <h6>Long Dress</h6></a>
-                                  <p>Bought item</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td> #dnj480</td>
-                            <td class="text-success">+ $4380</td>
-                            <td>
-                              <div class="d-flex"> 
-                                <div class="flex-grow-1">
-                                  <h6>Oct 25</h6>
-                                  <p>04:39:08</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="text-end">
-                              <div class="btn bg-light-warning border-light-warning text-warning">Pending</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center gap-3">
-                                <div class="flex-shrink-0"><img src="../assets/images/dashboard-1/icon/4.png" alt=""/></div>
-                                <div class="flex-grow-1"><a href="product-page.html">
-                                    <h6>Phillip Lightbulb</h6></a>
-                                  <p>Item Sold</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td> #g189d0</td>
-                            <td class="text-success">+ $246</td>
-                            <td>
-                              <div class="d-flex"> 
-                                <div class="flex-grow-1">
-                                  <h6>Dec 25</h6>
-                                  <p>08:35:65</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="text-end">
-                              <div class="btn bg-light-danger border-light-danger text-danger">Canceled</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center gap-3">
-                                <div class="flex-shrink-0"><img src="../assets/images/dashboard-1/icon/5.png" alt=""/></div>
-                                <div class="flex-grow-1"><a href="product-page.html">
-                                    <h6>Sofa Hauga</h6></a>
-                                  <p>Item Sold</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td> #31d8fs</td>
-                            <td class="text-danger">- $220</td>
-                            <td>
-                              <div class="d-flex"> 
-                                <div class="flex-grow-1">
-                                  <h6>Jan 25</h6>
-                                  <p>10:20:87</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="text-end">
-                              <div class="btn bg-light-success border-light-success text-success">Completed</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center gap-3">
-                                <div class="flex-shrink-0"><img src="../assets/images/dashboard-1/icon/6.png" alt=""/></div>
-                                <div class="flex-grow-1"><a href="product-page.html">
-                                    <h6>Apple iMac 19”</h6></a>
-                                  <p>Item Sold</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td> #g5384h</td>
-                            <td class="text-success">+ $983</td>
-                            <td>
-                              <div class="d-flex"> 
-                                <div class="flex-grow-1">
-                                  <h6>Feb 05</h6>
-                                  <p>10:49:50</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="text-end">
-                              <div class="btn bg-light-success border-light-success text-success">Completed</div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
+                     <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr class="border-bottom-secondary border-top-0">
+                            <th scope="col">Sn</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Gateway</th>
+                            <th scope="col">Remarks</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Subscription</th>
+                            <th scope="col">Reference</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          @if(!is_null($transactions))
+
+                          @php
+                              // Define an array of background color classes
+                              $rowColors = [
+                                'border-bottom-success', 
+                                'border-bottom-info', 
+                                'border-bottom-warning', 
+                                'border-bottom-danger', 
+                                'border-bottom-secondary',
+                                'border-bottom-primary',
+                                'border-bottom-0'
+                                ];
+
+                                $sn = 1;
+                          @endphp
+
+                          @foreach($transactions as $value)
+
+                            @php
+        
+                                $colorClass = $rowColors[$value->id % count($rowColors)];
+                            @endphp
+
+                            <tr class="{{$colorClass}}">
+                              <th scope="row">{{$sn++}}</th>
+                              <td>{{$value->user->first_name}} {{$value->user->last_name}}</td>
+                              <td>{{$value->gateway ?? ''}}</td>
+                              <td>{{$value->remarks ?? ''}}</td>
+                              <td>&#8358;{{$value->amount ?? ''}}</td>
+                              <td>{{$value->subscription->subscription_name ?? 'Not Available'}}</td>
+                              <td>{{$value->reference ?? 'Not Available'}}</td>
+                              <td>
+                                @if($value->status == 'success')
+                                   <span class="badge badge-light-success">{{$value->status}}</span>
+                                @elseif($value->status == 'pending')
+                                   <span class="badge badge-light-warning">{{$value->status}}</span>
+                                @elseif($value->status == 'failed')
+                                   <span class="badge badge-light-danger">{{$value->status}}</span>   
+                                @endif
+                                
+                              </td>
+                              <td>{{\Carbon\Carbon::parse($value->created_at)->format('d/m/Y')}}</td>
+                            </tr>
+
+                          @endforeach
+
+                          @else
+
+                          <p style="text-align:center">No Data avaliable</p>
+
+                          @endif
+                      </tbody>
+                    </table>
+                  </div>
                   </div>
                 </div>
               </div>

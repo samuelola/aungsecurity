@@ -9,6 +9,7 @@ use App\Http\Controllers\ResidentController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\KycController;
 use App\Http\Controllers\FaceVerificationController;
+use App\Http\Controllers\NotificationController;
 
 
 
@@ -87,6 +88,15 @@ Route::domain('{tenant}.' . $domain)
                   Route::get('/fundwallet', 'fundWallet')->name('fundwallet');
                   Route::post('/savefundWallet', 'saveFundWallet')->name('savefundWallet');
                   Route::get('/wallet', 'allWallet')->name('allwallet');
+                  Route::get('/payment_callback','paymentCallback')->name('paystack.payment_callback');
+            });
+
+            Route::controller(NotificationController::class)->group(function () {
+                Route::get('/notifications','index')->name('notifications.index');
+                Route::post('/notifications/mark-as-read','markNotifications');
+                Route::get('/notifications/load-more','loadMoreNotifications')->name('notifications.loadMore');
+                Route::get('/notifications/{notif}/read', 'read')->name('notifications.read');
+                
             });
               
          });

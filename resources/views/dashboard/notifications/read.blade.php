@@ -1,7 +1,7 @@
 @extends('dashboard.user.tenant_master')
 
 @section('title')
-    Fund Wallet
+    Notification
 @endsection
 
 
@@ -40,7 +40,7 @@ label{
             <div class="page-title">
               <div class="row">
                 <div class="col-sm-6 col-12"> 
-                  <h2>Fund Wallet</h2>
+                  <h2>Notification</h2>
                   
                 </div>
                 <div class="col-sm-6 col-12">
@@ -57,37 +57,49 @@ label{
           <div class="container-fluid default-dashboard">
             <div class="row">
                
-              <div class="col-xxl-6 col-xl-2"></div>
+              
              
-               <div class="col-xxl-6 col-xl-8">
+               <div class="col-xxl-6 col-xl-12">
                 <div class="card">
                   <div class="card-header card-no-border pb-0">
-                    <h3>Fund Your Wallet</h3>
+                    <h3>Notification</h3>
                   </div>
-                  <div class="card-body transaction-history pt-0 mt-3">
-                      <form class="row" method="post" action="{{route('savefundWallet',$tenant->subdomain)}}">
-                        @csrf
-                        <div class="mb-3">
-                          <label class="form-label" for="exampleFormControlInput1">Amount</label>
-                          <input class="form-control" id="exampleFormControlInput1" name="amount" type="number" placeholder="Enter Amount" value="{{ old('amount') }}">
-                          @error('amount')
-                                <p class="text-red-500 text-sm" style="color:#d22f2f">{{ $message }}</p>
-                          @enderror
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="exampleFormControlInput1">Email address</label>
-                          <input class="form-control" name="email" id="exampleFormControlInput1" type="email" placeholder="name@example.com" value="{{auth()->user()->email}}">
-                        </div>
-                        
-                        <div class="col">
-                            <button class="btn btn-primary me-2" type="submit">Fund Wallet</button>
-                        </div>
-                      </form>
-                  </div>
+
+                   <div class="row">
+                
+                            <div class="col-md-12">
+                                    <div class="border rounded p-3 mb-2 d-flex justify-content-between align-items-start">
+                                        
+                                        <!-- LEFT: Title + Message -->
+                                        <div class="flex-grow-1 me-3">
+                                            <strong>
+                                                {{ is_array($notification->data['title'] ?? null)
+                                                    ? implode(', ', $notification->data['title'])
+                                                    : ($notification->data['title'] ?? 'Notification') }}
+                                            </strong>
+
+                                            <p class="mb-0 text-wrap">
+                                                {!! is_array($notification->data['message'] ?? null)
+                                                    ? implode(', ', $notification->data['message'])
+                                                    : ($notification->data['message'] ?? 'Notification') !!}
+                                            </p>
+                                        </div>
+
+                                        <!-- RIGHT: Time -->
+                                        <small class="text-muted text-nowrap">
+                                            {{ $notification->created_at->diffForHumans() }}
+                                        </small>
+
+                                    </div>
+                                </div>
+
+
+                    </div><!--end of row-->
+                  
                 </div>
               </div>
              
-              <div class="col-xxl-6 col-xl-2"></div>
+              
 
             </div>
           </div>

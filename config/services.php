@@ -41,4 +41,9 @@ return [
         'compare' => env('FACEPP_COMPARE_URL'),
      ],
 
+    'paystack' => [
+    'secret' => env('PAYSTACK_SECRET_KEY'),
+    'url'    => env('PAYSTACK_PAYMENT_URL', 'https://api.paystack.co'),
+    ],
+
 ];

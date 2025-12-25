@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Kyc;
 use App\Services\AuthService;
+use DB;
 
 
 class TenantUserController extends Controller
@@ -88,13 +89,24 @@ class TenantUserController extends Controller
 
         if ($user && Auth::attempt(['email' => $user->email, 'password' => $credentials['password']])) {
             // use the service here
-            $this->authService->addWallet($user->id);
+            //$this->authService->addWallet($user->id);
 
             $request->session()->regenerate();
             if($user->isUser()){
+
+                $get_userwallet = DB::table('resident_wallets')->where('user_id',auth()->id())->first();
+                if(is_null($get_userwallet)){
+                   $this->authService->addWallet($user->id);
+                }
                 
                 return redirect()->route('tenant_user_dashboard', $tenant->subdomain);
+
             }elseif ($user->isAdmin()) {
+
+                $get_userwallet = DB::table('resident_wallets')->where('user_id',auth()->id())->first();
+                if(is_null($get_userwallet)){
+                   $this->authService->addWallet($user->id);
+                }
                 return redirect()->route('tenant_admin_dashboard', $tenant->subdomain);
             }
             
