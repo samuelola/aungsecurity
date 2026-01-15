@@ -154,11 +154,11 @@ label{
                                         <div style="color:#dc3545;" class="valid-feedback">Looks good!</div>
                                       </div>
 
-                                      <div class="col-sm-4">
-                                        <label class="form-label" for="customEmail01">Digital Residency ID<span class="text-danger">*</span></label>
+                                      <!-- <div class="col-sm-4">
+                                        <label class="form-label" for="customEmail01">Digital Residency ID</label>
                                         <input class="form-control" id="customEmail01" name="resident_id" type="text" value="{{ $kyc->resident_id ?? '' }}">
                                         <div style="color:#dc3545;" class="valid-feedback">Looks good!</div>
-                                      </div>
+                                      </div> -->
 
                                      
                                       

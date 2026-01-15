@@ -61,7 +61,9 @@
                           $isUnread = is_null($notification->read_at);
                           $tenant = app('tenant');
                        @endphp
-                      <a href="{{route('notifications.read',['notif'=>$notification->id,'tenant'=>$tenant->subdomain]) }}">
+                      <a href="{{route('notifications.read',['notif'=>$notification->id,'tenant'=>$tenant->subdomain]) }}"
+                       class="{{ $isUnread ? 'bg-primary-subtle fw-semibold' : '' }}"
+                      >
                         
                       <ul class="activity-timeline">
                         <li class="d-flex align-items-start">
@@ -70,7 +72,7 @@
                           <div class="flex-grow-1">
                             <h6 class="f-w-600 font-primary">
                               {{ $notification->created_at->diffForHumans() }}  
-                            <span class="circle-dot-primary float-end">
+                            <span class="{{$isUnread ? 'circle-dot-secondary' : 'circle-dot-primary'}} float-end">
                                 <svg class="circle-color">
                                   <use href="https://admin.pixelstrap.net/admiro/assets/svg/iconly-sprite.svg#circle"></use>
                                 </svg></span></h6>
@@ -97,7 +99,7 @@
               
               <li class="profile-nav custom-dropdown">
                 <div class="user-wrap">
-                  <div class="user-img"><img src="../assets/images/profile.png" alt="user"/></div>
+                  <div class="user-img"><img src="{{asset('assets/images/profile.png')}}" alt="user"/></div>
                   <div class="user-content">
                     <h6>{{ucfirst(auth()->user()->first_name)}} {{ucfirst(auth()->user()->last_name)}}</h6>
                     <p class="mb-0">{{auth()->user()->role}}<i class="fa-solid fa-chevron-down"></i></p>

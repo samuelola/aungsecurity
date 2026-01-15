@@ -166,6 +166,12 @@ class PaystackService implements PaymentInterface
                 
                 ]);
 
+        }elseif($get_bal->balance != 0.00){
+
+             DB::table('resident_wallets')->where('user_id',auth()->user()->id)->update([
+                'balance' => $get_bal->balance + $amount
+                
+                ]);
         }
         
         $user = User::find(auth()->user()->id);
@@ -175,7 +181,7 @@ class PaystackService implements PaymentInterface
             'Top-up Successful',
             "Your topup of ₦{$amount} is successful"
         )
-);
+        );
 
         return $status;
     }

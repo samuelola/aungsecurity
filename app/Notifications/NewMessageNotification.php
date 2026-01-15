@@ -13,7 +13,7 @@ class NewMessageNotification extends Notification implements ShouldBroadcast
 {
     use Queueable;
 
-    public string $title;
+    public $title;
     public $message;
 
     /**

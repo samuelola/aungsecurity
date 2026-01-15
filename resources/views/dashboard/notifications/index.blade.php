@@ -95,7 +95,7 @@ label{
                                     @endforelse
                                 </div>
 
-                      </div>
+                      </div><!--end of row-->
                 </div>
               </div>
              
