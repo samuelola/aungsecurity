@@ -23,6 +23,11 @@ Route::get('/refresh-csrf', function () {
 Route::controller(MainController::class)->group(function () {
 
       Route::get('/', 'index')->name('home');
+      Route::get('/about', 'About')->name('about');
+      Route::get('/price', 'Price')->name('price');
+      Route::get('/blog', 'Blog')->name('blog');
+      Route::get('/contact', 'Contact')->name('contact');
+      Route::get('/product', 'Product')->name('product');
 });
 
 Route::controller(TenantController::class)->group(function () {
