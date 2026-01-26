@@ -118,9 +118,10 @@ label{
                                       </div>
                                       <div class="col-12"> 
                                         <label class="form-label" for="exampleFormControlTextarea33">Address <span class="text-danger">*</span></label>
-                                        <textarea class="form-control" name="address"  id="exampleFormControlTextarea33" rows="3">
+                                        <textarea class="form-control" name="address"  id="exampleFormControlTextarea33">
                                           {{ old('address', $kyc->address ?? '') }}
                                         </textarea>
+                                       
                                       </div>
                                       <div class="col-sm-4">
                                         <label class="form-label" for="customState-wizard">State of Origin <span class="text-danger">*</span></label>
@@ -159,7 +160,23 @@ label{
                                         <input class="form-control" id="customEmail01" name="resident_id" type="text" value="{{ $kyc->resident_id ?? '' }}">
                                         <div style="color:#dc3545;" class="valid-feedback">Looks good!</div>
                                       </div> -->
+                                      <div class="col-sm-4">
+                                        <label class="form-label" for="customEmail01">Flat Number<span class="text-danger">*</span></label>
+                                        <input class="form-control" id="customEmail01" name="flat_number" type="number"   value="{{$kyc->flat_number ?? ''}}" >
+                                        <div style="color:#dc3545;" class="valid-feedback">Looks good!</div>
+                                      </div>
 
+                                      <div class="col-sm-4">
+                                        <label class="form-label" for="customEmail01">Agent Name<span class="text-danger">*</span></label>
+                                        <input class="form-control" id="customEmail01" name="agent_name" type="text"   value="{{$kyc->agent_name ?? ''}}" >
+                                        <div style="color:#dc3545;" class="valid-feedback">Looks good!</div>
+                                      </div>
+
+                                      <div class="col-sm-4">
+                                        <label class="form-label" for="customEmail01">Agent Number<span class="text-danger">*</span></label>
+                                        <input class="form-control" id="customEmail01" name="agent_number" type="number"   value="{{$kyc->agent_number ?? ''}}" >
+                                        <div style="color:#dc3545;" class="valid-feedback">Looks good!</div>
+                                      </div>
                                      
                                       
                                       <div class="col-12 text-end">

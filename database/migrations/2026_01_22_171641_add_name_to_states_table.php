@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('states')) {
-        Schema::create('states', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('states', function (Blueprint $table) {
+             $table->string('name')->nullable();
         });
-        }
     }
 
     /**
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('states');
+        Schema::table('states', function (Blueprint $table) {
+             $table->dropColumn('name');
+        });
     }
 };

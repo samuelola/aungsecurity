@@ -27,6 +27,10 @@ class BioRequest extends FormRequest
             'address'   => ['required', 'string'],
             'state_id'  => ['required'],
             'lga_id'    => ['required'],
+            'occupants' => ['required'],
+            'flat_number' => ['required'],
+            'agent_name' => ['required', 'string'],
+            'agent_number' => 'required|digits_between:11,15|unique:kycs,phone'
         ];
     }
     public function messages(): array
@@ -37,6 +41,10 @@ class BioRequest extends FormRequest
             'address.required'  => 'Residential address is required.',
             'state_id.required' => 'Please select your state of origin.',
             'lga_id.required'   => 'Please select your local government.',
+            'occupants.required'    => 'Occupant is required.',
+            'flat_number.required'    => 'Flat number is required.',
+            'agent_name.required'    => 'Agent Name is required.',
+            'agent_number.required'    => 'Agent Number is required.',
         ];
     }
 }

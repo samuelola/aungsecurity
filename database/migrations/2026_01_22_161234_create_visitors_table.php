@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('kycs', function (Blueprint $table) {
-            $table->string('face_image')->nullable();
+        Schema::create('visitors', function (Blueprint $table) {
+            $table->id();
+            $table->string('full_name');
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('kycs', function (Blueprint $table) {
-            $table->dropColumn('face_image');
-        });
+        Schema::dropIfExists('visitors');
     }
 };

@@ -17,6 +17,22 @@
     
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <link rel="manifest" href="{{asset('aung_favicon/manifest.json')}}">
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('/serviceworker.js')
+        .then(function (registration) {
+          console.log('ServiceWorker registered:', registration);
+        })
+        .catch(function (error) {
+          console.log('ServiceWorker registration failed:', error);
+        });
+    });
+  }
+</script>
     <style class="fslightbox-styles">
         .fslightbox-absoluted {
             position: absolute;

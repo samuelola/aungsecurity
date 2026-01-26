@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('lgas')) {
-        Schema::create('lgas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            
+             $table->string('status')->default('active'); 
+             $table->string('fees_status')->default('clear');
         });
-       }
     }
 
     /**
@@ -24,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lgas');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(['status', 'fees_status']);
+        });
     }
 };

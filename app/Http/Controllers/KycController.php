@@ -88,6 +88,9 @@ class KycController extends Controller
             'lga_id' => $request->lga_id,
             'state_id' => $request->state_id,
             'occupants' => $request->occupants,
+            'flat_number' => $request->flat_number,
+            'agent_name' => $request->agent_name,
+            'agent_number' => $request->agent_number,
             'current_step' => 'document',
             'bio_completed' => true,
         ]);

@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('kycs', function (Blueprint $table) {
-            $table->string('face_image')->nullable();
+             $table->unsignedBigInteger('flat_number')->nullable(); 
+             $table->string('agent_name')->nullable();
+             $table->string('agent_number')->nullable();
+             
         });
     }
 
@@ -22,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('kycs', function (Blueprint $table) {
-            $table->dropColumn('face_image');
+            $table->dropColumn(['flat_number', 'agent_name','agent_number']);
         });
     }
 };

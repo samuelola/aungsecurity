@@ -20,15 +20,21 @@ input {
 
    <div class="container-fluid">
       <div class="row">
-        <div class="col-xl-7 login_one_image"><img class="bg-img-cover bg-center" src="../assets/images/login/2.jpg" alt="looginpage"></div>
+        <div class="col-xl-7 login_one_image">
+          <img class="bg-img-cover bg-center" src="{{asset('assets/images/login/man_login.jpg')}}" alt="looginpage"></div>
         <div class="col-xl-5 p-0">
           <div class="login-card login-dark login-bg">
             <div>
-              <div><a class="logo" href="#"><img class="img-fluid for-light m-auto" src="../assets/images/logo/logo1.png" alt="looginpage"><img class="for-dark" src="../assets/images/logo/logo-dark.png" alt="logo"></a></div>
+              <div>
+                <a class="logo" href="#">
+                  <img class="img-fluid for-light m-auto" style="width:100px;height:100px;" src="{{asset('aung_logo_white.png')}}" alt="looginpage">
+                  <img class="for-dark" src="{{asset('aung_logo_blue.png')}}" style="width:120px;height:100px;" alt="logo">
+                </a>
+              </div>
               <div class="login-main"> 
                 <form class="theme-form" action="{{route('tenant_user_submit',$tenant->subdomain)}}" method="post">
                   @csrf
-                  <h4 class="text-center">{{ucfirst($tenant->subdomain)}} Estate</h4>
+                  <h4 class="text-center">{{ucfirst($tenant->estate_name)}} Estate</h4>
                   <h2 class="text-center">Login into  your account</h2>
                   <p class="text-center">Enter your email &amp; password to login</p>
                   <div class="form-group">

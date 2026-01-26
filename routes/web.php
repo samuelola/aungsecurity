@@ -10,7 +10,8 @@ use App\Http\Controllers\WalletController;
 use App\Http\Controllers\KycController;
 use App\Http\Controllers\FaceVerificationController;
 use App\Http\Controllers\NotificationController;
-
+use App\Http\Controllers\VisitorInvitationController;
+use App\Http\Controllers\GateVerificationController;
 
 
 
@@ -19,6 +20,18 @@ $domain = parse_url(config('app.url'), PHP_URL_HOST);
 Route::get('/refresh-csrf', function () {
     return response()->json(['csrf_token' => csrf_token()]);
 })->middleware('refresh_token');
+
+
+
+Route::controller(GateVerificationController::class)->group(function () {
+    Route::get('/security/scan','showScanForm')->name('showScanForm');
+    Route::post('/security/verify','verify')->name('verifyscan');
+});
+
+Route::get('/security/inside-count', function() {
+    $count = \App\Models\VisitorInvitation::where('status', 'used')->count();
+    return response()->json(['inside' => $count]);
+});
 
 Route::controller(MainController::class)->group(function () {
 
@@ -102,6 +115,12 @@ Route::domain('{tenant}.' . $domain)
                 Route::get('/notifications/load-more','loadMoreNotifications')->name('notifications.loadMore');
                 Route::get('/notifications/{notif}/read', 'read')->name('notifications.read');
                 
+            });
+
+            Route::controller(VisitorInvitationController::class)->group(function () {
+                
+                Route::get('visitor-invite', [VisitorInvitationController::class, 'create'])->name('visitor.create');
+                Route::post('/visitor-invite', [VisitorInvitationController::class, 'store'])->name('visitor.store');
             });
               
          });

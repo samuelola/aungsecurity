@@ -89,6 +89,12 @@
                 </div>
               </li>
               <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
+                <a class="sidebar-link" href="{{$kyc && $kyc->kyc_completed ? route('visitor.create',$tenant->subdomain) : '#'}}">
+                  <i class="ti-user"></i>
+                  <h6 class="f-w-600">Visitor's Invite</h6>
+                </a>
+              </li>
+              <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
                 <a class="sidebar-link" href="#">
                   <i class="ti-user"></i>
                   <h6 class="f-w-600">Visitor's Log</h6></a>
