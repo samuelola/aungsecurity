@@ -10,9 +10,25 @@ use Carbon\Carbon;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VisitorQrCodeMail;
+use Illuminate\Support\Facades\Storage;
+
 
 class VisitorInvitationController extends Controller
 {
+
+    public function index(Request $request, $subdomain)
+    {
+        $resident = auth()->user();
+
+        $invitations = VisitorInvitation::with('visitor')
+            ->where('resident_id', $resident->id)
+            ->latest()
+            ->get();   
+
+        return view('dashboard.user.resident.index', compact('invitations','subdomain'));
+    }
+    
+
     // Show the form
     public function create()
     {
@@ -39,8 +55,8 @@ class VisitorInvitationController extends Controller
             'phone' => 'nullable|string|max:20',
             'purpose' => 'required|string|max:255',
             'visit_date' => 'required|date|after_or_equal:today',
-            'valid_from' => 'required',
-            'valid_to' => 'required|after:valid_from',
+            'valid_from' => 'required|date_format:H:i',
+            'valid_to'   => 'required|date_format:H:i|after:valid_from',
         ]);
 
         // Create or get visitor
@@ -81,4 +97,36 @@ class VisitorInvitationController extends Controller
         return redirect()->route('visitor.create',$tenant->subdomain)
             ->with('success', 'Visitor invitation created successfully. QR code sent if email provided.');
     }
+
+    public function resendQr($subdomain,VisitorInvitation $invitation)
+    {
+        // Ensure the invitation belongs to this resident
+        if ($invitation->resident_id !== auth()->id()) {
+            abort(403);
+        }
+
+        Mail::to($invitation->visitor->email)
+            ->queue(new VisitorQrCodeMail($invitation->visitor, $invitation));
+   
+        return back()->with('success', 'QR Code resent to visitor.');
+    }
+
+    public function destroy($subdomain,VisitorInvitation $invitation)
+    {
+        // Optional safety: prevent deleting if already used
+        if ($invitation->status !== 'pending') {
+            return back()->with('error', 'Only pending invitations can be deleted.');
+        }
+
+        // Delete QR image if exists
+        $path = 'qrcodes/' . $invitation->id . '.png';
+        if (\Storage::disk('public')->exists($path)) {
+            \Storage::disk('public')->delete($path);
+        }
+
+        $invitation->delete();
+
+        return back()->with('success', 'Visitor invitation deleted successfully.');
+    }
+
 }

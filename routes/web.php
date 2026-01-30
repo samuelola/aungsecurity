@@ -12,7 +12,7 @@ use App\Http\Controllers\FaceVerificationController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\VisitorInvitationController;
 use App\Http\Controllers\GateVerificationController;
-
+use App\Http\Controllers\SubscriptionController;
 
 
 $domain = parse_url(config('app.url'), PHP_URL_HOST);
@@ -119,8 +119,18 @@ Route::domain('{tenant}.' . $domain)
 
             Route::controller(VisitorInvitationController::class)->group(function () {
                 
-                Route::get('visitor-invite', [VisitorInvitationController::class, 'create'])->name('visitor.create');
-                Route::post('/visitor-invite', [VisitorInvitationController::class, 'store'])->name('visitor.store');
+                Route::get('visitor-invite','create')->name('visitor.create');
+                Route::post('/visitor-invite', 'store')->name('visitor.store');
+                Route::get('/resident/invitations',  'index')->name('resident.invitations.index');
+                Route::post('/resident/invitations/{invitation}/resend', 'resendQr')->name('resident.invitations.resend');
+                Route::delete('/resident/invitations/{invitation}','destroy')->name('resident.invitations.destroy');
+            });
+
+
+            Route::controller(SubscriptionController::class)->group(function () {
+                
+                Route::get('subscription','create')->name('subscription.create');
+               
             });
               
          });

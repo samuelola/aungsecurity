@@ -9,3 +9,4 @@
 <!-- Page sidebar end-->
 @yield('content')
 @include('dashboard.user.body.footer')
+
