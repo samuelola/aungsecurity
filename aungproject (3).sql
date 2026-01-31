@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 15, 2026 at 01:57 PM
+-- Generation Time: Jan 30, 2026 at 11:06 AM
 -- Server version: 8.4.7
 -- PHP Version: 8.3.28
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `aungproject`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `access_logs`
+--
+
+DROP TABLE IF EXISTS `access_logs`;
+CREATE TABLE IF NOT EXISTS `access_logs` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `invitation_id` bigint UNSIGNED NOT NULL,
+  `gate_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Main Gate',
+  `security_id` bigint UNSIGNED DEFAULT NULL,
+  `action` enum('entry','exit') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `access_logs_invitation_id_foreign` (`invitation_id`),
+  KEY `access_logs_security_id_foreign` (`security_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -243,28 +263,6 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   KEY `jobs_queue_index` (`queue`)
 ) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `jobs`
---
-
-INSERT INTO `jobs` (`id`, `queue`, `payload`, `attempts`, `reserved_at`, `available_at`, `created_at`) VALUES
-(1, 'default', '{\"uuid\":\"211c9d85-cf05-4888-a401-9381615c85ab\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:3;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":2:{s:7:\\\"message\\\";s:35:\\\"Your topup of ₦3000 is successful\\\";s:2:\\\"id\\\";s:36:\\\"28858fe5-eb87-4dc1-b027-2425e7c7bfb9\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:35:\\\"Your topup of ₦3000 is successful\\\";s:7:\\\"user_id\\\";i:3;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1766577157,\"delay\":null}', 0, NULL, 1766577157, 1766577157),
-(2, 'default', '{\"uuid\":\"ecc3d3a8-54f5-4ff5-b7e9-f90d2e700da3\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:3;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":2:{s:7:\\\"message\\\";s:35:\\\"Your topup of ₦3000 is successful\\\";s:2:\\\"id\\\";s:36:\\\"8866237d-d199-453a-806b-934af7d9f578\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:35:\\\"Your topup of ₦3000 is successful\\\";s:7:\\\"user_id\\\";i:3;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1766577533,\"delay\":null}', 0, NULL, 1766577533, 1766577533),
-(3, 'default', '{\"uuid\":\"668ab2ac-0bf5-470c-b082-c8a177d5c641\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:3;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":2:{s:7:\\\"message\\\";s:35:\\\"Your topup of ₦3000 is successful\\\";s:2:\\\"id\\\";s:36:\\\"4f5aeef5-d245-4d2e-8dd9-da66f0f78456\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:35:\\\"Your topup of ₦3000 is successful\\\";s:7:\\\"user_id\\\";i:3;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1766578558,\"delay\":null}', 0, NULL, 1766578558, 1766578558),
-(4, 'default', '{\"uuid\":\"47473c0f-2540-4f1b-a262-ea30a7a5e3b0\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:3;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":2:{s:7:\\\"message\\\";s:35:\\\"Your topup of ₦3000 is successful\\\";s:2:\\\"id\\\";s:36:\\\"240020f5-8730-4d35-b02a-769271865f35\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:35:\\\"Your topup of ₦3000 is successful\\\";s:7:\\\"user_id\\\";i:3;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1766578754,\"delay\":null}', 0, NULL, 1766578754, 1766578754),
-(5, 'default', '{\"uuid\":\"67081933-7ac5-4e76-8bd4-004b4767d39c\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:3;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":2:{s:7:\\\"message\\\";s:35:\\\"Your topup of ₦1000 is successful\\\";s:2:\\\"id\\\";s:36:\\\"2ef69915-4b59-4ff4-96cd-8f1bf98b4159\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:35:\\\"Your topup of ₦1000 is successful\\\";s:7:\\\"user_id\\\";i:3;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1766581044,\"delay\":null}', 0, NULL, 1766581044, 1766581044),
-(6, 'default', '{\"uuid\":\"df971f16-b344-4d5b-971d-a494e18e9db4\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:3;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":2:{s:7:\\\"message\\\";s:34:\\\"Your topup of ₦200 is successful\\\";s:2:\\\"id\\\";s:36:\\\"f1927c03-b008-4348-8c81-8c9008d2e189\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:34:\\\"Your topup of ₦200 is successful\\\";s:7:\\\"user_id\\\";i:3;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1766581089,\"delay\":null}', 0, NULL, 1766581089, 1766581089),
-(7, 'default', '{\"uuid\":\"b4894431-1f2b-440e-8eef-03e6682ed188\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:3;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":2:{s:7:\\\"message\\\";s:34:\\\"Your topup of ₦600 is successful\\\";s:2:\\\"id\\\";s:36:\\\"f9798c2b-33da-4dbe-9e0c-7e68d566ab3d\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:34:\\\"Your topup of ₦600 is successful\\\";s:7:\\\"user_id\\\";i:3;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1766582835,\"delay\":null}', 0, NULL, 1766582835, 1766582836),
-(8, 'default', '{\"uuid\":\"661423c5-7811-4697-b355-2e2081f5797e\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:3;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":2:{s:7:\\\"message\\\";s:34:\\\"Your topup of ₦400 is successful\\\";s:2:\\\"id\\\";s:36:\\\"9731e093-3169-42ac-ad04-6f71772e96bb\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:34:\\\"Your topup of ₦400 is successful\\\";s:7:\\\"user_id\\\";i:3;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1766582870,\"delay\":null}', 0, NULL, 1766582870, 1766582870),
-(9, 'default', '{\"uuid\":\"e6c794ee-d9e4-428e-a781-559e5467b65e\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:3;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":2:{s:7:\\\"message\\\";s:35:\\\"Your topup of ₦1500 is successful\\\";s:2:\\\"id\\\";s:36:\\\"077ff2f8-8b76-4dac-9e94-5d29a600057d\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:35:\\\"Your topup of ₦1500 is successful\\\";s:7:\\\"user_id\\\";i:3;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1766583262,\"delay\":null}', 0, NULL, 1766583262, 1766583262),
-(10, 'default', '{\"uuid\":\"d5188fc4-cbcf-4cd3-8592-737fcbfe6b8b\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:3;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":2:{s:7:\\\"message\\\";s:34:\\\"Your topup of ₦120 is successful\\\";s:2:\\\"id\\\";s:36:\\\"786c12f7-df04-4cc3-a4e5-35fe51feeb09\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:34:\\\"Your topup of ₦120 is successful\\\";s:7:\\\"user_id\\\";i:3;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1766583621,\"delay\":null}', 0, NULL, 1766583621, 1766583621),
-(11, 'default', '{\"uuid\":\"d312af14-4685-4115-9c90-ca2fc22f8e4c\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:3;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":3:{s:5:\\\"title\\\";s:17:\\\"Top-up Successful\\\";s:7:\\\"message\\\";s:34:\\\"Your topup of ₦450 is successful\\\";s:2:\\\"id\\\";s:36:\\\"432f7262-f984-46a6-abcf-ee1aa2c3935b\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:34:\\\"Your topup of ₦450 is successful\\\";s:7:\\\"user_id\\\";i:3;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1766587479,\"delay\":null}', 0, NULL, 1766587479, 1766587479),
-(12, 'default', '{\"uuid\":\"72707576-3b17-457d-9ae3-431d87a8ba8f\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:3;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":3:{s:5:\\\"title\\\";s:17:\\\"Top-up Successful\\\";s:7:\\\"message\\\";s:35:\\\"Your topup of ₦3000 is successful\\\";s:2:\\\"id\\\";s:36:\\\"7a0e6988-84a6-493f-896e-e5f039d4f868\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:35:\\\"Your topup of ₦3000 is successful\\\";s:7:\\\"user_id\\\";i:3;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1766654722,\"delay\":null}', 0, NULL, 1766654722, 1766654722),
-(13, 'default', '{\"uuid\":\"29ba296f-c588-4881-a03e-a1e906d8f2d1\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:3;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":3:{s:5:\\\"title\\\";s:17:\\\"Top-up Successful\\\";s:7:\\\"message\\\";s:34:\\\"Your topup of ₦359 is successful\\\";s:2:\\\"id\\\";s:36:\\\"89e0a411-a59a-4ea2-9507-f3641b95661c\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:34:\\\"Your topup of ₦359 is successful\\\";s:7:\\\"user_id\\\";i:3;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1766654747,\"delay\":null}', 0, NULL, 1766654747, 1766654747),
-(14, 'default', '{\"uuid\":\"54157a47-dc17-428a-95e4-4916adb73936\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:3;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":3:{s:5:\\\"title\\\";s:17:\\\"Top-up Successful\\\";s:7:\\\"message\\\";s:34:\\\"Your topup of ₦100 is successful\\\";s:2:\\\"id\\\";s:36:\\\"b6598b7f-5177-42f4-a35f-521fac32d8cb\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:34:\\\"Your topup of ₦100 is successful\\\";s:7:\\\"user_id\\\";i:3;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1766654770,\"delay\":null}', 0, NULL, 1766654770, 1766654770),
-(15, 'default', '{\"uuid\":\"5b98b53b-7aa7-459c-b4e5-3f5278158308\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:4;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":3:{s:5:\\\"title\\\";s:17:\\\"Top-up Successful\\\";s:7:\\\"message\\\";s:35:\\\"Your topup of ₦3000 is successful\\\";s:2:\\\"id\\\";s:36:\\\"5e962fe0-7432-4fc2-9a56-e485ff56ce13\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:35:\\\"Your topup of ₦3000 is successful\\\";s:7:\\\"user_id\\\";i:4;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1766998381,\"delay\":null}', 0, NULL, 1766998381, 1766998381),
-(16, 'default', '{\"uuid\":\"e2103e20-eccd-4797-926a-073f00375703\",\"displayName\":\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":17:{s:5:\\\"event\\\";O:60:\\\"Illuminate\\\\Notifications\\\\Events\\\\BroadcastNotificationCreated\\\":3:{s:10:\\\"notifiable\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:5;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:12:\\\"notification\\\";O:40:\\\"App\\\\Notifications\\\\NewMessageNotification\\\":3:{s:5:\\\"title\\\";s:17:\\\"Top-up Successful\\\";s:7:\\\"message\\\";s:35:\\\"Your topup of ₦3000 is successful\\\";s:2:\\\"id\\\";s:36:\\\"30320eed-1835-4011-a646-a9894767f706\\\";}s:4:\\\"data\\\";a:2:{s:7:\\\"message\\\";s:35:\\\"Your topup of ₦3000 is successful\\\";s:7:\\\"user_id\\\";i:5;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:23:\\\"deleteWhenMissingModels\\\";b:1;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"},\"createdAt\":1767010296,\"delay\":null}', 0, NULL, 1767010296, 1767010296);
-
 -- --------------------------------------------------------
 
 --
@@ -305,30 +303,31 @@ CREATE TABLE IF NOT EXISTS `kycs` (
   `id_document` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `bio_completed` tinyint(1) NOT NULL DEFAULT '0',
   `doc_completed` tinyint(1) NOT NULL DEFAULT '0',
+  `face_completed` tinyint(1) NOT NULL DEFAULT '0',
   `kyc_completed` tinyint(1) NOT NULL DEFAULT '0',
-  `current_step` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'bio',
+  `current_step` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'bio',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `face_image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `face_completed` tinyint(1) NOT NULL DEFAULT '0',
   `face_confidence` double DEFAULT NULL,
   `face_verified` tinyint(1) NOT NULL DEFAULT '0',
   `occupants` int DEFAULT NULL,
   `resident_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `flat_number` bigint UNSIGNED DEFAULT NULL,
+  `agent_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `agent_number` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `kycs_resident_id_unique` (`resident_id`),
   KEY `kycs_user_id_foreign` (`user_id`),
   KEY `kycs_tenant_id_foreign` (`tenant_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `kycs`
 --
 
-INSERT INTO `kycs` (`id`, `user_id`, `tenant_id`, `phone`, `address`, `state_id`, `lga_id`, `id_type`, `id_document`, `bio_completed`, `doc_completed`, `kyc_completed`, `current_step`, `created_at`, `updated_at`, `face_image`, `face_completed`, `face_confidence`, `face_verified`, `occupants`, `resident_id`) VALUES
-(1, 2, 6, '08067932796', 'This is a test,  This is a test,  This is a test,  This is a test,  This is a test,  This is a test,  This is a test,  This is a test,  This is a test,  This is a test,  This is a test,', '13', '251', 'Passport', 'kyc_docs/tenant_6/GhF2j9ySvqBKQd4VuUEcX1vQNDG4HfXvd3E2sKqa.jpg', 1, 1, 1, 'completed', '2025-12-19 14:53:18', '2025-12-19 14:54:14', 'kyc_faces/tenant_6/live_2.jpg', 1, 87.92, 1, 2, NULL),
-(5, 3, 6, '08067932797', 'cncncncn', '15', '276', 'National ID', 'kyc_docs/tenant_6/nBhybA4GyAWQ4aP0MmeN94ExGIjCnRWD3HMYvqeY.jpg', 1, 1, 1, 'completed', '2025-12-20 13:52:05', '2025-12-20 13:54:53', 'kyc_faces/tenant_6/live_3.jpg', 1, 86.472, 1, 4, 'SAM-ESTATE-000001'),
-(7, 5, 8, '08067932793', 'tytytytyty', '10', '194', 'Passport', 'kyc_docs/tenant_8/zd3yS5328Hex2D4yZc4i7YZG1NZRn9DE3En80PYT.jpg', 1, 1, 1, 'completed', '2025-12-29 10:57:03', '2025-12-29 11:07:21', 'kyc_faces/tenant_8/live_5.jpg', 1, 87.931, 1, 4, 'DEMO-ESTATE-000001');
+INSERT INTO `kycs` (`id`, `user_id`, `tenant_id`, `phone`, `address`, `state_id`, `lga_id`, `id_type`, `id_document`, `bio_completed`, `doc_completed`, `face_completed`, `kyc_completed`, `current_step`, `created_at`, `updated_at`, `face_image`, `face_confidence`, `face_verified`, `occupants`, `resident_id`, `flat_number`, `agent_name`, `agent_number`) VALUES
+(1, 1, 1, '08067932796', 'This is a test testing', '6', '111', 'Passport', 'kyc_docs/tenant_1/dsaf1wWs0t2vUY8ZvVJeTFIV4mlhFk6ScPfcL6sE.jpg', 1, 1, 1, 1, 'completed', '2026-01-22 15:51:05', '2026-01-22 16:41:00', 'kyc_faces/tenant_1/live_1.jpg', 87.542, 1, 4, 'DEMO-ESTATE-000001', 1, 'peter', '08038372503');
 
 -- --------------------------------------------------------
 
@@ -1128,20 +1127,6 @@ INSERT INTO `lga` (`id`, `state_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lgas`
---
-
-DROP TABLE IF EXISTS `lgas`;
-CREATE TABLE IF NOT EXISTS `lgas` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `migrations`
 --
 
@@ -1151,31 +1136,38 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '0001_01_01_000000_create_users_table', 1),
-(2, '0001_01_01_000001_create_cache_table', 1),
-(3, '0001_01_01_000002_create_jobs_table', 1),
-(4, '2025_12_09_202025_create_tenants_table', 1),
-(5, '2025_12_09_203206_add_tenant_id_to_users_table', 1),
-(6, '2025_12_15_164256_add_soft_deletes_to_tenants_table', 2),
-(7, '2025_12_15_164537_add_soft_deletes_to_users_table', 3),
-(8, '2025_12_15_165404_create_personal_access_tokens_table', 4),
-(9, '2025_12_16_144501_add_role_to_users_table', 5),
-(10, '2025_12_17_132839_add_face_verification_to_users_table', 6),
-(11, '2025_12_17_172835_create_kycs_table', 7),
-(12, '2025_12_18_002931_create_states_table', 8),
-(13, '2025_12_18_002944_create_lgas_table', 8),
-(14, '2025_12_19_013753_add_face_image_to_kycs_table', 8),
-(15, '2025_12_19_024208_add_face_confidence_to_kycs_table', 9),
-(16, '2025_12_20_112252_create_resident_wallets_table', 10),
-(18, '2025_12_20_131610_add_occupants_to_kycs_table', 11),
-(19, '2025_12_20_141127_add_resident_id_to_kycs_table', 12);
+(79, '0001_01_01_000000_create_users_table', 1),
+(80, '0001_01_01_000001_create_cache_table', 1),
+(81, '0001_01_01_000002_create_jobs_table', 1),
+(82, '2025_12_09_202025_create_tenants_table', 1),
+(83, '2025_12_09_203206_add_tenant_id_to_users_table', 1),
+(84, '2025_12_15_164256_add_soft_deletes_to_tenants_table', 1),
+(85, '2025_12_15_164537_add_soft_deletes_to_users_table', 1),
+(86, '2025_12_15_165404_create_personal_access_tokens_table', 1),
+(87, '2025_12_16_144501_add_role_to_users_table', 1),
+(88, '2025_12_17_132839_add_face_verification_to_users_table', 1),
+(89, '2025_12_17_172835_create_kycs_table', 1),
+(90, '2025_12_18_002931_create_states_table', 1),
+(91, '2025_12_18_002944_create_lgas_table', 1),
+(92, '2025_12_19_013753_add_face_image_to_kycs_table', 1),
+(93, '2025_12_19_024208_add_face_confidence_to_kycs_table', 1),
+(94, '2025_12_20_112252_create_resident_wallets_table', 1),
+(95, '2025_12_20_131610_add_occupants_to_kycs_table', 1),
+(96, '2025_12_20_141127_add_resident_id_to_kycs_table', 1),
+(97, '2026_01_22_120536_create_visitor_invitation_table', 1),
+(98, '2026_01_22_131905_add_status_and_fees_status_to_users_table', 1),
+(99, '2026_01_22_161234_create_visitors_table', 1),
+(100, '2026_01_22_170504_add_flat_number_agent_name_agent_number_to_kycs_table', 2),
+(103, '2026_01_22_171641_add_name_to_states_table', 3),
+(104, '2026_01_25_174530_create_access_logs_table', 4),
+(105, '2026_01_25_175703_add_exit_fields_to_visitor_invitations', 5);
 
 -- --------------------------------------------------------
 
@@ -1267,16 +1259,14 @@ CREATE TABLE IF NOT EXISTS `resident_wallets` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `resident_wallets_uuid_unique` (`uuid`),
   KEY `resident_wallets_user_id_foreign` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `resident_wallets`
 --
 
 INSERT INTO `resident_wallets` (`id`, `uuid`, `user_id`, `currency_code`, `balance`, `minimium_balance`, `status`, `currency_id`, `created_at`, `updated_at`) VALUES
-(1, '1aafedc8-ed43-4e34-b428-337441f4002f', 3, 'NGN', 3459.00, 0.00, 1, 87, '2025-12-24 11:13:14', '2025-12-24 11:13:14'),
-(2, '1d6dae99-561e-4c99-98a5-991fba2a11ba', 4, 'NGN', 3000.00, 0.00, 1, 87, '2025-12-29 07:46:51', '2025-12-29 07:46:51'),
-(3, 'ded47b62-1048-48b1-bbbd-c229eae13323', 5, 'NGN', 3000.00, 0.00, 1, 87, '2025-12-29 10:57:03', '2025-12-29 10:57:03');
+(1, '8398ece4-4e79-4033-a9a9-d06d6a4d2147', 1, 'NGN', 0.00, 0.00, 1, 87, '2026-01-22 15:51:04', '2026-01-22 15:51:04');
 
 -- --------------------------------------------------------
 
@@ -1302,15 +1292,12 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('SQ70QakgckynyfpWTNw67D04AQWXg9nqNmC562vq', 5, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNXVIcWEzZ1hmQWRSaE53d1ByZGlmeHBkdmpBdGprT003QUQ1S25WaSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly9kZW1vLmxvY2FsaG9zdDo4MDAwL2Z1bmR3YWxsZXQiO3M6NToicm91dGUiO3M6MTA6ImZ1bmR3YWxsZXQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTo1O30=', 1768387347),
-('virzEUHWS2Jy9qZ8KLGAyqGPh096PJbjE1cTZeSV', NULL, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiY0pxR1J5SGtVcEc3aXdaemVCcEJMaXdSVW5QTlMzOUlCcTJhSWtOYSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1767011994),
-('kpL30loASR8WneYp4zUdCSLmfBsFm4PC8RkLTcos', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicU1wS09YcUdzOG14ODRvbkNtMGhBRTdNUXFqa0tXMFc2OWRnR0JvWiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjQ6Imh0dHA6Ly9hdW5nc2VjdXJpdHkudGVzdCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1768485416),
-('7WYoploAYa7xI02t92DKvaKugHtAz5kajBImD0I1', 5, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibWZod1NVUVBrNFRYTkJrVE03NlQyQUVrM1BhU3FSc1FFbHpXZnlOSSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly9kZW1vLmxvY2FsaG9zdC9yZXNpZGVudF90cmFuc2FjdGlvbiI7czo1OiJyb3V0ZSI7czoyMDoicmVzaWRlbnRfdHJhbnNhY3Rpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTo1O30=', 1767010403),
-('dWukiP1mW3xz1U6rlExWMds9CQ6qMsR2zxycLvHW', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiN09tblM5b0V6WUFhSXR5bngzSU5PbVBOQjVobmZmYnV0VXd4bVhINiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1768390398),
-('poGpCwjQ99qTh0Nu7ef5I47D4HnqqHpKnYEVuqS8', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMUZQSzI0SG1kaGswRFpBN3dFa2NxWFFYZFdUQ1VWOGI0ZGZPQWZ1ZSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly9zYW0ubG9jYWxob3N0OjgwMDAvZXN0YXRlX2xvZ2luIjtzOjU6InJvdXRlIjtzOjE3OiJ0ZW5hbnRfdXNlcl9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1768387272),
-('AaLu3konec3UOtvkPnAdIPkG0U7MixZZbB5EUqPh', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZTNRaktnVnkyZEhqRUZtUlB4MTFNZEhNMkl6UFF3UnAydWhxRklSbCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1767002549),
-('qeRxUtgFTLQoc2JKZ69QjSjaMX9XXK5M3vyODhIt', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieHJ6bTVzQlZEREtNWHZaTkFGSVJ3Sk5BdDdSeHluSTE3VVdkMldUdiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1767002623),
-('nltVE5N1txpkHpVQEfehiXi0mcXCeLJzKLvSeALU', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWkJUZEV2c3VXNlNoQ0R0WG4yMnM1MW8yNktPbWFURWtsR2M3bjd3NyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1767002772);
+('HVYbaua5j8tKTFAXcU0LuRWcSNLZak7zvhRz39VE', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiQTdhbmtIZDdYYTFvTjYydk5EMVVLSDMzRFZZajE0cXpRWmdTamdDeiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1769771165),
+('nsnC4qqfJXjpDhLEYkzxMGBERoYLQzVBCF8HEgIT', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWUZ3OGdLOEtURWNzOE9DSEVpNG1LWnVDV052RFp2VlpwQmZwZ2NKWCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly9kZW1vLmxvY2FsaG9zdDo4MDAwL3Jlc2lkZW50L2ludml0YXRpb25zIjtzOjU6InJvdXRlIjtzOjI2OiJyZXNpZGVudC5pbnZpdGF0aW9ucy5pbmRleCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1769750357),
+('hAX97sTiE7m3rx12LJVLhblOXK6KilRhnC0GaQPW', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoib09sWGZuVXNsTjhYZ2VZZDF2OTUyenJpak9Qd1JPd2JabGUxVXFYUCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDM6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9zZWN1cml0eS9pbnNpZGUtY291bnQiO3M6NToicm91dGUiO047fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1769695171),
+('C4Uxe1PqaOG5rVYd8mvLVQrROjyBzgGiV4WmLkVr', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWFdObUZtS25LTWNGcDJ4SzdrT3IyOU80WXJoYlVtVGxZV3dMMFAzRyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly9kZW1vLmxvY2FsaG9zdDo4MDAwL2VzdGF0ZV9sb2dpbiI7czo1OiJyb3V0ZSI7czoxNzoidGVuYW50X3VzZXJfbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1769771103),
+('AO0AYW3oTk0b912Q8JYnwExxOZtomLgs2CGx6v5l', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiS3lpbldHU3gzcTQ5cDZma1dFOVkxTmxwaFBsQWhhU1BoeHVYaTBjcyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9kZW1vLmxvY2FsaG9zdDo4MDAwL3Zpc2l0b3ItaW52aXRlIjtzOjU6InJvdXRlIjtzOjE0OiJ2aXNpdG9yLmNyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1769700836),
+('sNFDGaMwRInT10y7kpWdQcJgwuY0EE5YKIuz5HDo', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZU1kV2ZQYTUxd1p4SDc4MHpqZ0ZDR00yaDJaWmN4cVE3ZVhERDBPaSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDM6Imh0dHA6Ly9kZW1vLmxvY2FsaG9zdDo4MDAwL2VzdGF0ZV9kYXNoYm9hcmQiO3M6NToicm91dGUiO3M6MjE6InRlbmFudF91c2VyX2Rhc2hib2FyZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1769694528);
 
 -- --------------------------------------------------------
 
@@ -1377,24 +1364,23 @@ INSERT INTO `states` (`id`, `name`) VALUES
 DROP TABLE IF EXISTS `tenants`;
 CREATE TABLE IF NOT EXISTS `tenants` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `first_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estate_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `subdomain` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `estate_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tenants_subdomain_unique` (`subdomain`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tenants`
 --
 
-INSERT INTO `tenants` (`id`, `first_name`, `last_name`, `subdomain`, `estate_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(6, 'John', 'Doe', 'sam', 'sam', '2025-12-18 23:41:08', '2025-12-18 23:41:08', NULL),
-(8, 'demo', 'demo', 'demo', 'demo', '2025-12-29 10:54:54', '2025-12-29 10:54:54', NULL);
+INSERT INTO `tenants` (`id`, `first_name`, `last_name`, `estate_name`, `subdomain`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'demo', 'doe', 'demoo', 'demo', '2026-01-22 15:50:25', '2026-01-22 15:50:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -1441,8 +1427,8 @@ INSERT INTO `transactions` (`id`, `reference`, `amount`, `user_id`, `receiver_id
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `first_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1454,20 +1440,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `role` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
   `face_verified` tinyint(1) NOT NULL DEFAULT '0',
   `face_image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
+  `fees_status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'clear',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `users_tenant_id_foreign` (`tenant_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `tenant_id`, `deleted_at`, `role`, `face_verified`, `face_image`) VALUES
-(1, 'james', 'doe', 'sammyola121@gmail.com', NULL, '$2y$12$BYUmMuGcVSUPVKTCWxd.cu.4BQncCcbGPQ/m8C2YWXchiKxwc1jBW', NULL, '2025-12-16 12:26:18', '2025-12-16 12:26:18', 6, NULL, 'admin', 0, NULL),
-(2, 'test', 'sample', 'oladelesamuel48@gmail.com', NULL, '$2y$12$CPqkU58JCM/eJ9rb8IsPBO7yoccE9ghDg35tDMvgt5i0Q30l0eeve', NULL, '2025-12-16 15:25:06', '2025-12-16 15:25:06', 6, NULL, 'user', 0, NULL),
-(3, 'james', 'ola', 'sammyola122@gmail.com', NULL, '$2y$12$GOz.ttIttFURIrOOuyG/kOMOb1VrIlU/rAhW5Y.Z.UlOEvfBYrhS.', NULL, '2025-12-18 23:42:16', '2025-12-18 23:42:16', 6, NULL, 'user', 0, NULL),
-(5, 'jude', 'doe', 'jude@gmail.com', NULL, '$2y$12$hG311sGexrdjhkz4zhLe4OXxz8PLK4Eda28XjdAQP1x/nrblUeG4W', NULL, '2025-12-29 10:57:03', '2025-12-29 10:57:03', 8, NULL, 'user', 0, NULL);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `tenant_id`, `deleted_at`, `role`, `face_verified`, `face_image`, `status`, `fees_status`) VALUES
+(1, 'jude', 'doe', 'jude@gmail.com', NULL, '$2y$12$4leuSIeZcGMLXdx6NYYtU.NP7Nz1CveI50TlAJcZoVRu75o684UW6', NULL, '2026-01-22 15:51:04', '2026-01-22 15:51:04', 1, NULL, 'user', 0, NULL, 'active', 'clear');
 
 -- --------------------------------------------------------
 
@@ -1528,6 +1513,66 @@ CREATE TABLE IF NOT EXISTS `user_statistics` (
   KEY `user_statistics_user_id_foreign` (`user_id`),
   KEY `user_statistics_referred_by_foreign` (`referred_by`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visitors`
+--
+
+DROP TABLE IF EXISTS `visitors`;
+CREATE TABLE IF NOT EXISTS `visitors` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `full_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `visitors`
+--
+
+INSERT INTO `visitors` (`id`, `full_name`, `email`, `phone`, `created_at`, `updated_at`) VALUES
+(1, 'james', 'oladelesamuel48@gmail.com', '08067932791', '2026-01-23 00:04:37', '2026-01-23 00:04:37'),
+(2, 'tester', 'sammyola12@gmail.com', '08167932796', '2026-01-28 15:12:25', '2026-01-28 15:12:25'),
+(3, 'Samuel Oladele', 'oladelesamuel48@gmail.com', '08067932796', '2026-01-28 21:27:30', '2026-01-28 21:27:30'),
+(7, 'wolla', 'sammyola122@gmail.com', '08067932796', '2026-01-30 03:08:32', '2026-01-30 03:08:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visitor_invitation`
+--
+
+DROP TABLE IF EXISTS `visitor_invitation`;
+CREATE TABLE IF NOT EXISTS `visitor_invitation` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `resident_id` bigint UNSIGNED NOT NULL,
+  `visitor_id` bigint UNSIGNED NOT NULL,
+  `purpose` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `visit_date` date NOT NULL,
+  `valid_from` time NOT NULL,
+  `valid_to` time NOT NULL,
+  `qr_token` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('pending','used','exited','expired') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `used_at` timestamp NULL DEFAULT NULL,
+  `exited_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `visitor_invitation_resident_id_foreign` (`resident_id`),
+  KEY `visitor_invitation_visitor_id_foreign` (`visitor_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `visitor_invitation`
+--
+
+INSERT INTO `visitor_invitation` (`id`, `resident_id`, `visitor_id`, `purpose`, `visit_date`, `valid_from`, `valid_to`, `qr_token`, `status`, `used_at`, `exited_at`, `created_at`, `updated_at`) VALUES
+(7, 1, 7, 'This is great', '2026-01-30', '05:08:00', '10:08:00', 'eyJpdiI6ImUrMmkyNGtNTXVTa29QYmt3Q0tUcXc9PSIsInZhbHVlIjoib3phR0R2SDNIMWZ3OWRZbWhsYk11WjExdVFaM0taWEFNVVY3c2NCeFhmbHdBWThqTlNBSVg3YlFDVWJaTHVuOXpUZHNWSlJadWFVM3gyNFZFQ0NNKzhLM1cyelVxWWNQbjVrREdBaWI1T3ZuUm5XZVJjZFo0MWJlZTlPbEZBWVhWZnVrbDRiZmluZmYxbmR4QXZXNUZMYW9BQjJHZzVNUjBSbXUxcWFZNUFZPSIsIm1hYyI6IjIwYmZkOWYwNjJjMDMyMmVlYTVjNDBiYzIxYWYzNGI1OTFjNjZhYTFmYmE0ODViNWM2MWRmZjNhMzNiOWUxY2QiLCJ0YWciOiIifQ==', 'pending', NULL, NULL, '2026-01-30 03:08:32', '2026-01-30 03:08:32');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -13,6 +13,8 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\VisitorInvitationController;
 use App\Http\Controllers\GateVerificationController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\SecurityController;
+
 
 
 $domain = parse_url(config('app.url'), PHP_URL_HOST);
@@ -23,9 +25,14 @@ Route::get('/refresh-csrf', function () {
 
 
 
-Route::controller(GateVerificationController::class)->group(function () {
-    Route::get('/security/scan','showScanForm')->name('showScanForm');
-    Route::post('/security/verify','verify')->name('verifyscan');
+// Route::controller(GateVerificationController::class)->group(function () {
+//     Route::get('/security/scan','showScanForm')->name('showScanForm');
+//     Route::post('/security/verify','verify')->name('verifyscan');
+// });
+
+ Route::controller(SecurityController::class)->group(function () {         
+        Route::get('/security/scan_verify', 'form')->name('security.form');
+        Route::post('/security/verify', 'verify')->name('security.verify');
 });
 
 Route::get('/security/inside-count', function() {
@@ -99,6 +106,7 @@ Route::domain('{tenant}.' . $domain)
             Route::controller(ResidentController::class)->group(function () {
 
               Route::get('/resident_transaction', 'residentTransaction')->name('resident_transaction');
+              Route::get('/resident/details', [ResidentController::class, 'details'])->name('resident.details');
             });
 
             Route::controller(WalletController::class)->group(function () {
@@ -125,7 +133,6 @@ Route::domain('{tenant}.' . $domain)
                 Route::post('/resident/invitations/{invitation}/resend', 'resendQr')->name('resident.invitations.resend');
                 Route::delete('/resident/invitations/{invitation}','destroy')->name('resident.invitations.destroy');
             });
-
 
             Route::controller(SubscriptionController::class)->group(function () {
                 

@@ -67,7 +67,7 @@
                 </div>
               </li>
               <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
-                <a class="sidebar-link" href="#">
+                <a class="sidebar-link" href="{{$kyc && $kyc->kyc_completed ? route('resident.details',$tenant->subdomain) : '#'}}">
                   <i class="ti-user"></i>
                   <h6 class="f-w-600">Resident Details</h6></a>
               </li>

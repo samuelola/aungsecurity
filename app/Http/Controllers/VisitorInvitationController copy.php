@@ -113,9 +113,9 @@ class VisitorInvitationController extends Controller
         }
 
         Mail::to($invitation->visitor->email)
-            ->queue(new VisitorMail($invitation->visitor, $invitation));    
+            ->queue(new VisitorQrCodeMail($invitation->visitor, $invitation));
    
-        return back()->with('success', 'Access Code resent to visitor.');
+        return back()->with('success', 'QR Code resent to visitor.');
     }
 
     public function destroy($subdomain,VisitorInvitation $invitation)
@@ -126,10 +126,10 @@ class VisitorInvitationController extends Controller
         }
 
         // Delete QR image if exists
-        // $path = 'qrcodes/' . $invitation->id . '.png';
-        // if (\Storage::disk('public')->exists($path)) {
-        //     \Storage::disk('public')->delete($path);
-        // }
+        $path = 'qrcodes/' . $invitation->id . '.png';
+        if (\Storage::disk('public')->exists($path)) {
+            \Storage::disk('public')->delete($path);
+        }
 
         //$invitation->delete();
 

@@ -6,6 +6,7 @@
 
 
 @section('content')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
  <style>
  
@@ -125,12 +126,12 @@ label{
                         <tr class="border-bottom-secondary border-top-0">
                           <th scope="col">Sn</th>
                           <th scope="col">Visitor</th>
-                          <th scope="col">Purpose</th>
+                          <!-- <th scope="col">Purpose</th> -->
                           <th scope="col">Visit Date</th>
                           <th scope="col">Time (From)</th>
                           <th scope="col">Time (To)</th>
                           <th scope="col">Status</th>
-                          <th scope="col">QR Code</th>
+                          <th scope="col">Access Code</th>
                           <th scope="col">Actions</th>
                         </tr>
                       </thead>
@@ -160,9 +161,9 @@ label{
                           <th scope="row">{{$sn++}}</th>
                           <td>{{ $invitation->visitor->full_name }}</td>
   
-                            <td class="purpose-cell" data-purpose="{{ $invitation->purpose }}" style="cursor:pointer; color:blue; text-decoration:underline;">
+                            <!-- <td class="purpose-cell" data-purpose="{{ $invitation->purpose }}" style="cursor:pointer; color:blue; text-decoration:underline;">
                                 {{ \Illuminate\Support\Str::limit($invitation->purpose, 25) }}
-                            </td>
+                            </td> -->
 
 
                           <td>
@@ -179,9 +180,12 @@ label{
                               <span class="badge badge-light-danger">Exited</span>
                             @endif
                           </td>
-                          <td>
+                          <!-- <td>
                             <img src="{{ asset('storage/qrcodes/'.$invitation->id.'.png') }}"
                          width="80">
+                          </td> -->
+                          <td>
+                             {{$invitation->access_code}}
                           </td>
                           <td>
                               <!-- <a href="{{ asset('storage/qrcodes/'.$invitation->id.'.png') }}"
@@ -190,20 +194,55 @@ label{
                                 ⬇ Download
                                 </a> -->
                                 <div class="mb-2">
-                                <form method="POST"
-                                    action="{{ route('resident.invitations.resend', ['invitation'=>$invitation,'tenant'=>$subdomain]) }}"
-                                    style="display:inline;">
-                                    @csrf
-                                    <button class="btn text-light btn-primary me-2" type="submit">Resend</button>
-                                </form>
-</div>
+                                  <form method="POST"
+                                      action="{{ route('resident.invitations.resend', ['invitation'=>$invitation,'tenant'=>$subdomain]) }}"
+                                      style="display:inline;">
+                                      @csrf
+                                      <button class="btn text-light btn-primary me-2" type="submit"><i class="bi bi-send-fill"></i> Resend</button>
+                                  </form>
+                                </div>
+                                <div class="mb-2">
+                                     @php
+    $message = urlencode(
+    "Hello {$invitation->visitor->full_name},
+
+        Valid Date: {$invitation->visit_date}
+        Access Time: {$invitation->valid_from} - {$invitation->valid_to}
+        Access Code: {$invitation->access_code}
+
+    Show this code at the gate."
+    );
+@endphp
+
+@php
+    $rawPhone = preg_replace('/[^0-9]/', '', $invitation->visitor->phone);
+
+    if (str_starts_with($rawPhone, '0')) {
+        $formattedPhone = '+234' . substr($rawPhone, 1);
+    } elseif (str_starts_with($rawPhone, '234')) {
+        $formattedPhone = '+' . $rawPhone;
+    } else {
+        $formattedPhone = '+'.$rawPhone; // fallback
+    }
+@endphp
+
+@if($invitation->visitor->phone)
+    <a href="https://wa.me/{{ ltrim($formattedPhone, '+') }}?text={{ $message }}"
+       target="_blank"
+       class="btn btn-light btn-sm me-1"style="color:#000">
+       <i class="bi bi-share-fill"></i> share
+    </a>
+@endif
+
+
+                                </div>
                                 <form method="POST"
                                     action="{{ route('resident.invitations.destroy', ['invitation'=>$invitation,'tenant'=>$subdomain]) }}"
                                     style="display:inline;"
                                     onsubmit="return confirm('Delete this invitation? This cannot be undone.');">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm">🗑 Delete</button>
+                                    <button class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i> Delete</button>
                                 </form>
 
                           </td>
@@ -234,7 +273,7 @@ label{
 <div id="purposeModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <h4>Full Purpose</h4>
+    <h4>Purpose</h4>
     <p id="modalText"></p>
   </div>
 </div>

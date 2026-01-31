@@ -22,7 +22,7 @@ class VisitorInvitation extends Model
     // Invitation belongs to a resident (user)
     public function resident()
     {
-        return $this->belongsTo(\App\Models\User::class, 'resident_id');
+        return $this->belongsTo(User::class, 'resident_id');
     }
 
     // Invitation has many access logs

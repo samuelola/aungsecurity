@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('resident_id')->constrained('users');
             $table->foreignId('visitor_id')->constrained();
-            $table->string('purpose');
+            $table->longText('purpose');
             $table->date('visit_date');
             $table->time('valid_from');
             $table->time('valid_to');

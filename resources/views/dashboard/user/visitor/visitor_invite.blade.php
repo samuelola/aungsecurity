@@ -103,14 +103,14 @@ label{
                                 <p class="text-red-500 text-sm" style="color:#d22f2f">{{ $message }}</p>
                           @enderror
 
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                           <label class="form-label" for="exampleFormControlInput1">Purpose of Visit</label>
                           
                           <textarea class="form-control" name="purpose" id="exampleFormControlInput1" value="{{ old('purpose') }}"></textarea>
                         </div>
                           @error('purpose')
                                 <p class="text-red-500 text-sm" style="color:#d22f2f">{{ $message }}</p>
-                          @enderror
+                          @enderror -->
 
                         <div class="mb-3">
                           <label class="form-label" for="exampleFormControlInput1">Date of Visit</label>
@@ -122,7 +122,7 @@ label{
                           
                         <div class="mb-3">
                           <label class="form-label" for="exampleFormControlInput1">Valid From (Time)</label>
-                          <input class="form-control" name="valid_from" id="exampleFormControlInput1" type="time"  value="{{ old('valid_from') }}">
+                          <input class="form-control" name="valid_from" id="valid_from" type="time" value="{{ old('valid_from') }}">
                         </div>
                           @error('valid_from')
                                 <p class="text-red-500 text-sm" style="color:#d22f2f">{{ $message }}</p>
@@ -131,7 +131,7 @@ label{
                           
                         <div class="mb-3">
                           <label class="form-label" for="exampleFormControlInput1">Valid To (Time)</label>
-                          <input class="form-control" name="valid_to" id="exampleFormControlInput1" type="time"  value="{{ old('valid_to') }}">
+                          <input class="form-control" name="valid_to" id="valid_to" type="time" value="{{ old('valid_to') }}" readonly>
                         </div>
                           @error('valid_to')
                                 <p class="text-red-500 text-sm" style="color:#d22f2f">{{ $message }}</p>
@@ -155,3 +155,34 @@ label{
         </div>
 @endsection
 
+
+@section('script')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const validFromInput = document.getElementById('valid_from');
+    const validToInput   = document.getElementById('valid_to');
+
+    validFromInput.addEventListener('change', function () {
+        if (!this.value) return;
+
+        // Get selected time
+        const [hours, minutes] = this.value.split(':').map(Number);
+
+        // Create date object and add 3 hours
+        const date = new Date();
+        date.setHours(hours);
+        date.setMinutes(minutes);
+        date.setSeconds(0);
+
+        date.setHours(date.getHours() + 3);
+
+        // Format back to HH:MM
+        const newHours = String(date.getHours()).padStart(2, '0');
+        const newMinutes = String(date.getMinutes()).padStart(2, '0');
+
+        validToInput.value = `${newHours}:${newMinutes}`;
+    });
+});
+</script>
+
+@endsection

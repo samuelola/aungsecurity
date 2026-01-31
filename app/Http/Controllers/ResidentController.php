@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tenant;
 use App\Models\Transaction;
+use App\Models\User;
 
 class ResidentController extends Controller
 {
@@ -20,6 +21,14 @@ class ResidentController extends Controller
         $tenant = app('tenant');
         return view('dashboard.admin.transaction.index');
     }
+
+    public function details(Request $request){
+
+        $resident = User::with('kyc')->first();
+        return view('dashboard.user.resident.details', compact('resident'));
+    }
+
+    
 
     
 }

@@ -2,8 +2,9 @@
             <div class="   container-fluid">
                 <a class="navbar-brand" href="/">
                     <img class="main-logo"
-                        src="/pluginfile.php/1/theme_olan/main_logo/1757783192/olan-main-logo.svg"
-                        alt="Olan">
+                        src="{{asset('aung_logo_blue.png')}}"
+                        alt="AungSolution" style="width: 100px;">
+                        
 
                 </a>
 
