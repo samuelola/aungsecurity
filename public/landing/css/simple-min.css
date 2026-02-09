@@ -84443,11 +84443,20 @@ html,body {
 
 p {
     margin-bottom: 15px;
-    line-height: 1.7;
+    /* line-height: 1.7; */
     color: #4B5563;
     font-family: "Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    font-size: 15px
+    /* font-size: 15px */
+    line-height: 30px;
+    font-size: 16px;
 }
+
+.pricing-text p{
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+}
+
 
 p:last-child {
     margin-bottom: 0
@@ -86136,7 +86145,7 @@ img {
 .education-about-area.wrap-style2 {
     position: relative;
     z-index: 1;
-    background: linear-gradient(180deg,#EAEEFF 0%,#FBF9FF 39.24%,#FFF1EE 78.49%)
+    /* background: linear-gradient(180deg,#EAEEFF 0%,#FBF9FF 39.24%,#FFF1EE 78.49%) */
 }
 
 .education-about-area.wrap-style2 .education-about-image {
@@ -100967,7 +100976,7 @@ body#page-course-delete {
     }
 
     .navbar .others-option .option-item {
-        margin-right: 10px
+        margin-right: 180px
     }
 
     .navbar .others-option .option-item .search-form {

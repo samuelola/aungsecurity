@@ -86136,7 +86136,7 @@ img {
 .education-about-area.wrap-style2 {
     position: relative;
     z-index: 1;
-    background: linear-gradient(180deg,#EAEEFF 0%,#FBF9FF 39.24%,#FFF1EE 78.49%)
+    /* background: linear-gradient(180deg,#EAEEFF 0%,#FBF9FF 39.24%,#FFF1EE 78.49%) */
 }
 
 .education-about-area.wrap-style2 .education-about-image {

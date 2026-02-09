@@ -3,6 +3,136 @@
 
 @section('content')
 
+  <style>
+    .border-white {
+    border-color: #fff !important;
+    border-width: 2px;
+}
+
+/* .card-body {
+    font-size: 18px;
+}
+
+.card-body h6 {
+    font-size: 15px;
+}
+.card-body li {
+    line-height: 1.7;
+} */
+
+.pricing-card {
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.pricing-card:hover {
+    transform: translateY(-6px);
+}
+
+.pricing-header {
+    background: linear-gradient(135deg, #0dcaf0, #0d6efd);
+    padding: 30px 20px;
+}
+
+.pricing-text h3 {
+    font-size: 36px;
+}
+
+.pricing-text p {
+    font-size: 18px;
+    opacity: 0.95;
+}
+
+.feature-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.feature-list li {
+    padding-left: 32px;
+    position: relative;
+    margin-bottom: 14px;
+    font-weight: 500;
+}
+
+.feature-list li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #0d6efd;
+    font-weight: bold;
+}
+
+@media (max-width: 767px) {
+    .pricing-text {
+        margin-bottom: 20px;
+    }
+}
+
+
+
+.pricing-plan {
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricing-plan:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.pricing-plan-header {
+    background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+    padding: 35px 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.pricing-plan-header-alt {
+    background: linear-gradient(135deg, #20c997, #198754);
+    padding: 35px 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.price {
+    font-size: 36px;
+    font-weight: 800;
+}
+
+.plan-features {
+    list-style: none;
+    padding-left: 0;
+}
+
+.plan-features li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 14px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.plan-features li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: #0d6efd;
+    font-weight: bold;
+}
+
+@media (max-width: 767px) {
+    .price {
+        font-size: 28px;
+    }
+}
+
+
+
+
+  </style>
 
         <div id="page" data-region="mainpage" data-usertour="scroller"
             class="olan-page-drawers drawers   drag-container">
@@ -22,11 +152,7 @@
                                         </a>
                                     </li>
 
-                                    <li class="breadcrumb-item">
-                                        <span>
-                                            Site pages
-                                        </span>
-                                    </li>
+                                    
 
                                     <li class="breadcrumb-item">
                                         <a href="https://olan-moodle.hibootstrap.com/mod/page/view.php?id=26"
@@ -61,297 +187,202 @@
                         <h2 class="visually-hidden" id="fullwidth-top-block-region-heading">Blocks</h2><a href="#sb-1"
                             class="visually-hidden-focusable">Skip [Olan] Pricing</a>
 
-                        <section id="inst155" class=" block_olan_pricing block  card mb-3" role="region"
-                            data-block="olan_pricing" data-instance-id="155" aria-labelledby="instance-155-header">
-
-                            <div class="card-body p-3">
-
-                                <h3 id="instance-155-header" class="h5 card-title d-inline">[Olan] Pricing</h3>
-
-
-                                <div class="card-text content mt-3">
-                                    <div class="pricing-plans-area ptb-140">
-                                        <div class="container">
-                                            <div class="section-title section-title-animation animation-style2"
-                                                data-cues="slideInUp" data-duration="1000">
-                                                <h2 class="title-animation">Choose Your Plan<img
-                                                        src="https://olan-moodle.hibootstrap.com/pluginfile.php/218/block_olan_pricing/images/1/title-line.png"
-                                                        alt="image"></h2>
-                                                <p>Affordable pricing for students, professionals, and teams. Learn
-                                                    without limits.</p>
-                                            </div>
-                                            <ul class="pricing-toggle-billing">
-                                                <li class="active" data-billing="monthly">Monthly</li>
-                                                <li data-billing="yearly">Yearly (Save 15%)</li>
-                                            </ul>
-                                            <div class="row justify-content-center g-5 pricing-tab" data-tab="monthly"
-                                                data-cues="slideInUp" data-duration="1000">
-                                                <div class="col-lg-4 col-md-6">
-                                                    <div class="pricing-plans-card">
-                                                        <h2>Free</h2>
-                                                        <div class="price" data-monthly="0" data-yearly="0">$0
-                                                            <span>/month</span></div>
-                                                        <ul class="features">
-                                                            <li>Access 10 free courses</li>
-                                                            <li>Community Support</li>
-                                                            <li>Limited Certification</li>
-                                                            <li>Basic Progress Tracking</li>
-                                                            <li>Access to Weekly Webinars</li>
-                                                            <li>Public Discussion Forums</li>
-                                                            <li>Course Reminders via Email</li>
-                                                        </ul>
-                                                        <div class="price-btn"><a
-                                                                href="https://olan.ddev.site/login/index.php"
-                                                                class="default-btn">Start for Free<svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="18"
-                                                                    height="14" viewBox="0 0 18 14" fill="none">
-                                                                    <path opacity="0.5"
-                                                                        d="M16.25 6.75V7.25H1.25V6.75H16.25Z"
-                                                                        fill="white" stroke="white" />
-                                                                    <path d="M10.75 1L16.75 7L10.75 13" stroke="white"
-                                                                        stroke-width="1.5" stroke-linecap="round"
-                                                                        stroke-linejoin="round" /></svg></a></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-6">
-                                                    <div class="pricing-plans-card">
-                                                        <h2>Pro</h2>
-                                                        <div class="price" data-monthly="29" data-yearly="295">$29
-                                                            <span>/month</span></div>
-                                                        <ul class="features">
-                                                            <li>Unlimited Course Access</li>
-                                                            <li>Premium Support</li>
-                                                            <li>Certified Certificates</li>
-                                                            <li>Quizzes &amp; Assessments</li>
-                                                            <li>Offline Learning</li>
-                                                            <li>Download Course Materials</li>
-                                                            <li>Exclusive Community Access</li>
-                                                            <li>Monthly Live Q&amp;A Sessions</li>
-                                                            <li>Assignment Feedback</li>
-                                                        </ul>
-                                                        <div class="price-btn"><a
-                                                                href="https://olan.ddev.site/login/index.php"
-                                                                class="default-btn">Get Pro<svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="18"
-                                                                    height="14" viewBox="0 0 18 14" fill="none">
-                                                                    <path opacity="0.5"
-                                                                        d="M16.25 6.75V7.25H1.25V6.75H16.25Z"
-                                                                        fill="white" stroke="white" />
-                                                                    <path d="M10.75 1L16.75 7L10.75 13" stroke="white"
-                                                                        stroke-width="1.5" stroke-linecap="round"
-                                                                        stroke-linejoin="round" /></svg></a></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-6">
-                                                    <div class="pricing-plans-card">
-                                                        <h2>Enterprise</h2>
-                                                        <div class="price" data-monthly="49" data-yearly="499">$49
-                                                            <span>/month</span></div>
-                                                        <ul class="features">
-                                                            <li>Team Management Dashboard</li>
-                                                            <li>Bulk User Enrollment</li>
-                                                            <li>Dedicated Account Manager</li>
-                                                            <li>Custom LMS Integration</li>
-                                                            <li>Advanced Analytics &amp; Reporting</li>
-                                                            <li>SCORM &amp; xAPI Support</li>
-                                                            <li>Custom Branding</li>
-                                                            <li>Role-Based Access Control</li>
-                                                            <li>Priority Support &amp; SLAs</li>
-                                                        </ul>
-                                                        <div class="price-btn"><a
-                                                                href="https://olan.ddev.site/login/index.php"
-                                                                class="default-btn">Contact Sales<svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="18"
-                                                                    height="14" viewBox="0 0 18 14" fill="none">
-                                                                    <path opacity="0.5"
-                                                                        d="M16.25 6.75V7.25H1.25V6.75H16.25Z"
-                                                                        fill="white" stroke="white" />
-                                                                    <path d="M10.75 1L16.75 7L10.75 13" stroke="white"
-                                                                        stroke-width="1.5" stroke-linecap="round"
-                                                                        stroke-linejoin="round" /></svg></a></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row justify-content-center g-5 pricing-tab" data-tab="yearly"
-                                                style="display:none;" data-cues="slideInUp" data-duration="1000">
-                                                <div class="col-lg-4 col-md-6">
-                                                    <div class="pricing-plans-card">
-                                                        <h2>Free (Year)</h2>
-                                                        <div class="price" data-monthly="0" data-yearly="0">$0
-                                                            <span>/year</span></div>
-                                                        <ul class="features">
-                                                            <li>Access 10 free courses</li>
-                                                            <li>Community Support</li>
-                                                            <li>Limited Certification</li>
-                                                            <li>Basic Progress Tracking</li>
-                                                            <li>Access to Weekly Webinars</li>
-                                                            <li>Public Discussion Forums</li>
-                                                            <li>Course Reminders via Email</li>
-                                                        </ul>
-                                                        <div class="price-btn"><a
-                                                                href="https://olan.ddev.site/login/index.php"
-                                                                class="default-btn">Start for Free<svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="18"
-                                                                    height="14" viewBox="0 0 18 14" fill="none">
-                                                                    <path opacity="0.5"
-                                                                        d="M16.25 6.75V7.25H1.25V6.75H16.25Z"
-                                                                        fill="white" stroke="white" />
-                                                                    <path d="M10.75 1L16.75 7L10.75 13" stroke="white"
-                                                                        stroke-width="1.5" stroke-linecap="round"
-                                                                        stroke-linejoin="round" /></svg></a></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-6">
-                                                    <div class="pricing-plans-card">
-                                                        <h2>Pro (Year)</h2>
-                                                        <div class="price" data-monthly="29" data-yearly="295">$295
-                                                            <span>/year</span></div>
-                                                        <ul class="features">
-                                                            <li>Unlimited Course Access</li>
-                                                            <li>Premium Support</li>
-                                                            <li>Certified Certificates</li>
-                                                            <li>Quizzes &amp; Assessments</li>
-                                                            <li>Offline Learning</li>
-                                                            <li>Download Course Materials</li>
-                                                            <li>Exclusive Community Access</li>
-                                                            <li>Monthly Live Q&amp;A Sessions</li>
-                                                            <li>Assignment Feedback</li>
-                                                        </ul>
-                                                        <div class="price-btn"><a
-                                                                href="https://olan.ddev.site/login/index.php"
-                                                                class="default-btn">Get Pro<svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="18"
-                                                                    height="14" viewBox="0 0 18 14" fill="none">
-                                                                    <path opacity="0.5"
-                                                                        d="M16.25 6.75V7.25H1.25V6.75H16.25Z"
-                                                                        fill="white" stroke="white" />
-                                                                    <path d="M10.75 1L16.75 7L10.75 13" stroke="white"
-                                                                        stroke-width="1.5" stroke-linecap="round"
-                                                                        stroke-linejoin="round" /></svg></a></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-6">
-                                                    <div class="pricing-plans-card">
-                                                        <h2>Enterprise (Year)</h2>
-                                                        <div class="price" data-monthly="49" data-yearly="499">$499
-                                                            <span>/year</span></div>
-                                                        <ul class="features">
-                                                            <li>Team Management Dashboard</li>
-                                                            <li>Bulk User Enrollment</li>
-                                                            <li>Dedicated Account Manager</li>
-                                                            <li>Custom LMS Integration</li>
-                                                            <li>Advanced Analytics &amp; Reporting</li>
-                                                            <li>SCORM &amp; xAPI Support</li>
-                                                            <li>Custom Branding</li>
-                                                            <li>Role-Based Access Control</li>
-                                                            <li>Priority Support &amp; SLAs</li>
-                                                        </ul>
-                                                        <div class="price-btn"><a
-                                                                href="https://olan.ddev.site/login/index.php"
-                                                                class="default-btn">Contact Sales<svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="18"
-                                                                    height="14" viewBox="0 0 18 14" fill="none">
-                                                                    <path opacity="0.5"
-                                                                        d="M16.25 6.75V7.25H1.25V6.75H16.25Z"
-                                                                        fill="white" stroke="white" />
-                                                                    <path d="M10.75 1L16.75 7L10.75 13" stroke="white"
-                                                                        stroke-width="1.5" stroke-linecap="round"
-                                                                        stroke-linejoin="round" /></svg></a></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <script>
-                                        (function () {
-                                            var wrap = document.currentScript && document.currentScript
-                                                .previousElementSibling ? document.currentScript
-                                                .previousElementSibling : null;
-                                            var root = wrap ? wrap : document;
-                                            var list = root.querySelectorAll(".pricing-toggle-billing li");
-
-                                            function showTab(mode) {
-                                                var tabs = root.querySelectorAll(".pricing-tab");
-                                                tabs.forEach(function (t) {
-                                                    t.style.display = (t.getAttribute("data-tab") ===
-                                                        mode) ? "flex" : "none";
-                                                });
-                                                list.forEach(function (li) {
-                                                    li.classList.toggle("active", li.getAttribute(
-                                                        "data-billing") === mode);
-                                                });
-                                            }
-                                            list.forEach(function (li) {
-                                                li.addEventListener("click", function () {
-                                                    showTab(this.getAttribute("data-billing"));
-                                                });
-                                            });
-                                            showTab("monthly");
-                                        })();
-                                    </script>
-                                    <div class="footer"></div>
-
-                                </div>
-
-                            </div>
-
-                        </section>
-
-                        <span id="sb-1"></span><a href="#sb-2" class="visually-hidden-focusable">Skip [Olan] CTA</a>
-
-                        <section id="inst156" class=" block_olan_cta block  card mb-3" role="region"
-                            data-block="olan_cta" data-instance-id="156" aria-labelledby="instance-156-header">
-
-                            <div class="card-body p-3">
-
-                                <h3 id="instance-156-header" class="h5 card-title d-inline">[Olan] CTA</h3>
-
-
-                                <div class="card-text content mt-3">
-                                    <div class="cta-wrap-area ptb-140">
-                                        <div class="container">
-                                            <div class="cta-wrap-content section-title-animation animation-style1"
-                                                data-cues="slideInUp" data-duration="1000">
-                                                <h2 class="title-animation">
-                                                    Start Your Journey Toward In-Demand <span>
-                                                        Skills Today <img
-                                                            src="https://olan-moodle.hibootstrap.com/pluginfile.php/219/block_olan_cta/images/1/title-line.png"
-                                                            alt="image"> </span>
-                                                </h2>
-                                                <p>Enroll now and learn from certified industry experts.</p>
-                                                <a href="https://olan.ddev.site/course/index.php" class="default-btn">
-                                                    Get Started Now <svg xmlns="http://www.w3.org/2000/svg" width="18"
-                                                        height="14" viewBox="0 0 18 14" fill="none">
-                                                        <path opacity="0.5" d="M16.375 6.75V7.25H1.375V6.75H16.375Z"
-                                                            fill="#1C43FE" stroke="#1C43FE" />
-                                                        <path d="M10.875 1L16.875 7L10.875 13" stroke="#1C43FE"
-                                                            stroke-width="1.5" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="cta-wrap-shape1" data-speed="0.02" data-revert="true">
-                                            <img src="https://olan-moodle.hibootstrap.com/pluginfile.php/219/block_olan_cta/images/2/cta-shape5.png"
-                                                alt="image">
-                                        </div>
-                                        <div class="cta-wrap-shape2" data-speed="0.02" data-revert="true">
-                                            <img src="https://olan-moodle.hibootstrap.com/pluginfile.php/219/block_olan_cta/images/3/cta-shape6.png"
-                                                alt="image">
-                                        </div>
-                                    </div>
-
-                                    <div class="footer"></div>
-
-                                </div>
-
-                            </div>
-
-                        </section>
-
+                       
                         <span id="sb-2"></span>
                     </aside>
+                </div>
+
+
+                <div class="container" style="margin-top:80px !important;">
+
+                    <h2 class="title-animation">
+
+                            <div class="split-line"
+                                style="display: block; text-align: center; position: relative;">
+                                <div style="position:relative;display:inline-block;font-size:35px;">
+                                    Easy Pay
+                                </div>
+                                
+                            </div>
+                            <div class="split-line"
+                                style="display: block; text-align: center; position: relative;">
+                                <img src="/landing/images/title-line.png"
+                                    alt="image">
+                            </div>
+                            
+                            
+                        </h2>
+                        <p style="text-align:center;font-weight: 600;">
+                            Pay-As-You-Go Plan
+
+                        </p>    
+                   
+                    <div class="row mt-5">
+    <div class="col-xl-12 col-sm-6">
+        <div class="card pricing-card shadow-lg border-0">
+
+            <!-- Header -->
+            <div class="card-header pricing-header text-white">
+                <div class="row text-center">
+                    <div class="col-md-6 pricing-text border-end border-light">
+                        <span class="badge bg-warning text-dark mb-2">Flexible</span>
+                        <h3 class="fw-bold mt-2">12.5%</h3>
+                        <p class="mb-0">Pay as you go</p>
+                    </div>
+                    <div class="col-md-6 pricing-text">
+                        <span class="badge bg-success mb-2">Annual Fee</span>
+                        <h3 class="fw-bold mt-2">₦20,000</h3>
+                        <p class="mb-0">To generate visitor access codes per resident</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="card-body fs-5 p-4">
+                <div class="row g-4">
+
+                    <div class="col-md-6">
+                        <ul class="feature-list">
+                            <li>No setup fees</li>
+                            <li>No monthly subscription for estates</li>
+                            <li>Secure digital wallet for residents</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-6">
+                        <ul class="feature-list">
+                            <li>Resident dashboards & estate reports</li>
+                            <li>Pre-approved visitor access codes</li>
+                            <li>Service personnel digital passes</li>
+                            <li>Advanced access logs & audit trails</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+                </div>
+
+
+             <div class="container" style="margin-top:80px !important;">
+
+                    <h2 class="title-animation">
+
+                            <div class="split-line"
+                                style="display: block; text-align: center; position: relative;">
+                                <div style="position:relative;display:inline-block;font-size:35px;">
+                                    White label Saas Plan
+                                </div>
+                                
+                            </div>
+                            <div class="split-line"
+                                style="display: block; text-align: center; position: relative;">
+                                <img src="/landing/images/title-line.png"
+                                    alt="image">
+                            </div>
+                            
+                            
+                        </h2>
+                        <p style="text-align:center;font-weight: 600;">
+                            Enterprise-Grade Estate Infrastructure
+
+                        </p>    
+                   
+                    <div class="row mt-5 g-4">
+
+                        <!-- Card -->
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="card pricing-plan h-100 shadow-lg border-0">
+
+                                <div class="card-header pricing-plan-header text-white text-center">
+                                    <span class="badge bg-warning text-dark mb-2">One Time</span>
+                                    <h4 class="fw-bold mt-2">White Label License</h4>
+                                    <h2 class="price mt-3">₦5M – ₦10M</h2>
+                                    <!-- <p class="small opacity-75 mt-2">
+                                        Pricing depends on estate size and feature scope
+                                    </p> -->
+                                    <h4 class="fw-bold" style="font-size: 16px;">
+                                        Pricing depends on estate size and feature scope
+                                    </h4>
+                                </div>
+
+                                <div class="card-body p-4">
+                                    <ul class="plan-features">
+                                        <li>Full White Label Deployment</li>
+                                        <li>Custom Branding & Domain</li>
+                                        <li>Estate Specific Workloads & Rules</li>
+                                        <li>Dedicated Onboard & Setup</li>
+                                        <li>Full Access to  Aung ONE Core Infrastructure</li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Duplicate cards (reuse same structure) -->
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="card pricing-plan h-100 shadow-lg border-0">
+                                <div class="card-header pricing-plan-header text-white text-center">
+                                    <span class="badge bg-success mb-2">Yearly</span>
+                                    <h4 class="fw-bold mt-2">Annual Maintenance & Support</h4>
+                                    <h2 class="price mt-3">25% - 30%</h2>
+                                    <h4 class="fw-bold" style="font-size: 16px;">of Licence Fee</h4>
+                                    <!-- <p class="small opacity-75 mt-2">
+                                        Residents without an active access code generation cannot generate visitor access code
+                                    </p> -->
+                                </div>
+                                <div class="card-body p-4">
+                                    <ul class="plan-features">
+                                        <li>System Updates and improvements</li>
+                                        <li>Hosting and Infrastructural Support</li>
+                                        <li>Security Patches & Monitoring</li>
+                                        <li>Technical Support & uptime assurance</li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="card pricing-plan h-100 shadow-lg border-0">
+                                <div class="card-header pricing-plan-header text-white text-center">
+                                    <span class="badge bg-info mb-2">Per Resident</span>
+                                    <h4 class="fw-bold mt-2">Service and Access Fees</h4>
+                                    <h2 class="price mt-3">8.5% <span style="font-size: 15px;">Transaction Fee</span> ₦20,000 <span style="font-size: 15px;">Annual Access</span></h2>
+                                    <!-- <p class="small opacity-75 mt-2">
+                                        Designed for smart city deployments
+                                    </p> -->
+                                </div>
+                                <div class="card-body p-4">
+                                    <ul class="plan-features">
+                                        <li>8.5% fee on all estate transactions</li>
+                                        <li>Annual fee required for visitor access codes</li>
+                                        <li>Applies to both Easy Pay & White-Label estates</li>
+                                        <li>Can be paid by residents or covered in bulk by estates</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                     </div>
+
+                    <!-- Action Buttons -->
+                    <div class="text-center mt-5">
+                        <a href="#" class="btn btn-primary btn-lg px-5 me-3 shadow">
+                            Request a Demo
+                        </a>
+                        <a href="#" class="btn btn-outline-dark btn-lg px-5 shadow">
+                            Contact Sales
+                        </a>
+                    </div>
+
                 </div>
 
                 <div id="olans-settings-menu-container" class="olans-settings-menu-container">

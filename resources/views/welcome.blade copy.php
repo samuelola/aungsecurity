@@ -172,7 +172,7 @@
                         <span id="sb-1"></span><a href="#sb-2" class="visually-hidden-focusable">Skip [Olan] Funfacts
                             Three</a>
 
-                        <section  style="margin-top: 120px !important;" id="inst100" class=" block_olan_funfacts_three block  card mb-3" role="region"
+                        <section id="inst100" class=" block_olan_funfacts_three block  card mb-3" role="region"
                             data-block="olan_funfacts_three" data-instance-id="100"
                             aria-labelledby="instance-100-header">
 
@@ -182,33 +182,8 @@
 
 
                                 <div class="card-text content mt-3">
-                                    <div class="container">
-                                            <div class="row justify-content-center align-items-center g-5"
-                                                data-cues="slideInUp" data-duration="1000" data-disabled="true">
-                                                    <h2 class="title-animation" data-cue="slideInUp" data-duration="1000"
-                                                    style="perspective: 400px; animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;"
-                                                    data-show="true">
-                                                    <div class="split-line"
-                                                        style="display: block; text-align: center; position: relative;">
-                                                        <div style="position:relative;display:inline-block;">
-                                                            Trusted by Communities. Built for Growth.
-                                                        </div>
-                                                        
-                                                    </div>
-                                                    <div class="split-line"
-                                                        style="display: block; text-align: center; position: relative;">
-                                                        <img src="/landing/images/title-line.png"
-                                                            alt="image"></div>
-                                                    </h2>
-                                                    
-                                            </div>
-                                            <div class="section-title " "=""> 
-                                            <p>Delivering digital tools that strengthen trust, simplify payments, and power safe, connected living spaces</p>
-                                            </div>        
-                                     </div>
-                                    <div class="ot-fun-area">
+                                    <div class="ot-fun-area pt-140">
                                         <div class="container">
-                                            
                                             <div class="ot-fun-inner">
                                                 <div class="row justify-content-center g-5" data-cues="slideInUp"
                                                     data-duration="1000" data-disabled="true">
@@ -352,27 +327,40 @@
                                                     style="animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
                                                     <div
                                                         class="education-about-content  section-title-animation animation-style1">
-                                                        <!-- <span class="sub">About Olan</span> -->
-                                                        <h2 class="title-animation" style="perspective: 400px;font-size: 30px;">
-                                                            <div class="split-line" style="display: block; text-align: start; position: relative;">
-                                                                  <span>
+                                                        <span class="sub">About Olan</span>
+                                                        <h2 class="title-animation" style="perspective: 400px;">
+                                                            <div class="split-line"
+                                                                style="display: block; text-align: start; position: relative;">
+                                                                <div style="display:inline-block;">
+                                                                 Olan
+                                                                </div>
+                                                                <div style="display:inline-block;">
+                                                                 Platform.
+                                                                </div>
+                                                                
+                                                                <div style="display:inline-block;">
+                                                                  Infinite
+                                                                </div>
+                                                            </div>
+                                                            <div class="split-line"
+                                                                style="display: block; text-align: start; position: relative;">
+                                                                <span>
                                                                     <div style="display:inline-block;">
-                                                                       Technology that creates trust,
-                                                                       implifies payments 
-                                                                       and strengthens everyday living.
+                                                                      Learning
                                                                     </div>
-                                                                      
+                                                                    <div style="display:inline-block;">
+                                                                     Possibilities.
+                                                                    </div>
+                                                                     
                                                                     <img
                                                                         src="landing/images/title-line.png"
                                                                         alt="image">
-                                                                  </span>      
+                                                                </span>
                                                             </div>
-                                                            
                                                         </h2>
                                                         <p></p>
-                                                        <!-- <p>
-                                                            Our platform combines secure digital wallets and identity verification, replacing manual processes with intelligent automation, improving transparency, security, and revenue flow in communities and commercial operations
-                                                        </p> -->
+                                                        <p>At Olan, we believe quality education should be accessible,
+                                                            engaging, and empowering—for everyone, everywhere.</p>
                                                         <p></p>
 
                                                         <ul class="list" data-cues="fadeIn" data-duration="1000"
@@ -385,8 +373,9 @@
                                                                         alt="image">
                                                                 </div>
                                                                 <div class="content">
-                                                                    <h3>Work from Anywhere</h3>
-                                                                    <p>Manage payments, verify identities, and monitor estate activity from any device, anywhere, from the comfort of your home and offices. Built for admins, residents, and businesses on the move.</p>
+                                                                    <h3>Learn from Anywhere</h3>
+                                                                    <p>Access your courses anytime, on any device—at
+                                                                        home, at work, or on the go.</p>
                                                                 </div>
                                                             </li>
                                                             <li data-cue="fadeIn" data-duration="1000" data-delay="0"
@@ -397,8 +386,9 @@
                                                                         alt="image">
                                                                 </div>
                                                                 <div class="content">
-                                                                    <h3>Operate with Peace of Mind</h3>
-                                                                    <p>Smart automation for debt recovery and service charge collection, reducing conflict, errors, and delays.</p>
+                                                                    <h3>Teach with Confidence</h3>
+                                                                    <p>All the tools you need to build, launch, and
+                                                                        scale your courses—stress-free.</p>
                                                                 </div>
                                                             </li>
                                                             <li data-cue="fadeIn" data-duration="1000" data-delay="0"
@@ -409,37 +399,14 @@
                                                                         alt="image">
                                                                 </div>
                                                                 <div class="content">
-                                                                    <h3>Verified Digital Identity</h3>
-                                                                    <p>Face capture, government ID validation, and secure tenant records to help estates and landlords make safer decisions.</p>
-                                                                </div>
-                                                            </li>
-                                                             <li data-cue="fadeIn" data-duration="1000" data-delay="0"
-                                                                data-show="true"
-                                                                style="animation-name: fadeIn; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
-                                                                <div class="icon">
-                                                                    <img src="landing/images/about-list-icon.svg"
-                                                                        alt="image">
-                                                                </div>
-                                                                <div class="content">
-                                                                    <h3>Grow Without Boundaries</h3>
-                                                                    <p>Modular products designed to expand from one area to thousands, scalable for fast-growing communities and companies.</p>
-                                                                </div>
-                                                            </li>
-                                                            <li data-cue="fadeIn" data-duration="1000" data-delay="0"
-                                                                data-show="true"
-                                                                style="animation-name: fadeIn; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
-                                                                <div class="icon">
-                                                                    <img src="landing/images/about-list-icon.svg"
-                                                                        alt="image">
-                                                                </div>
-                                                                <div class="content">
-                                                                    <h3>Data-Driven Insights and Aggregating</h3>
-                                                                    <p>Our platform combines secure digital wallets and identity verification, replacing manual processes with intelligent automation, improving transparency, security, and revenue flow in communities and commercial operations.</p>
+                                                                    <h3>Earn Real Certificates</h3>
+                                                                    <p>Complete courses and receive professional
+                                                                        certificates to boost your career.</p>
                                                                 </div>
                                                             </li>
                                                         </ul>
 
-                                                        <!-- <div class="about-btn">
+                                                        <div class="about-btn">
                                                             <a href="#"
                                                                 class="default-btn">
                                                                 Learn More About Us <svg
@@ -454,7 +421,7 @@
                                                                         stroke-linejoin="round"></path>
                                                                 </svg>
                                                             </a>
-                                                        </div> -->
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div><!--/.row-->
@@ -469,13 +436,320 @@
 
                         </section>
 
-                        
+                        <span id="sb-3"></span><a href="#sb-4" class="visually-hidden-focusable">Skip [Olan] Funfacts
+                            Four</a>
 
-                        
+                        <section id="inst102" class=" block_olan_funfacts_four block  card mb-3" role="region"
+                            data-block="olan_funfacts_four" data-instance-id="102"
+                            aria-labelledby="instance-102-header">
 
-                        
+                            <div class="card-body p-3">
 
-                       
+                                <h3 id="instance-102-header" class="h5 card-title d-inline">[Olan] Funfacts Four</h3>
+
+
+                                <div class="card-text content mt-3">
+                                    <div class="ot-fun-box-area pb-140">
+                                        <div class="container">
+                                            <div class="row justify-content-center g-0" data-cues="slideInUp"
+                                                data-duration="1000" data-disabled="true">
+                                                <div class="col-lg-3 col-sm-6" data-cue="slideInUp" data-duration="1000"
+                                                    data-show="true"
+                                                    style="animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                                                    <div class="ot-fun-box-item">
+                                                        <div class="content">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-center">
+                                                                <h3 class="counter">6</h3>
+                                                                <h3 class="sub">.</h3>
+                                                                <h3 class="counter">8</h3>
+                                                                <h3 class="sub">M+</h3>
+                                                            </div>
+                                                            <p>ACTIVE LEARNERS</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6" data-cue="slideInUp" data-duration="1000"
+                                                    data-show="true"
+                                                    style="animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 300ms; animation-direction: normal; animation-fill-mode: both;">
+                                                    <div class="ot-fun-box-item wrap2">
+                                                        <div class="content">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-center">
+                                                                <h3 class="counter">7</h3>
+                                                                <h3 class="sub">.</h3>
+                                                                <h3 class="counter">5</h3>
+                                                                <h3 class="sub">K+</h3>
+                                                            </div>
+                                                            <p>COURSES AVAILABLE</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6" data-cue="slideInUp" data-duration="1000"
+                                                    data-show="true"
+                                                    style="animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 600ms; animation-direction: normal; animation-fill-mode: both;">
+                                                    <div class="ot-fun-box-item wrap3">
+                                                        <div class="content">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-center">
+                                                                <h3 class="counter">120</h3>
+                                                                <h3 class="sub">+</h3>
+                                                            </div>
+                                                            <p>COUNTRIES REACHED</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6" data-cue="slideInUp" data-duration="1000"
+                                                    data-show="true"
+                                                    style="animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 900ms; animation-direction: normal; animation-fill-mode: both;">
+                                                    <div class="ot-fun-box-item wrap4">
+                                                        <div class="content">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-center">
+                                                                <h3 class="counter">4</h3>
+                                                                <h3 class="sub">.</h3>
+                                                                <h3 class="counter">9</h3>
+                                                            </div>
+                                                            <p>AVERAGE COURSE RATING</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="footer"></div>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                        <span id="sb-4"></span><a href="#sb-5" class="visually-hidden-focusable">Skip [Olan] Course Area
+                            Two</a>
+
+                        <section id="inst108" class=" block_olan_course_area_two block  card mb-3" role="region"
+                            data-block="olan_course_area_two" data-instance-id="108"
+                            aria-labelledby="instance-108-header">
+
+                            <div class="card-body p-3">
+
+                                <h3 id="instance-108-header" class="h5 card-title d-inline">[Olan] Course Area Two</h3>
+
+
+                                <div class="card-text content mt-3">
+
+                                    <div class="ot-courses-area pb-140 ">
+                                        <div class="container">
+                                            <div class="section-title " "="">
+                    <span class=" sub">Featured Courses</span>
+                                                <h2 class="title-animation">
+                                                    Affordable Learning. Real-World Skills.<img
+                                                        src="landing/images/title-line.png"
+                                                        alt="Affordable Learning. Real-World Skills.">
+                                                </h2>
+                                                <p></p>
+                                                <p>Explore high-quality, expert-led courses designed to help you grow
+                                                    your skills and advance your career.</p>
+                                                <p></p>
+                                            </div>
+                                            <div class="row justify-content-center g-4">
+                                                <div class="col-lg-4 col-md-6">
+                                                    <div class="ot-courses-card">
+                                                        <div class="image">
+                                                            <a
+                                                                href="#">
+                                                                <img class="img-whp"
+                                                                    src="landing/images/courses8.jpg"
+                                                                    alt="Mastering Python for Data Science and Real-World Analytics">
+                                                            </a>
+                                                            <ul class="info-list">
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                                        height="17" viewBox="0 0 14 17" fill="none">
+                                                                        <path
+                                                                            d="M1 5.5C1 3.379 1 2.31775 1.65925 1.65925C2.31775 1 3.379 1 5.5 1H8.5C10.621 1 11.6823 1 12.3408 1.65925C13 2.31775 13 3.379 13 5.5V11.5C13 13.621 13 14.6823 12.3408 15.3408C11.6823 16 10.621 16 8.5 16H5.5C3.379 16 2.31775 16 1.65925 15.3408C1 14.6823 1 13.621 1 11.5V5.5Z"
+                                                                            stroke="#1C43FE" stroke-width="1.5"></path>
+                                                                        <path
+                                                                            d="M12.9235 11.4995H3.9235C3.226 11.4995 2.87725 11.4995 2.59075 11.576C2.20923 11.6783 1.86137 11.8793 1.58213 12.1586C1.3029 12.438 1.10212 12.7859 1 13.1675"
+                                                                            stroke="#1C43FE" stroke-width="1.5"></path>
+                                                                        <path opacity="0.5"
+                                                                            d="M4 4.74951H10M4 7.37451H7.75M12.625 13.7495H4"
+                                                                            stroke="#1C43FE" stroke-width="1.5"
+                                                                            stroke-linecap="round"></path>
+                                                                    </svg>
+                                                                    <span>4/09/25</span>
+                                                                </li>
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                                        height="19" viewBox="0 0 14 19" fill="none">
+                                                                        <path
+                                                                            d="M6.99986 7.85714C8.8934 7.85714 10.4284 6.32212 10.4284 4.42857C10.4284 2.53502 8.8934 1 6.99986 1C5.10631 1 3.57129 2.53502 3.57129 4.42857C3.57129 6.32212 5.10631 7.85714 6.99986 7.85714Z"
+                                                                            stroke="#1C43FE" stroke-width="1.5"></path>
+                                                                        <path opacity="0.5"
+                                                                            d="M7 17.2858C10.3137 17.2858 13 15.7508 13 13.8573C13 11.9637 10.3137 10.4287 7 10.4287C3.68629 10.4287 1 11.9637 1 13.8573C1 15.7508 3.68629 17.2858 7 17.2858Z"
+                                                                            stroke="#1C43FE" stroke-width="1.5"></path>
+                                                                    </svg>
+                                                                    <span>1 Learners</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="content">
+                                                            <a href="#"
+                                                                class="tag-btn">Data Science</a>
+                                                            <h3>
+                                                                <a
+                                                                    href="#">Mastering
+                                                                    Python for Data Science and Real-World Analytics</a>
+                                                            </h3>
+                                                            <div class="profile-btn">
+                                                                <a
+                                                                    href="#">Jeku
+                                                                    Smit</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6">
+                                                    <div class="ot-courses-card">
+                                                        <div class="image">
+                                                            <a
+                                                                href="#">
+                                                                <img class="img-whp"
+                                                                    src="landing/images/courses9.jpg"
+                                                                    alt="Complete Digital Marketing Strategy: From Fundamentals to Funnels">
+                                                            </a>
+                                                            <ul class="info-list">
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                                        height="17" viewBox="0 0 14 17" fill="none">
+                                                                        <path
+                                                                            d="M1 5.5C1 3.379 1 2.31775 1.65925 1.65925C2.31775 1 3.379 1 5.5 1H8.5C10.621 1 11.6823 1 12.3408 1.65925C13 2.31775 13 3.379 13 5.5V11.5C13 13.621 13 14.6823 12.3408 15.3408C11.6823 16 10.621 16 8.5 16H5.5C3.379 16 2.31775 16 1.65925 15.3408C1 14.6823 1 13.621 1 11.5V5.5Z"
+                                                                            stroke="#1C43FE" stroke-width="1.5"></path>
+                                                                        <path
+                                                                            d="M12.9235 11.4995H3.9235C3.226 11.4995 2.87725 11.4995 2.59075 11.576C2.20923 11.6783 1.86137 11.8793 1.58213 12.1586C1.3029 12.438 1.10212 12.7859 1 13.1675"
+                                                                            stroke="#1C43FE" stroke-width="1.5"></path>
+                                                                        <path opacity="0.5"
+                                                                            d="M4 4.74951H10M4 7.37451H7.75M12.625 13.7495H4"
+                                                                            stroke="#1C43FE" stroke-width="1.5"
+                                                                            stroke-linecap="round"></path>
+                                                                    </svg>
+                                                                    <span>4/09/25</span>
+                                                                </li>
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                                        height="19" viewBox="0 0 14 19" fill="none">
+                                                                        <path
+                                                                            d="M6.99986 7.85714C8.8934 7.85714 10.4284 6.32212 10.4284 4.42857C10.4284 2.53502 8.8934 1 6.99986 1C5.10631 1 3.57129 2.53502 3.57129 4.42857C3.57129 6.32212 5.10631 7.85714 6.99986 7.85714Z"
+                                                                            stroke="#1C43FE" stroke-width="1.5"></path>
+                                                                        <path opacity="0.5"
+                                                                            d="M7 17.2858C10.3137 17.2858 13 15.7508 13 13.8573C13 11.9637 10.3137 10.4287 7 10.4287C3.68629 10.4287 1 11.9637 1 13.8573C1 15.7508 3.68629 17.2858 7 17.2858Z"
+                                                                            stroke="#1C43FE" stroke-width="1.5"></path>
+                                                                    </svg>
+                                                                    <span>1 Learners</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="content">
+                                                            <a href="#"
+                                                                class="tag-btn">Digital Marketing</a>
+                                                            <h3>
+                                                                <a
+                                                                    href="#">Complete
+                                                                    Digital Marketing Strategy: From Fundamentals to
+                                                                    Funnels</a>
+                                                            </h3>
+                                                            <div class="profile-btn">
+                                                                <a
+                                                                    href="#">Jeku
+                                                                    Smit</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6">
+                                                    <div class="ot-courses-card">
+                                                        <div class="image">
+                                                            <a
+                                                                href="#">
+                                                                <img class="img-whp"
+                                                                    src="landing/images/courses10.jpg"
+                                                                    alt="UI/UX Bootcamp: Create Stunning Interfaces and User Experiences">
+                                                            </a>
+                                                            <ul class="info-list">
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                                        height="17" viewBox="0 0 14 17" fill="none">
+                                                                        <path
+                                                                            d="M1 5.5C1 3.379 1 2.31775 1.65925 1.65925C2.31775 1 3.379 1 5.5 1H8.5C10.621 1 11.6823 1 12.3408 1.65925C13 2.31775 13 3.379 13 5.5V11.5C13 13.621 13 14.6823 12.3408 15.3408C11.6823 16 10.621 16 8.5 16H5.5C3.379 16 2.31775 16 1.65925 15.3408C1 14.6823 1 13.621 1 11.5V5.5Z"
+                                                                            stroke="#1C43FE" stroke-width="1.5"></path>
+                                                                        <path
+                                                                            d="M12.9235 11.4995H3.9235C3.226 11.4995 2.87725 11.4995 2.59075 11.576C2.20923 11.6783 1.86137 11.8793 1.58213 12.1586C1.3029 12.438 1.10212 12.7859 1 13.1675"
+                                                                            stroke="#1C43FE" stroke-width="1.5"></path>
+                                                                        <path opacity="0.5"
+                                                                            d="M4 4.74951H10M4 7.37451H7.75M12.625 13.7495H4"
+                                                                            stroke="#1C43FE" stroke-width="1.5"
+                                                                            stroke-linecap="round"></path>
+                                                                    </svg>
+                                                                    <span>4/09/25</span>
+                                                                </li>
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                                        height="19" viewBox="0 0 14 19" fill="none">
+                                                                        <path
+                                                                            d="M6.99986 7.85714C8.8934 7.85714 10.4284 6.32212 10.4284 4.42857C10.4284 2.53502 8.8934 1 6.99986 1C5.10631 1 3.57129 2.53502 3.57129 4.42857C3.57129 6.32212 5.10631 7.85714 6.99986 7.85714Z"
+                                                                            stroke="#1C43FE" stroke-width="1.5"></path>
+                                                                        <path opacity="0.5"
+                                                                            d="M7 17.2858C10.3137 17.2858 13 15.7508 13 13.8573C13 11.9637 10.3137 10.4287 7 10.4287C3.68629 10.4287 1 11.9637 1 13.8573C1 15.7508 3.68629 17.2858 7 17.2858Z"
+                                                                            stroke="#1C43FE" stroke-width="1.5"></path>
+                                                                    </svg>
+                                                                    <span>1 Learners</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="content">
+                                                            <a href="#"
+                                                                class="tag-btn">Design Bootcamp</a>
+                                                            <h3>
+                                                                <a
+                                                                    href="#">UI/UX
+                                                                    Bootcamp: Create Stunning Interfaces and User
+                                                                    Experiences</a>
+                                                            </h3>
+                                                            <div class="profile-btn">
+                                                                <a
+                                                                    href="#">Jeku
+                                                                    Smit</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ot-courses-all-btn">
+                                                <a href="/course"
+                                                    class="default-btn">
+                                                    View All Courses
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14"
+                                                        viewBox="0 0 18 14" fill="none">
+                                                        <path opacity="0.5" d="M16.25 6.75V7.25H1.25V6.75H16.25Z"
+                                                            fill="white" stroke="white"></path>
+                                                        <path d="M10.75 1L16.75 7L10.75 13" stroke="white"
+                                                            stroke-width="1.5" stroke-linecap="round"
+                                                            stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="footer"></div>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                        <span id="sb-5"></span><a href="#sb-6" class="visually-hidden-focusable">Skip [Olan] CTA</a>
 
                         <section id="inst109" class=" block_olan_cta block  card mb-3" role="region"
                             data-block="olan_cta" data-instance-id="109" aria-labelledby="instance-109-header">
@@ -506,38 +780,38 @@
                                                              Journey
                                                             </div>
                                                             <div style="position:relative;display:inline-block;">
-                                                              To
+                                                              Toward
                                                             </div>
                                                             
                                                             <div style="position:relative;display:inline-block;">
-                                                              Smarter
+                                                              In
                                                             </div>
                                                             
                                                         </div>
                                                         <div class="split-line"
                                                             style="display: block; text-align: center; position: relative;">
-                                                            
+                                                            <div style="position:relative;display:inline-block;">
+                                                                <div style="position:relative;display:inline-block;">
+                                                                   Demand
+                                                                </div>
+                                                            </div> 
                                                             <span>
                                                                 <div style="position:relative;display:inline-block;">
-                                                                    Estate Management
+                                                                    Skills
                                                                 </div>
-                                                            </span>
-                                                        </div>
-                                                        <div class="split-line"
-                                                            style="display: block; text-align: center; position: relative;">
-                                                            
-                                                            <span>
                                                                 <div style="position:relative;display:inline-block;">
-                                                                    <p><i>Secure,Simple, and Reliable Estate Solutions</i></sp>
+                                                                    Today
                                                                 </div>
+                                                                 <img
+                                                                    src="landing/images/title-line.png"
+                                                                    alt="image">
                                                             </span>
                                                         </div>
-                                                        
                                                     </h2>
-                                                    <p>Manage your estate with ease and confidence. Our platform combines reliable payment solutions with advanced security features, giving you complete peace of mind every day.</p>
+                                                    <p>Enroll now and learn from certified industry experts.</p>
                                                     <a href="#"
                                                         class="default-btn">
-                                                        Start Now
+                                                        Get Started Now
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14"
                                                             viewBox="0 0 18 14" fill="none">
                                                             <path opacity="0.5" d="M16.375 6.75V7.25H1.375V6.75H16.375Z"
@@ -568,10 +842,120 @@
 
                         </section>
 
-                        
+                        <span id="sb-6"></span><a href="#sb-7" class="visually-hidden-focusable">Skip [Olan] Partners
+                            Three</a>
 
-                       
-                        <section style="margin-top: 150px !important;" id="inst114" class=" block_olan_feedback block  card mb-3" role="region"
+                        <section id="inst111" class=" block_olan_partners_three block  card mb-3" role="region"
+                            data-block="olan_partners_three" data-instance-id="111"
+                            aria-labelledby="instance-111-header">
+
+                            <div class="card-body p-3">
+
+                                <h3 id="instance-111-header" class="h5 card-title d-inline">[Olan] Partners Three</h3>
+
+
+                                <div class="card-text content mt-3">
+                                    <div class="ot-partner-area ptb-140">
+                                        <div class="container">
+                                            <div class="row justify-content-center align-items-center g-5"
+                                                data-cues="slideInUp" data-duration="1000" data-disabled="true">
+                                                <div class="col-lg-6 col-md-12" data-cue="slideInUp"
+                                                    data-duration="1000" data-show="true"
+                                                    style="animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                                                    <div
+                                                        class="ot-partner-content section-title-animation animation-style3">
+                                                        <span class="sub">Our Partners</span>
+                                                        <h2 class="title-animation" style="perspective: 400px;">
+                                                            <div class="split-line"
+                                                                style="display: block; text-align: start; position: relative;">
+                                                                <div style="position:relative;display:inline-block;">
+                                                                    Trusted
+                                                                </div>
+                                                                <div style="position:relative;display:inline-block;">
+                                                                    By
+                                                                </div>
+                                                                <div style="position:relative;display:inline-block;">
+                                                                    Leading
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            <div class="split-line"
+                                                                style="display: block; text-align: start; position: relative;">
+                                                                <span>
+                                                                    <div
+                                                                        style="position:relative;display:inline-block;">
+                                                                       Organizations
+                                                                    </div> <img
+                                                                        src="landing/images/title-line.png"
+                                                                        alt="image">
+                                                                </span>
+                                                                <div style="position:relative;display:inline-block;">
+                                                                    Worldwide
+                                                                </div>
+                                                            </div>
+                                                        </h2>
+                                                        <p>Our platform supports organizations of all sizes in
+                                                            upskilling their workforce through expert-led training.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12" data-cue="slideInUp"
+                                                    data-duration="1000" data-show="true"
+                                                    style="animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                                                    <div class="ot-partner-items">
+                                                        <div class="item">
+                                                            <img src="landing/images/award1.png"
+                                                                alt="award1.png">
+                                                        </div>
+                                                        <div class="item">
+                                                            <img src="landing/images/award2.png"
+                                                                alt="award2.png">
+                                                        </div>
+                                                        <div class="item">
+                                                            <img src="landing/images/award3.png"
+                                                                alt="award3.png">
+                                                        </div>
+                                                        <div class="item">
+                                                            <img src="landing/images/award4.png"
+                                                                alt="award4.png">
+                                                        </div>
+                                                        <div class="item">
+                                                            <img src="landing/images/award5.png"
+                                                                alt="award5.png">
+                                                        </div>
+                                                        <div class="item">
+                                                            <img src="landing/images/award6.png"
+                                                                alt="award6.png">
+                                                        </div>
+                                                        <div class="item">
+                                                            <img src="landing/images/award7.png"
+                                                                alt="award7.png">
+                                                        </div>
+                                                        <div class="item">
+                                                            <img src="landing/images/award8.png"
+                                                                alt="award8.png">
+                                                        </div>
+                                                        <div class="item">
+                                                            <img src="landing/images/award9.png"
+                                                                alt="award9.png">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="footer"></div>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                        <span id="sb-7"></span><a href="#sb-8" class="visually-hidden-focusable">Skip [Olan]
+                            Feedback</a>
+
+                        <section id="inst114" class=" block_olan_feedback block  card mb-3" role="region"
                             data-block="olan_feedback" data-instance-id="114" aria-labelledby="instance-114-header">
 
                             <div class="card-body p-3">
@@ -580,98 +964,19 @@
 
 
                                 <div class="card-text content mt-3">
-                                    <div class="container">
-                                            <div class="row justify-content-center align-items-center g-5"
-                                                data-cues="slideInUp" data-duration="1000" data-disabled="true">
-                                                <span
-                                                    class="sub" data-cue="slideInUp" data-duration="1000"
-                                                    data-show="true"
-                                                    style="color: #1c43fe;
-    font-weight: 500;
-    display: block;
-    margin-bottom: 12px;text-align: center;
-animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">Meet
-                                                    What Our Clients Say</span>
-                                                    <h2 class="title-animation" data-cue="slideInUp" data-duration="1000"
-                                                    style="perspective: 400px; animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;"
-                                                    data-show="true">
-                                                    <div class="split-line"
-                                                        style="display: block; text-align: center; position: relative;">
-                                                        <div style="position:relative;display:inline-block;">
-                                                            Trusted by Residents & Estate Managers
-                                                        </div>
-                                                        
-                                                    </div>
-                                                    <div class="split-line"
-                                                        style="display: block; text-align: center; position: relative;">
-                                                        <img src="/landing/images/title-line.png"
-                                                            alt="image"></div>
-                                                    </h2>
-                                            </div> 
-                                     </div>               
                                     <div class="ot-feedback-area pb-140">
                                         <div class="container" data-cues="slideInUp" data-duration="1000"
                                             data-disabled="true">
                                             <div class="ot-feedback-inner" data-cue="slideInUp" data-duration="1000"
                                                 data-show="true"
                                                 style="animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
-                                                
                                                 <div class="inner-top">
                                                     <div
                                                         class="swiper ot-feedback-slider swiper-initialized swiper-horizontal swiper-autoheight swiper-backface-hidden">
                                                         <div class="swiper-wrapper"
                                                             id="swiper-wrapper-7ea1f9410e364bb6f" aria-live="off"
                                                             style="height: 544px; transition-duration: 0ms; transform: translate3d(-981px, 0px, 0px); transition-delay: 0ms;">
-                                                            
-                                                             <div class="swiper-slide swiper-slide-next swiper-slide-prev"
-                                                                role="group" aria-label="2 / 2"
-                                                                data-swiper-slide-index="1"
-                                                                style="width: 956px; margin-right: 25px;">
-                                                                <div class="row justify-content-center g-4">
-                                                                    <div class="col-lg-4 col-md-12">
-                                                                        <div class="ot-feedback-image"
-                                                                            style="background-image: url(landing/images/feedback2.jpg);">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-8 col-md-12">
-                                                                        <div class="ot-feedback-content">
-                                                                            <div class="top">
-                                                                                <ul class="rating">
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                </ul>
-                                                                                <div class="quote">
-                                                                                    <img src="landing/images/quote.svg"
-                                                                                        alt="quote">
-                                                                                </div>
-                                                                            </div>
-                                                                            <p>From security monitoring to payment tracking, Aung Solutions has made estate management stress-free. Efficiency at its best!</p>
-                                                                            <div class="info">
-                                                                                <h3>Funke L., Resident</h3>
-                                                                                <!-- <span>UX/UI Design Mentor</span> -->
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+
 
                                                             <div class="swiper-slide swiper-slide-next swiper-slide-prev"
                                                                 role="group" aria-label="2 / 2"
@@ -713,160 +1018,18 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                                         alt="quote">
                                                                                 </div>
                                                                             </div>
-                                                                            <p>The customer support is excellent, and the platform is incredibly intuitive. I feel confident using it to manage my estate and finances.</p>
+                                                                            <p>Olan made it incredibly easy to fit
+                                                                                learning into my busy schedule. The
+                                                                                platform's structure, high-quality
+                                                                                instructors, and relevant course
+                                                                                material helped me gain the skills I
+                                                                                needed to lead digital campaigns
+                                                                                confidently. I've already applied what I
+                                                                                learned to real projects and seen great
+                                                                                results.</p>
                                                                             <div class="info">
-                                                                                <h3>Kelechi F., Property Owner</h3>
-                                                                                <!-- <span>UX/UI Design Mentor</span> -->
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="swiper-slide swiper-slide-next swiper-slide-prev"
-                                                                role="group" aria-label="2 / 2"
-                                                                data-swiper-slide-index="1"
-                                                                style="width: 956px; margin-right: 25px;">
-                                                                <div class="row justify-content-center g-4">
-                                                                    <div class="col-lg-4 col-md-12">
-                                                                        <div class="ot-feedback-image"
-                                                                            style="background-image: url(landing/images/feedback2.jpg);">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-8 col-md-12">
-                                                                        <div class="ot-feedback-content">
-                                                                            <div class="top">
-                                                                                <ul class="rating">
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                </ul>
-                                                                                <div class="quote">
-                                                                                    <img src="landing/images/quote.svg"
-                                                                                        alt="quote">
-                                                                                </div>
-                                                                            </div>
-                                                                            <p>I love how simple it is to make and track payments. No more late fees or missed dues. Highly recommend for every resident!</p>
-                                                                            <div class="info">
-                                                                                <h3>Amaka I., Tenant</h3>
-                                                                                <!-- <span>UX/UI Design Mentor</span> -->
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                             
-                                                            <div class="swiper-slide swiper-slide-next swiper-slide-prev"
-                                                                role="group" aria-label="2 / 2"
-                                                                data-swiper-slide-index="1"
-                                                                style="width: 956px; margin-right: 25px;">
-                                                                <div class="row justify-content-center g-4">
-                                                                    <div class="col-lg-4 col-md-12">
-                                                                        <div class="ot-feedback-image"
-                                                                            style="background-image: url(landing/images/feedback2.jpg);">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-8 col-md-12">
-                                                                        <div class="ot-feedback-content">
-                                                                            <div class="top">
-                                                                                <ul class="rating">
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                </ul>
-                                                                                <div class="quote">
-                                                                                    <img src="landing/images/quote.svg"
-                                                                                        alt="quote">
-                                                                                </div>
-                                                                            </div>
-                                                                            <p>As an estate manager, this platform saves me countless hours. Everything from payments to visitor access is centralized and efficient.</p>
-                                                                            <div class="info">
-                                                                                <h3>Chukwuemeka O., Estate Manager</h3>
-                                                                                <!-- <span>UX/UI Design Mentor</span> -->
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="swiper-slide swiper-slide-next swiper-slide-prev"
-                                                                role="group" aria-label="2 / 2"
-                                                                data-swiper-slide-index="1"
-                                                                style="width: 956px; margin-right: 25px;">
-                                                                <div class="row justify-content-center g-4">
-                                                                    <div class="col-lg-4 col-md-12">
-                                                                        <div class="ot-feedback-image"
-                                                                            style="background-image: url(landing/images/feedback2.jpg);">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-8 col-md-12">
-                                                                        <div class="ot-feedback-content">
-                                                                            <div class="top">
-                                                                                <ul class="rating">
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <img src="landing/images/star.svg"
-                                                                                            alt="star">
-                                                                                    </li>
-                                                                                </ul>
-                                                                                <div class="quote">
-                                                                                    <img src="landing/images/quote.svg"
-                                                                                        alt="quote">
-                                                                                </div>
-                                                                            </div>
-                                                                            <p>The security features give me peace of mind knowing my estate is monitored 24/7. I no longer worry about unauthorized access.</p>
-                                                                            <div class="info">
-                                                                                <h3>Ngozi M., Resident</h3>
-                                                                                <!-- <span>UX/UI Design Mentor</span> -->
+                                                                                <h3>Maria Jackson</h3>
+                                                                                <span>UX/UI Design Mentor</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -911,10 +1074,18 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                                         alt="quote">
                                                                                 </div>
                                                                             </div>
-                                                                            <p>Managing my estate has never been this easy. Payments are seamless, and I can track everything in real time. Truly a game-changer!</p>
+                                                                            <p>Olan made it incredibly easy to fit
+                                                                                learning into my busy schedule. The
+                                                                                platform's structure, high-quality
+                                                                                instructors, and relevant course
+                                                                                material helped me gain the skills I
+                                                                                needed to lead digital campaigns
+                                                                                confidently. I've already applied what I
+                                                                                learned to real projects and seen great
+                                                                                results.</p>
                                                                             <div class="info">
-                                                                                <h3>Tunde A., Estate Owner</h3>
-                                                                                <!-- <span>Marketing Manager</span> -->
+                                                                                <h3>Sarah Mitchell</h3>
+                                                                                <span>Marketing Manager</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1014,8 +1185,7 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                     k</div>
                                                             </div>
                                                         </div>
-                                                    </h2> 
-                                                    <!-- <a
+                                                    </h2> <a
                                                         href="/mod/page/view.php?id=24"
                                                         class="default-btn">
                                                         View All Feedback <svg xmlns="http://www.w3.org/2000/svg"
@@ -1026,7 +1196,7 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                 stroke-width="1.5" stroke-linecap="round"
                                                                 stroke-linejoin="round"></path>
                                                         </svg>
-                                                    </a> -->
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -1040,7 +1210,9 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
 
                         </section>
 
-                        
+                        <span id="sb-8"></span><a href="#sb-9" class="visually-hidden-focusable">Skip [Olan] Team
+                            Two</a>
+
                         <section id="inst116" class=" block_olan_team_two block  card mb-3" role="region"
                             data-block="olan_team_two" data-instance-id="116" aria-labelledby="instance-116-header">
 
@@ -1052,17 +1224,25 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                 <div class="card-text content mt-3">
                                     <div class="ot-team-area pb-140">
                                         <div class="container">
-                                            <div class="row justify-content-center align-items-center g-5"
-                                                data-cues="slideInUp" data-duration="1000" data-disabled="true">
-                                               
+                                            <div class="section-title section-title-animation animation-style1"
+                                                data-cues="slideInUp" data-duration="1000" data-disabled="true"><span
+                                                    class="sub" data-cue="slideInUp" data-duration="1000"
+                                                    data-show="true"
+                                                    style="animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">Meet
+                                                    Our Instructors</span>
                                                 <h2 class="title-animation" data-cue="slideInUp" data-duration="1000"
                                                     style="perspective: 400px; animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;"
                                                     data-show="true">
                                                     <div class="split-line"
                                                         style="display: block; text-align: center; position: relative;">
-                                                        
                                                         <div style="position:relative;display:inline-block;">
-                                                             Meet the People Powering Our Solutions
+                                                            Your
+                                                        </div>
+                                                        <div style="position:relative;display:inline-block;">
+                                                            Learning
+                                                        </div>
+                                                        <div style="position:relative;display:inline-block;">
+                                                            Guides
                                                             
                                                         </div>
                                                     </div>
@@ -1071,10 +1251,6 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                         <img src="/landing/images/title-line.png"
                                                             alt="image"></div>
                                                 </h2>
-                                               
-                                            </div>
-                                            <div class="section-title " "=""> 
-                                                <p>Delivering digital tools that strengthen trust, simplify payments, and power safe, connected living spaces</p>
                                             </div>
                                             <div class="row justify-content-center g-4" data-cues="slideInUp"
                                                 data-duration="1000" data-disabled="true">
@@ -1119,9 +1295,8 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                         </div>
                                                         <div class="content">
                                                             <h3><a
-                                                                    href="#">
-                                                                    Obiukwu Chinedu John
-                                                                </a></h3><span>Chief Executive Officer/ Chief Operating Officer</span>
+                                                                    href="#">James
+                                                                    Patel </a></h3><span>UX/UI Design Mentor</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1166,7 +1341,8 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                         </div>
                                                         <div class="content">
                                                             <h3><a
-                                                                    href="#">Obiukwu Ugochi Blessing</a></h3><span>Chief Marketing Officer/Data & Intelligence Lead</span>
+                                                                    href="#">Maria
+                                                                    Jackson</a></h3><span>Senior Web Developer</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1211,11 +1387,13 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                         </div>
                                                         <div class="content">
                                                             <h3><a
-                                                                    href="#">Samuel Oladele </a></h3><span>Senior Software Engineer</span>
+                                                                    href="#">Liam
+                                                                    Chen </a></h3><span>Personal Productivity
+                                                                Coach</span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="col-lg-3 col-sm-6" data-cue="slideInUp" data-duration="1000"
+                                                <div class="col-lg-3 col-sm-6" data-cue="slideInUp" data-duration="1000"
                                                     data-show="true"
                                                     style="animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 900ms; animation-direction: normal; animation-fill-mode: both;">
                                                     <div class="ot-team-card  wrap-style">
@@ -1260,21 +1438,9 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                     Kim</a></h3><span>Lead Data Science Educator</span>
                                                         </div>
                                                     </div>
-                                                </div> -->
-                                            </div>
-                                            <!-- <div class="row">
-                                                <div class="col-md-1"></div>
-                                                <div class="col-md-10" style="text-align: center;
-    margin-top: 70px;">
-                                                     
-                                                   <p>Together, we combine innovation, discipline, and purpose to build technology that works — reliably, securely, and at scale.
-</p>
-                                            
                                                 </div>
-                                                <div class="col-md-1"></div>
-                                            </div> -->
+                                            </div>
                                         </div>
-
                                     </div>
                                     <div class="footer"></div>
 
@@ -1310,12 +1476,11 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                 <div class="col-lg-6 col-md-12" data-cue="slideInUp"
                                                     data-duration="1000" data-show="true"
                                                     style="animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
-                                                    <div class="faq-content row justify-content-center align-items-center g-5">
+                                                    <div class="faq-content section-title-animation animation-style3">
                                                         <div class="title">
-                                                            <span class="sub">
-                                                                <a class="autolink" title="FAQ"
+                                                            <span class="sub"><a class="autolink" title="FAQ"
                                                                     href="#">FAQ</a>'s</span>
-                                                            <h2 class="title-animation" style="perspective: 400px;font-size:30px;">
+                                                            <h2 class="title-animation" style="perspective: 400px;">
                                                                 <div class="split-line"
                                                                     style="display: block; text-align: start; position: relative;">
                                                                     <div
@@ -1351,8 +1516,7 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                     </span>
                                                                     <div
                                                                         style="position:relative;display:inline-block;">
-                                                                        Aung
-
+                                                                        olan
                                                                     </div>
                                                                 </div>
                                                             </h2>
@@ -1365,16 +1529,15 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                         data-target="#collapse_1_118"
                                                                         aria-expanded="true"
                                                                         aria-controls="collapse_1_118">
-                                                                        How do I get started on the AUNG platform? </button>
+                                                                        How do I enroll in a course on Olan? </button>
                                                                     <div id="collapse_1_118"
                                                                         class="accordion-collapse collapse show"
                                                                         data-parent="#faqAccordion118">
                                                                         <div class="accordion-body">
-                                                                            <p>
-                                                                                To begin, create an account using your phone number or email address. Once registered, you’ll complete a simple profile setup and verify your identity. After verification, you can access your 
-                                                                                dashboard, fund your wallet, and start using available services such as payments, estate access, and notifications.
- 
-                                                                            </p>
+                                                                            <p>Simply browse our course catalog, select
+                                                                                a course that fits your goals, and click
+                                                                                “Enroll Now.” You'll be guided through a
+                                                                                quick and secure checkout process.</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1384,17 +1547,16 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                         data-target="#collapse_2_118"
                                                                         aria-expanded="false"
                                                                         aria-controls="collapse_2_118">
-                                                                        What is the AUNG application, and how does it work?
-
+                                                                        Are the courses self-paced or scheduled?
                                                                     </button>
                                                                     <div id="collapse_2_118"
                                                                         class="accordion-collapse collapse"
                                                                         data-parent="#faqAccordion118">
                                                                         <div class="accordion-body">
-                                                                            <p>The Aung Application is a secure digital wallet that allows residents and users to make estate-related payments, manage balances, view transaction history, and automate 
-                                                                                recurring charges. Payments can be made using cards 
-                                                                                or bank transfers, and confirmations are recorded 
-                                                                                instantly on your dashboard.</p>
+                                                                            <p>Simply browse our course catalog, select
+                                                                                a course that fits your goals, and click
+                                                                                “Enroll Now.” You'll be guided through a
+                                                                                quick and secure checkout process.</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1404,16 +1566,16 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                         data-target="#collapse_3_118"
                                                                         aria-expanded="false"
                                                                         aria-controls="collapse_3_118">
-                                                                       How are service charges and recurring payments handled? </button>
+                                                                        Will I receive a certificate after completing a
+                                                                        course? </button>
                                                                     <div id="collapse_3_118"
                                                                         class="accordion-collapse collapse"
                                                                         data-parent="#faqAccordion118">
                                                                         <div class="accordion-body">
-                                                                            <p>Service charges can be set up for automatic 
-                                                                                renewal based on monthly, quarterly, or yearly plans. 
-                                                                                The system sends reminders before due dates and processes payments automatically 
-                                                                                once approved, 
-                                                                                helping estates recover fees without conflict or disruption</p>
+                                                                            <p>Simply browse our course catalog, select
+                                                                                a course that fits your goals, and click
+                                                                                “Enroll Now.” You'll be guided through a
+                                                                                quick and secure checkout process.</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1423,193 +1585,19 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                         data-target="#collapse_4_118"
                                                                         aria-expanded="false"
                                                                         aria-controls="collapse_4_118">
-                                                                        How does tenant and identity verification work?
+                                                                        Can I access Olan courses on mobile devices?
                                                                     </button>
                                                                     <div id="collapse_4_118"
                                                                         class="accordion-collapse collapse"
                                                                         data-parent="#faqAccordion118">
                                                                         <div class="accordion-body">
-                                                                            <p>Users are required to submit valid identification 
-                                                                                details and complete facial verification during registration.
-                                                                                This information is securely stored and used to create a verified digital profile, 
-                                                                                helping estate managers improve security 
-                                                                            and maintain accurate resident records.</p>
+                                                                            <p>Simply browse our course catalog, select
+                                                                                a course that fits your goals, and click
+                                                                                “Enroll Now.” You'll be guided through a
+                                                                                quick and secure checkout process.</p>
                                                                         </div>
                                                                     </div>
-                                                                    
                                                                 </div>
-
-                                                                <div class="accordion-item">
-                                                                    <button class="accordion-button collapsed"
-                                                                        type="button" data-toggle="collapse"
-                                                                        data-target="#collapse_5_118"
-                                                                        aria-expanded="false"
-                                                                        aria-controls="collapse_5_118">
-                                                                        Can I approve visitors and service personnel through the app?
-                                                                    </button>
-                                                                    <div id="collapse_5_118"
-                                                                        class="accordion-collapse collapse"
-                                                                        data-parent="#faqAccordion118">
-                                                                        <div class="accordion-body">
-                                                                            <p>
-                                                                                Yes. Residents can pre-approve visitors or service personnel 
-                                                                                directly from the app by generating a digital access pass.
-                                                                                Security personnel can verify access at entry points using QR 
-                                                                                codes or confirmation logs within the system.
-
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </div>
-
-                                                                <div class="accordion-item">
-                                                                    <button class="accordion-button collapsed"
-                                                                        type="button" data-toggle="collapse"
-                                                                        data-target="#collapse_6_118"
-                                                                        aria-expanded="false"
-                                                                        aria-controls="collapse_6_118">
-                                                                        What happens if I miss a payment?
-                                                                    </button>
-                                                                    <div id="collapse_6_118"
-                                                                        class="accordion-collapse collapse"
-                                                                        data-parent="#faqAccordion118">
-                                                                        <div class="accordion-body">
-                                                                            <p>
-                                                                                If a payment is missed, 
-                                                                                the system sends automated reminders and updates your 
-                                                                                dashboard with the outstanding balance. Estate managers 
-                                                                                can track unpaid charges transparently without resorting 
-                                                                                to service disconnections or access restrictions.
-
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </div>
-
-
-                                                                <div class="accordion-item">
-                                                                    <button class="accordion-button collapsed"
-                                                                        type="button" data-toggle="collapse"
-                                                                        data-target="#collapse_7_118"
-                                                                        aria-expanded="false"
-                                                                        aria-controls="collapse_7_118">
-                                                                        Is my personal and payment information secure?
-                                                                    </button>
-                                                                    <div id="collapse_7_118"
-                                                                        class="accordion-collapse collapse"
-                                                                        data-parent="#faqAccordion118">
-                                                                        <div class="accordion-body">
-                                                                            <p>
-                                                                                If a payment is missed, 
-                                                                                the system sends automated reminders and updates your 
-                                                                                dashboard with the outstanding balance. Estate managers 
-                                                                                can track unpaid charges transparently without resorting 
-                                                                                to service disconnections or access restrictions.
-
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </div>
-
-                                                                 <div class="accordion-item"> <!--begining of div-->
-                                                                    <button class="accordion-button collapsed"
-                                                                        type="button" data-toggle="collapse"
-                                                                        data-target="#collapse_8_118"
-                                                                        aria-expanded="false"
-                                                                        aria-controls="collapse_8_118">
-                                                                        Can estate managers monitor activities and payments in real time?
-                                                                    </button>
-                                                                    <div id="collapse_8_118"
-                                                                        class="accordion-collapse collapse"
-                                                                        data-parent="#faqAccordion118">
-                                                                        <div class="accordion-body">
-                                                                            <p>
-                                                                                Yes. Estate administrators have access to a dedicated dashboard
-                                                                                where they can monitor payments, verification status, visitor logs, and 
-                                                                                community activity in real time, enabling better decision-making and reporting.
-
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </div><!--end of div -->
-
-                                                                <div class="accordion-item"> <!--begining of div-->
-                                                                    <button class="accordion-button collapsed"
-                                                                        type="button" data-toggle="collapse"
-                                                                        data-target="#collapse_9_118"
-                                                                        aria-expanded="false"
-                                                                        aria-controls="collapse_9_118">
-                                                                        Does the application work on mobile devices?
-                                                                    </button>
-                                                                    <div id="collapse_9_118"
-                                                                        class="accordion-collapse collapse"
-                                                                        data-parent="#faqAccordion118">
-                                                                        <div class="accordion-body">
-                                                                            <p>
-                                                                                Yes. The AUNG System is designed for full mobile access, 
-                                                                                allowing users to manage payments, approvals, 
-                                                                                and alerts from smartphones or tablets anytime, anywhere.
-
-
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </div><!--end of div -->
-                                                                <div class="accordion-item"> <!--begining of div-->
-                                                                    <button class="accordion-button collapsed"
-                                                                        type="button" data-toggle="collapse"
-                                                                        data-target="#collapse_10_118"
-                                                                        aria-expanded="false"
-                                                                        aria-controls="collapse_10_118">
-                                                                        How do I get help or report an issue?
-                                                                    </button>
-                                                                    <div id="collapse_10_118"
-                                                                        class="accordion-collapse collapse"
-                                                                        data-parent="#faqAccordion118">
-                                                                        <div class="accordion-body">
-                                                                            <p>
-                                                                               If you experience any issues or need assistance, 
-                                                                               you can contact our support team directly through the 
-                                                                               app or via the Contact Us page. Support requests are 
-                                                                               logged and handled promptly to ensure uninterrupted service.
-
-
-
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </div><!--end of div -->
-                                                                <div class="accordion-item"> <!--begining of div-->
-                                                                    <button class="accordion-button collapsed"
-                                                                        type="button" data-toggle="collapse"
-                                                                        data-target="#collapse_11_118"
-                                                                        aria-expanded="false"
-                                                                        aria-controls="collapse_11_118">
-                                                                        Can this platform be used by multiple estates or businesses?
-                                                                    </button>
-                                                                    <div id="collapse_11_118"
-                                                                        class="accordion-collapse collapse"
-                                                                        data-parent="#faqAccordion118">
-                                                                        <div class="accordion-body">
-                                                                            <p>
-                                                                               Yes. The platform is built to scale. Estate managers, 
-                                                                               landlords, and organizations can manage multiple locations 
-                                                                               or properties from a single account.
-
-
-
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </div><!--end of div -->
-
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1647,7 +1635,7 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                     <div
                                                         class="education-blog-content section-title-animation animation-style1">
                                                         <span class="sub">Our Blog</span>
-                                                        <h2 class="title-animation" style="perspective: 400px;font-size:30px;">
+                                                        <h2 class="title-animation" style="perspective: 400px;">
                                                             <div class="split-line"
                                                                 style="display: block; text-align: start; position: relative;">
                                                                 <div style="position:relative;display:inline-block;">

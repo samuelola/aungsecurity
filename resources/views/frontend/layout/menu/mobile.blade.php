@@ -1,8 +1,9 @@
 <div class="sidebar-menu-area offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas">
             <div class="offcanvas-header">
                 <a class="logo d-inline-block" href="/">
-                    <img src="/pluginfile.php/1/theme_olan/mobile_logo/1757783192/olan-main-logo.svg"
-                        alt="Olan">
+                    <img class="main-logo"
+                        src="{{asset('aung_logo_blue.png')}}"
+                        alt="AungSolution" style="width: 100px;">
 
                 </a>
                 <button type="button" data-bs-dismiss="offcanvas" aria-label="Close" class="close-btn">

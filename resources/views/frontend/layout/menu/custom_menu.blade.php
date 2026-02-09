@@ -75,7 +75,7 @@
                     <div class="others-option d-flex align-items-center">
                         <div class="option-item">
 
-                            <form class="search-form" method="get"
+                            <!-- <form class="search-form" method="get"
                                 action="/course/search.php">
                                 <input type="text" class="form-control" name="q" placeholder="Search for anything">
                                 <button type="submit">
@@ -94,7 +94,7 @@
                                         </g>
                                     </svg>
                                 </button>
-                            </form>
+                            </form> -->
 
                         </div>
 

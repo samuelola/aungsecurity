@@ -41,13 +41,12 @@
                     </div>
 
                     <div class="page-banner-shape1" data-speed="0.05" data-revert="true">
-                        <img src="{{asset('landing/about/page-banner-shape1.png')}}"
-                            alt="image">
+                        <img src="landing/images/cta-shape6.png"
+                                                        alt="image">
                     </div>
 
                     <div class="page-banner-shape2" data-speed="0.05" data-revert="true">
-                        <img src="{{asset('landing/about/page-banner-shape2.png')}}"
-                            alt="image">
+                        <img src="landing/images/cta-shape5.png" alt="image">
                     </div>
 
                 </div>
@@ -55,10 +54,11 @@
                 <div class="olan-fullwidth-top" aria-label="Blocks">
                     <aside id="block-region-fullwidth-top" class="block-region" data-blockregion="fullwidth-top"
                         data-droptarget="1" aria-labelledby="fullwidth-top-block-region-heading">
-                        <h2 class="visually-hidden" id="fullwidth-top-block-region-heading">Blocks</h2><a href="#sb-1"
-                            class="visually-hidden-focusable">Skip [Olan] Features</a>
+                        <!-- <h2 class="visually-hidden" id="fullwidth-top-block-region-heading">Blocks</h2> -->
+                        <!-- <a href="#sb-1"
+                            class="visually-hidden-focusable">Skip [Olan] Features</a> -->
 
-                        <section id="inst127" class=" block_olan_features block  card mb-3" role="region"
+                        <!-- <section id="inst127" class=" block_olan_features block  card mb-3" role="region"
                             data-block="olan_features" data-instance-id="127" aria-labelledby="instance-127-header">
 
                             <div class="card-body p-3">
@@ -127,19 +127,83 @@
 
                             </div>
 
-                        </section>
-
-                        <span id="sb-1"></span><a href="#sb-2" class="visually-hidden-focusable">Skip [Olan] About
-                            Two</a>
+                        </section> -->
 
                         <section id="inst130" class=" block_olan_about_two block  card mb-3" role="region"
                             data-block="olan_about_two" data-instance-id="130" aria-labelledby="instance-130-header">
 
                             <div class="card-body p-3">
 
-                                <h3 id="instance-130-header" class="h5 card-title d-inline">[Olan] About Two</h3>
+                               
+                                <div class="card-text content mt-3">
+                                    <div class="education-about-area wrap-style2 pt-140">
+                                        <div class="container">
+                                            <div class="row justify-content-center align-items-center g-5"
+                                                data-cues="slideInUp" data-duration="1000">
+                                                <h2 class="title-animation">
+                                                    <div class="split-line"
+                                                                style="display: block; text-align: center; position: relative;">
+                                                                <div style="position:relative;display:inline-block;">
+                                                                    About AUNG Solutions Nigeria Limited
 
+                                                                </div>
+                                                                
+                                                    </div>
 
+                                                    <div class="split-line"
+                                                                style="display: block; text-align: center; position: relative;">
+                                                                <img
+                                                        src="{{asset('landing/about/title-line.png')}}"
+                                                        alt="image">
+                                                    </div>
+                                                     
+                                                    
+                                                </h2>
+                                            </div>
+                                            <div class="row justify-content-center align-items-center g-5"
+                                                data-cues="slideInUp" data-duration="1000" data-delay="0">
+                                                
+
+                                                <div class="col-xl-12 col-md-12">
+                                                    <div
+                                                        class="education-about-content  section-title-animation animation-style1">
+                                                        <!-- <span class="sub">About AUNG Solutions Nigeria Limited</span> -->
+                                                        
+                                                        <p>
+                                                            <p>
+                                                                AUNG Solutions Nigeria Limited is a dynamic and forward-thinking technology company headquartered in <b>Lagos, Nigeria</b>, committed to building practical, secure, and scalable digital solutions for businesses, communities, and organizations across Africa and emerging markets.
+                                                                We specialize in the <b>design, development, and deployment of innovative applications and digital platforms</b> that address real-world challenges across multiple sectors. Our solutions are thoughtfully engineered to meet the evolving needs of modern businesses, residential communities, and digital creators, bridging gaps between technology, security, finance, and everyday operations.
+                                                                At AUNG Solutions, we believe technology should not complicate life or create friction. Instead, it should <b>simplify processes, strengthen trust, improve accountability, and unlock growth opportunities</b>. This belief drives every product we build and every solution we deploy.
+
+                                                            </p>
+                                                        </p>
+                                                        
+
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/.row-->
+                                        </div>
+
+                                       
+
+                                    </div>
+
+                                    <div class="footer"></div>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                       <section id="inst130" class=" block_olan_about_two block  card mb-3" role="region"
+                            data-block="olan_about_two" data-instance-id="130" aria-labelledby="instance-130-header">
+
+                            <div class="card-body p-3">
+
+                            
                                 <div class="card-text content mt-3">
                                     <div class="education-about-area wrap-style2 pt-140">
                                         <div class="container">
@@ -184,28 +248,30 @@
                                                 <div class="col-xl-6 col-md-12">
                                                     <div
                                                         class="education-about-content  section-title-animation animation-style1">
-                                                        <span class="sub">About Olan</span>
+                                                        <!-- <span class="sub">About AUNG Solutions Nigeria Limited</span> -->
                                                         <h2 class="title-animation">
-                                                            One Platform. Infinite <span>Learning Possibilities. <img
+                                                             <span>What We Do 
+                                                                <img
                                                                     src="{{asset('landing/about/title-line.png')}}"
                                                                     alt="image"></span>
                                                         </h2>
-                                                        <p>
-                                                            <p>At Olan, we believe quality education should be
-                                                                accessible, engaging, and empowering—for everyone,
-                                                                everywhere.</p>
-                                                        </p>
-
+                                               
+                                                        <!-- <span style="margin-top:35px;" class="sub">What We Do</span> -->
                                                         <ul class="list" data-cues="fadeIn" data-duration="1000"
                                                             data-delay="0" data-stagger="120">
                                                             <li>
                                                                 <div class="icon">
                                                                     <img src="{{asset('landing/about/about-list-icon.svg')}}"
-                                                                        alt="image"> </div>
+                                                                        alt="image">
+                                                                </div>
                                                                 <div class="content">
-                                                                    <h3>Learn from Anywhere</h3>
+                                                                    <!-- <h3>Learn from Anywhere</h3>
                                                                     <p>Access your courses anytime, on any device—at
-                                                                        home, at work, or on the go.</p>
+                                                                        home, at work, or on the go.</p> -->
+                                                                    <p>
+                                                                        <b>Community Wallet & Estate Management Systems</b> that automate payments, improve debt recovery, enhance security, and foster collaboration within residential estates.
+
+                                                                    </p>    
                                                                 </div>
                                                             </li>
                                                             <li>
@@ -213,9 +279,13 @@
                                                                     <img src="{{asset('landing/about/about-list-icon.svg')}}"
                                                                         alt="image"> </div>
                                                                 <div class="content">
-                                                                    <h3>Teach with Confidence</h3>
+                                                                    <!-- <h3>Teach with Confidence</h3>
                                                                     <p>All the tools you need to build, launch, and
-                                                                        scale your courses—stress-free.</p>
+                                                                        scale your courses—stress-free.</p> -->
+                                                                    <p>
+                                                                        <b>Identity Verification and Access Control Solutions</b> that help communities and businesses maintain accurate records and improve safety through secure digital verification.
+
+                                                                    </p>    
                                                                 </div>
                                                             </li>
                                                             <li>
@@ -223,60 +293,25 @@
                                                                     <img src="{{asset('landing/about/about-list-icon.svg')}}"
                                                                         alt="image"> </div>
                                                                 <div class="content">
-                                                                    <h3>Earn Real Certificates</h3>
+                                                                    <!-- <h3>Earn Real Certificates</h3>
                                                                     <p>Complete courses and receive professional
-                                                                        certificates to boost your career.</p>
+                                                                        certificates to boost your career.</p> -->
+                                                                     <p>
+                                                                        <b>Custom Software Development and API Integrations</b> tailored to meet specific operational and industry requirements.
+
+                                                                     </p>   
                                                                 </div>
                                                             </li>
                                                         </ul>
 
-                                                        <div class="about-btn">
-                                                            <a href="#"
-                                                                class="default-btn">
-                                                                Learn More About Us <svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="18"
-                                                                    height="14" viewBox="0 0 18 14" fill="none"
-                                                                    aria-hidden="true">
-                                                                    <path opacity="0.5"
-                                                                        d="M16.25 6.75V7.25H1.25V6.75H16.25Z"
-                                                                        fill="white" stroke="white" />
-                                                                    <path d="M10.75 1L16.75 7L10.75 13" stroke="white"
-                                                                        stroke-width="1.5" stroke-linecap="round"
-                                                                        stroke-linejoin="round" />
-                                                                </svg>
-                                                            </a>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
                                             <!--/.row-->
                                         </div>
 
-                                        <div class="dl-video-area pt-140">
-                                            <div class="container" data-cues="slideInUp" data-duration="1000"
-                                                data-disabled="true">
-                                                <div class="dl-video-view" data-cue="slideInUp" data-duration="1000"
-                                                    data-show="true"
-                                                    style="animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
-                                                    <img src="{{asset('landing/about/video.png')}}"
-                                                        alt="image">
-                                                    <a data-fslightbox="video" class="video-btn"
-                                                        href="https://youtu.be/PWvPbGWVRrU">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
-                                                            viewBox="0 0 24 24">
-                                                            <path fill="none" stroke="#fff" stroke-width="1.5"
-                                                                d="M20.409 9.353a2.998 2.998 0 0 1 0 5.294L7.597 21.614C5.534 22.737 3 21.277 3 18.968V5.033c0-2.31 2.534-3.769 4.597-2.648z">
-                                                            </path>
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="education-about-rectangle">
-                                            <img src="{{asset('landing/about/rectangle2.png')}}"
-                                                alt="image">
-                                        </div>
+                                       
 
                                     </div>
 
@@ -288,603 +323,49 @@
 
                         </section>
 
-                        <span id="sb-2"></span><a href="#sb-3" class="visually-hidden-focusable">Skip [Olan] Partners
-                            Three</a>
-
-                        <section id="inst131" class=" block_olan_partners_three block  card mb-3" role="region"
-                            data-block="olan_partners_three" data-instance-id="131"
-                            aria-labelledby="instance-131-header">
+                        <section id="inst130" class=" block_olan_about_two block  card mb-3" role="region"
+                            data-block="olan_about_two" data-instance-id="130" aria-labelledby="instance-130-header">
 
                             <div class="card-body p-3">
 
-                                <h3 id="instance-131-header" class="h5 card-title d-inline">[Olan] Partners Three</h3>
-
-
                                 <div class="card-text content mt-3">
-                                    <div class="ot-partner-area ptb-140">
-                                        <div class="container">
-                                            <div class="row justify-content-center align-items-center g-5"
-                                                data-cues="slideInUp" data-duration="1000">
-                                                <div class="col-lg-6 col-md-12">
-                                                    <div
-                                                        class="ot-partner-content section-title-animation animation-style3">
-                                                        <span class="sub">Our Partners</span>
-                                                        <h2 class="title-animation">
-                                                            Trusted by Leading <span>
-                                                                Organizations <img
-                                                                    src="{{asset('landing/about/title-line.png')}}"
-                                                                    alt="image">
-                                                            </span>
-                                                            Worldwide </h2>
-                                                        <p>Our platform supports organizations of all sizes in
-                                                            upskilling their workforce through expert-led training.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12">
-                                                    <div class="ot-partner-items">
-                                                        <div class="item">
-                                                            <img src="{{asset('landing/images/award1.png')}}"
-                                                                alt="award1.png">
-                                                        </div>
-                                                        <div class="item">
-                                                            <img src="{{asset('landing/images/award2.png')}}"
-                                                                alt="award2.png">
-                                                        </div>
-                                                        <div class="item">
-                                                            <img src="{{asset('landing/images/award3.png')}}"
-                                                                alt="award3.png">
-                                                        </div>
-                                                        <div class="item">
-                                                            <img src="{{asset('landing/images/award4.png')}}"
-                                                                alt="award4.png">
-                                                        </div>
-                                                        <div class="item">
-                                                            <img src="{{asset('landing/images/award5.png')}}"
-                                                                alt="award5.png">
-                                                        </div>
-                                                        <div class="item">
-                                                            <img src="{{asset('landing/images/award6.png')}}"
-                                                                alt="award6.png">
-                                                        </div>
-                                                        <div class="item">
-                                                            <img src="{{asset('landing/images/award7.png')}}"
-                                                                alt="award7.png">
-                                                        </div>
-                                                        <div class="item">
-                                                            <img src="{{asset('landing/images/award8.png')}}"
-                                                                alt="award8.png">
-                                                        </div>
-                                                        <div class="item">
-                                                            <img src="{{asset('landing/images/award9.png')}}"
-                                                                alt="award9.png">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="footer"></div>
-
-                                </div>
-
-                            </div>
-
-                        </section>
-
-                        <span id="sb-3"></span><a href="#sb-4" class="visually-hidden-focusable">Skip [Olan] Overview
-                            Area</a>
-
-                        <section id="inst132" class=" block_olan_overview_area block  card mb-3" role="region"
-                            data-block="olan_overview_area" data-instance-id="132"
-                            aria-labelledby="instance-132-header">
-
-                            <div class="card-body p-3">
-
-                                <h3 id="instance-132-header" class="h5 card-title d-inline">[Olan] Overview Area</h3>
-
-
-                                <div class="card-text content mt-3">
-
-                                    <div class="education-overview-area pb-140">
-                                        <div class="container">
-                                            <div class="education-overview-inner">
-                                                <div class="overview-fun-items" data-cues="slideInUp"
-                                                    data-duration="1000">
-
-                                                    <div class="fun">
-                                                        <div class="d-flex align-items-center justify-content-center">
-                                                            <h3 class="counter">6</h3>
-                                                            <h3 class="sub">.</h3>
-                                                            <h3 class="counter">8</h3>
-                                                            <h3 class="sub">M+</h3>
-                                                        </div>
-                                                        <p>ACTIVE LEARNERS</p>
-                                                    </div>
-
-                                                    <div class="fun wrap2">
-                                                        <div class="d-flex align-items-center justify-content-center">
-                                                            <h3 class="counter">7</h3>
-                                                            <h3 class="sub">.</h3>
-                                                            <h3 class="counter">5</h3>
-                                                            <h3 class="sub">K+</h3>
-                                                        </div>
-                                                        <p>COURSES AVAILABLE</p>
-                                                    </div>
-
-                                                    <div class="fun wrap3">
-                                                        <div class="d-flex align-items-center justify-content-center">
-                                                            <h3 class="counter">120</h3>
-                                                            <h3 class="sub">+</h3>
-                                                        </div>
-                                                        <p>COUNTRIES REACHED</p>
-                                                    </div>
-
-                                                    <div class="fun wrap4">
-                                                        <div class="d-flex align-items-center justify-content-center">
-                                                            <h3 class="counter">4</h3>
-                                                            <h3 class="sub">.</h3>
-                                                            <h3 class="counter">9</h3>
-                                                        </div>
-                                                        <p>AVERAGE COURSE RATING</p>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="row justify-content-center align-items-center g-4"
-                                                    data-cues="slideInUp" data-duration="1000">
-                                                    <div class="col-lg-7 col-md-12">
-                                                        <div
-                                                            class="education-overview-content section-title-animation animation-style1">
-                                                            <h2 class="title-animation">Kickstart Your Learning Journey
-                                                                and Build the <span>Career You<img
-                                                                        src="{{asset('landing/about/title-line.png')}}"
-                                                                        alt="image"></span> Deserve</h2>
-                                                            <p>Explore expert-led courses that help you grow faster,
-                                                                smarter, and stronger.</p>
-                                                            <div class="overview-btn">
-                                                                <a href="#"
-                                                                    class="default-btn">Get Started Now
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18"
-                                                                        height="14" viewBox="0 0 18 14" fill="none">
-                                                                        <path opacity="0.5"
-                                                                            d="M16.25 6.75V7.25H1.25V6.75H16.25Z"
-                                                                            fill="white" stroke="white" />
-                                                                        <path d="M10.75 1L16.75 7L10.75 13"
-                                                                            stroke="white" stroke-width="1.5"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round" />
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-5 col-md-12">
-                                                        <div class="education-overview-image">
-
-                                                            <img src="{{asset('landing/about/overview.png')}}"
-                                                                alt="image">
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="row justify-content-center g-1" data-cues="slideInUp"
-                                                data-duration="1000">
-                                                <div class="col-lg-6 col-md-12">
-                                                    <div class="education-overview-wrapper">
-                                                        <div class="swiper education-overview-slider">
-                                                            <div class="swiper-wrapper">
-
-                                                                <div class="swiper-slide">
-                                                                    <div class="education-overview-slide-item">
-                                                                        <div class="quote">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                width="43" height="43"
-                                                                                viewBox="0 0 43 43" fill="none">
-                                                                                <path
-                                                                                    d="M34.0165 17.6209C33.9299 16.6846 33.9961 14.1395 36.4343 10.6003C36.6187 10.3333 36.5853 9.97306 36.3562 9.74409C35.3622 8.75005 34.7468 8.12278 34.3151 7.68385C33.7475 7.1051 33.4883 6.84138 33.1091 6.49752C32.8558 6.26989 32.4727 6.26592 32.2168 6.48905C27.967 10.187 23.2468 17.8282 23.9298 27.1899C24.3301 32.6869 28.3397 36.6768 33.4634 36.6768C38.7216 36.6768 42.9995 32.3995 42.9995 27.1413C42.9995 22.0688 39.0182 17.9089 34.0165 17.6209ZM33.4634 35.333C29.0634 35.333 25.6181 31.8674 25.2697 27.0928C24.5013 16.5639 30.7601 9.7244 32.6511 7.9135C32.8355 8.09524 33.0461 8.3091 33.3565 8.62535C33.7304 9.0059 34.2423 9.52687 35.0165 10.3038C32.0566 14.8638 32.615 18.113 32.8597 18.5788C32.9759 18.8 33.2141 18.9489 33.4634 18.9489C37.9808 18.9489 41.6558 22.6239 41.6558 27.1413C41.6558 31.6581 37.9808 35.333 33.4634 35.333Z"
-                                                                                    fill="#1C43FE" />
-                                                                                <path
-                                                                                    d="M10.1546 17.6207C10.0673 16.6871 10.1316 14.1439 12.5724 10.6002C12.7561 10.3331 12.7233 9.97289 12.4943 9.74392C11.5022 8.75183 10.8874 8.12524 10.4564 7.6863C9.88688 7.10627 9.627 6.84182 9.24779 6.49735C8.9945 6.26972 8.61133 6.26643 8.35548 6.48821C4.10573 10.1861 -0.615129 17.8261 0.0665551 27.1897C0.468135 32.686 4.47836 36.6766 9.60207 36.6766C14.8603 36.6766 19.1383 32.3993 19.1383 27.1411C19.1383 22.068 15.1569 17.9075 10.1546 17.6207ZM9.60207 35.3329C5.20277 35.3329 1.75545 31.8672 1.40641 27.0919C0.640067 16.5604 6.89885 9.72356 8.78978 7.91333C8.97481 8.09507 9.18612 8.31027 9.49713 8.6272C9.87042 9.00775 10.3816 9.52805 11.1545 10.3036C8.1947 14.8643 8.75309 18.1128 8.99779 18.578C9.11396 18.7991 9.35274 18.9487 9.60207 18.9487C14.1196 18.9487 17.7945 22.6237 17.7945 27.1411C17.7945 31.6579 14.1196 35.3329 9.60207 35.3329Z"
-                                                                                    fill="#1C43FE" />
-                                                                            </svg>
-                                                                        </div>
-                                                                        <p>Olan completely changed the way I learn. The
-                                                                            platform is smooth, the content is real, and
-                                                                            I feel more confident applying for jobs now.
-                                                                        </p>
-                                                                        <div class="profile">
-                                                                            <div class="avatars"><img
-                                                                                    src="{{asset('landing/about/user2.jpg')}}"
-                                                                                    class="left" alt="image"><img
-                                                                                    src="{{asset('landing/about/user3.jpg')}}"
-                                                                                    class="active" alt="image"><img
-                                                                                    src="{{asset('landing/about/user1.jpg')}}"
-                                                                                    class="right" alt="image"></div>
-                                                                            <div class="content">
-                                                                                <h3>Maria Jackson</h3>
-                                                                                <span>Aspiring Data Analyst</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="swiper-slide">
-                                                                    <div class="education-overview-slide-item">
-                                                                        <div class="quote">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                width="43" height="43"
-                                                                                viewBox="0 0 43 43" fill="none">
-                                                                                <path
-                                                                                    d="M34.0165 17.6209C33.9299 16.6846 33.9961 14.1395 36.4343 10.6003C36.6187 10.3333 36.5853 9.97306 36.3562 9.74409C35.3622 8.75005 34.7468 8.12278 34.3151 7.68385C33.7475 7.1051 33.4883 6.84138 33.1091 6.49752C32.8558 6.26989 32.4727 6.26592 32.2168 6.48905C27.967 10.187 23.2468 17.8282 23.9298 27.1899C24.3301 32.6869 28.3397 36.6768 33.4634 36.6768C38.7216 36.6768 42.9995 32.3995 42.9995 27.1413C42.9995 22.0688 39.0182 17.9089 34.0165 17.6209ZM33.4634 35.333C29.0634 35.333 25.6181 31.8674 25.2697 27.0928C24.5013 16.5639 30.7601 9.7244 32.6511 7.9135C32.8355 8.09524 33.0461 8.3091 33.3565 8.62535C33.7304 9.0059 34.2423 9.52687 35.0165 10.3038C32.0566 14.8638 32.615 18.113 32.8597 18.5788C32.9759 18.8 33.2141 18.9489 33.4634 18.9489C37.9808 18.9489 41.6558 22.6239 41.6558 27.1413C41.6558 31.6581 37.9808 35.333 33.4634 35.333Z"
-                                                                                    fill="#1C43FE" />
-                                                                                <path
-                                                                                    d="M10.1546 17.6207C10.0673 16.6871 10.1316 14.1439 12.5724 10.6002C12.7561 10.3331 12.7233 9.97289 12.4943 9.74392C11.5022 8.75183 10.8874 8.12524 10.4564 7.6863C9.88688 7.10627 9.627 6.84182 9.24779 6.49735C8.9945 6.26972 8.61133 6.26643 8.35548 6.48821C4.10573 10.1861 -0.615129 17.8261 0.0665551 27.1897C0.468135 32.686 4.47836 36.6766 9.60207 36.6766C14.8603 36.6766 19.1383 32.3993 19.1383 27.1411C19.1383 22.068 15.1569 17.9075 10.1546 17.6207ZM9.60207 35.3329C5.20277 35.3329 1.75545 31.8672 1.40641 27.0919C0.640067 16.5604 6.89885 9.72356 8.78978 7.91333C8.97481 8.09507 9.18612 8.31027 9.49713 8.6272C9.87042 9.00775 10.3816 9.52805 11.1545 10.3036C8.1947 14.8643 8.75309 18.1128 8.99779 18.578C9.11396 18.7991 9.35274 18.9487 9.60207 18.9487C14.1196 18.9487 17.7945 22.6237 17.7945 27.1411C17.7945 31.6579 14.1196 35.3329 9.60207 35.3329Z"
-                                                                                    fill="#1C43FE" />
-                                                                            </svg>
-                                                                        </div>
-                                                                        <p>Thanks to this platform, I transitioned from
-                                                                            a complete beginner to a confident data
-                                                                            professional. Totally recommend it!</p>
-                                                                        <div class="profile">
-                                                                            <div class="avatars"><img
-                                                                                    src="{{asset('landing/about/user2.jpg')}}"
-                                                                                    class="left" alt="image"><img
-                                                                                    src="{{asset('landing/about/user1.jpg')}}"
-                                                                                    class="active" alt="image"><img
-                                                                                    src="{{asset('landing/about/user3.jpg')}}"
-                                                                                    class="right" alt="image"></div>
-                                                                            <div class="content">
-                                                                                <h3>James Smith</h3>
-                                                                                <span>Junior Data Scientist</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="swiper-slide">
-                                                                    <div class="education-overview-slide-item">
-                                                                        <div class="quote">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                width="43" height="43"
-                                                                                viewBox="0 0 43 43" fill="none">
-                                                                                <path
-                                                                                    d="M34.0165 17.6209C33.9299 16.6846 33.9961 14.1395 36.4343 10.6003C36.6187 10.3333 36.5853 9.97306 36.3562 9.74409C35.3622 8.75005 34.7468 8.12278 34.3151 7.68385C33.7475 7.1051 33.4883 6.84138 33.1091 6.49752C32.8558 6.26989 32.4727 6.26592 32.2168 6.48905C27.967 10.187 23.2468 17.8282 23.9298 27.1899C24.3301 32.6869 28.3397 36.6768 33.4634 36.6768C38.7216 36.6768 42.9995 32.3995 42.9995 27.1413C42.9995 22.0688 39.0182 17.9089 34.0165 17.6209ZM33.4634 35.333C29.0634 35.333 25.6181 31.8674 25.2697 27.0928C24.5013 16.5639 30.7601 9.7244 32.6511 7.9135C32.8355 8.09524 33.0461 8.3091 33.3565 8.62535C33.7304 9.0059 34.2423 9.52687 35.0165 10.3038C32.0566 14.8638 32.615 18.113 32.8597 18.5788C32.9759 18.8 33.2141 18.9489 33.4634 18.9489C37.9808 18.9489 41.6558 22.6239 41.6558 27.1413C41.6558 31.6581 37.9808 35.333 33.4634 35.333Z"
-                                                                                    fill="#1C43FE" />
-                                                                                <path
-                                                                                    d="M10.1546 17.6207C10.0673 16.6871 10.1316 14.1439 12.5724 10.6002C12.7561 10.3331 12.7233 9.97289 12.4943 9.74392C11.5022 8.75183 10.8874 8.12524 10.4564 7.6863C9.88688 7.10627 9.627 6.84182 9.24779 6.49735C8.9945 6.26972 8.61133 6.26643 8.35548 6.48821C4.10573 10.1861 -0.615129 17.8261 0.0665551 27.1897C0.468135 32.686 4.47836 36.6766 9.60207 36.6766C14.8603 36.6766 19.1383 32.3993 19.1383 27.1411C19.1383 22.068 15.1569 17.9075 10.1546 17.6207ZM9.60207 35.3329C5.20277 35.3329 1.75545 31.8672 1.40641 27.0919C0.640067 16.5604 6.89885 9.72356 8.78978 7.91333C8.97481 8.09507 9.18612 8.31027 9.49713 8.6272C9.87042 9.00775 10.3816 9.52805 11.1545 10.3036C8.1947 14.8643 8.75309 18.1128 8.99779 18.578C9.11396 18.7991 9.35274 18.9487 9.60207 18.9487C14.1196 18.9487 17.7945 22.6237 17.7945 27.1411C17.7945 31.6579 14.1196 35.3329 9.60207 35.3329Z"
-                                                                                    fill="#1C43FE" />
-                                                                            </svg>
-                                                                        </div>
-                                                                        <p>Olan is your all-in-one online education
-                                                                            platform—built for students, instructors,
-                                                                            and institutions to thrive in a connected
-                                                                            learning world.</p>
-                                                                        <div class="profile">
-                                                                            <div class="avatars"><img
-                                                                                    src="{{asset('landing/about/user2.jpg')}}"
-                                                                                    class="left" alt="image"><img
-                                                                                    src="{{asset('landing/about/user3.jpg')}}"
-                                                                                    class="active" alt="image"><img
-                                                                                    src="{{asset('landing/about/user1.jpg')}}"
-                                                                                    class="right" alt="image"></div>
-                                                                            <div class="content">
-                                                                                <h3>Sophie Allen</h3>
-                                                                                <span>Data Enthusiast</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="overview-nav-buttons">
-                                                            <div class="button-prev">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24">
-                                                                    <g fill="none">
-                                                                        <path fill="#1C43FE"
-                                                                            d="M20 12.75a.75.75 0 0 0 0-1.5zm0-1.5H4v1.5h16z"
-                                                                            opacity="0.5" />
-                                                                        <path stroke="#1C43FE" stroke-linecap="round"
-                                                                            stroke-linejoin="round" stroke-width="1.5"
-                                                                            d="m10 6l-6 6l6 6" />
-                                                                    </g>
-                                                                </svg>
-                                                            </div>
-                                                            <div class="button-next">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24">
-                                                                    <g fill="none">
-                                                                        <path fill="#1C43FE"
-                                                                            d="M4 11.25a.75.75 0 0 0 0 1.5zm0 1.5h16v-1.5H4z"
-                                                                            opacity="0.5" />
-                                                                        <path stroke="#1C43FE" stroke-linecap="round"
-                                                                            stroke-linejoin="round" stroke-width="1.5"
-                                                                            d="m14 6l6 6l-6 6" />
-                                                                    </g>
-                                                                </svg>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-6 col-md-12">
-                                                    <div class="education-overview-right">
-                                                        <div class="content section-title-animation animation-style1">
-                                                            <h3 class="title-animation">Join a Global Community of
-                                                                Learners and Educators</h3>
-                                                            <p>Collaborate with learners from 120+ countries, share
-                                                                ideas, and grow with expert guidance.</p>
-                                                            <a href="https://olan.ddev.site/mod/page/view.php?id=22"
-                                                                class="default-btn">Join Our Community
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="18"
-                                                                    height="14" viewBox="0 0 18 14" fill="none">
-                                                                    <path opacity="0.5"
-                                                                        d="M16.25 6.75V7.25H1.25V6.75H16.25Z"
-                                                                        fill="white" stroke="white" />
-                                                                    <path d="M10.75 1L16.75 7L10.75 13" stroke="white"
-                                                                        stroke-width="1.5" stroke-linecap="round"
-                                                                        stroke-linejoin="round" />
-                                                                </svg>
-                                                            </a>
-                                                        </div>
-                                                        <div class="users">
-
-                                                            <img src="{{asset('landing/about/users.png')}}"
-                                                                alt="image">
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="footer"></div>
-
-                                </div>
-
-                            </div>
-
-                        </section>
-
-                        <span id="sb-4"></span><a href="#sb-5" class="visually-hidden-focusable">Skip [Olan] Team</a>
-
-                        <section id="inst133" class=" block_olan_team block  card mb-3" role="region"
-                            data-block="olan_team" data-instance-id="133" aria-labelledby="instance-133-header">
-
-                            <div class="card-body p-3">
-
-                                <h3 id="instance-133-header" class="h5 card-title d-inline">[Olan] Team</h3>
-
-
-                                <div class="card-text content mt-3">
-                                    <div class="education-team-area pb-140">
+                                    <div class="education-about-area wrap-style2 pt-140">
                                         <div class="container">
                                             <div class="section-title section-title-animation animation-style1"
-                                                data-cues="slideInUp" data-duration="1000"><span class="sub">Meet Our
-                                                    Instructors</span>
-                                                <h2 class="title-animation">Your Learning Guides <img
+                                                data-cues="slideInUp" data-duration="1000">
+                                                <!-- <span class="sub">Meet Our
+                                                    Instructors</span> -->
+                                                <h2 class="title-animation">Our Mission <img
                                                         src="{{asset('landing/about/title-line.png')}}"
                                                         alt="image"></h2>
                                             </div>
-                                            <div class="row justify-content-center g-4" data-cues="slideInUp"
-                                                data-duration="1000">
-                                                <div class="col-lg-3 col-md-6">
-                                                    <div class="education-team-card">
-                                                        <div class="image"><a
-                                                                href="#"><img
-                                                                    src="{{asset('landing/about/team1.jpg')}}"
-                                                                    alt="image"></a>
-                                                            <div class="share-btn"><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24" fill="none">
-                                                                    <path
-                                                                        d="M9 11.5C9 12.163 8.73661 12.7989 8.26777 13.2678C7.79893 13.7366 7.16304 14 6.5 14C5.83696 14 5.20107 13.7366 4.73223 13.2678C4.26339 12.7989 4 12.163 4 11.5C4 10.837 4.26339 10.2011 4.73223 9.73223C5.20107 9.26339 5.83696 9 6.5 9C7.16304 9 7.79893 9.26339 8.26777 9.73223C8.73661 10.2011 9 10.837 9 11.5Z"
-                                                                        stroke="#1C43FE" stroke-width="1.5" />
-                                                                    <path opacity="0.5"
-                                                                        d="M14.32 16.8018L9 13.2898M14.42 6.83984L9.1 10.3518"
-                                                                        stroke="#1C43FE" stroke-width="1.5"
-                                                                        stroke-linecap="round" />
-                                                                    <path
-                                                                        d="M19 18.5C19 19.163 18.7366 19.7989 18.2678 20.2678C17.7989 20.7366 17.163 21 16.5 21C15.837 21 15.2011 20.7366 14.7322 20.2678C14.2634 19.7989 14 19.163 14 18.5C14 17.837 14.2634 17.2011 14.7322 16.7322C15.2011 16.2634 15.837 16 16.5 16C17.163 16 17.7989 16.2634 18.2678 16.7322C18.7366 17.2011 19 17.837 19 18.5ZM19 5.5C19 6.16304 18.7366 6.79893 18.2678 7.26777C17.7989 7.73661 17.163 8 16.5 8C15.837 8 15.2011 7.73661 14.7322 7.26777C14.2634 6.79893 14 6.16304 14 5.5C14 4.83696 14.2634 4.20107 14.7322 3.73223C15.2011 3.26339 15.837 3 16.5 3C17.163 3 17.7989 3.26339 18.2678 3.73223C18.7366 4.20107 19 4.83696 19 5.5Z"
-                                                                        stroke="#1C43FE" stroke-width="1.5" /></svg>
-                                                                <ul class="list">
-                                                                    <li><a href="#" target="_blank"><i
-                                                                                class="ri-facebook-fill"></i></a></li>
-                                                                    <li><a href="#" target="_blank"><i class=""></i></a>
-                                                                    </li>
-                                                                    <li><a href="#" target="_blank"><i
-                                                                                class="ri-linkedin-fill"></i></a></li>
-                                                                    <li><a href="#" target="_blank"><i
-                                                                                class="ri-instagram-fill"></i></a></li>
-                                                                </ul>
-                                                                <div class="shape1"><svg viewBox="0 0 10 10" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        class="w-10 h-10">
-                                                                        <path
-                                                                            d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z">
-                                                                        </path>
-                                                                    </svg></div>
-                                                                <div class="shape2"><svg viewBox="0 0 10 10" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        class="w-10 h-10">
-                                                                        <path
-                                                                            d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z">
-                                                                        </path>
-                                                                    </svg></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="content">
-                                                            <h3><a
-                                                                    href="#">Maria
-                                                                    Jackson</a></h3><span>UX/UI Design Mentor</span>
-                                                        </div>
+                                            <div class="row justify-content-center align-items-center g-5"
+                                                data-cues="slideInUp" data-duration="1000" data-delay="0">
+                                                <div class="col-xl-12 col-md-12">
+                                                    <div
+                                                        class="education-about-content  section-title-animation animation-style1">
+                                                        <!-- <span class="sub">About AUNG Solutions Nigeria Limited</span> -->
+                                                        <p>
+                                                            <p>
+                                                                Our mission is to leverage technology to solve real-world problems, 
+                                                                drive digital transformation, and empower organizations to operate more efficiently, 
+                                                                securely, and profitably in an increasingly interconnected environment.
+                                                                We focus on creating systems that replace manual, fragmented, and conflict-driven processes with <b>intelligent automation and transparent digital workflows</b>.
+                                                            </p>
+                                                        </p>
+                                                        
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-3 col-md-6">
-                                                    <div class="education-team-card wrap-style">
-                                                        <div class="image"><a
-                                                                href="#"><img
-                                                                    src="{{asset('landing/about/team2.jpg')}}"
-                                                                    alt="image"></a>
-                                                            <div class="share-btn"><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24" fill="none">
-                                                                    <path
-                                                                        d="M9 11.5C9 12.163 8.73661 12.7989 8.26777 13.2678C7.79893 13.7366 7.16304 14 6.5 14C5.83696 14 5.20107 13.7366 4.73223 13.2678C4.26339 12.7989 4 12.163 4 11.5C4 10.837 4.26339 10.2011 4.73223 9.73223C5.20107 9.26339 5.83696 9 6.5 9C7.16304 9 7.79893 9.26339 8.26777 9.73223C8.73661 10.2011 9 10.837 9 11.5Z"
-                                                                        stroke="#1C43FE" stroke-width="1.5" />
-                                                                    <path opacity="0.5"
-                                                                        d="M14.32 16.8018L9 13.2898M14.42 6.83984L9.1 10.3518"
-                                                                        stroke="#1C43FE" stroke-width="1.5"
-                                                                        stroke-linecap="round" />
-                                                                    <path
-                                                                        d="M19 18.5C19 19.163 18.7366 19.7989 18.2678 20.2678C17.7989 20.7366 17.163 21 16.5 21C15.837 21 15.2011 20.7366 14.7322 20.2678C14.2634 19.7989 14 19.163 14 18.5C14 17.837 14.2634 17.2011 14.7322 16.7322C15.2011 16.2634 15.837 16 16.5 16C17.163 16 17.7989 16.2634 18.2678 16.7322C18.7366 17.2011 19 17.837 19 18.5ZM19 5.5C19 6.16304 18.7366 6.79893 18.2678 7.26777C17.7989 7.73661 17.163 8 16.5 8C15.837 8 15.2011 7.73661 14.7322 7.26777C14.2634 6.79893 14 6.16304 14 5.5C14 4.83696 14.2634 4.20107 14.7322 3.73223C15.2011 3.26339 15.837 3 16.5 3C17.163 3 17.7989 3.26339 18.2678 3.73223C18.7366 4.20107 19 4.83696 19 5.5Z"
-                                                                        stroke="#1C43FE" stroke-width="1.5" /></svg>
-                                                                <ul class="list">
-                                                                    <li><a href="#" target="_blank"><i
-                                                                                class="ri-facebook-fill"></i></a></li>
-                                                                    <li><a href="#" target="_blank"><i class=""></i></a>
-                                                                    </li>
-                                                                    <li><a href="#" target="_blank"><i
-                                                                                class="ri-linkedin-fill"></i></a></li>
-                                                                    <li><a href="#" target="_blank"><i
-                                                                                class="ri-instagram-fill"></i></a></li>
-                                                                </ul>
-                                                                <div class="shape1"><svg viewBox="0 0 10 10" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        class="w-10 h-10">
-                                                                        <path
-                                                                            d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z">
-                                                                        </path>
-                                                                    </svg></div>
-                                                                <div class="shape2"><svg viewBox="0 0 10 10" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        class="w-10 h-10">
-                                                                        <path
-                                                                            d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z">
-                                                                        </path>
-                                                                    </svg></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="content">
-                                                            <h3><a
-                                                                    href="#">James
-                                                                    Patel</a></h3><span>Senior Web Developer</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-6">
-                                                    <div class="education-team-card">
-                                                        <div class="image"><a
-                                                                href="#"><img
-                                                                    src="{{asset('landing/about/team3.jpg')}}"
-                                                                    alt="image"></a>
-                                                            <div class="share-btn"><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24" fill="none">
-                                                                    <path
-                                                                        d="M9 11.5C9 12.163 8.73661 12.7989 8.26777 13.2678C7.79893 13.7366 7.16304 14 6.5 14C5.83696 14 5.20107 13.7366 4.73223 13.2678C4.26339 12.7989 4 12.163 4 11.5C4 10.837 4.26339 10.2011 4.73223 9.73223C5.20107 9.26339 5.83696 9 6.5 9C7.16304 9 7.79893 9.26339 8.26777 9.73223C8.73661 10.2011 9 10.837 9 11.5Z"
-                                                                        stroke="#1C43FE" stroke-width="1.5" />
-                                                                    <path opacity="0.5"
-                                                                        d="M14.32 16.8018L9 13.2898M14.42 6.83984L9.1 10.3518"
-                                                                        stroke="#1C43FE" stroke-width="1.5"
-                                                                        stroke-linecap="round" />
-                                                                    <path
-                                                                        d="M19 18.5C19 19.163 18.7366 19.7989 18.2678 20.2678C17.7989 20.7366 17.163 21 16.5 21C15.837 21 15.2011 20.7366 14.7322 20.2678C14.2634 19.7989 14 19.163 14 18.5C14 17.837 14.2634 17.2011 14.7322 16.7322C15.2011 16.2634 15.837 16 16.5 16C17.163 16 17.7989 16.2634 18.2678 16.7322C18.7366 17.2011 19 17.837 19 18.5ZM19 5.5C19 6.16304 18.7366 6.79893 18.2678 7.26777C17.7989 7.73661 17.163 8 16.5 8C15.837 8 15.2011 7.73661 14.7322 7.26777C14.2634 6.79893 14 6.16304 14 5.5C14 4.83696 14.2634 4.20107 14.7322 3.73223C15.2011 3.26339 15.837 3 16.5 3C17.163 3 17.7989 3.26339 18.2678 3.73223C18.7366 4.20107 19 4.83696 19 5.5Z"
-                                                                        stroke="#1C43FE" stroke-width="1.5" /></svg>
-                                                                <ul class="list">
-                                                                    <li><a href="#" target="_blank"><i
-                                                                                class="ri-facebook-fill"></i></a></li>
-                                                                    <li><a href="#" target="_blank"><i class=""></i></a>
-                                                                    </li>
-                                                                    <li><a href="#" target="_blank"><i
-                                                                                class="ri-linkedin-fill"></i></a></li>
-                                                                    <li><a href="#" target="_blank"><i
-                                                                                class="ri-instagram-fill"></i></a></li>
-                                                                </ul>
-                                                                <div class="shape1"><svg viewBox="0 0 10 10" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        class="w-10 h-10">
-                                                                        <path
-                                                                            d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z">
-                                                                        </path>
-                                                                    </svg></div>
-                                                                <div class="shape2"><svg viewBox="0 0 10 10" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        class="w-10 h-10">
-                                                                        <path
-                                                                            d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z">
-                                                                        </path>
-                                                                    </svg></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="content">
-                                                            <h3><a
-                                                                    href="#">Hannah
-                                                                    Kim</a></h3><span>Personal Productivity Coach</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-6">
-                                                    <div class="education-team-card wrap-style">
-                                                        <div class="image"><a
-                                                                href="#"><img
-                                                                    src="{{asset('landing/about/team4.jpg')}}"
-                                                                    alt="image"></a>
-                                                            <div class="share-btn"><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24" fill="none">
-                                                                    <path
-                                                                        d="M9 11.5C9 12.163 8.73661 12.7989 8.26777 13.2678C7.79893 13.7366 7.16304 14 6.5 14C5.83696 14 5.20107 13.7366 4.73223 13.2678C4.26339 12.7989 4 12.163 4 11.5C4 10.837 4.26339 10.2011 4.73223 9.73223C5.20107 9.26339 5.83696 9 6.5 9C7.16304 9 7.79893 9.26339 8.26777 9.73223C8.73661 10.2011 9 10.837 9 11.5Z"
-                                                                        stroke="#1C43FE" stroke-width="1.5" />
-                                                                    <path opacity="0.5"
-                                                                        d="M14.32 16.8018L9 13.2898M14.42 6.83984L9.1 10.3518"
-                                                                        stroke="#1C43FE" stroke-width="1.5"
-                                                                        stroke-linecap="round" />
-                                                                    <path
-                                                                        d="M19 18.5C19 19.163 18.7366 19.7989 18.2678 20.2678C17.7989 20.7366 17.163 21 16.5 21C15.837 21 15.2011 20.7366 14.7322 20.2678C14.2634 19.7989 14 19.163 14 18.5C14 17.837 14.2634 17.2011 14.7322 16.7322C15.2011 16.2634 15.837 16 16.5 16C17.163 16 17.7989 16.2634 18.2678 16.7322C18.7366 17.2011 19 17.837 19 18.5ZM19 5.5C19 6.16304 18.7366 6.79893 18.2678 7.26777C17.7989 7.73661 17.163 8 16.5 8C15.837 8 15.2011 7.73661 14.7322 7.26777C14.2634 6.79893 14 6.16304 14 5.5C14 4.83696 14.2634 4.20107 14.7322 3.73223C15.2011 3.26339 15.837 3 16.5 3C17.163 3 17.7989 3.26339 18.2678 3.73223C18.7366 4.20107 19 4.83696 19 5.5Z"
-                                                                        stroke="#1C43FE" stroke-width="1.5" /></svg>
-                                                                <ul class="list">
-                                                                    <li><a href="#" target="_blank"><i
-                                                                                class="ri-facebook-fill"></i></a></li>
-                                                                    <li><a href="#" target="_blank"><i class=""></i></a>
-                                                                    </li>
-                                                                    <li><a href="#" target="_blank"><i
-                                                                                class="ri-linkedin-fill"></i></a></li>
-                                                                    <li><a href="#" target="_blank"><i
-                                                                                class="ri-instagram-fill"></i></a></li>
-                                                                </ul>
-                                                                <div class="shape1"><svg viewBox="0 0 10 10" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        class="w-10 h-10">
-                                                                        <path
-                                                                            d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z">
-                                                                        </path>
-                                                                    </svg></div>
-                                                                <div class="shape2"><svg viewBox="0 0 10 10" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        class="w-10 h-10">
-                                                                        <path
-                                                                            d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z">
-                                                                        </path>
-                                                                    </svg></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="content">
-                                                            <h3><a
-                                                                    href="#">Liam
-                                                                    Chen</a></h3><span>Lead Data Science Educator</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
+                                               
                                             </div>
+                                            <!--/.row-->
                                         </div>
+
+                                      
+
                                     </div>
+
                                     <div class="footer"></div>
 
                                 </div>
@@ -893,49 +374,304 @@
 
                         </section>
 
-                        <span id="sb-5"></span><a href="#sb-6" class="visually-hidden-focusable">Skip [Olan] CTA</a>
-
-                        <section id="inst134" class=" block_olan_cta block  card mb-3" role="region"
-                            data-block="olan_cta" data-instance-id="134" aria-labelledby="instance-134-header">
+                        <section id="inst130" class=" block_olan_about_two block  card mb-3" role="region"
+                            data-block="olan_about_two" data-instance-id="130" aria-labelledby="instance-130-header">
 
                             <div class="card-body p-3">
 
-                                <h3 id="instance-134-header" class="h5 card-title d-inline">[Olan] CTA</h3>
+                                <div class="card-text content mt-3">
+                                    <div class="education-about-area wrap-style2 pt-140">
+                                        <div class="container">
+                                            <div class="section-title section-title-animation animation-style1"
+                                                data-cues="slideInUp" data-duration="1000">
+                                                <!-- <span class="sub">Meet Our
+                                                    Instructors</span> -->
+                                                <h2 class="title-animation">Our Vision <img
+                                                        src="{{asset('landing/about/title-line.png')}}"
+                                                        alt="image"></h2>
+                                            </div>
+                                            <div class="row justify-content-center align-items-center g-5"
+                                                data-cues="slideInUp" data-duration="1000" data-delay="0">
+                                                <div class="col-xl-12 col-md-12">
+                                                    <div
+                                                        class="education-about-content  section-title-animation animation-style1">
+                                                        <!-- <span class="sub">About AUNG Solutions Nigeria Limited</span> -->
+                                                        
+                                                        <p>
+                                                            <p>
+                                                                To become one of Africa’s most trusted technology solution 
+                                                                providers, powering smarter communities, stronger businesses, 
+                                                                and a more connected digital economy across developing nations.
 
+                                                            </p>
+                                                        </p>
+                                                        
+                                                    </div>
+                                                </div>
+
+                                               
+                                            </div>
+                                            <!--/.row-->
+                                        </div>
+
+                                      
+
+                                    </div>
+
+                                    <div class="footer"></div>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                        <section id="inst130" class=" block_olan_about_two block  card mb-3" role="region"
+                            data-block="olan_about_two" data-instance-id="130" aria-labelledby="instance-130-header">
+
+                            <div class="card-body p-3">
 
                                 <div class="card-text content mt-3">
-                                    <div class="cta-wrap-area ptb-140">
+                                    <div class="education-about-area wrap-style2 pt-140">
                                         <div class="container">
-                                            <div class="cta-wrap-content section-title-animation animation-style1"
+                                            <div class="section-title section-title-animation animation-style1"
                                                 data-cues="slideInUp" data-duration="1000">
-                                                <h2 class="title-animation">
-                                                    Start Your Journey Toward In-Demand <span>
-                                                        Skills Today <img
-                                                            src="{{asset('landing/about/title-line.png')}}"
-                                                            alt="image"> </span>
-                                                </h2>
-                                                <p>Enroll now and learn from certified industry experts.</p>
-                                                <a href="#" class="default-btn">
-                                                    Get Started Now <svg xmlns="http://www.w3.org/2000/svg" width="18"
-                                                        height="14" viewBox="0 0 18 14" fill="none">
-                                                        <path opacity="0.5" d="M16.375 6.75V7.25H1.375V6.75H16.375Z"
-                                                            fill="#1C43FE" stroke="#1C43FE" />
-                                                        <path d="M10.875 1L16.875 7L10.875 13" stroke="#1C43FE"
-                                                            stroke-width="1.5" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </svg>
-                                                </a>
+                                                <!-- <span class="sub">Meet Our
+                                                    Instructors</span> -->
+                                                <h2 class="title-animation">Our Approach <img
+                                                        src="{{asset('landing/about/title-line.png')}}"
+                                                        alt="image"></h2>
                                             </div>
+                                            <div class="row justify-content-center align-items-center g-5"
+                                                data-cues="slideInUp" data-duration="1000" data-delay="0">
+                                                <div class="col-xl-12 col-md-12">
+                                                    <div
+                                                        class="education-about-content  section-title-animation animation-style1">
+                                                        <!-- <span class="sub">About AUNG Solutions Nigeria Limited</span> -->
+                                                        
+                                                        <p>
+                                                            <p>
+                                                                We take a problem-first approach to innovation. Before building, we study the challenges faced by users on the ground, estate managers struggling with service charge recovery, 
+                                                                businesses managing daily sales manually, or communities 
+                                                                facing security risks due to poor verification systems.
+
+                                                            </p>
+                                                        </p>
+
+                                                    </div>
+                                                </div>
+
+                                               
+                                            </div>
+                                            <div class="row justify-content-center align-items-center g-5"
+                                                data-cues="slideInUp" data-duration="1000" data-delay="0">
+                                                <div class="col-xl-6 col-md-12" style="margin-top: -200px;">
+                                                    <div
+                                                        class="education-about-content  section-title-animation animation-style1">
+                                                        <!-- <span class="sub">About AUNG Solutions Nigeria Limited</span> -->
+                                                        
+                                                           <p>
+                                                                By combining deep local insight with modern technology, we deliver solutions that are:
+
+                                                            </p>
+                                                        <ul class="list" data-cues="fadeIn" data-duration="1000"
+                                                            data-delay="0" data-stagger="120">
+                                                            <li>
+                                                                <div class="icon">
+                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
+                                                                        alt="image">
+                                                                </div>
+                                                                <div class="content">
+                                                                    <!-- <h3>Learn from Anywhere</h3>
+                                                                    <p>Access your courses anytime, on any device—at
+                                                                        home, at work, or on the go.</p> -->
+                                                                    <p>
+                                                                        Practical and easy to adopt
+                                                                    </p>    
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="icon">
+                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
+                                                                        alt="image"> </div>
+                                                                <div class="content">
+                                                                    <!-- <h3>Teach with Confidence</h3>
+                                                                    <p>All the tools you need to build, launch, and
+                                                                        scale your courses—stress-free.</p> -->
+                                                                    <p>
+                                                                        Secure and compliant with data protection standards
+                                                                    </p>    
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="icon">
+                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
+                                                                        alt="image"> </div>
+                                                                <div class="content">
+                                                                    <!-- <h3>Earn Real Certificates</h3>
+                                                                    <p>Complete courses and receive professional
+                                                                        certificates to boost your career.</p> -->
+                                                                     <p>
+                                                                        Flexible enough to scale across industries and regions
+                                                                     </p>   
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-md-12" style="margin-top: 80px;">
+                                                    <div
+                                                        class="education-about-content  section-title-animation animation-style1">
+                                                        <!-- <span class="sub">About AUNG Solutions Nigeria Limited</span> -->
+                                                        
+                                                        <p>
+                                                                Why Aung Solutions
+                                                        </p>
+                                                        <ul class="list" data-cues="fadeIn" data-duration="1000"
+                                                            data-delay="0" data-stagger="120">
+                                                            <li>
+                                                                <div class="icon">
+                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
+                                                                        alt="image">
+                                                                </div>
+                                                                <div class="content">
+                                                                    <!-- <h3>Learn from Anywhere</h3>
+                                                                    <p>Access your courses anytime, on any device—at
+                                                                        home, at work, or on the go.</p> -->
+                                                                    <p>
+                                                                        <b>Multi-Industry Expertise:</b> Solutions designed for estates, businesses, creators, and enterprises.
+                                                                    </p>    
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="icon">
+                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
+                                                                        alt="image"> </div>
+                                                                <div class="content">
+                                                                    <!-- <h3>Teach with Confidence</h3>
+                                                                    <p>All the tools you need to build, launch, and
+                                                                        scale your courses—stress-free.</p> -->
+                                                                    <p>
+                                                                        <b>Security-Driven Design:</b> Data protection, identity verification, and system integrity are core priorities.
+
+
+                                                                    </p>    
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="icon">
+                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
+                                                                        alt="image"> </div>
+                                                                <div class="content">
+                                                                    <!-- <h3>Earn Real Certificates</h3>
+                                                                    <p>Complete courses and receive professional
+                                                                        certificates to boost your career.</p> -->
+                                                                     <p>
+                                                                        <b>Scalable Architecture:</b> Products built to grow from single users to thousands of organizations.
+
+
+                                                                     </p>   
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="icon">
+                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
+                                                                        alt="image"> </div>
+                                                                <div class="content">
+                                                                    <!-- <h3>Earn Real Certificates</h3>
+                                                                    <p>Complete courses and receive professional
+                                                                        certificates to boost your career.</p> -->
+                                                                     <p>
+                                                                        <b>Community-Focused Innovation:</b> Technology that promotes collaboration, not conflict.
+
+                                                                     </p>   
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="icon">
+                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
+                                                                        alt="image"> </div>
+                                                                <div class="content">
+                                                                    <!-- <h3>Earn Real Certificates</h3>
+                                                                    <p>Complete courses and receive professional
+                                                                        certificates to boost your career.</p> -->
+                                                                     <p>
+                                                                        <b>Economic Impact:</b> Creating jobs, enabling businesses, and contributing to sustainable growth.
+
+                                                                     </p>   
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+
+                                                    </div>
+                                                </div>
+
+                                               
+                                            </div>
+                                            <!--/.row-->
+
+                                           
                                         </div>
 
-                                        <div class="cta-wrap-shape1" data-speed="0.02" data-revert="true">
-                                            <img src="{{asset('landing/about/cta-shape5.png')}}"
-                                                alt="image">
+                                      
+
+                                    </div>
+
+                                    <div class="footer"></div>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                        
+
+                        
+
+                        <section id="inst130" class=" block_olan_about_two block  card mb-3" role="region"
+                            data-block="olan_about_two" data-instance-id="130" aria-labelledby="instance-130-header">
+
+                            <div class="card-body p-3">
+
+                                <div class="card-text content mt-3">
+                                    <div class="education-about-area wrap-style2 pt-140">
+                                        <div class="container">
+                                            <div class="section-title section-title-animation animation-style1"
+                                                data-cues="slideInUp" data-duration="1000">
+                                                <!-- <span class="sub">Meet Our
+                                                    Instructors</span> -->
+                                                <h2 class="title-animation">Our Commitment<img
+                                                        src="{{asset('landing/about/title-line.png')}}"
+                                                        alt="image"></h2>
+                                            </div>
+                                            <div class="row justify-content-center align-items-center g-5"
+                                                data-cues="slideInUp" data-duration="1000" data-delay="0">
+                                                <div class="col-xl-12 col-md-12">
+                                                    <div
+                                                        class="education-about-content  section-title-animation animation-style1">
+                                                        <!-- <span class="sub">About AUNG Solutions Nigeria Limited</span> -->
+                                                        
+                                                        
+                                                            <p>
+                                                                Aung Solutions Nigeria Limited is committed to <b>continuous innovation</b>, 
+                                                                ethical technology deployment, and long-term partnerships.
+                                                                As we expand our product ecosystem, we remain focused on delivering measurable value, maintaining trust, and contributing meaningfully to Africa’s digital future.
+
+                                                            </p>
+                                                        
+                                                        
+                                                    </div>
+                                                </div>
+
+                                               
+                                            </div>
+                                            <!--/.row-->
                                         </div>
-                                        <div class="cta-wrap-shape2" data-speed="0.02" data-revert="true">
-                                            <img src="{{asset('landing/about/cta-shape6.png')}}"
-                                                alt="image">
-                                        </div>
+
+                                      
+
                                     </div>
 
                                     <div class="footer"></div>
@@ -950,14 +686,7 @@
                     </aside>
                 </div>
 
-                <div id="olans-settings-menu-container" class="olans-settings-menu-container">
-                    <div id="olan-settings-menu-inner">
-                    </div>
-                </div>
-
-                <div>
-                    <a class="visually-hidden-focusable" href="#maincontent">Skip to main content</a>
-                </div>
+                
                 
                 
                 

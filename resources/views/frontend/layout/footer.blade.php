@@ -197,7 +197,7 @@
                         <!-- Copyright Area -->
                         <div class="copyright-area">
                             <p>
-                               © <span id="currentYear"></span> <span>Aungsecurity</span>. All rights reserved. </p>
+                               © <span id="currentYear"></span> <span>Aung Solutions Nigeria Limited</span>. All rights reserved. </p>
                         </div>
 
 
