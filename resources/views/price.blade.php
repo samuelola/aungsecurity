@@ -147,7 +147,7 @@
                             <nav aria-label="Navigation bar">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item">
-                                        <a href="https://olan-moodle.hibootstrap.com/">
+                                        <a href="{{route('home')}}">
                                             Home
                                         </a>
                                     </li>
@@ -155,7 +155,7 @@
                                     
 
                                     <li class="breadcrumb-item">
-                                        <a href="https://olan-moodle.hibootstrap.com/mod/page/view.php?id=26"
+                                        <a href="{{route('price')}}"
                                             aria-current="page" title="Page">
                                             Pricing Plan
                                         </a>
@@ -166,17 +166,16 @@
                     </div>
 
                     <div class="page-banner-subtract">
-                        <img src="https://olan-moodle.hibootstrap.com/theme/olan/pix/subtract.png" alt="image">
+                        <img src="{{asset('landing/about/subtract.png')}}" alt="image">
                     </div>
 
                     <div class="page-banner-shape1" data-speed="0.05" data-revert="true">
-                        <img src="https://olan-moodle.hibootstrap.com/pluginfile.php/1/theme_olan/banner_shape/1757783192/page-banner-shape1.png"
-                            alt="image">
+                        <img src="{{asset('landing/images/cta-shape6.png')}}"
+                                                        alt="image">
                     </div>
 
                     <div class="page-banner-shape2" data-speed="0.05" data-revert="true">
-                        <img src="https://olan-moodle.hibootstrap.com/pluginfile.php/1/theme_olan/banner_shape2/1757783192/page-banner-shape2.png"
-                            alt="image">
+                        <img src="{{asset('landing/images/cta-shape5.png')}}" alt="image">
                     </div>
 
                 </div>

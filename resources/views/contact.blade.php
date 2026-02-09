@@ -3,6 +3,13 @@
 
 @section('content')
 
+<style>
+    .map-area iframe {
+    filter: grayscale(10%);
+}
+
+</style>
+
         <div id="page" data-region="mainpage" data-usertour="scroller"
             class="olan-page-drawers drawers   drag-container">
             <div class=" drag-container">
@@ -36,17 +43,16 @@
                     </div>
 
                     <div class="page-banner-subtract">
-                        <img src="https://olan-moodle.hibootstrap.com/theme/olan/pix/subtract.png" alt="image">
+                        <img src="{{asset('landing/about/subtract.png')}}" alt="image">
                     </div>
 
                     <div class="page-banner-shape1" data-speed="0.05" data-revert="true">
-                        <img src="https://olan-moodle.hibootstrap.com/pluginfile.php/1/theme_olan/banner_shape/1757783192/page-banner-shape1.png"
-                            alt="image">
+                        <img src="{{asset('landing/images/cta-shape6.png')}}"
+                                                        alt="image">
                     </div>
 
                     <div class="page-banner-shape2" data-speed="0.05" data-revert="true">
-                        <img src="https://olan-moodle.hibootstrap.com/pluginfile.php/1/theme_olan/banner_shape2/1757783192/page-banner-shape2.png"
-                            alt="image">
+                        <img src="{{asset('landing/images/cta-shape5.png')}}" alt="image">
                     </div>
 
                 </div>
@@ -54,8 +60,7 @@
                 <div class="olan-fullwidth-top" aria-label="Blocks">
                     <aside id="block-region-fullwidth-top" class="block-region" data-blockregion="fullwidth-top"
                         data-droptarget="1" aria-labelledby="fullwidth-top-block-region-heading">
-                        <h2 class="visually-hidden" id="fullwidth-top-block-region-heading">Blocks</h2><a href="#sb-1"
-                            class="visually-hidden-focusable">Skip [Olan] Contact Cards</a>
+                        
 
                         <section id="inst202" class=" block_olan_contact_cards block  card mb-3" role="region"
                             data-block="olan_contact_cards" data-instance-id="202"
@@ -63,13 +68,54 @@
 
                             <div class="card-body p-3">
 
-                                <h3 id="instance-202-header" class="h5 card-title d-inline">[Olan] Contact Cards</h3>
-
-
                                 <div class="card-text content mt-3">
                                     <div class="contact-info-area ptb-140">
                                         <div class="container">
-                                            <div class="row justify-content-center g-4" data-cues="slideInUp"
+                                            <div class="row justify-content-center align-items-center g-5"
+                                                data-cues="slideInUp" data-duration="1000">
+                                                <h2 class="title-animation">
+                                                    <div class="split-line"
+                                                                style="display: block; text-align: center; position: relative;">
+                                                                <div style="position:relative;display:inline-block;">
+                                                                    Let’s Build Smarter Solutions Together
+
+                                                                </div>
+                                                                
+                                                    </div>
+
+                                                    <div class="split-line"
+                                                                style="display: block; text-align: center; position: relative;">
+                                                                <img
+                                                        src="{{asset('landing/about/title-line.png')}}"
+                                                        alt="image">
+                                                    </div>
+                                                     
+                                                    
+                                                </h2>
+                                            </div>
+                                             <div class="row justify-content-center align-items-center g-5"
+                                                        data-cues="slideInUp" data-duration="1000" data-delay="0">
+                                                        <div class="col-xl-12 col-md-12">
+                                                            <div
+                                                                class="education-about-content  section-title-animation animation-style1">
+                                                                <!-- <span class="sub">About AUNG Solutions Nigeria Limited</span> -->
+                                                                <p>
+                                                                    <p>
+                                                                        Whether you’re looking to deploy one of our products, request a demo, 
+                                                                        explore partnerships, or ask a question, our team is ready to help.
+                                                                        Reach out to us, and we’ll respond promptly.
+
+
+                                                                    </p>
+                                                                   
+                                                                </p>
+                                                                
+                                                            </div>
+                                                        </div>
+
+                                                    
+                                            </div> 
+                                            <div style="margin-top:50px;" class="row justify-content-center g-4" data-cues="slideInUp"
                                                 data-duration="1000">
                                                 <div class="col-xl-3 col-sm-6">
                                                     <div class="contact-info-card">
@@ -77,7 +123,7 @@
                                                                 src="https://olan-moodle.hibootstrap.com/pluginfile.php/274/block_olan_contact_cards/images/1/map-pin.svg"
                                                                 alt="icon"></div>
                                                         <h3>Our Location</h3>
-                                                        <p>354 Oakridge, Camden NJ 08102 - USA</p>
+                                                        <p>Teju Royal Estate, Block A1, House 4C Ojo, Lagos, Nigeria</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-sm-6">
@@ -86,8 +132,7 @@
                                                                 src="https://olan-moodle.hibootstrap.com/pluginfile.php/274/block_olan_contact_cards/images/2/mail.svg"
                                                                 alt="icon"></div>
                                                         <h3>Email Address</h3>
-                                                        <p><a href="mailto:info@olan.com">info@olan.com</a><a
-                                                                href="mailto:hello@olan.com">hello@olan.com</a></p>
+                                                        <p><a href="mailto:info@aungsolutions.com">info@aungsolutions.com</a></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-sm-6">
@@ -96,11 +141,10 @@
                                                                 src="https://olan-moodle.hibootstrap.com/pluginfile.php/274/block_olan_contact_cards/images/3/phone-call.svg"
                                                                 alt="icon"></div>
                                                         <h3>Urgent Call</h3>
-                                                        <p><a href="tel:020350363880">+02 035 036 3880</a><a
-                                                                href="tel:020350363880">+02 035 036 3880</a></p>
+                                                        <p><a href="tel:07062140380">+2347062140380</a></p>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-3 col-sm-6">
+                                                <!-- <div class="col-xl-3 col-sm-6">
                                                     <div class="contact-info-card">
                                                         <div class="icon bg4"><img
                                                                 src="https://olan-moodle.hibootstrap.com/pluginfile.php/274/block_olan_contact_cards/images/4/printer.svg"
@@ -110,7 +154,7 @@
                                                                 8563214</a><a href="tel:01234567899856">+012 (345) 678
                                                                 99 856</a></p>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -130,15 +174,35 @@
 
 
 
-                                <div class="card-text content mt-3">
+                                <!-- <div class="card-text content mt-3">
                                     <div class="no-overflow">
-                                        <div class="map-area"><iframe
-                                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3058.363775650484!2d-75.11916642361537!3d39.95561878357462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6c857aaaaaaab%3A0xebc346365e9fd279!2sSkillmate!5e0!3m2!1sen!2sbd!4v1745723843357!5m2!1sen!2sbd"></iframe>
+                                        <div class="map-area">
+                                            
                                         </div>
                                     </div>
                                     <div class="footer"></div>
 
+                                </div> -->
+
+                                <div class="card-text content mt-3">
+                                    <div class="no-overflow">
+                                        <div class="map-area" style="width:100%; height:500px; border-radius:12px; overflow:hidden;">
+                                            <iframe
+                                                src="https://www.google.com/maps?q=Teju%20Royal%20Estate%20Ojo%20Lagos%20Nigeria&output=embed"
+                                                width="100%"
+                                                height="100%"
+                                                style="border:0;"
+                                                allowfullscreen=""
+                                                loading="lazy"
+                                                referrerpolicy="no-referrer-when-downgrade">
+                                            </iframe>
+                                        </div>
+                                    </div>
+                                    <div class="footer"></div>
                                 </div>
+
+
+
 
                             </div>
 
@@ -149,36 +213,75 @@
 
                             <div class="card-body p-3">
 
-                                <h3 id="instance-205-header" class="h5 card-title d-inline">[Olan] Contact Form</h3>
-
-
                                 <div class="card-text content mt-3">
                                     <div class="contact-us-area ptb-140">
                                         <div class="container">
-                                            <form action="https://olan-moodle.hibootstrap.com/local/contact/index.php"
+                                            <div class="row justify-content-center align-items-center g-5"
+                                                data-cues="slideInUp" data-duration="1000">
+                                                <h2 class="title-animation">
+                                                    <div class="split-line"
+                                                                style="display: block; text-align: center; position: relative;">
+                                                                <div style="position:relative;display:inline-block;">
+                                                                   Get in Touch
+
+                                                                </div>
+                                                                
+                                                    </div>
+
+                                                    <div class="split-line"
+                                                                style="display: block; text-align: center; position: relative;">
+                                                                <img
+                                                        src="{{asset('landing/about/title-line.png')}}"
+                                                        alt="image">
+                                                    </div>
+                                                     
+                                                    
+                                                </h2>
+                                            </div>
+                                            <div class="row justify-content-center align-items-center g-5"
+                                                        data-cues="slideInUp" data-duration="1000" data-delay="0">
+                                                        <div class="col-xl-12 col-md-12">
+                                                            <div
+                                                                class="education-about-content  section-title-animation animation-style1">
+                                                                <!-- <span class="sub">About AUNG Solutions Nigeria Limited</span> -->
+                                                                <p>
+                                                                    <p>
+                                                                        Have an inquiry about our solutions, pricing, 
+                                                                        or customization options? Fill out the form below, 
+                                                                        and a member of our team will get back to you shortly.
+                                                                    </p>
+                                                                   
+                                                                </p>
+                                                                
+                                                            </div>
+                                                        </div>
+
+                                                    
+                                            </div> 
+                                            <form style="margin-top: 30px;" action="#"
                                                 method="post"
                                                 class="contact-us-form section-title-animation animation-style1">
                                                 <input type="hidden" name="sesskey" value="rsCxNdAjm9">
-                                                <h3 class="title-animation">Got A Minute? Contact Us Now!</h3>
+                                                <h3 class="title-animation">We’d Love to Hear from You</h3>
                                                 <div class="row justify-content-center" data-cues="slideInUp"
                                                     data-duration="1000">
                                                     <div class="col-lg-12 col-md-12">
                                                         <div class="form-group">
-                                                            <label>Name</label>
+                                                            <label>Full Name</label>
                                                             <input type="text" class="form-control" name="name"
                                                                 placeholder="Enter your name" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12">
                                                         <div class="form-group">
-                                                            <label>Email</label>
+                                                            <label>Email Address</label>
                                                             <input type="email" class="form-control" name="email"
                                                                 placeholder="Enter email address" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12">
                                                         <div class="form-group">
-                                                            <label>Number</label>
+                                                            <label>Phone Number</label>
                                                             <input type="text" class="form-control" name="phone"
                                                                 placeholder="Enter your number">
                                                         </div>

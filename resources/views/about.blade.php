@@ -41,12 +41,12 @@
                     </div>
 
                     <div class="page-banner-shape1" data-speed="0.05" data-revert="true">
-                        <img src="landing/images/cta-shape6.png"
+                        <img src="{{asset('landing/images/cta-shape6.png')}}"
                                                         alt="image">
                     </div>
 
                     <div class="page-banner-shape2" data-speed="0.05" data-revert="true">
-                        <img src="landing/images/cta-shape5.png" alt="image">
+                        <img src="{{asset('landing/images/cta-shape5.png')}}" alt="image">
                     </div>
 
                 </div>

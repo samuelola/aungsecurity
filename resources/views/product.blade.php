@@ -35,16 +35,16 @@
                     </div>
 
                     <div class="page-banner-subtract">
-                        <img src="https://olan-moodle.hibootstrap.com/theme/olan/pix/subtract.png" alt="image">
+                        <img src="{{asset('landing/about/subtract.png')}}" alt="image">
                     </div>
 
                     <div class="page-banner-shape1" data-speed="0.05" data-revert="true">
-                        <img src="landing/images/cta-shape6.png"
+                        <img src="{{asset('landing/images/cta-shape6.png')}}"
                                                         alt="image">
                     </div>
 
                     <div class="page-banner-shape2" data-speed="0.05" data-revert="true">
-                        <img src="landing/images/cta-shape5.png" alt="image">
+                        <img src="{{asset('landing/images/cta-shape5.png')}}" alt="image">
                     </div>
 
                 </div>
@@ -64,22 +64,7 @@
                 <div>
                     <a class="visually-hidden-focusable" href="#maincontent">Skip to main content</a>
                 </div>
-                <script
-                    src="https://olan-moodle.hibootstrap.com/lib/javascript.php/1757783192/lib/polyfills/polyfill.js">
-                </script>
-                <script
-                    src="https://olan-moodle.hibootstrap.com/theme/yui_combo.php?rollup/3.18.1/yui-moodlesimple-min.js">
-                </script>
-                <script src="https://olan-moodle.hibootstrap.com/theme/jquery.php/core/jquery-3.7.1.min.js"></script>
-                <script
-                    src="https://olan-moodle.hibootstrap.com/lib/javascript.php/1757783192/lib/javascript-static.js">
-                </script>
-                <script src="https://olan-moodle.hibootstrap.com/theme/javascript.php/olan/1757783192/head"></script>
-                <script>
-                    //<![CDATA[
-                    document.body.className += ' jsenabled';
-                    //]]>
-                </script>
+                
 
 
 
@@ -125,10 +110,17 @@
                                                                 <!-- <span class="sub">About AUNG Solutions Nigeria Limited</span> -->
                                                                 <p>
                                                                     <p>
-                                                                        Our mission is to leverage technology to solve real-world problems, 
-                                                                        drive digital transformation, and empower organizations to operate more efficiently, 
-                                                                        securely, and profitably in an increasingly interconnected environment.
-                                                                        We focus on creating systems that replace manual, fragmented, and conflict-driven processes with <b>intelligent automation and transparent digital workflows</b>.
+                                                                        Aung Solutions operates as a <b>multi-solution technology hub</b>, 
+                                                                        delivering a diverse range of secure, scalable, 
+                                                                        and user-friendly products under one unified platform.
+                                                                        Each solution is designed to solve real-world operational challenges while 
+                                                                        enabling growth, transparency, and collaboration across residential 
+                                                                        communities and businesses.
+
+                                                                    </p>
+                                                                    <p>
+                                                                        Our products are modular, meaning you can deploy what you need today and scale seamlessly as your needs evolve.
+
                                                                     </p>
                                                                 </p>
                                                                 

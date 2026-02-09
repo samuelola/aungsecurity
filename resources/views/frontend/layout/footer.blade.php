@@ -9,8 +9,7 @@
                                     style="animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
                                     <div class="single-footer-widget">
                                         <a class="widget-logo" href="/">
-                                            <img src="/pluginfile.php/1/theme_olan/main_footer_logo/1757783192/olan-main-logo.svg"
-                                                alt="Olan">
+                                            <img class="main-logo" src="{{asset('aung_logo_blue.png')}}" alt="AungSolution" style="width: 100px;">
 
                                         </a>
 
