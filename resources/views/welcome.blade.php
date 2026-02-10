@@ -3,6 +3,14 @@
 
 @section('content')
 
+<style>
+    .pin-icon {
+    color: #191950;
+    font-size: 20px;
+}
+
+</style>
+
 <div id="page" data-region="mainpage" data-usertour="scroller"
             class="olan-page-drawers drawers   drag-container">
             <div class=" drag-container" id="yui_3_18_1_1_1766842491326_16">
@@ -112,7 +120,7 @@
                                                                         <g mask="url(#mask0_7904_1990)">
                                                                             <path
                                                                                 d="M-0.450195 0.352539H13.9502V14.753H-0.450195V0.352539Z"
-                                                                                fill="#1C43FE"></path>
+                                                                                fill="#191950"></path>
                                                                         </g>
                                                                     </svg>Explore</a></li>
                                                         </ul>
@@ -152,8 +160,8 @@
                                                     height="46" viewBox="0 0 46 46" fill="none">
                                                     <path opacity="0.5"
                                                         d="M24.4375 7.6665C24.4375 7.28526 24.286 6.91962 24.0165 6.65004C23.7469 6.38045 23.3812 6.229 23 6.229C22.6188 6.229 22.2531 6.38045 21.9835 6.65004C21.714 6.91962 21.5625 7.28526 21.5625 7.6665H24.4375ZM21.5625 7.6665V38.3332H24.4375V7.6665H21.5625Z"
-                                                        fill="#1C43FE"></path>
-                                                    <path d="M34.5 26.833L23 38.333L11.5 26.833" stroke="#1C43FE"
+                                                        fill="#191950"></path>
+                                                    <path d="M34.5 26.833L23 38.333L11.5 26.833" stroke="#191950"
                                                         stroke-width="1.5" stroke-linecap="round"
                                                         stroke-linejoin="round"></path>
                                                 </svg></a></div>
@@ -381,8 +389,7 @@
                                                                 data-show="true"
                                                                 style="animation-name: fadeIn; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
                                                                 <div class="icon">
-                                                                    <img src="landing/images/about-list-icon.svg"
-                                                                        alt="image">
+                                                                    <i class="ri-pushpin-fill pin-icon"></i>
                                                                 </div>
                                                                 <div class="content">
                                                                     <h3>Work from Anywhere</h3>
@@ -393,8 +400,7 @@
                                                                 data-show="true"
                                                                 style="animation-name: fadeIn; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
                                                                 <div class="icon">
-                                                                    <img src="landing/images/about-list-icon.svg"
-                                                                        alt="image">
+                                                                    <i class="ri-pushpin-fill pin-icon"></i>
                                                                 </div>
                                                                 <div class="content">
                                                                     <h3>Operate with Peace of Mind</h3>
@@ -405,8 +411,7 @@
                                                                 data-show="true"
                                                                 style="animation-name: fadeIn; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
                                                                 <div class="icon">
-                                                                    <img src="landing/images/about-list-icon.svg"
-                                                                        alt="image">
+                                                                    <i class="ri-pushpin-fill pin-icon"></i>
                                                                 </div>
                                                                 <div class="content">
                                                                     <h3>Verified Digital Identity</h3>
@@ -417,8 +422,7 @@
                                                                 data-show="true"
                                                                 style="animation-name: fadeIn; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
                                                                 <div class="icon">
-                                                                    <img src="landing/images/about-list-icon.svg"
-                                                                        alt="image">
+                                                                    <i class="ri-pushpin-fill pin-icon"></i>
                                                                 </div>
                                                                 <div class="content">
                                                                     <h3>Grow Without Boundaries</h3>
@@ -429,8 +433,7 @@
                                                                 data-show="true"
                                                                 style="animation-name: fadeIn; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
                                                                 <div class="icon">
-                                                                    <img src="landing/images/about-list-icon.svg"
-                                                                        alt="image">
+                                                                    <i class="ri-pushpin-fill pin-icon"></i>
                                                                 </div>
                                                                 <div class="content">
                                                                     <h3>Data-Driven Insights and Aggregating</h3>
@@ -541,8 +544,8 @@
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14"
                                                             viewBox="0 0 18 14" fill="none">
                                                             <path opacity="0.5" d="M16.375 6.75V7.25H1.375V6.75H16.375Z"
-                                                                fill="#1C43FE" stroke="#1C43FE"></path>
-                                                            <path d="M10.875 1L16.875 7L10.875 13" stroke="#1C43FE"
+                                                                fill="#191950" stroke="#191950"></path>
+                                                            <path d="M10.875 1L16.875 7L10.875 13" stroke="#191950"
                                                                 stroke-width="1.5" stroke-linecap="round"
                                                                 stroke-linejoin="round"></path>
                                                         </svg>
@@ -586,7 +589,7 @@
                                                 <span
                                                     class="sub" data-cue="slideInUp" data-duration="1000"
                                                     data-show="true"
-                                                    style="color: #1c43fe;
+                                                    style="color: #191950;
     font-weight: 500;
     display: block;
     margin-bottom: 12px;text-align: center;
@@ -931,10 +934,10 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                 height="24" viewBox="0 0 24 24">
                                                                 <g fill="none">
-                                                                    <path fill="#1C43FE"
+                                                                    <path fill="#191950"
                                                                         d="M20 12.75a.75.75 0 0 0 0-1.5zm0-1.5H4v1.5h16z"
                                                                         opacity="0.5"></path>
-                                                                    <path stroke="#1C43FE" stroke-linecap="round"
+                                                                    <path stroke="#191950" stroke-linecap="round"
                                                                         stroke-linejoin="round" stroke-width="1.5"
                                                                         d="m10 6l-6 6l6 6"></path>
                                                                 </g>
@@ -946,10 +949,10 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                 height="24" viewBox="0 0 24 24">
                                                                 <g fill="none">
-                                                                    <path fill="#1C43FE"
+                                                                    <path fill="#191950"
                                                                         d="M4 11.25a.75.75 0 0 0 0 1.5zm0 1.5h16v-1.5H4z"
                                                                         opacity="0.5"></path>
-                                                                    <path stroke="#1C43FE" stroke-linecap="round"
+                                                                    <path stroke="#191950" stroke-linecap="round"
                                                                         stroke-linejoin="round" stroke-width="1.5"
                                                                         d="m14 6l6 6l-6 6"></path>
                                                                 </g>
@@ -1021,8 +1024,8 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                         View All Feedback <svg xmlns="http://www.w3.org/2000/svg"
                                                             width="18" height="14" viewBox="0 0 18 14" fill="none">
                                                             <path opacity="0.5" d="M16.25 6.75V7.25H1.25V6.75H16.25Z"
-                                                                fill="#1C43FE" stroke="#1C43FE"></path>
-                                                            <path d="M10.75 1L16.75 7L10.75 13" stroke="#1C43FE"
+                                                                fill="#191950" stroke="#191950"></path>
+                                                            <path d="M10.75 1L16.75 7L10.75 13" stroke="#191950"
                                                                 stroke-width="1.5" stroke-linecap="round"
                                                                 stroke-linejoin="round"></path>
                                                         </svg>
@@ -1727,8 +1730,8 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                             fill="none" aria-hidden="true">
                                                                             <path opacity="0.5"
                                                                                 d="M5.47015 17.4697C5.39647 17.5384 5.33736 17.6212 5.29637 17.7132C5.25538 17.8052 5.23334 17.9045 5.23156 18.0052C5.22979 18.1059 5.24831 18.2059 5.28603 18.2993C5.32375 18.3927 5.3799 18.4775 5.45112 18.5488C5.52233 18.62 5.60717 18.6761 5.70056 18.7139C5.79394 18.7516 5.89397 18.7701 5.99468 18.7683C6.09538 18.7665 6.19469 18.7445 6.28669 18.7035C6.37869 18.6625 6.46149 18.6034 6.53015 18.5297L5.47015 17.4697ZM6.53015 18.5297L18.5302 6.52973L17.4702 5.46973L5.47015 17.4697L6.53015 18.5297Z"
-                                                                                fill="#1C43FE"></path>
-                                                                            <path d="M9 6H18V15" stroke="#1C43FE"
+                                                                                fill="#191950"></path>
+                                                                            <path d="M9 6H18V15" stroke="#191950"
                                                                                 stroke-width="1.5"
                                                                                 stroke-linecap="round"
                                                                                 stroke-linejoin="round"></path>
@@ -1760,7 +1763,7 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                         class="tag-btn">Success Stories</a>
                                                                     <h3>
                                                                         <a
-                                                                            href="/blog/index.php?entryid=1">Real
+                                                                            href="{{route('blog_details')}}">Real
                                                                             Stories from Olan Students</a>
                                                                     </h3>
                                                                     <ul class="meta">
@@ -1771,15 +1774,15 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                                 aria-hidden="true">
                                                                                 <path
                                                                                     d="M2 12C2 8.229 2 6.343 3.172 5.172C4.344 4.001 6.229 4 10 4H14C17.771 4 19.657 4 20.828 5.172C21.999 6.344 22 8.229 22 12V14C22 17.771 22 19.657 20.828 20.828C19.656 21.999 17.771 22 14 22H10C6.229 22 4.343 22 3.172 20.828C2.001 19.656 2 17.771 2 14V12Z"
-                                                                                    stroke="#1C43FE" stroke-width="1.5">
+                                                                                    stroke="#191950" stroke-width="1.5">
                                                                                 </path>
                                                                                 <path opacity="0.5"
                                                                                     d="M7 4V2.5M17 4V2.5M2.5 9H21.5"
-                                                                                    stroke="#1C43FE" stroke-width="1.5"
+                                                                                    stroke="#191950" stroke-width="1.5"
                                                                                     stroke-linecap="round"></path>
                                                                                 <path
                                                                                     d="M18 17C18 17.2652 17.8946 17.5196 17.7071 17.7071C17.5196 17.8946 17.2652 18 17 18C16.7348 18 16.4804 17.8946 16.2929 17.7071C16.1054 17.5196 16 17.2652 16 17C16 16.7348 16.1054 16.4804 16.2929 16.2929C16.4804 16.1054 16.7348 16 17 16C17.2652 16 17.5196 16.1054 17.7071 16.2929C17.8946 16.4804 18 16.7348 18 17ZM18 13C18 13.2652 17.8946 13.5196 17.7071 13.7071C17.5196 13.8946 17.2652 14 17 14C16.7348 14 16.4804 13.8946 16.2929 13.7071C16.1054 13.5196 16 13.2652 16 13C16 12.7348 16.1054 12.4804 16.2929 12.2929C16.4804 12.1054 16.7348 12 17 12C17.2652 12 17.5196 12.1054 17.7071 12.2929C17.8946 12.4804 18 12.7348 18 13ZM13 17C13 17.2652 12.8946 17.5196 12.7071 17.7071C12.5196 17.8946 12.2652 18 12 18C11.7348 18 11.4804 17.8946 11.2929 17.7071C11.1054 17.5196 11 17.2652 11 17C11 16.7348 11.1054 16.4804 11.2929 16.2929C11.4804 16.1054 11.7348 16 12 16C12.2652 16 12.5196 16.1054 12.7071 16.2929C12.8946 16.4804 13 16.7348 13 17ZM13 13C13 13.2652 12.8946 13.5196 12.7071 13.7071C12.5196 13.8946 12.2652 14 12 14C11.7348 14 11.4804 13.8946 11.2929 13.7071C11.1054 13.5196 11 13.2652 11 13C11 12.7348 11.1054 12.4804 11.2929 12.2929C11.4804 12.1054 11.7348 12 12 12C12.2652 12 12.5196 12.1054 12.7071 12.2929C12.8946 12.4804 13 12.7348 13 13ZM8 17C8 17.2652 7.89464 17.5196 7.70711 17.7071C7.51957 17.8946 7.26522 18 7 18C6.73478 18 6.48043 17.8946 6.29289 17.7071C6.10536 17.5196 6 17.2652 6 17C6 16.7348 6.10536 16.4804 6.29289 16.2929C6.48043 16.1054 6.73478 16 7 16C7.26522 16 7.51957 16.1054 7.70711 16.2929C7.89464 16.4804 8 16.7348 8 13Z"
-                                                                                    fill="#1C43FE"></path>
+                                                                                    fill="#191950"></path>
                                                                             </svg>
                                                                             <span>September 9, 2025</span>
                                                                         </li>
@@ -1790,10 +1793,10 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                                 aria-hidden="true">
                                                                                 <path opacity="0.5"
                                                                                     d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                                                                                    stroke="#1C43FE" stroke-width="1.5">
+                                                                                    stroke="#191950" stroke-width="1.5">
                                                                                 </path>
                                                                                 <path d="M12 8V12L14.5 14.5"
-                                                                                    stroke="#1C43FE" stroke-width="1.5"
+                                                                                    stroke="#191950" stroke-width="1.5"
                                                                                     stroke-linecap="round"
                                                                                     stroke-linejoin="round"></path>
                                                                             </svg>
@@ -1822,8 +1825,8 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                             fill="none" aria-hidden="true">
                                                                             <path opacity="0.5"
                                                                                 d="M5.47015 17.4697C5.39647 17.5384 5.33736 17.6212 5.29637 17.7132C5.25538 17.8052 5.23334 17.9045 5.23156 18.0052C5.22979 18.1059 5.24831 18.2059 5.28603 18.2993C5.32375 18.3927 5.3799 18.4775 5.45112 18.5488C5.52233 18.62 5.60717 18.6761 5.70056 18.7139C5.79394 18.7516 5.89397 18.7701 5.99468 18.7683C6.09538 18.7665 6.19469 18.7445 6.28669 18.7035C6.37869 18.6625 6.46149 18.6034 6.53015 18.5297L5.47015 17.4697ZM6.53015 18.5297L18.5302 6.52973L17.4702 5.46973L5.47015 17.4697L6.53015 18.5297Z"
-                                                                                fill="#1C43FE"></path>
-                                                                            <path d="M9 6H18V15" stroke="#1C43FE"
+                                                                                fill="#191950"></path>
+                                                                            <path d="M9 6H18V15" stroke="#191950"
                                                                                 stroke-width="1.5"
                                                                                 stroke-linecap="round"
                                                                                 stroke-linejoin="round"></path>
@@ -1866,15 +1869,15 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                                 aria-hidden="true">
                                                                                 <path
                                                                                     d="M2 12C2 8.229 2 6.343 3.172 5.172C4.344 4.001 6.229 4 10 4H14C17.771 4 19.657 4 20.828 5.172C21.999 6.344 22 8.229 22 12V14C22 17.771 22 19.657 20.828 20.828C19.656 21.999 17.771 22 14 22H10C6.229 22 4.343 22 3.172 20.828C2.001 19.656 2 17.771 2 14V12Z"
-                                                                                    stroke="#1C43FE" stroke-width="1.5">
+                                                                                    stroke="#191950" stroke-width="1.5">
                                                                                 </path>
                                                                                 <path opacity="0.5"
                                                                                     d="M7 4V2.5M17 4V2.5M2.5 9H21.5"
-                                                                                    stroke="#1C43FE" stroke-width="1.5"
+                                                                                    stroke="#191950" stroke-width="1.5"
                                                                                     stroke-linecap="round"></path>
                                                                                 <path
                                                                                     d="M18 17C18 17.2652 17.8946 17.5196 17.7071 17.7071C17.5196 17.8946 17.2652 18 17 18C16.7348 18 16.4804 17.8946 16.2929 17.7071C16.1054 17.5196 16 17.2652 16 17C16 16.7348 16.1054 16.4804 16.2929 16.2929C16.4804 16.1054 16.7348 16 17 16C17.2652 16 17.5196 16.1054 17.7071 16.2929C17.8946 16.4804 18 16.7348 18 17ZM18 13C18 13.2652 17.8946 13.5196 17.7071 13.7071C17.5196 13.8946 17.2652 14 17 14C16.7348 14 16.4804 13.8946 16.2929 13.7071C16.1054 13.5196 16 13.2652 16 13C16 12.7348 16.1054 12.4804 16.2929 12.2929C16.4804 12.1054 16.7348 12 17 12C17.2652 12 17.5196 12.1054 17.7071 12.2929C17.8946 12.4804 18 12.7348 18 13ZM13 17C13 17.2652 12.8946 17.5196 12.7071 17.7071C12.5196 17.8946 12.2652 18 12 18C11.7348 18 11.4804 17.8946 11.2929 17.7071C11.1054 17.5196 11 17.2652 11 17C11 16.7348 11.1054 16.4804 11.2929 16.2929C11.4804 16.1054 11.7348 16 12 16C12.2652 16 12.5196 16.1054 12.7071 16.2929C12.8946 16.4804 13 16.7348 13 17ZM13 13C13 13.2652 12.8946 13.5196 12.7071 13.7071C12.5196 13.8946 12.2652 14 12 14C11.7348 14 11.4804 13.8946 11.2929 13.7071C11.1054 13.5196 11 13.2652 11 13C11 12.7348 11.1054 12.4804 11.2929 12.2929C11.4804 12.1054 11.7348 12 12 12C12.2652 12 12.5196 12.1054 12.7071 12.2929C12.8946 12.4804 13 12.7348 13 13ZM8 17C8 17.2652 7.89464 17.5196 7.70711 17.7071C7.51957 17.8946 7.26522 18 7 18C6.73478 18 6.48043 17.8946 6.29289 17.7071C6.10536 17.5196 6 17.2652 6 17C6 16.7348 6.10536 16.4804 6.29289 16.2929C6.48043 16.1054 6.73478 16 7 16C7.26522 16 7.51957 16.1054 7.70711 16.2929C7.89464 16.4804 8 16.7348 8 13Z"
-                                                                                    fill="#1C43FE"></path>
+                                                                                    fill="#191950"></path>
                                                                             </svg>
                                                                             <span>September 9, 2025</span>
                                                                         </li>
@@ -1885,10 +1888,10 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                                                                                 aria-hidden="true">
                                                                                 <path opacity="0.5"
                                                                                     d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                                                                                    stroke="#1C43FE" stroke-width="1.5">
+                                                                                    stroke="#191950" stroke-width="1.5">
                                                                                 </path>
                                                                                 <path d="M12 8V12L14.5 14.5"
-                                                                                    stroke="#1C43FE" stroke-width="1.5"
+                                                                                    stroke="#191950" stroke-width="1.5"
                                                                                     stroke-linecap="round"
                                                                                     stroke-linejoin="round"></path>
                                                                             </svg>

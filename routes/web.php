@@ -48,6 +48,9 @@ Route::controller(MainController::class)->group(function () {
       Route::get('/blog', 'Blog')->name('blog');
       Route::get('/contact', 'Contact')->name('contact');
       Route::get('/product', 'Product')->name('product');
+      Route::get('/blog_details', 'BlogDetails')->name('blog_details');
+      Route::get('/privacy_policy', 'PrivacyPolicy')->name('privacy_policy');
+      Route::get('/terms', 'TermService')->name('terms');
 });
 
 Route::controller(TenantController::class)->group(function () {

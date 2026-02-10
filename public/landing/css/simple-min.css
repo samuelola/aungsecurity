@@ -11765,8 +11765,10 @@ iframe.mm_iframe {
 }
 
 @charset "UTF-8";:root {
-    --main-color: #1C43FE;
-    --secondary-color: #FE3F10;
+    --main-color: #191950;
+    /* --main-color: #1C43FE; */
+    /* --secondary-color: #FE3F10; */
+    --secondary-color: #191950;
     --tertiary-color: #42B9A8;
     --footerBG: #FFF7F5;
     --footerBG2: #F7F8FF;

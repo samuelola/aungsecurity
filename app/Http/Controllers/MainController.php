@@ -31,6 +31,21 @@ class MainController extends Controller
          return view('blog');
     }
 
+    public function BlogDetails(Request $request){
+
+         return view('blog_details');
+    }
+
+    public function PrivacyPolicy(Request $request){
+
+         return view('privacy_policy');
+    }
+
+    public function TermService(Request $request){
+
+         return view('terms');
+    }
+
     public function Contact(Request $request){
 
          return view('contact');

@@ -3,7 +3,13 @@
 
 @section('content')
 
+<style>
+    .pin-icon {
+    color: #191950;
+    font-size: 20px;
+}
 
+</style>
 
  <div id="page" data-region="mainpage" data-usertour="scroller"
             class="olan-page-drawers drawers   drag-container">
@@ -261,8 +267,7 @@
                                                             data-delay="0" data-stagger="120">
                                                             <li>
                                                                 <div class="icon">
-                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
-                                                                        alt="image">
+                                                                    <i class="ri-pushpin-fill pin-icon"></i>
                                                                 </div>
                                                                 <div class="content">
                                                                     <!-- <h3>Learn from Anywhere</h3>
@@ -276,8 +281,8 @@
                                                             </li>
                                                             <li>
                                                                 <div class="icon">
-                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
-                                                                        alt="image"> </div>
+                                                                    <i class="ri-pushpin-fill pin-icon"></i>
+                                                                </div>
                                                                 <div class="content">
                                                                     <!-- <h3>Teach with Confidence</h3>
                                                                     <p>All the tools you need to build, launch, and
@@ -290,8 +295,8 @@
                                                             </li>
                                                             <li>
                                                                 <div class="icon">
-                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
-                                                                        alt="image"> </div>
+                                                                     <i class="ri-pushpin-fill pin-icon"></i>
+                                                                </div>
                                                                 <div class="content">
                                                                     <!-- <h3>Earn Real Certificates</h3>
                                                                     <p>Complete courses and receive professional
@@ -478,8 +483,7 @@
                                                             data-delay="0" data-stagger="120">
                                                             <li>
                                                                 <div class="icon">
-                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
-                                                                        alt="image">
+                                                                     <i class="ri-pushpin-fill pin-icon"></i>
                                                                 </div>
                                                                 <div class="content">
                                                                     <!-- <h3>Learn from Anywhere</h3>
@@ -492,8 +496,8 @@
                                                             </li>
                                                             <li>
                                                                 <div class="icon">
-                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
-                                                                        alt="image"> </div>
+                                                                     <i class="ri-pushpin-fill pin-icon"></i>
+                                                                </div>
                                                                 <div class="content">
                                                                     <!-- <h3>Teach with Confidence</h3>
                                                                     <p>All the tools you need to build, launch, and
@@ -505,8 +509,8 @@
                                                             </li>
                                                             <li>
                                                                 <div class="icon">
-                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
-                                                                        alt="image"> </div>
+                                                                    <i class="ri-pushpin-fill pin-icon"></i> 
+                                                                </div>
                                                                 <div class="content">
                                                                     <!-- <h3>Earn Real Certificates</h3>
                                                                     <p>Complete courses and receive professional
@@ -532,8 +536,7 @@
                                                             data-delay="0" data-stagger="120">
                                                             <li>
                                                                 <div class="icon">
-                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
-                                                                        alt="image">
+                                                                     <i class="ri-pushpin-fill pin-icon"></i>
                                                                 </div>
                                                                 <div class="content">
                                                                     <!-- <h3>Learn from Anywhere</h3>
@@ -546,8 +549,8 @@
                                                             </li>
                                                             <li>
                                                                 <div class="icon">
-                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
-                                                                        alt="image"> </div>
+                                                                    <i class="ri-pushpin-fill pin-icon"></i>
+                                                                </div>
                                                                 <div class="content">
                                                                     <!-- <h3>Teach with Confidence</h3>
                                                                     <p>All the tools you need to build, launch, and
@@ -561,8 +564,8 @@
                                                             </li>
                                                             <li>
                                                                 <div class="icon">
-                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
-                                                                        alt="image"> </div>
+                                                                    <i class="ri-pushpin-fill pin-icon"></i>
+                                                                </div>
                                                                 <div class="content">
                                                                     <!-- <h3>Earn Real Certificates</h3>
                                                                     <p>Complete courses and receive professional
@@ -576,8 +579,8 @@
                                                             </li>
                                                             <li>
                                                                 <div class="icon">
-                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
-                                                                        alt="image"> </div>
+                                                                     <i class="ri-pushpin-fill pin-icon"></i>
+                                                                 </div>
                                                                 <div class="content">
                                                                     <!-- <h3>Earn Real Certificates</h3>
                                                                     <p>Complete courses and receive professional
@@ -590,8 +593,8 @@
                                                             </li>
                                                             <li>
                                                                 <div class="icon">
-                                                                    <img src="{{asset('landing/about/about-list-icon.svg')}}"
-                                                                        alt="image"> </div>
+                                                                    <i class="ri-pushpin-fill pin-icon"></i>
+                                                                 </div>
                                                                 <div class="content">
                                                                     <!-- <h3>Earn Real Certificates</h3>
                                                                     <p>Complete courses and receive professional
@@ -686,13 +689,9 @@
                     </aside>
                 </div>
 
-                
-                
-                
-                
                 <div>
                     <div class="if_hide_page_bottom_content d-none">
-                        <div id="page" class="container d-print-block bottom-region-main-box">
+                        <div class="container d-print-block bottom-region-main-box">
                             <div id="page-content" class="d-print-block">
                                 <div id="region-main-box">
                                     <div class="row">
