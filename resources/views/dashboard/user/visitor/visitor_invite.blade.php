@@ -81,8 +81,15 @@ label{
                       <form class="row" method="post" action="{{route('visitor.store',$tenant->subdomain)}}">
                         @csrf
                         <div class="mb-3">
-                          <label class="form-label" for="exampleFormControlInput1">Visitor Full Name</label>
-                          <input class="form-control" id="exampleFormControlInput1" name="full_name" type="text" placeholder="Enter Full Name" value="{{ old('full_name') }}">
+                          <label class="form-label" for="exampleFormControlInput1">Visitor First Name</label>
+                          <input class="form-control" id="exampleFormControlInput1" name="first_name" type="text" placeholder="Enter First Name" value="{{ old('first_name') }}">
+                          @error('full_name')
+                                <p class="text-red-500 text-sm" style="color:#d22f2f">{{ $message }}</p>
+                          @enderror
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="exampleFormControlInput1">Visitor Last Name</label>
+                          <input class="form-control" id="exampleFormControlInput1" name="last_name" type="text" placeholder="Enter Last Name" value="{{ old('last_name') }}">
                           @error('full_name')
                                 <p class="text-red-500 text-sm" style="color:#d22f2f">{{ $message }}</p>
                           @enderror

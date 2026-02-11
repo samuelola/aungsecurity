@@ -58,11 +58,18 @@ class SecurityController extends Controller
         'updated_at'    => now(),
     ]);
 
+    $from = \Carbon\Carbon::createFromFormat('H:i:s', $invitation->valid_from)->format('g:i A');
+    $to = \Carbon\Carbon::createFromFormat('H:i:s', $invitation->valid_to)->format('g:i A');
     return response()->json([
         'status' => 'success',
         'type' => 'entry',
-        'visitor' => $invitation->visitor->full_name,
-        'resident' => $invitation->resident->first_name ." ". $invitation->resident->last_name,
+        'visitor' => ucfirst($invitation->visitor->first_name) ." ". ucfirst($invitation->visitor->last_name),
+        'visitor_date' =>  $invitation->visit_date,
+        'visit_time' => $from ." - ". $to,
+        'resident_name' => ucfirst($invitation->resident->first_name) ." ". ucfirst($invitation->resident->last_name),
+        'resident_phone' => $invitation->resident->kyc->phone,
+        'flat_number' => $invitation->resident->kyc->flat_number,
+        'address' => $invitation->resident->kyc->address,
         'message' => 'ENTRY ALLOWED'
     ]);
     
@@ -86,11 +93,19 @@ class SecurityController extends Controller
         'updated_at'    => now(),
        ]);
 
+
+       $from = \Carbon\Carbon::createFromFormat('H:i:s', $invitation->valid_from)->format('g:i A');
+       $to = \Carbon\Carbon::createFromFormat('H:i:s', $invitation->valid_to)->format('g:i A');
         return response()->json([
             'status' => 'success',
             'type' => 'exit',
-            'visitor' => $invitation->visitor->full_name,
-            'resident' => $invitation->resident->first_name ." ". $invitation->resident->last_name,
+            'visitor' => ucfirst($invitation->visitor->first_name) ." ". ucfirst($invitation->visitor->last_name),
+            'visitor_date' =>  $invitation->visit_date,
+            'visit_time' => $from ." - ". $to,
+            'resident_name' => ucfirst($invitation->resident->first_name) ." ". ucfirst($invitation->resident->last_name),
+            'resident_phone' => $invitation->resident->kyc->phone,
+            'flat_number' => $invitation->resident->kyc->flat_number,
+            'address' => $invitation->resident->kyc->address,
             'message' => 'EXIT RECORDED'
         ]);
     }

@@ -51,9 +51,10 @@ class VisitorInvitationController extends Controller
         }
 
         $request->validate([
-            'full_name' => 'required|string|max:255',
-            'email' => 'nullable|email|max:255',
-            'phone' => 'nullable|string|max:20',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20',
             // 'purpose' => 'required|string|max:255',
             'visit_date' => 'required|date|after_or_equal:today',
             'valid_from' => 'required|date_format:H:i',
@@ -62,7 +63,8 @@ class VisitorInvitationController extends Controller
 
         // Create or get visitor
         $visitor = Visitor::firstOrCreate([
-            'full_name' => $request->full_name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'phone' => $request->phone,
         ]);

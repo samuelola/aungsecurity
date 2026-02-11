@@ -5,15 +5,16 @@
     <title>Visitor QR Code</title>
 </head>
 <body style="font-family: Arial, sans-serif;">
-    <h2>Hello {{ $visitor->full_name }},</h2>
+   
+    <h2>Hello {{ ucfirst($invitation->visitor->first_name) }} {{ ucfirst($invitation->visitor->last_name) }},</h2>
 
     <p>
         You have been invited to visit
-        <strong>{{ $invitation->resident->first_name }} {{ $invitation->resident->last_name }}</strong>.
+        <strong>{{ ucfirst($invitation->resident->first_name) }} {{ ucfirst($invitation->resident->last_name) }}</strong>.
     </p>
 
     <p><strong>Valid Date:</strong> {{ $invitation->visit_date }}</p>
-    <p><strong>Valid Time:</strong> {{ $invitation->getRawOriginal('valid_from') }} – {{ $invitation->getRawOriginal('valid_to') }}</p>
+    <p><strong>Valid Time:</strong> {{ \Carbon\Carbon::createFromFormat('H:i:s', $invitation->valid_from)->format('g:i A') }} – {{ \Carbon\Carbon::createFromFormat('H:i:s', $invitation->valid_to)->format('g:i A') }}</p>
 
     <p>Please present the Code below at the estate gate for verification:</p>
 

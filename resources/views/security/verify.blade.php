@@ -135,8 +135,17 @@ $(document).ready(function () {
                     visitorInfo.html(`
                         <div class="card mt-3 shadow-sm border-success">
                             <div class="card-body">
-                                <h5 class="card-title">Visitor: ${data.visitor}</h5>
-                                <p class="card-text">Resident: ${data.resident}</p>
+                                <h5 class="card-title">Visitor Details</h5>
+                                <p class="card-text" style="font-weight: 600;">Visitor Name:  ${data.visitor}</p>
+                                <p class="card-text" style="font-weight: 600;">Visit Date:  ${data.visitor_date}</p>
+                                <p class="card-text" style="font-weight: 600;">Visit Time:  ${data.visit_time}</p>
+                                
+                                <br/>
+                                <h5 class="card-title">Resident Details</h5>
+                                <p class="card-text" style="font-weight: 600;">Resident Name: ${data.resident_name}</p>
+                                <p class="card-text" style="font-weight: 600;">Resident Phone: ${data.resident_phone}</p>
+                                <p class="card-text" style="font-weight: 600;">Resident Flat Number: ${data.flat_number}</p>
+                                <p class="card-text" style="font-weight: 600;">Resident Address: ${data.address}</p>
                                 <span class="badge bg-${data.type === 'entry' ? 'success' : 'warning'}">
                                     ${data.type.toUpperCase()}
                                 </span>

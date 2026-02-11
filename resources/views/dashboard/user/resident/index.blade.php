@@ -159,7 +159,7 @@ label{
                             @endphp  
                         <tr class="{{$colorClass}}">
                           <th scope="row">{{$sn++}}</th>
-                          <td>{{ $invitation->visitor->full_name }}</td>
+                          <td>{{ ucfirst($invitation->visitor->first_name) }} {{ ucfirst($invitation->visitor->last_name) }}</td>
   
                             <!-- <td class="purpose-cell" data-purpose="{{ $invitation->purpose }}" style="cursor:pointer; color:blue; text-decoration:underline;">
                                 {{ \Illuminate\Support\Str::limit($invitation->purpose, 25) }}
@@ -169,8 +169,16 @@ label{
                           <td>
                              <span class="badge badge-light-primary">{{ $invitation->visit_date }}</span>
                           </td>
-                          <td>{{ $invitation->valid_from }}</td>
-                          <td>{{ $invitation->valid_to }}</td>
+                          <td>
+                            <!-- {{ $invitation->valid_from }} -->
+                            {{ \Carbon\Carbon::createFromFormat('H:i:s', $invitation->valid_from)->format('g:i A') }}
+
+                          </td>
+                          <td>
+                            <!-- {{ $invitation->valid_to }} -->
+                            {{ \Carbon\Carbon::createFromFormat('H:i:s', $invitation->valid_to)->format('g:i A') }}
+
+                          </td>
                           <td>
                             @if($invitation->status == 'pending')
                             <span class="badge badge-light-warning">pending</span>
