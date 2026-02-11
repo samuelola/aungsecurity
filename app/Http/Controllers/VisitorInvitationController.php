@@ -39,6 +39,7 @@ class VisitorInvitationController extends Controller
     // Handle form submission
     public function store(Request $request)
     {
+        $tenant = app('tenant');
         $resident = auth()->user();
 
         // Business rules
@@ -92,16 +93,16 @@ class VisitorInvitationController extends Controller
             'delete_status' => 'no'
         ]);
 
+        
         // Send email if visitor provided email
         if ($visitor->email) {
             // Mail::to($visitor->email)
             //     ->queue(new VisitorQrCodeMail($visitor, $invitation));
             Mail::to($visitor->email)
-                ->queue(new VisitorMail($visitor, $invitation));    
+                ->queue(new VisitorMail($visitor, $invitation,$tenant));    
                 
         }
 
-        $tenant = app('tenant');
 
         return redirect()->route('resident.invitations.index',$tenant->subdomain)
             ->with('success', 'Visitor invitation created successfully. QR code sent if email provided.');

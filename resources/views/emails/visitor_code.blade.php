@@ -11,8 +11,20 @@
     <p>
         You have been invited to visit
         <strong>{{ ucfirst($invitation->resident->first_name) }} {{ ucfirst($invitation->resident->last_name) }}</strong>.
+        
+        
     </p>
 
+    <p>
+        Resident Flat No: {{$invitation->resident->kyc->flat_number}}.
+    </p>
+    <p>
+        Address of Resident: {{$invitation->resident->kyc->address}}.
+    </p>
+    <p>
+     
+     Resident Estate Name: {{$tenant->estate_name}} estate
+    </p>
     <p><strong>Valid Date:</strong> {{ $invitation->visit_date }}</p>
     <p><strong>Valid Time:</strong> {{ \Carbon\Carbon::createFromFormat('H:i:s', $invitation->valid_from)->format('g:i A') }} – {{ \Carbon\Carbon::createFromFormat('H:i:s', $invitation->valid_to)->format('g:i A') }}</p>
 

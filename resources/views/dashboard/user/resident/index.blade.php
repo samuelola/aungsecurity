@@ -210,16 +210,22 @@ label{
                                   </form>
                                 </div>
                                 <div class="mb-2">
-                                     @php
+@php
+    $from = \Carbon\Carbon::parse($invitation->valid_from)->format('g:i A');
+    $to   = \Carbon\Carbon::parse($invitation->valid_to)->format('g:i A');
+    $tenant = app('tenant');
     $message = urlencode(
-    "Hello {$invitation->visitor->full_name},
-
-        Valid Date: {$invitation->visit_date}
-        Access Time: {$invitation->valid_from} - {$invitation->valid_to}
-        Access Code: {$invitation->access_code}
-
-    Show this code at the gate."
+        "Hello *{$invitation->visitor->first_name} {$invitation->visitor->last_name}*,\n\n" .
+        "You have been invited to visit *{$invitation->resident->first_name} {$invitation->resident->first_name}*\n" .
+        "Resident Flat No: {$invitation->resident->kyc->flat_number}\n" .
+        "Address of Resident: {$invitation->resident->kyc->address}\n" .
+        "Resident Estate Name: {$tenant->estate_name} Estate\n" .
+        "Valid Date: *{$invitation->visit_date}*\n" .
+        "Access Time: *{$from} - {$to}*\n" .
+        "Access Code: *{$invitation->access_code}*\n\n" .
+        "Show this code at the gate."
     );
+    
 @endphp
 
 @php

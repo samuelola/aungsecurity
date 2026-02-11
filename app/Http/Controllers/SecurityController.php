@@ -60,6 +60,7 @@ class SecurityController extends Controller
 
     $from = \Carbon\Carbon::createFromFormat('H:i:s', $invitation->valid_from)->format('g:i A');
     $to = \Carbon\Carbon::createFromFormat('H:i:s', $invitation->valid_to)->format('g:i A');
+    $tenant = app('tenant');
     return response()->json([
         'status' => 'success',
         'type' => 'entry',
@@ -70,6 +71,7 @@ class SecurityController extends Controller
         'resident_phone' => $invitation->resident->kyc->phone,
         'flat_number' => $invitation->resident->kyc->flat_number,
         'address' => $invitation->resident->kyc->address,
+        'estate_name' => $tenant->estate_name,
         'message' => 'ENTRY ALLOWED'
     ]);
     
@@ -106,6 +108,7 @@ class SecurityController extends Controller
             'resident_phone' => $invitation->resident->kyc->phone,
             'flat_number' => $invitation->resident->kyc->flat_number,
             'address' => $invitation->resident->kyc->address,
+            'estate_name' => $tenant->estate_name,
             'message' => 'EXIT RECORDED'
         ]);
     }

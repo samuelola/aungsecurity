@@ -145,7 +145,9 @@ $(document).ready(function () {
                                 <p class="card-text" style="font-weight: 600;">Resident Name: ${data.resident_name}</p>
                                 <p class="card-text" style="font-weight: 600;">Resident Phone: ${data.resident_phone}</p>
                                 <p class="card-text" style="font-weight: 600;">Resident Flat Number: ${data.flat_number}</p>
-                                <p class="card-text" style="font-weight: 600;">Resident Address: ${data.address}</p>
+                                <p class="card-text" style="font-weight: 600;">Resident Estate Address: ${data.address}</p>
+                                <p class="card-text" style="font-weight: 600;">Resident Estate Name: ${data.estate_name}</p>
+                                
                                 <span class="badge bg-${data.type === 'entry' ? 'success' : 'warning'}">
                                     ${data.type.toUpperCase()}
                                 </span>

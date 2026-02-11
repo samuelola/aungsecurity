@@ -15,14 +15,16 @@ class VisitorMail extends Mailable
 
     public $visitor;
     public $invitation;
+    public $tenant;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($visitor, $invitation)
+    public function __construct($visitor, $invitation,$tenant)
     {
         $this->visitor = $visitor;
         $this->invitation = $invitation;
+        $this->tenant = $tenant;
     }
 
     /**
@@ -45,6 +47,7 @@ class VisitorMail extends Mailable
             with: [
             'visitor'     => $this->visitor,
             'invitation'  => $this->invitation,
+            'tenant'      => $this->tenant,
            ],
         );
     }
