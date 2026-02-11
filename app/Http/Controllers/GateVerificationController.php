@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\VisitorInvitation;
 use App\Models\AccessLog;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class GateVerificationController extends Controller
 {

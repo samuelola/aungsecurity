@@ -120,6 +120,7 @@ $(document).ready(function () {
             type: "POST",
             data: {
                 code: codeInput.val(),
+                gate_name: "Main Gate",
                 _token: "{{ csrf_token() }}"
             },
             success: function(data) {

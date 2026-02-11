@@ -152,8 +152,8 @@
     let scanLock = false;
     function onScanSuccess(decodedText) {
     
-    if (scanLock) return;   // 🚫 block repeat scans
-    scanLock = true;        // 🔒 lock scanner    
+    if (scanLock) return;   // block repeat scans
+    scanLock = true;        // lock scanner    
         
     const resultDiv = document.getElementById('result');
 

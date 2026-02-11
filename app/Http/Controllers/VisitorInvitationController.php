@@ -101,7 +101,7 @@ class VisitorInvitationController extends Controller
 
         $tenant = app('tenant');
 
-        return redirect()->route('visitor.create',$tenant->subdomain)
+        return redirect()->route('resident.invitations.index',$tenant->subdomain)
             ->with('success', 'Visitor invitation created successfully. QR code sent if email provided.');
     }
 
@@ -121,9 +121,10 @@ class VisitorInvitationController extends Controller
     public function destroy($subdomain,VisitorInvitation $invitation)
     {
         // Optional safety: prevent deleting if already used
-        if ($invitation->status != 'pending' && $invitation->delete_status == 'no') {
-            return back()->with('error', 'Only pending invitations can be deleted.');
-        }
+        // if ($invitation->status != 'pending' && $invitation->delete_status == 'no') {
+        //     return back()->with('error', 'Only pending invitations can be deleted.');
+        // }
+
 
         // Delete QR image if exists
         // $path = 'qrcodes/' . $invitation->id . '.png';
