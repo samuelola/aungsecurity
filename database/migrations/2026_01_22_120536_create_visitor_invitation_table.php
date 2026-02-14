@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('visitor_invitation', function (Blueprint $table) {
             $table->id();
             $table->foreignId('resident_id')->constrained('users');
-            $table->foreignId('visitor_id')->constrained();
+            $table->foreignId('visitor_id')->nullable()->constrained();
             $table->longText('purpose');
             $table->date('visit_date');
             $table->time('valid_from');

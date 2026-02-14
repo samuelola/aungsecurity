@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('visitor_invitation', function (Blueprint $table) {
-            $table->longText('access_code')->nullable();
+             $table->foreignId('invited_resident_id')
+              ->nullable()
+              ->constrained('users')
+              ->nullOnDelete();
         });
     }
 
@@ -22,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('visitor_invitation', function (Blueprint $table) {
-            $table->dropColumn('access_code');
+            $table->dropColumn('invited_resident_id');
         });
     }
 };

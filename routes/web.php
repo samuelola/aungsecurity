@@ -54,7 +54,7 @@ Route::controller(MainController::class)->group(function () {
 });
 
 Route::controller(TenantController::class)->group(function () {
-
+      
       Route::get('/register', 'create')->name('tenant_create');
       Route::post('/registerr', 'store')->name('tenant_store');
 });
@@ -135,6 +135,7 @@ Route::domain('{tenant}.' . $domain)
                 Route::get('/resident/invitations',  'index')->name('resident.invitations.index');
                 Route::post('/resident/invitations/{invitation}/resend', 'resendQr')->name('resident.invitations.resend');
                 Route::delete('/resident/invitations/{invitation}','destroy')->name('resident.invitations.destroy');
+
             });
 
             Route::controller(SubscriptionController::class)->group(function () {

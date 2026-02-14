@@ -13,25 +13,18 @@ class VisitorMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $visitor;            // Null if resident invite
-    public $invitation;         // Invitation object
-    public $tenant;             // Tenant/estate info
-    public $isResidentInvite;   // Boolean flag
+    public $visitor;
+    public $invitation;
+    public $tenant;
 
     /**
      * Create a new message instance.
-     *
-     * @param  object|null $visitor
-     * @param  object $invitation
-     * @param  object $tenant
-     * @param  bool $isResidentInvite
      */
-    public function __construct($visitor = null, $invitation, $tenant, $isResidentInvite = false)
+    public function __construct($visitor, $invitation,$tenant)
     {
         $this->visitor = $visitor;
         $this->invitation = $invitation;
         $this->tenant = $tenant;
-        $this->isResidentInvite = $isResidentInvite;
     }
 
     /**
@@ -40,9 +33,7 @@ class VisitorMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->isResidentInvite
-                ? 'You Have a Resident Invitation'
-                : 'Your Visitor Access Code',
+            subject: 'Your Visitor Access Code',
         );
     }
 
@@ -54,16 +45,17 @@ class VisitorMail extends Mailable
         return new Content(
             view: 'emails.visitor_code',
             with: [
-                'visitor'           => $this->visitor,
-                'invitation'        => $this->invitation,
-                'tenant'            => $this->tenant,
-                'isResidentInvite'  => $this->isResidentInvite,
-            ],
+            'visitor'     => $this->visitor,
+            'invitation'  => $this->invitation,
+            'tenant'      => $this->tenant,
+           ],
         );
     }
 
     /**
      * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
     public function attachments(): array
     {

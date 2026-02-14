@@ -30,4 +30,10 @@ class VisitorInvitation extends Model
     // {
     //     return $this->hasMany(\App\Models\AccessLog::class, 'invitation_id');
     // }
+
+    public function invitedResident()
+    {
+        return $this->belongsTo(User::class, 'invited_resident_id');
+    }
+
 }

@@ -39,6 +39,7 @@ class VisitorInvitationController extends Controller
     // Handle form submission
     public function store(Request $request)
     {
+        $tenant = app('tenant');
         $resident = auth()->user();
 
         // Business rules
@@ -51,9 +52,10 @@ class VisitorInvitationController extends Controller
         }
 
         $request->validate([
-            'full_name' => 'required|string|max:255',
-            'email' => 'nullable|email|max:255',
-            'phone' => 'nullable|string|max:20',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20',
             // 'purpose' => 'required|string|max:255',
             'visit_date' => 'required|date|after_or_equal:today',
             'valid_from' => 'required|date_format:H:i',
@@ -62,7 +64,8 @@ class VisitorInvitationController extends Controller
 
         // Create or get visitor
         $visitor = Visitor::firstOrCreate([
-            'full_name' => $request->full_name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'phone' => $request->phone,
         ]);
@@ -90,18 +93,18 @@ class VisitorInvitationController extends Controller
             'delete_status' => 'no'
         ]);
 
+        
         // Send email if visitor provided email
         if ($visitor->email) {
             // Mail::to($visitor->email)
             //     ->queue(new VisitorQrCodeMail($visitor, $invitation));
             Mail::to($visitor->email)
-                ->queue(new VisitorMail($visitor, $invitation));    
+                ->queue(new VisitorMail($visitor, $invitation,$tenant));    
                 
         }
 
-        $tenant = app('tenant');
 
-        return redirect()->route('visitor.create',$tenant->subdomain)
+        return redirect()->route('resident.invitations.index',$tenant->subdomain)
             ->with('success', 'Visitor invitation created successfully. QR code sent if email provided.');
     }
 
@@ -113,23 +116,24 @@ class VisitorInvitationController extends Controller
         }
 
         Mail::to($invitation->visitor->email)
-            ->queue(new VisitorQrCodeMail($invitation->visitor, $invitation));
+            ->queue(new VisitorMail($invitation->visitor, $invitation));    
    
-        return back()->with('success', 'QR Code resent to visitor.');
+        return back()->with('success', 'Access Code resent to visitor.');
     }
 
     public function destroy($subdomain,VisitorInvitation $invitation)
     {
         // Optional safety: prevent deleting if already used
-        if ($invitation->status != 'pending' && $invitation->delete_status == 'no') {
-            return back()->with('error', 'Only pending invitations can be deleted.');
-        }
+        // if ($invitation->status != 'pending' && $invitation->delete_status == 'no') {
+        //     return back()->with('error', 'Only pending invitations can be deleted.');
+        // }
+
 
         // Delete QR image if exists
-        $path = 'qrcodes/' . $invitation->id . '.png';
-        if (\Storage::disk('public')->exists($path)) {
-            \Storage::disk('public')->delete($path);
-        }
+        // $path = 'qrcodes/' . $invitation->id . '.png';
+        // if (\Storage::disk('public')->exists($path)) {
+        //     \Storage::disk('public')->delete($path);
+        // }
 
         //$invitation->delete();
 

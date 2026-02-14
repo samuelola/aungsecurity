@@ -85,19 +85,19 @@
 
               <li class="sidebar-main-title">
                 <div>
-                  <h5 class="f-w-700 sidebar-title pt-3">Visitor Management</h5>
+                  <h5 class="f-w-700 sidebar-title pt-3">Invitation</h5>
                 </div>
               </li>
               <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
                 <a class="sidebar-link" href="{{$kyc && $kyc->kyc_completed ? route('visitor.create',$tenant->subdomain) : '#'}}">
                   <i class="ti-user"></i>
-                  <h6 class="f-w-600">Visitor's Invite</h6>
+                  <h6 class="f-w-600">Create Invitation</h6>
                 </a>
               </li>
               <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
                 <a class="sidebar-link" href="{{$kyc && $kyc->kyc_completed ? route('resident.invitations.index',$tenant->subdomain) : '#'}}">
                   <i class="ti-user"></i>
-                  <h6 class="f-w-600">Visitor's Log</h6></a>
+                  <h6 class="f-w-600">Invitation's Log</h6></a>
               </li>
 
               <!-- <li class="sidebar-main-title">

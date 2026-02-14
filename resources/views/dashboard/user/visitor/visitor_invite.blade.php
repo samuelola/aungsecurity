@@ -66,99 +66,148 @@ label{
             </div>
           </div>
           <!-- Container-fluid starts-->
-          <div class="container-fluid default-dashboard">
-            <div class="row">
-               
-              <div class="col-xxl-6 col-xl-2"></div>
-             
-               <div class="col-xxl-6 col-xl-8">
-                <div class="card">
-                  <div class="card-header card-no-border pb-0">
-                    <h3>Invite a Visitor</h3>
-                  </div>
-                  <div class="card-body transaction-history pt-0 mt-3">
-                      
-                      <form class="row" method="post" action="{{route('visitor.store',$tenant->subdomain)}}">
-                        @csrf
-                        <div class="mb-3">
-                          <label class="form-label" for="exampleFormControlInput1">Visitor First Name</label>
-                          <input class="form-control" id="exampleFormControlInput1" name="first_name" type="text" placeholder="Enter First Name" value="{{ old('first_name') }}">
-                          @error('full_name')
-                                <p class="text-red-500 text-sm" style="color:#d22f2f">{{ $message }}</p>
-                          @enderror
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="exampleFormControlInput1">Visitor Last Name</label>
-                          <input class="form-control" id="exampleFormControlInput1" name="last_name" type="text" placeholder="Enter Last Name" value="{{ old('last_name') }}">
-                          @error('full_name')
-                                <p class="text-red-500 text-sm" style="color:#d22f2f">{{ $message }}</p>
-                          @enderror
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="exampleFormControlInput1">Vistor Email address</label>
-                          <input class="form-control" name="email" id="exampleFormControlInput1" type="email" placeholder="name@example.com" value="{{ old('email') }}">
-                        </div>
-                          @error('email')
-                                <p class="text-red-500 text-sm" style="color:#d22f2f">{{ $message }}</p>
-                          @enderror
+               <div class="container-fluid default-dashboard">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-8">
 
-                        <div class="mb-3">
-                          <label class="form-label" for="exampleFormControlInput1">Visitor Phone Number</label>
-                          <input class="form-control" name="phone" id="exampleFormControlInput1" type="phone" placeholder="08067932796" value="{{ old('phone') }}">
-                        </div>
-                          @error('phone')
-                                <p class="text-red-500 text-sm" style="color:#d22f2f">{{ $message }}</p>
-                          @enderror
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Create Invitation</h3>
+                                </div>
 
-                        <!-- <div class="mb-3">
-                          <label class="form-label" for="exampleFormControlInput1">Purpose of Visit</label>
-                          
-                          <textarea class="form-control" name="purpose" id="exampleFormControlInput1" value="{{ old('purpose') }}"></textarea>
-                        </div>
-                          @error('purpose')
-                                <p class="text-red-500 text-sm" style="color:#d22f2f">{{ $message }}</p>
-                          @enderror -->
+                                <div class="card-body">
 
-                        <div class="mb-3">
-                          <label class="form-label" for="exampleFormControlInput1">Date of Visit</label>
-                          <input class="form-control" name="visit_date" id="exampleFormControlInput1" type="date"  value="{{ old('visit_date') }}">
-                        </div>
-                          @error('visit_date')
-                                <p class="text-red-500 text-sm" style="color:#d22f2f">{{ $message }}</p>
-                          @enderror 
-                          
-                        <div class="mb-3">
-                          <label class="form-label" for="exampleFormControlInput1">Valid From (Time)</label>
-                          <input class="form-control" name="valid_from" id="valid_from" type="time" value="{{ old('valid_from') }}">
-                        </div>
-                          @error('valid_from')
-                                <p class="text-red-500 text-sm" style="color:#d22f2f">{{ $message }}</p>
-                          @enderror
-                          
-                          
-                        <div class="mb-3">
-                          <label class="form-label" for="exampleFormControlInput1">Valid To (Time)</label>
-                          <input class="form-control" name="valid_to" id="valid_to" type="time" value="{{ old('valid_to') }}" readonly>
-                        </div>
-                          @error('valid_to')
-                                <p class="text-red-500 text-sm" style="color:#d22f2f">{{ $message }}</p>
-                          @enderror  
+                                    <form method="POST" action="{{ route('visitor.store', $tenant->subdomain) }}">
+                                        @csrf
 
-                        
-                        <div class="col">
-                            <button class="btn btn-primary me-2" type="submit">Send Invitation</button>
-                        </div>
-                      </form>
+                                        {{-- ================= INVITE TYPE ================= --}}
+                                        <div class="mb-3">
+                                            <label class="form-label">Invite Type</label>
+                                            <select name="invite_type" id="invite_type" class="form-control">
+                                                <option value="external" {{ old('invite_type')=='external'?'selected':'' }}>
+                                                    External Visitor
+                                                </option>
+                                                <option value="resident" {{ old('invite_type')=='resident'?'selected':'' }}>
+                                                    Estate Resident
+                                                </option>
+                                                <option value="self" {{ old('invite_type')=='self'?'selected':'' }}>
+                                                    Myself
+                                                </option>
+                                            </select>
+                                            @error('invite_type')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
 
-                        
-                  </div>
+
+                                        {{-- ================= EXTERNAL FIELDS ================= --}}
+                                        <div id="external_fields">
+
+                                            <div class="mb-3">
+                                                <label class="form-label">First Name</label>
+                                                <input class="form-control" name="first_name"
+                                                      value="{{ old('first_name') }}">
+                                                @error('first_name')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Last Name</label>
+                                                <input class="form-control" name="last_name"
+                                                      value="{{ old('last_name') }}">
+                                                @error('last_name')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input class="form-control" name="email" type="email"
+                                                      value="{{ old('email') }}">
+                                                @error('email')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Phone</label>
+                                                <input class="form-control" name="phone"
+                                                      value="{{ old('phone') }}">
+                                                @error('phone')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
+                                        </div>
+
+
+                                        {{-- ================= RESIDENT FIELDS ================= --}}
+                                        <div id="resident_fields" style="display:none;">
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Select Resident</label>
+                                                <select name="invited_resident_id" class="form-control">
+                                                    <option value="">-- Select Resident --</option>
+                                                    @foreach($residents as $res)
+                                                        <option value="{{ $res->id }}"
+                                                            {{ old('invited_resident_id')==$res->id?'selected':'' }}>
+                                                            {{ $res->email }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('invited_resident_id')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
+                                        </div>
+
+
+                                        {{-- ================= DATE ================= --}}
+                                        <div class="mb-3">
+                                            <label class="form-label">Visit Date</label>
+                                            <input class="form-control" name="visit_date" type="date"
+                                                  value="{{ old('visit_date') }}">
+                                            @error('visit_date')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+
+
+                                        {{-- ================= TIME ================= --}}
+                                        <div class="mb-3">
+                                            <label class="form-label">Valid From</label>
+                                            <input class="form-control" name="valid_from" id="valid_from"
+                                                  type="time" value="{{ old('valid_from') }}">
+                                            @error('valid_from')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Valid To</label>
+                                            <input class="form-control" name="valid_to" id="valid_to"
+                                                  type="time" value="{{ old('valid_to') }}" readonly>
+                                            @error('valid_to')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+
+
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            Send Invitation
+                                        </button>
+
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-              </div>
-             
-              <div class="col-xxl-6 col-xl-2"></div>
-
-            </div>
-          </div>
+          <!-- Container-fluid ends-->
         </div>
 @endsection
 
@@ -190,6 +239,39 @@ document.addEventListener('DOMContentLoaded', function () {
         validToInput.value = `${newHours}:${newMinutes}`;
     });
 });
+
+
+// ================= DYNAMIC FIELD TOGGLE =================
+const inviteType = document.getElementById('invite_type');
+const externalFields = document.getElementById('external_fields');
+const residentFields = document.getElementById('resident_fields');
+
+function toggleFields() {
+
+    if (inviteType.value === 'external') {
+        externalFields.style.display = 'block';
+        residentFields.style.display = 'none';
+    }
+
+    else if (inviteType.value === 'resident') {
+        externalFields.style.display = 'none';
+        residentFields.style.display = 'block';
+    }
+
+    else {
+        externalFields.style.display = 'none';
+        residentFields.style.display = 'none';
+    }
+}
+
+inviteType.addEventListener('change', toggleFields);
+
+// Run on page load (for validation errors)
+toggleFields();
 </script>
 
 @endsection
+
+
+
+
