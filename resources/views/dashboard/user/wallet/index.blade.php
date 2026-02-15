@@ -120,6 +120,25 @@
               
 
             </div>
+
+            <div class="row">
+              <div class="col-md-12 box-col-12">
+                <div class="card overflow-hidden">
+                  <div class="card-header card-no-border pb-0">
+                    <h3>Wallet  History</h3>
+                  </div>
+                  <div class="bar-chart-widget">
+                    <div class="bottom-content card-body">
+                      <div class="row">
+                        <div class="col-12">
+                          <div id="transaction_wallet_chart"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <!--another row-->
                 <div class="row">
               <div class="col-sm-12">
@@ -208,3 +227,77 @@
         </div>
 @endsection
 
+
+
+@section('script')
+
+<script>
+var optionscolumnchart = {
+  series: [
+    {
+      name: "Transactions",
+      data: @json($chartData),
+    }
+  ],
+  chart: {
+    type: "bar",
+    height: 380,
+    toolbar: { show: false }
+  },
+  plotOptions: {
+    bar: {
+      horizontal: false,
+      columnWidth: "40%",
+      endingShape: "rounded",
+    },
+  },
+  dataLabels: { enabled: false },
+  stroke: {
+    show: true,
+    width: 1,
+    colors: ["transparent"],
+  },
+  xaxis: {
+    categories: [
+      "Jan","Feb","Mar","Apr","May","Jun",
+      "Jul","Aug","Sep","Oct","Nov","Dec"
+    ],
+    axisTicks: { show: false },
+    axisBorder: { color: "#C4C4C4" },
+  },
+  yaxis: {
+    title: {
+      text: "Amount (₦)",
+      style: {
+        fontSize: "14px",
+        fontFamily: "Roboto, sans-serif",
+        fontWeight: 500,
+      },
+    },
+  },
+  colors: [AdmiroAdminConfig.primary],
+  tooltip: {
+    y: {
+      formatter: function (val) {
+        return "₦ " + val.toLocaleString();
+      },
+    },
+  },
+  responsive: [
+    {
+      breakpoint: 576,
+      options: {
+        chart: { height: 200 }
+      }
+    }
+  ]
+};
+
+var chartcolumnchart = new ApexCharts(
+  document.querySelector("#transaction_wallet_chart"),
+  optionscolumnchart
+);
+chartcolumnchart.render();
+</script>
+
+@endsection

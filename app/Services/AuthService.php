@@ -16,6 +16,20 @@ use App\Models\Tenant;
 
 class AuthService implements RegisterInterface{
 
+
+    public function createUser($userRequest,$tenant){
+
+        $user = User::create([
+            'first_name' => $userRequest->first_name,
+            'last_name' => $userRequest->last_name,
+            'email' => $userRequest->email,
+            'password' => bcrypt($userRequest->password),
+            'tenant_id' => $tenant->id,
+            'role' => 'user',
+        ]);
+
+        return $user;
+    }
     
     public function addWallet($user_id){
         

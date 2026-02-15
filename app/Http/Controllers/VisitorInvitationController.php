@@ -52,92 +52,93 @@ class VisitorInvitationController extends Controller
     
    
 
-        public function store(Request $request)
-        {
-            $resident = auth()->user();
-            $tenant = app('tenant');
+    public function store(Request $request)
+    {
+        
+        $resident = auth()->user();
+        $tenant = app('tenant');
 
-            // ================= VALIDATION =================
-            $rules = [
-                'invite_type' => 'required|in:external,resident,self',
-                'visit_date'  => 'required|date|after_or_equal:today',
-                'valid_from'  => 'required|date_format:H:i',
-                'valid_to'    => 'required|date_format:H:i|after:valid_from',
-                'invited_resident_id' => 'nullable|exists:users,id',
-            ];
+        // ================= VALIDATION =================
+        $rules = [
+            'invite_type' => 'required|in:external,resident,self',
+            'visit_date'  => 'required|date|after_or_equal:today',
+            'valid_from'  => 'required|date_format:H:i',
+            'valid_to'    => 'required|date_format:H:i|after:valid_from',
+            'invited_resident_id' => 'nullable|exists:users,id',
+        ];
 
-            $validator = Validator::make($request->all(), $rules);
+        $validator = Validator::make($request->all(), $rules);
 
-            // Conditional validation
-            $validator->sometimes(['first_name', 'last_name', 'phone', 'email'], 'required|string|max:255', function ($input) {
-                return $input->invite_type === 'external';
-            });
+        // Conditional validation
+        $validator->sometimes(['first_name', 'last_name', 'phone', 'email'], 'required|string|max:255', function ($input) {
+            return $input->invite_type === 'external';
+        });
 
-            $validator->sometimes('invited_resident_id', 'required', function ($input) {
-                return $input->invite_type === 'resident';
-            });
+        $validator->sometimes('invited_resident_id', 'required', function ($input) {
+            return $input->invite_type === 'resident';
+        });
 
-            $validator->validate();
+        $validator->validate();
 
-            // ================= CREATE INVITATION =================
-            $accessCode = random_int(100000, 999999);
-            $payload = [
-                'invitation_id' => Str::uuid(),
-                'resident_id'   => $resident->id,
-                'expires_at'    => $request->visit_date . ' ' . $request->valid_to
-            ];
-            $encryptedToken = encrypt(json_encode($payload));
+        // ================= CREATE INVITATION =================
+        $accessCode = random_int(100000, 999999);
+        $payload = [
+            'invitation_id' => Str::uuid(),
+            'resident_id'   => $resident->id,
+            'expires_at'    => $request->visit_date . ' ' . $request->valid_to
+        ];
+        $encryptedToken = encrypt(json_encode($payload));
 
-            $data = [
-                'resident_id'   => $resident->id,
-                'visit_date'    => $request->visit_date,
-                'valid_from'    => $request->valid_from,
-                'valid_to'      => $request->valid_to,
-                'access_code'   => $accessCode,
-                'qr_token'      => $encryptedToken,
-                'delete_status' => 'no',
-            ];
+        $data = [
+            'resident_id'   => $resident->id,
+            'visit_date'    => $request->visit_date,
+            'valid_from'    => $request->valid_from,
+            'valid_to'      => $request->valid_to,
+            'access_code'   => $accessCode,
+            'qr_token'      => $encryptedToken,
+            'delete_status' => 'no',
+        ];
 
-            // ================= HANDLE INVITE TYPES =================
-            if ($request->invite_type === 'external') {
-                $visitor = Visitor::firstOrCreate([
-                    'first_name' => $request->first_name,
-                    'last_name'  => $request->last_name,
-                    'email'      => $request->email,
-                    'phone'      => $request->phone,
-                ]);
+        // ================= HANDLE INVITE TYPES =================
+        if ($request->invite_type === 'external') {
+            $visitor = Visitor::firstOrCreate([
+                'first_name' => $request->first_name,
+                'last_name'  => $request->last_name,
+                'email'      => $request->email,
+                'phone'      => $request->phone,
+            ]);
 
-                $data['visitor_id'] = $visitor->id;
-                $data['invited_resident_id'] = null;
+            $data['visitor_id'] = $visitor->id;
+            $data['invited_resident_id'] = null;
 
-            } elseif ($request->invite_type === 'resident') {
-                $invitedResident = User::find($request->invited_resident_id);
-                $data['invited_resident_id'] = $invitedResident->id ?? null;
-                $data['visitor_id'] = null;
+        } elseif ($request->invite_type === 'resident') {
+            $invitedResident = User::find($request->invited_resident_id);
+            $data['invited_resident_id'] = $invitedResident->id ?? null;
+            $data['visitor_id'] = null;
 
-            } elseif ($request->invite_type === 'self') {
-                $data['invited_resident_id'] = $resident->id;
-                $data['visitor_id'] = null;
-            }
-
-            $invitation = VisitorInvitation::create($data);
-
-            // ================= SEND EMAILS =================
-            if ($request->invite_type === 'external' && !empty($visitor->email)) {
-                Mail::to($visitor->email)
-                    ->queue(new VisitorMail($visitor, $invitation, $tenant));
-            }
-
-            if ($request->invite_type === 'resident' && !empty($invitedResident->email)) {
-                Mail::to($invitedResident->email)
-                    ->queue(new VisitorMail(null, $invitation, $tenant, true)); 
-                // true flag to indicate resident invite (optional, adjust your Mailable)
-            }
-
-            return redirect()
-                ->route('resident.invitations.index', $tenant->subdomain)
-                ->with('success', 'Invitation created successfully.');
+        } elseif ($request->invite_type === 'self') {
+            $data['invited_resident_id'] = $resident->id;
+            $data['visitor_id'] = null;
         }
+
+        $invitation = VisitorInvitation::create($data);
+
+        // ================= SEND EMAILS =================
+        if ($request->invite_type === 'external' && !empty($visitor->email)) {
+            Mail::to($visitor->email)
+                ->queue(new VisitorMail($visitor, $invitation, $tenant));
+        }
+
+        if ($request->invite_type === 'resident' && !empty($invitedResident->email)) {
+            Mail::to($invitedResident->email)
+                ->queue(new VisitorMail(null, $invitation, $tenant, true)); 
+            // true flag to indicate resident invite (optional, adjust your Mailable)
+        }
+
+        return redirect()
+            ->route('resident.invitations.index', $tenant->subdomain)
+            ->with('success', 'Invitation created successfully.');
+    }
 
 
 
@@ -147,6 +148,7 @@ class VisitorInvitationController extends Controller
      */
     public function resendQr($subdomain, VisitorInvitation $invitation)
     {
+
         $tenant = app('tenant');
 
         // ================= AUTHORIZATION =================
@@ -201,4 +203,5 @@ class VisitorInvitationController extends Controller
 
         return back()->with('success', 'Invitation deleted successfully.');
     }
+    
 }

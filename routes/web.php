@@ -150,29 +150,6 @@ Route::domain('{tenant}.' . $domain)
 
        });
 
-       Route::middleware(['tenant.auth', 'role:admin'])->group(function () {
-
-            Route::post('/admin_estate_logout', [TenantUserController::class, 'adminLogout'])->name('admin_tenant.logout');
-            Route::controller(TenantDashboardController::class)->group(function () {
-            Route::get('/admin_estate_dashboard', 'adminIndex')->name('tenant_admin_dashboard');
-            });
-
-            Route::controller(ResidentController::class)->group(function () {
-
-              Route::get('/admin_resident_transaction', 'adminTransaction')->name('admin_transaction');
-            });
-
-            
-
-       });
-
-       
-
-       
-
-       
-
-
-       
+      
         
 });

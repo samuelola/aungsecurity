@@ -124,19 +124,40 @@
               <div class="col-md-12 box-col-12">
                 <div class="card overflow-hidden">
                   <div class="card-header card-no-border pb-0">
-                    <h3>Monthly  History</h3>
+                    <h3>Transaction  History</h3>
                   </div>
                   <div class="bar-chart-widget">
                     <div class="bottom-content card-body">
                       <div class="row">
                         <div class="col-12">
-                          <div id="chart-widget4"></div>
+                          <div id="transaction_chart"></div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+
+              <div class="row">
+              <div class="col-md-12 box-col-12">
+                <div class="card overflow-hidden">
+                  <div class="card-header card-no-border pb-0">
+                    <h3>Invitation History</h3>
+                  </div>
+                  <div class="bar-chart-widget">
+                    <div class="bottom-content card-body">
+                      <div class="row">
+                        <div class="col-12">
+                          <div id="invitation_chart"></div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
             </div>
              
               <div class="col-xxl-6 col-xl-12">
@@ -223,4 +244,127 @@
             </div>
           </div>
         </div>
+@endsection
+
+
+@section('script')
+
+<script>
+var optionscolumnchart = {
+  series: [
+    {
+      name: "Transactions",
+      data: @json($chartData),
+    }
+  ],
+  chart: {
+    type: "bar",
+    height: 380,
+    toolbar: { show: false }
+  },
+  plotOptions: {
+    bar: {
+      horizontal: false,
+      columnWidth: "40%",
+      endingShape: "rounded",
+    },
+  },
+  dataLabels: { enabled: false },
+  stroke: {
+    show: true,
+    width: 1,
+    colors: ["transparent"],
+  },
+  xaxis: {
+    categories: [
+      "Jan","Feb","Mar","Apr","May","Jun",
+      "Jul","Aug","Sep","Oct","Nov","Dec"
+    ],
+    axisTicks: { show: false },
+    axisBorder: { color: "#C4C4C4" },
+  },
+  yaxis: {
+    title: {
+      text: "Amount (₦)",
+      style: {
+        fontSize: "14px",
+        fontFamily: "Roboto, sans-serif",
+        fontWeight: 500,
+      },
+    },
+  },
+  colors: [AdmiroAdminConfig.primary],
+  tooltip: {
+    y: {
+      formatter: function (val) {
+        return "₦ " + val.toLocaleString();
+      },
+    },
+  },
+  responsive: [
+    {
+      breakpoint: 576,
+      options: {
+        chart: { height: 200 }
+      }
+    }
+  ]
+};
+
+var chartcolumnchart = new ApexCharts(
+  document.querySelector("#transaction_chart"),
+  optionscolumnchart
+);
+chartcolumnchart.render();
+</script>
+
+<script>
+var options = {
+  series: [{
+    name: "Invitations",
+    data: @json($invitationData)
+  }],
+  chart: {
+    type: "line",
+    height: 350,
+    toolbar: { show: false }
+  },
+  stroke: {
+    curve: "smooth",
+    width: 3
+  },
+  markers: {
+    size: 4
+  },
+  xaxis: {
+    categories: @json($invitationLabels),
+  },
+  yaxis: {
+    title: {
+      text: "Number of Invitations"
+    },
+    min: 0
+  },
+  tooltip: {
+    y: {
+      formatter: function (val) {
+        return val + " invitation(s)";
+      }
+    }
+  },
+  colors: [AdmiroAdminConfig.primary],
+  dataLabels: {
+    enabled: false
+  }
+};
+
+var chart = new ApexCharts(
+  document.querySelector("#invitation_chart"),
+  options
+);
+
+chart.render();
+</script>
+
+
 @endsection
