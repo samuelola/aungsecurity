@@ -147,6 +147,8 @@ label { cursor: text !important; }
                                                 $message = urlencode(
                                                     "Hello *$guestName $guestLast*,\n\n" .
                                                     "You have been invited to visit *{$invitation->resident->first_name} {$invitation->resident->last_name}*\n" .
+                                                    "Resident Flat No: {$invitation->resident->kyc->flat_number}\n" .
+                                                    "Address of Resident: {$invitation->resident->kyc->address}\n" .
                                                     "Estate: {$tenant->estate_name}\n" .
                                                     "Valid Date: *{$invitation->visit_date}*\n" .
                                                     "Access Time: *$from - $to*\n" .

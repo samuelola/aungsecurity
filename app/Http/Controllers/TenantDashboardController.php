@@ -56,6 +56,10 @@ class TenantDashboardController extends Controller
     }
 
    
+    public function adminIndex(Request $request, $subdomain){
 
+        $tenant = app('tenant');
+        return view('dashboard.admin.admin_index',compact('tenant'));
+    }
     
 }

@@ -74,9 +74,14 @@ Route::domain('{tenant}.' . $domain)
       Route::controller(TenantUserController::class)->group(function () {
          Route::get('/estate_register', 'showRegistrationForm')->name('tenant_user_reg');
          Route::post('/estate_registerr', 'storeRegister')->name('tenant_user_store_reg');
+         Route::post('/estate_register_admin', 'storeRegisterAdmin')->name('estate_register_admin');
          Route::get('/estate_login','showLoginForm')->name('tenant_user_login');
-         Route::post('/estate_loginn', 'userStore')->name('tenant_user_submit'); // login post
-      
+         Route::post('/estate_loginn', 'userLogin')->name('tenant_user_submit'); // login post
+         Route::get('/verify-email', 'showVerifyForm')->name('verify.email.form');
+         Route::get('/admin-verify-email', 'showVerifyAdminForm')->name('verifyadmin.email.form');
+         Route::post('/verify-email', 'verifyEmail')->name('verify_email');
+         Route::post('/verify-admin-email', 'verifyAdminEmail')->name('verify_admin_email');
+         Route::post('/resend_verification', 'resendCode')->name('resend_verification');
        });
 
        Route::middleware(['tenant.auth', 'role:user'])->group(function () {
@@ -151,5 +156,20 @@ Route::domain('{tenant}.' . $domain)
        });
 
       
-        
+       Route::middleware(['tenant.auth', 'role:admin'])->group(function () {
+
+       
+            Route::post('/admin_estate_logout', [TenantUserController::class, 'adminLogout'])->name('admin_tenant.logout');
+            Route::controller(TenantDashboardController::class)->group(function () {
+            Route::get('/admin_estate_dashboard', 'adminIndex')->name('tenant_admin_dashboard');
+            });
+
+            Route::controller(ResidentController::class)->group(function () {
+
+              Route::get('/admin_resident_transaction', 'adminTransaction')->name('admin_transaction');
+            });
+
+            
+
+       }); 
 });

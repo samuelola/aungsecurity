@@ -31,68 +31,152 @@ input {
                 <img class="for-dark" src="{{asset('aung_logo_blue.png')}}" style="width:120px;height:100px;" alt="logo">
                </a>
               </div>
-              <div class="login-main"> 
-                <form class="theme-form" action="{{route('tenant_user_store_reg',$tenant->subdomain)}}" method="post">
-                    @csrf
-                  <h2 class="text-center" style="font-size: 20px;">Register with {{ucfirst($tenant->estate_name)}} Estate</h2>
-                  <p class="text-center">Enter your credentials to Signup</p>
-                  <div class="form-group">
-                    <label class="col-form-label">First Name</label>
-                    <input class="form-control" name="first_name" type="text" value="{{ old('first_name') }}"  placeholder="John">
-                     @error('first_name')
-                     <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
-                    @enderror 
-                  </div>
-                  <div class="form-group">
-                    <label class="col-form-label">Lastname</label>
-                    <input class="form-control" name="last_name" type="text" value="{{ old('last_name') }}" placeholder="Doe">
-                     @error('last_name')
-                    <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
-                    @enderror 
-                  </div>
-                  <div class="form-group">
-                    <label class="col-form-label">Email Address</label>
-                    <input class="form-control" name="email" type="email" value="{{ old('email') }}"  placeholder="Test@gmail.com">
-                     @error('email')
-                        <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
-                     @enderror 
-                  </div>
-                  
-                  <div class="form-group">
-                    <label class="col-form-label">Password</label>
+              <div class="text-center mb-4">
+                  <button type="button" class="btn btn-outline-primary me-2" onclick="showForm('user')">User</button>
+                  <button type="button" class="btn btn-outline-dark" onclick="showForm('admin')">Admin</button>
+              </div>
+              <div id="userForm">
+                <div class="login-main"> 
+                  <form class="theme-form" action="{{route('tenant_user_store_reg',$tenant->subdomain)}}" method="post">
+                      @csrf
+                    <h2 class="text-center" style="font-size: 20px;">Register as a User {{ucfirst($tenant->estate_name)}} Estate</h2>
+                    <p class="text-center">Enter your credentials to Signup</p>
+                    <div class="form-group">
+                      <label class="col-form-label">First Name</label>
+                      <input class="form-control" name="first_name" type="text" value="{{ old('first_name') }}"  placeholder="John">
+                      @error('first_name')
+                      <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+                      @enderror 
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label">Lastname</label>
+                      <input class="form-control" name="last_name" type="text" value="{{ old('last_name') }}" placeholder="Doe">
+                      @error('last_name')
+                      <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+                      @enderror 
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label">Email Address</label>
+                      <input class="form-control" name="email" type="email" value="{{ old('email') }}"  placeholder="Test@gmail.com">
+                      @error('email')
+                          <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+                      @enderror 
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="col-form-label">Password</label>
+                      <div class="form-input position-relative">
+                        <input class="form-control password-field" type="password" name="password" placeholder="*********">
+                        <span class="toggle-password" onclick="togglePassword(this)">
+                          show
+                        </span>
+                      </div>
+                      @error('password')
+                        <span class="invalid-feedback d-block"><strong>{{ $message }}</strong></span>
+                      @enderror
+                    </div>
+
+                    <div class="form-group">
+                    <label class="col-form-label">Confirm Password</label>
                     <div class="form-input position-relative">
-                      <input class="form-control password-field" type="password" name="password" placeholder="*********">
+                      <input class="form-control password-field" type="password" name="password_confirmation" placeholder="*********">
                       <span class="toggle-password" onclick="togglePassword(this)">
                         show
                       </span>
                     </div>
-                    @error('password')
+                    @error('password_confirmation')
                       <span class="invalid-feedback d-block"><strong>{{ $message }}</strong></span>
                     @enderror
-                  </div>
-
-                  <div class="form-group">
-                  <label class="col-form-label">Confirm Password</label>
-                  <div class="form-input position-relative">
-                    <input class="form-control password-field" type="password" name="password_confirmation" placeholder="*********">
-                    <span class="toggle-password" onclick="togglePassword(this)">
-                      show
-                    </span>
-                  </div>
-                  @error('password_confirmation')
-                    <span class="invalid-feedback d-block"><strong>{{ $message }}</strong></span>
-                  @enderror
-                  </div>
-
-                  <div class="form-group mb-0 checkbox-checked">
-                    <div class="text-end mt-3">
-                      <button class="btn btn-primary btn-block w-100" type="submit">Register                 </button>
                     </div>
-                  </div>
-                  
-                 <p class="mt-4 mb-0 text-center"><span style="color:#292929">Already have an account?</span><a style="font-weight:600;" class="ms-2" href="{{route('tenant_user_login',$tenant->subdomain)}}">Login Here</a></p>
-                </form>
+
+                    <div class="form-group mb-0 checkbox-checked">
+                      <div class="text-end mt-3">
+                        <button class="btn btn-primary btn-block w-100" type="submit">Register                 </button>
+                      </div>
+                    </div>
+                    
+                  <p class="mt-4 mb-0 text-center"><span style="color:#292929">Already have an account?</span><a style="font-weight:600;" class="ms-2" href="{{route('tenant_user_login',$tenant->subdomain)}}">Login Here</a></p>
+                  </form>
+                </div>
               </div>
+
+              <div id="adminForm" style="display:none;">
+                <div class="login-main"> 
+                  
+                  <form class="theme-form" action="{{route('estate_register_admin',$tenant->subdomain)}}" method="post">
+                      @csrf
+                    <h2 class="text-center" style="font-size: 20px;">Register as an Admin {{ucfirst($tenant->estate_name)}} Estate</h2>
+                    <p class="text-center">Enter your credentials to Signup</p>
+                    <div class="form-group">
+                      <label class="col-form-label">First Name</label>
+                      <input class="form-control" 
+                         name="first_name" 
+                         type="text" 
+                         value="{{ old('first_name',$tenant->first_name) }}"  
+                         placeholder="John"
+                         readonly>
+                      @error('first_name')
+                      <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+                      @enderror 
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label">Lastname</label>
+                      <input class="form-control"
+                       name="last_name" 
+                       type="text" 
+                       value="{{ old('last_name',$tenant->last_name) }}" 
+                       placeholder="Doe"
+                       readonly>
+                      @error('last_name')
+                      <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+                      @enderror 
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label">Email Address</label>
+                      <input class="form-control" name="email" type="email" value="{{ old('email') }}"  placeholder="Test@gmail.com">
+                      @error('email')
+                          <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+                      @enderror 
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="col-form-label">Password</label>
+                      <div class="form-input position-relative">
+                        <input class="form-control password-field" type="password" name="password" placeholder="*********">
+                        <span class="toggle-password" onclick="togglePassword(this)">
+                          show
+                        </span>
+                      </div>
+                      @error('password')
+                        <span class="invalid-feedback d-block"><strong>{{ $message }}</strong></span>
+                      @enderror
+                    </div>
+
+                    <div class="form-group">
+                    <label class="col-form-label">Confirm Password</label>
+                    <div class="form-input position-relative">
+                      <input class="form-control password-field" type="password" name="password_confirmation" placeholder="*********">
+                      <span class="toggle-password" onclick="togglePassword(this)">
+                        show
+                      </span>
+                    </div>
+                    @error('password_confirmation')
+                      <span class="invalid-feedback d-block"><strong>{{ $message }}</strong></span>
+                    @enderror
+                    </div>
+
+                    <div class="form-group mb-0 checkbox-checked">
+                      <div class="text-end mt-3">
+                        <button class="btn btn-primary btn-block w-100" type="submit">Register                 </button>
+                      </div>
+                    </div>
+                    
+                  <p class="mt-4 mb-0 text-center"><span style="color:#292929">Already have an account?</span><a style="font-weight:600;" class="ms-2" href="{{route('tenant_user_login',$tenant->subdomain)}}">Login Here</a></p>
+                  </form>
+                </div>
+              </div>
+
+
             </div>
           </div>
         </div>
@@ -100,6 +184,21 @@ input {
 @endsection
 
 @section('script')
+<script>
+function showForm(type) {
+    const userForm = document.getElementById('userForm');
+    const adminForm = document.getElementById('adminForm');
+
+    if (type === 'admin') {
+        adminForm.style.display = 'block';
+        userForm.style.display = 'none';
+    } else {
+        adminForm.style.display = 'none';
+        userForm.style.display = 'block';
+    }
+}
+</script>
+
  <script>
 function togglePassword(element) {
   const input = element.previousElementSibling;

@@ -54,9 +54,9 @@ class NewMessageNotification extends Notification implements ShouldBroadcast
         ]);
     }
 
-    public function broadcastOn()
+    public function broadcastOn($notifiable)
     {
-        return ['App.Models.User.' . $this->notifiable->id];
+        return ['App.Models.User.' . $notifiable->id];
     }
 
     

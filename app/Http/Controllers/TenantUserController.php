@@ -10,6 +10,8 @@ use App\Models\Kyc;
 use App\Services\AuthService;
 use DB;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\RegisterAdminRequest;
+use Carbon\Carbon;
 
 
 class TenantUserController extends Controller
@@ -43,10 +45,28 @@ class TenantUserController extends Controller
 
       // use the service here
       $this->authService->addWallet($user->id);
-
-      return redirect()->route('tenant_user_dashboard',$tenant->subdomain);
+      return redirect()->route('verify.email.form',$tenant->subdomain);
+      //return redirect()->route('tenant_user_dashboard',$tenant->subdomain);
 
   }
+
+  public function storeRegisterAdmin(RegisterAdminRequest $request, $subdomain)
+  {
+
+     $tenant = app('tenant');
+     $user = $this->authService->createAdmin($request,$tenant);
+
+      // Automatically log in the user
+      Auth::login($user);
+
+      // use the service here
+      $this->authService->addWallet($user->id);
+      return redirect()->route('verifyadmin.email.form',$tenant->subdomain);
+    //   return redirect()->route('tenant_admin_dashboard',$tenant->subdomain);
+
+  }
+
+  
 
    // Show login form
   public function showLoginForm($subdomain)
@@ -56,7 +76,7 @@ class TenantUserController extends Controller
     }
 
 
-  public function userStore(Request $request, $subdomain)
+  public function userLogin(Request $request, $subdomain)
     {
         //$tenant = Tenant::where('subdomain', $subdomain)->firstOrFail();
         $tenant = app('tenant');
@@ -71,8 +91,7 @@ class TenantUserController extends Controller
                     ->where('tenant_id', $tenant->id)
                     ->first();  
                     
-                    
-
+                
         if ($user && Auth::attempt(['email' => $user->email, 'password' => $credentials['password']])) {
             // use the service here
             //$this->authService->addWallet($user->id);
@@ -88,6 +107,15 @@ class TenantUserController extends Controller
                 return redirect()->route('tenant_user_dashboard', $tenant->subdomain);
 
             }
+
+            if ($user->isAdmin()) {
+
+                $get_userwallet = DB::table('resident_wallets')->where('user_id',auth()->id())->first();
+                if(is_null($get_userwallet)){
+                   $this->authService->addWallet($user->id);
+                }
+                return redirect()->route('tenant_admin_dashboard', $tenant->subdomain);
+            }
             
         }
 
@@ -97,7 +125,19 @@ class TenantUserController extends Controller
     }  
 
     // Handle logout
-  public function logout(Request $request, $subdomain)
+    public function logout(Request $request, $subdomain)
+    {
+        $tenant = app('tenant');
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        $host = request()->getHost();
+        return redirect()->route('tenant_user_login', $tenant->subdomain);
+        //return redirect()->to("http://{$subdomain}.{$host}/user_login");
+    }
+
+    public function adminLogout(Request $request, $subdomain)
     {
         $tenant = app('tenant');
         Auth::logout();
@@ -110,5 +150,91 @@ class TenantUserController extends Controller
     }
 
 
+    public function showVerifyForm()
+    {
+        $tenant = app('tenant');
+        $user = auth()->user();
+        $expiresAt = $user->verification_code_sent_at
+        ? Carbon::parse($user->verification_code_sent_at)
+            ->addMinutes(5)
+            ->timestamp
+        : null;
+        return view('auth.estate.verify', compact('tenant','user','expiresAt'));
+    }
+
+    public function showVerifyAdminForm()
+    {
+        $tenant = app('tenant');
+        $user = auth()->user();
+        $expiresAt = $user->verification_code_sent_at
+        ? Carbon::parse($user->verification_code_sent_at)
+            ->addMinutes(5)
+            ->timestamp
+        : null;
+        return view('auth.estate.verify_admin', compact('tenant','user','expiresAt'));
+    }
+
+    public function verifyEmail(Request $request){
+
+        $request->validate([
+            'code' => 'required|digits:4'
+        ]);
+        
+        try{
+             $tenant = app('tenant');
+             $this->authService->verifyCode($request);
+             return redirect()
+            ->route('tenant_user_dashboard', $tenant->subdomain);
+
+        }catch(\Exception $e){
+              return redirect()
+            ->back()
+            ->with('error', $e->getMessage());
+        }
+
+    }
+
+
+    public function verifyAdminEmail(Request $request){
+
+        $request->validate([
+            'code' => 'required|digits:4'
+        ]);
+        
+        try{
+             $tenant = app('tenant');
+             $this->authService->verifyCode($request);
+             return redirect()
+            ->route('tenant_admin_dashboard', $tenant->subdomain);
+
+        }catch(\Exception $e){
+              return redirect()
+            ->back()
+            ->with('error', $e->getMessage());
+        }
+
+    }
+
+    
+
+    public function resendCode(){
+
+        try {
+
+            $tenant = app('tenant');
+            $this->authService->resendVerificationCode(auth()->user());
+            return response()->json([
+            'status' => 'success',
+            'message' => 'New verification code sent successfully.'
+            ]);
+
+        } catch (\Exception $e) {
+
+             return response()->json([
+             'status' => 'error',
+             'message' => $e->getMessage()
+             ], 400);
+        }
+    }
 
 }
