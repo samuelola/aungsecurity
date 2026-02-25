@@ -103,9 +103,8 @@ class TenantUserController extends Controller
                 if(is_null($get_userwallet)){
                    $this->authService->addWallet($user->id);
                 }
-                
-                return redirect()->route('tenant_user_dashboard', $tenant->subdomain);
 
+                return redirect()->route('tenant_user_dashboard', $tenant->subdomain);
             }
 
             if ($user->isAdmin()) {
@@ -114,6 +113,7 @@ class TenantUserController extends Controller
                 if(is_null($get_userwallet)){
                    $this->authService->addWallet($user->id);
                 }
+
                 return redirect()->route('tenant_admin_dashboard', $tenant->subdomain);
             }
             

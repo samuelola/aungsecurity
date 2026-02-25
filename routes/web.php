@@ -14,6 +14,7 @@ use App\Http\Controllers\VisitorInvitationController;
 use App\Http\Controllers\GateVerificationController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\SecurityController;
+use App\Http\Controllers\ForgotPasswordController;
 
 
 
@@ -82,6 +83,19 @@ Route::domain('{tenant}.' . $domain)
          Route::post('/verify-email', 'verifyEmail')->name('verify_email');
          Route::post('/verify-admin-email', 'verifyAdminEmail')->name('verify_admin_email');
          Route::post('/resend_verification', 'resendCode')->name('resend_verification');
+       });
+
+
+       Route::controller(ForgotPasswordController::class)->group(function () {
+
+          Route::get('/forgot-password', 'showForgotPasswordForm')->name('tenant_forgot_password');
+          Route::post('/forgot-password', 'sendResetCode')->name('tenant_send_reset_code');
+          Route::get('/reset-mypassword', 'showResetPasswordForm')->name('tenant_reset_password_form');
+          Route::post('/reset-password','resetPassword')->name('tenant_reset_password');
+          Route::get('/reset-password','verifyCodePassword')->name('verify_code_password');
+          Route::post('/resend-reset-verification', 'resendResetCode')->name('resend_reset_verification');
+          Route::post('/verify-pass-code', 'verifyPassCode')->name('verifypasscode');
+          
        });
 
        Route::middleware(['tenant.auth', 'role:user'])->group(function () {

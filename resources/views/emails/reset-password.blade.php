@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Aung Solutions Email Verification</title>
+    <title>Aung Solutions Reset Password</title>
 </head>
 <body style="font-family: Arial, sans-serif; background-color:#f4f6f8; padding:20px;">
 
@@ -10,7 +10,7 @@
 
         <h2>Hello {{ ucfirst($user->first_name) }} {{ ucfirst($user->last_name) }},</h2>
 
-        <p>Your verification code is:</p>
+        <p>Your password reset code is:</p>
 
         <h1>{{ $user->verification_code }}</h1>
 

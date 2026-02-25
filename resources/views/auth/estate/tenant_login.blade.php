@@ -63,13 +63,13 @@ input {
                           <label style="position: relative;
     top: 5px;" class="form-check-label ms-2" for="solid6">Remember password</label>
                       </div>
-                      <a class="link" href="forget-password.html">Forgot password?</a>
+                      <a class="link" href="{{route('tenant_forgot_password',$tenant->subdomain)}}">Forgot password?</a>
                   </div>
                   
 
 
                     <div class="text-end mt-3">
-                      <button class="btn btn-primary btn-block w-100" type="submit">Login               </button>
+                      <button class="btn btn-primary btn-block w-100" type="submit">Login</button>
                     </div>
                   </div>
                  
