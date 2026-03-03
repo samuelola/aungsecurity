@@ -84,8 +84,13 @@ Route::domain('{tenant}.' . $domain)
          Route::post('/verify-admin-email', 'verifyAdminEmail')->name('verify_admin_email');
          Route::post('/resend_verification', 'resendCode')->name('resend_verification');
        });
+       
 
+       Route::controller(VisitorInvitationController::class)->group(function () {
 
+             Route::get('/resident/show/{invitation}',  'show')->name('visitor.show');
+       });
+       
        Route::controller(ForgotPasswordController::class)->group(function () {
 
           Route::get('/forgot-password', 'showForgotPasswordForm')->name('tenant_forgot_password');
@@ -154,7 +159,7 @@ Route::domain('{tenant}.' . $domain)
                 Route::get('/resident/invitations',  'index')->name('resident.invitations.index');
                 Route::post('/resident/invitations/{invitation}/resend', 'resendQr')->name('resident.invitations.resend');
                 Route::delete('/resident/invitations/{invitation}','destroy')->name('resident.invitations.destroy');
-
+                
             });
 
             Route::controller(SubscriptionController::class)->group(function () {

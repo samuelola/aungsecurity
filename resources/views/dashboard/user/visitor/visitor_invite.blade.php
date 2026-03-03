@@ -98,6 +98,7 @@ label{
                                                 <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
+                                        
 
 
                                         {{-- ================= EXTERNAL FIELDS ================= --}}
@@ -162,6 +163,33 @@ label{
                                             </div>
 
                                         </div>
+
+                                        {{-- ================= MYSELF FIELDS ================= --}}
+                                            <div id="self_fields" style="display:none;">
+
+                                                <button type="button" class="btn btn-sm btn-outline-primary mb-3" id="add_self_name_btn">
+                                                    + Add First & Last Name
+                                                </button>
+                                                <div id="self_name_fields" style="display:none;">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">First Name</label>
+                                                        <input class="form-control" name="self_first_name"
+                                                            value="{{ old('self_first_name') }}">
+                                                        @error('self_first_name')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Last Name</label>
+                                                        <input class="form-control" name="self_last_name"
+                                                            value="{{ old('self_last_name') }}">
+                                                        @error('self_last_name')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
                                         {{-- ================= DATE ================= --}}
@@ -245,26 +273,44 @@ document.addEventListener('DOMContentLoaded', function () {
 const inviteType = document.getElementById('invite_type');
 const externalFields = document.getElementById('external_fields');
 const residentFields = document.getElementById('resident_fields');
+const selfFields = document.getElementById('self_fields');
+const addSelfNameBtn = document.getElementById('add_self_name_btn');
+const selfNameFields = document.getElementById('self_name_fields');
 
 function toggleFields() {
 
     if (inviteType.value === 'external') {
         externalFields.style.display = 'block';
         residentFields.style.display = 'none';
+        selfFields.style.display = 'none';
     }
 
     else if (inviteType.value === 'resident') {
         externalFields.style.display = 'none';
         residentFields.style.display = 'block';
+        selfFields.style.display = 'none';
+    }
+    else if (inviteType.value === 'self') {
+        externalFields.style.display = 'none';
+        residentFields.style.display = 'none';
+        selfFields.style.display = 'block';
     }
 
     else {
         externalFields.style.display = 'none';
         residentFields.style.display = 'none';
+        selfFields.style.display = 'none';
     }
 }
 
+
+// Event listener for Invite Type change
 inviteType.addEventListener('change', toggleFields);
+
+// ================= PLUS BUTTON TO SHOW OPTIONAL NAME =================
+addSelfNameBtn.addEventListener('click', function() {
+    selfNameFields.style.display = selfNameFields.style.display === 'none' ? 'block' : 'none';
+});
 
 // Run on page load (for validation errors)
 toggleFields();

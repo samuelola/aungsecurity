@@ -10,8 +10,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VisitorMail;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Crypt;
-use Carbon\Carbon;
 
 class VisitorInvitationController extends Controller
 {
@@ -80,10 +78,6 @@ class VisitorInvitationController extends Controller
             return $input->invite_type === 'resident';
         });
 
-        $validator->sometimes(['self_first_name', 'self_last_name'], 'nullable|string|max:255', function ($input) {
-          return $input->invite_type === 'self';
-        });
-
         $validator->validate();
 
         // ================= CREATE INVITATION =================
@@ -123,23 +117,8 @@ class VisitorInvitationController extends Controller
             $data['visitor_id'] = null;
 
         } elseif ($request->invite_type === 'self') {
-            // Only create a Visitor if first/last name are provided
-            if (!empty($request->self_first_name) || !empty($request->self_last_name)) {
-            $visitorData = [
-                'first_name' => $request->self_first_name,
-                'last_name'  => $request->self_last_name,
-                'email'      => $resident->email ?? null,
-                'phone'      => $resident->phone ?? null,
-            ];
-            $visitor = Visitor::firstOrCreate($visitorData);
-            $data['visitor_id'] = $visitor->id;
-            } else {
-                $data['visitor_id'] = null;
-            }
-
             $data['invited_resident_id'] = $resident->id;
-
-           
+            $data['visitor_id'] = null;
         }
 
         $invitation = VisitorInvitation::create($data);
@@ -154,12 +133,6 @@ class VisitorInvitationController extends Controller
             Mail::to($invitedResident->email)
                 ->queue(new VisitorMail(null, $invitation, $tenant, true)); 
             // true flag to indicate resident invite (optional, adjust your Mailable)
-        }
-
-        // For "self", optionally send email to resident if email exists
-        if ($request->invite_type === 'self' && !empty($resident->email)) {
-            Mail::to($resident->email)
-                ->queue(new VisitorMail($visitor ?? null, $invitation, $tenant, true));
         }
 
         return redirect()
@@ -229,33 +202,6 @@ class VisitorInvitationController extends Controller
         $invitation->update(['delete_status' => 'yes']);
 
         return back()->with('success', 'Invitation deleted successfully.');
-    }
-
-
-
-    public function show($subdomain,$invitation)
-    {
-        
-        $newinvitation = Crypt::decryptString($invitation);
-        $newinvitation_decode = json_decode($newinvitation);
-        $invitation = VisitorInvitation::with([
-            'resident.kyc',
-            'visitor',
-            'invitedResident.kyc'
-        ])->findOrFail($newinvitation_decode->id);
-
-        $tenant = app('tenant');
-
-        $guestName = $invitation->visitor->first_name 
-            ?? $invitation->invitedResident->first_name;
-
-        $guestLast = $invitation->visitor->last_name 
-            ?? $invitation->invitedResident->last_name;
-
-        $from = Carbon::parse($invitation->valid_from)->format('g:i A');
-        $to = Carbon::parse($invitation->valid_to)->format('g:i A');
-
-        return view('dashboard.user.visitor.show', compact('invitation','tenant'));
     }
     
 }

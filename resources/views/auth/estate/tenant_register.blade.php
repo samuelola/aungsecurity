@@ -32,8 +32,8 @@ input {
                </a>
               </div>
               <div class="text-center mb-4">
-                  <button type="button" class="btn btn-outline-primary me-2" onclick="showForm('user')">User</button>
-                  <button type="button" class="btn btn-outline-dark" onclick="showForm('admin')">Admin</button>
+                  <button id="userBtn" type="button" class="btn btn-outline-primary me-2" onclick="showForm('user')">User</button>
+                  <button id="adminBtn" type="button" class="btn btn-outline-dark" onclick="showForm('admin')">Admin</button>
               </div>
               <div id="userForm">
                 <div class="login-main"> 
@@ -188,15 +188,26 @@ input {
 function showForm(type) {
     const userForm = document.getElementById('userForm');
     const adminForm = document.getElementById('adminForm');
+    const userBtn = document.getElementById('userBtn');
+    const adminBtn = document.getElementById('adminBtn');
 
     if (type === 'admin') {
         adminForm.style.display = 'block';
         userForm.style.display = 'none';
+        adminBtn.classList.add('active');
+        userBtn.classList.remove('active');
     } else {
         adminForm.style.display = 'none';
         userForm.style.display = 'block';
+        userBtn.classList.add('active');
+        adminBtn.classList.remove('active');
     }
 }
+
+// Make User button active by default when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    showForm('user');
+});
 </script>
 
  <script>
