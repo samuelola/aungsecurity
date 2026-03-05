@@ -15,6 +15,7 @@ use App\Http\Controllers\GateVerificationController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\SecurityController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\AdminSubscriptionPlanController;
 
 
 
@@ -165,6 +166,7 @@ Route::domain('{tenant}.' . $domain)
             Route::controller(SubscriptionController::class)->group(function () {
                 
                 Route::get('subscription','create')->name('subscription.create');
+                Route::post('/subscribe', 'subscribe')->name('subscribe');
                
             });
               
@@ -186,6 +188,14 @@ Route::domain('{tenant}.' . $domain)
             Route::controller(ResidentController::class)->group(function () {
 
               Route::get('/admin_resident_transaction', 'adminTransaction')->name('admin_transaction');
+            });
+
+            Route::controller(AdminSubscriptionPlanController::class)->group(function () {
+
+              Route::get('/plans', 'index')->name('admin_plans');
+              Route::get('/create', 'create')->name('admin_create_plan');
+              Route::post('/store', 'store')->name('admin_store_plan');
+
             });
 
             

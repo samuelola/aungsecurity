@@ -56,43 +56,50 @@
     <script src="{{asset('assets/js/chart-widget.js')}}"></script>
    <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // Select all sidebar links that have a submenu
+
   const links = document.querySelectorAll('.sidebar-link');
 
-  links.forEach(link => {
+  links.forEach((link, index) => {
+
     const submenu = link.nextElementSibling;
     const arrow = link.querySelector('.arrow-toggle');
 
     if (!submenu || !submenu.classList.contains('sidebar-submenu')) return;
 
-    // Initialize closed
-    submenu.style.maxHeight = '0px';
+    const storageKey = "sidebar_menu_" + index;
 
-    link.addEventListener('click', function (e) {
-      e.preventDefault(); // prevent dummy link jump
-
-      const isOpen = submenu.classList.contains('open');
-
-      if (isOpen) {
-        // Close submenu
-        submenu.style.maxHeight = '0px';
-        submenu.classList.remove('open');
-        if (arrow) arrow.classList.remove('rotate');
-      } else {
-        // Open submenu
+    // Restore state from localStorage
+    if (localStorage.getItem(storageKey) === "open") {
         submenu.classList.add('open');
-        submenu.style.maxHeight = submenu.scrollHeight + 'px';
+        submenu.style.maxHeight = submenu.scrollHeight + "px";
         if (arrow) arrow.classList.add('rotate');
-      }
+    } else {
+        submenu.style.maxHeight = "0px";
+    }
+
+    link.addEventListener('click', function(e) {
+
+        e.preventDefault();
+
+        const isOpen = submenu.classList.contains('open');
+
+        if (isOpen) {
+            submenu.style.maxHeight = "0px";
+            submenu.classList.remove('open');
+            if (arrow) arrow.classList.remove('rotate');
+            localStorage.setItem(storageKey, "closed");
+
+        } else {
+            submenu.classList.add('open');
+            submenu.style.maxHeight = submenu.scrollHeight + "px";
+            if (arrow) arrow.classList.add('rotate');
+            localStorage.setItem(storageKey, "open");
+        }
+
     });
 
-    // Optional: keep max-height correct if content changes
-    submenu.addEventListener('transitionend', function () {
-      if (submenu.classList.contains('open')) {
-        submenu.style.maxHeight = submenu.scrollHeight + 'px';
-      }
-    });
   });
+
 });
 </script>
 

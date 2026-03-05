@@ -18,6 +18,24 @@
                   <h6 class="f-w-600">Dashboard</h6></a>
               </li>
 
+
+              <li class="sidebar-main-title">
+                <div>
+                  <h5 class="f-w-700 sidebar-title">Subscription</h5>
+                </div>
+              </li>
+              
+
+              <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i><a class="sidebar-link" href="javascript:void(0)">
+                  <i class="ti-wallet"></i>
+                 <h6 class="f-w-600">Subscription</h6><i class="ti-arrow-right arrow-toggle"></i></a>
+                <ul class="sidebar-submenu">
+                  <li> <a href="{{route('admin_create_plan',$tenant->subdomain)}}">Create Plan</a></li>
+                  <li> <a href="{{route('admin_plans',$tenant->subdomain)}}">Plan List</a></li>
+                </ul>
+
+              </li>
+
               <li class="sidebar-main-title">
                 <div>
                   <h5 class="f-w-700 sidebar-title pt-3">Resident Management</h5>

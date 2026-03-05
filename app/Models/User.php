@@ -74,5 +74,10 @@ class User extends Authenticatable
         return $this->hasOne(Tenant::class,'tenant_id');
     }
 
+    public function subscriptions() {
+        
+        return $this->hasMany(Subscription::class);
+    }
+
     
 }
