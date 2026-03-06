@@ -16,7 +16,7 @@ class VisitorInvitation extends Model
     // Invitation belongs to a visitor
     public function visitor()
     {
-        return $this->belongsTo(Visitor::class);
+        return $this->belongsTo(Visitor::class,'visitor_id');
     }
 
     // Invitation belongs to a resident (user)
@@ -35,5 +35,12 @@ class VisitorInvitation extends Model
     {
         return $this->belongsTo(User::class, 'invited_resident_id');
     }
+
+    public function accessLogs()
+    {
+        return $this->hasMany(AccessLog::class, 'access_logs');
+    }
+
+
 
 }

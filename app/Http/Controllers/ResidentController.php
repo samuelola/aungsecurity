@@ -22,6 +22,18 @@ class ResidentController extends Controller
         return view('dashboard.admin.transaction.index');
     }
 
+    public function allResidents(Request $request, $subdomain){
+
+        $tenant = app('tenant');
+        $allresidents = User::with('kyc')
+                        ->latest()
+                        ->where('id','!=',auth()->id())
+                        ->get();
+        return view('dashboard.admin.resident.index', compact('allresidents'));
+    }
+
+    
+
     public function details(Request $request){
 
         $resident = User::with('kyc')->first();

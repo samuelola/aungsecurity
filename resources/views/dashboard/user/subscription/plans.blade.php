@@ -130,11 +130,19 @@ label{
 
                                             <input type="hidden" name="billing_cycle" value="{{ $plan->duration }}">
 
-                                            <button class="btn btn-primary w-100">
+                                            @if($currentSubscription && $currentSubscription->subscription_plan_id == $plan->id)
 
-                                                Choose Plan
+                                                <button class="btn btn-primary w-100" disabled>
+                                                    Current Plan
+                                                </button>
 
-                                            </button>
+                                            @else
+
+                                                <button class="btn btn-primary w-100">
+                                                    Choose Plan
+                                                </button>
+
+                                            @endif
 
                                         </form>
 

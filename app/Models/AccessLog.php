@@ -9,4 +9,9 @@ class AccessLog extends Model
     protected $table= 'access_logs';
     
     protected $guarded = [];
+
+    public function Invitation()
+    {
+        return $this->belongsTo(VisitorInvitation::class,'invitation_id');
+    }
 }

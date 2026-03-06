@@ -16,23 +16,31 @@ class SubscriptionController extends Controller
         $this->subscriptionService = $subscriptionService;
     }
 
-     public function create()
+     public function allSub()
     {
-        $plans = SubscriptionPlan::where('is_active', true)->get();
-
-        return view('dashboard.user.subscription.plans', compact('plans'));
+        $plans = $this->subscriptionService->allPlans();
+        $currentSubscription = $this->subscriptionService->currentSubscription();
+        return view('dashboard.user.subscription.plans', compact('plans','currentSubscription'));
     }
 
     public function subscribe(SubscribeRequest $request)
     {
 
-        $this->subscriptionService->subscribe(
+        try{
+
+            $this->subscriptionService->subscribe(
             auth()->user(),
             $request->plan_id,
             $request->billing_cycle
         );
 
-        return redirect()->back()->with('success','Subscribed successfully');
+           return redirect()->back()->with('success','Subscribed successfully');
+
+        }catch(\Exception $e){
+            
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+        
     }
 
 }

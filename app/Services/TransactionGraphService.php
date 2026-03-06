@@ -34,7 +34,30 @@ class TransactionGraphService {
         $chartData = [];
         for ($i = 1; $i <= 12; $i++) {
             $chartData[] = isset($monthlyTransactions[$i])
-                ? $monthlyTransactions[$i] / 100 // divide if stored in kobo
+                ? $monthlyTransactions[$i]
+                : 0;
+        }
+
+        return $chartData;
+    }
+
+    public function transactionAllChart(){
+
+        // Monthly transaction totals (success only)
+        $monthlyTransactions = Transaction::where('status', 'success')
+        ->whereYear('created_at', now()->year)
+        ->select(
+            DB::raw('MONTH(created_at) as month'),
+            DB::raw('SUM(amount) as total')
+        )
+        ->groupBy('month')
+        ->pluck('total', 'month');
+        
+        // Prepare 12 months data
+        $chartData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $chartData[] = isset($monthlyTransactions[$i])
+                ? $monthlyTransactions[$i]
                 : 0;
         }
 

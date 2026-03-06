@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Services\TransactionGraphService;
 use App\Services\InvitationGraphService;
-use App\Models\VisitorInvitation;
 use App\Services\WalletService;
+use App\Models\VisitorInvitation;
 use App\Services\TransactionService;
 use App\Services\KycService;
 
-class TenantDashboardController extends Controller
+class AdminTenantDashboardController extends Controller
 {
 
     protected $transactionGraphService;
@@ -24,6 +24,7 @@ class TenantDashboardController extends Controller
     protected $walletService;
     protected $transactionService;
     protected $kycService;
+
 
     public function __construct(
         TransactionGraphService $transactionGraphService,
@@ -40,28 +41,24 @@ class TenantDashboardController extends Controller
          $this->kycService = $kycService;
     }
 
-    public function index(Request $request, $subdomain){
+    
+   
+    public function adminIndex(Request $request, $subdomain){
 
         $tenant = app('tenant');
-        $user = auth()->user();
-
-        $kyc = $this->kycService->createKyc($user,$tenant);
-        $wallet = $this->walletService->getUserWallet($user);
-        $transactions = $this->transactionService->getUserTransactions($user);
-        $theTransactionChart = $this->transactionGraphService->transactionChart($user);
-        $theInvitationChart = $this->invitationGraphService->invitationChart($user);
-        
-         
-        return view('dashboard.user.tenant_index',[
+        $transactions = $this->transactionService->getAllTransactions();
+        $theTransactionChart = $this->transactionGraphService->transactionAllChart();
+        $theInvitationChart = $this->invitationGraphService->allInvitationChart();
+        $wallet = $this->walletService->getAllWallet();
+        return view('dashboard.admin.admin_index',[
             'tenant' => $tenant,
-            'kyc' => $kyc,
             'wallet'=>$wallet,
             'transactions'=> $transactions,
             'chartData' => $theTransactionChart,
             'invitationLabels' => $theInvitationChart['labels'],
             'invitationData' => $theInvitationChart['data']
-            ]);
+        ]);
+        
     }
-
     
 }

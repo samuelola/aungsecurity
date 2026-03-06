@@ -141,31 +141,31 @@
               </div>
 
               <div class="row">
-              <div class="col-md-12 box-col-12">
-                <div class="card overflow-hidden">
-                  <div class="card-header card-no-border pb-0">
-                    <h3>Invitation History</h3>
-                  </div>
-                  <div class="bar-chart-widget">
-                    <div class="bottom-content card-body">
-                      <div class="row">
-                        <div class="col-12">
-                          <div id="invitation_chart"></div>
+                <div class="col-md-12 box-col-12">
+                  <div class="card overflow-hidden">
+                    <div class="card-header card-no-border pb-0">
+                      <h3>Invitation History</h3>
+                    </div>
+                    <div class="bar-chart-widget">
+                      <div class="bottom-content card-body">
+                        <div class="row">
+                          <div class="col-12">
+                            <div id="invitation_chart"></div>
 
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+
+
               </div>
-
-
-            </div>
              
               <div class="col-xxl-6 col-xl-12">
                 <div class="card">
                   <div class="card-header card-no-border pb-0">
-                    <h3>Transition History</h3>
+                    <h3>Transaction History</h3>
                   </div>
                   <div class="card-body transaction-history pt-0">
                      <div class="table-responsive">
@@ -255,7 +255,7 @@
 var optionscolumnchart = {
   series: [
     {
-      name: "Transactions",
+      name: "Amount",
       data: @json($chartData),
     }
   ],

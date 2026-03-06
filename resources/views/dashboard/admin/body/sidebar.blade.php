@@ -36,16 +36,28 @@
 
               </li>
 
+              <li class="sidebar-list">
+                <i class="fa-solid fa-thumbtack"></i><a class="sidebar-link" href="javascript:void(0)">
+                  <i class="ti-wallet"></i>
+                  <h6 class="lan-3">Plans</h6><i class="iconly-Arrow-Right-2 icli"> </i></a>
+                <ul class="sidebar-submenu" style="display: none;">
+                   <li> <a href="{{route('admin_create_plan',$tenant->subdomain)}}">Create Plan</a></li>
+                  <li> <a href="{{route('admin_plans',$tenant->subdomain)}}">Plan List</a></li>
+                </ul>
+              </li>
+
               <li class="sidebar-main-title">
                 <div>
                   <h5 class="f-w-700 sidebar-title pt-3">Resident Management</h5>
                 </div>
               </li>
               <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
-                <a class="sidebar-link" href="#">
+                <a class="sidebar-link" href="{{route('allresident.details',$tenant->subdomain)}}">
                   <i class="ti-user"></i>
                   <h6 class="f-w-600">All Residents </h6></a>
               </li>
+
+              
 
               <li class="sidebar-main-title">
                 <div>
@@ -53,9 +65,14 @@
                 </div>
               </li>
               <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
-                <a class="sidebar-link" href="#">
+                <a class="sidebar-link" href="{{route('admin_visitor_logs',$tenant->subdomain)}}">
                   <i class="ti-user"></i>
                   <h6 class="f-w-600">All Visitor's Log</h6></a>
+              </li>
+              <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
+                <a class="sidebar-link" href="{{route('admin_invite_logs',$tenant->subdomain)}}">
+                  <i class="ti-user"></i>
+                  <h6 class="f-w-600">All Invite's Log</h6></a>
               </li>
 
               <li class="sidebar-main-title">

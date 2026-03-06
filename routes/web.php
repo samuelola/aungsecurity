@@ -16,6 +16,8 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\SecurityController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\AdminSubscriptionPlanController;
+use App\Http\Controllers\AdminTenantDashboardController;
+use App\Http\Controllers\AdminVisitorInvitationController;
 
 
 
@@ -165,15 +167,14 @@ Route::domain('{tenant}.' . $domain)
 
             Route::controller(SubscriptionController::class)->group(function () {
                 
-                Route::get('subscription','create')->name('subscription.create');
+                Route::get('subscription','allSub')->name('subscription.create');
                 Route::post('/subscribe', 'subscribe')->name('subscribe');
                
             });
               
          });
             
-            
-
+  
        });
 
       
@@ -181,13 +182,14 @@ Route::domain('{tenant}.' . $domain)
 
        
             Route::post('/admin_estate_logout', [TenantUserController::class, 'adminLogout'])->name('admin_tenant.logout');
-            Route::controller(TenantDashboardController::class)->group(function () {
+            Route::controller(AdminTenantDashboardController::class)->group(function () {
             Route::get('/admin_estate_dashboard', 'adminIndex')->name('tenant_admin_dashboard');
             });
 
             Route::controller(ResidentController::class)->group(function () {
 
               Route::get('/admin_resident_transaction', 'adminTransaction')->name('admin_transaction');
+              Route::get('/allresidents', 'allResidents')->name('allresident.details');
             });
 
             Route::controller(AdminSubscriptionPlanController::class)->group(function () {
@@ -197,6 +199,20 @@ Route::domain('{tenant}.' . $domain)
               Route::post('/store', 'store')->name('admin_store_plan');
 
             });
+
+            Route::controller(AdminVisitorInvitationController::class)->group(function () {
+
+              Route::get('/allvisitorlog', 'adminVisitorLog')->name('admin_visitor_logs');
+              Route::get('/allinvitelog', 'adminInviteLog')->name('admin_invite_logs');
+              
+
+            });
+
+
+            
+
+
+            
 
             
 

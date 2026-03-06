@@ -18,7 +18,15 @@ class SubscriptionService
             ? $start->copy()->addMonth()
             : $start->copy()->addYear();
 
-        return Subscription::create([
+        $activeSubscription = Subscription::where('user_id', auth()->id())
+        ->where('status', 'active')
+        ->first();
+        
+         if ($activeSubscription) {
+            throw new \Exception("You already have an active subscription.");
+        }
+
+        Subscription::create([
             'user_id' => $user->id,
             'subscription_plan_id' => $planId,
             'billing_cycle' => $billingCycle,
@@ -26,6 +34,22 @@ class SubscriptionService
             'ends_at' => $end,
             'status' => 'active'
         ]);
+
+        return true;
+    }
+
+
+    public function allPlans(){
+
+       return SubscriptionPlan::where('is_active', true)->get();
+    }
+
+    public function currentSubscription(){
+
+       return Subscription::where('user_id', auth()->id())
+        ->where('status', 'active')
+        ->where('ends_at', '>', now())
+        ->first();
     }
 
     public function cancel($subscription)

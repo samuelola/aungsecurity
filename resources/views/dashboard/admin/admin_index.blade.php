@@ -27,14 +27,20 @@
           <!-- Container-fluid starts-->
           <div class="container-fluid default-dashboard">
             <div class="row">
-
+               @php
+                $currencyExchangeRateNgn = DB::table('currency')->where('code','NGN')->first();
+                $currencyExchangeRateUsd = DB::table('currency')->where('code','USD')->first();
+             
+              @endphp
               <div class="col-xl-3">
                 <div class="card overflow-hidden">
                   <div class="chart-widget-top">
                     <div class="row card-body pb-0 m-0">
                       <div class="col-xl-9 col-lg-8 col-9 p-0">
                         <h3 class="mb-2">Total Balance</h3>
-                        <h3 style="font-size: 15px;">&#8358;31,939</h3>
+                        <h3 style="font-size: 15px;">
+                           {{$currencyExchangeRateNgn->symbol}}{{number_format($wallet ?? 0,2,'.',',')}} 
+                        </h3>
                         <h3 style="margin-top: 15px;"></h3>
                         <span></span>
                       </div>
@@ -106,13 +112,14 @@
               <div class="col-md-12 box-col-12">
                 <div class="card overflow-hidden">
                   <div class="card-header card-no-border pb-0">
-                    <h3>Monthly  History</h3>
+                    <h3>Transaction Chart</h3>
                   </div>
                   <div class="bar-chart-widget">
                     <div class="bottom-content card-body">
                       <div class="row">
                         <div class="col-12">
-                          <div id="chart-widget4"></div>
+                          
+                          <div id="admin_transaction_chart"></div>
                         </div>
                       </div>
                     </div>
@@ -121,176 +128,236 @@
               </div>
             </div>
              
+              <div class="row">
+                <div class="col-md-12 box-col-12">
+                  <div class="card overflow-hidden">
+                    <div class="card-header card-no-border pb-0">
+                      <h3>Invitation History</h3>
+                    </div>
+                    <div class="bar-chart-widget">
+                      <div class="bottom-content card-body">
+                        <div class="row">
+                          <div class="col-12">
+                            <div id="admin_invitation_chart"></div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
               <div class="col-xxl-6 col-xl-12">
                 <div class="card">
                   <div class="card-header card-no-border pb-0">
                     <h3>Transition History</h3>
                   </div>
+                  
+                  <!--transaction History -->
                   <div class="card-body transaction-history pt-0">
-                    <div class="table-responsive theme-scrollbar">
-                      <table class="table display table-bordernone" id="transaction" style="width:100%">
-                        <thead>
-                          <tr> 
-                            <th>Item Name</th>
-                            <th>Invoice No.</th>
-                            <th>Credit/Debit</th>
-                            <th>Date/Time</th>
-                            <th class="text-center">Status</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center gap-3">
-                                <div class="flex-shrink-0"><img src="../assets/images/dashboard-1/icon/1.png" alt=""/></div>
-                                <div class="flex-grow-1"><a href="product-page.html">
-                                    <h6>Samsung TV</h6></a>
-                                  <p>Item Sold</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td> #px0101</td>
-                            <td class="text-success">+ $3460</td>
-                            <td>
-                              <div class="d-flex"> 
-                                <div class="flex-grow-1">
-                                  <h6>Jan 25</h6>
-                                  <p>08:35:65</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="text-end">
-                              <div class="btn bg-light-success border-light-success text-success">Completed</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center gap-3">
-                                <div class="flex-shrink-0"><img src="../assets/images/dashboard-1/icon/2.png" alt=""/></div>
-                                <div class="flex-grow-1"><a href="product-page.html">
-                                    <h6>Spring Bed</h6></a>
-                                  <p>Bought item</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td> #rf304f</td>
-                            <td class="text-danger">- $910</td>
-                            <td>
-                              <div class="d-flex"> 
-                                <div class="flex-grow-1">
-                                  <h6>Feb 20</h6>
-                                  <p>12:35:00  </p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="text-end">
-                              <div class="btn bg-light-success border-light-success text-success">Completed</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center gap-3">
-                                <div class="flex-shrink-0"><img src="../assets/images/dashboard-1/icon/3.png" alt=""/></div>
-                                <div class="flex-grow-1"><a href="product-page.html">
-                                    <h6>Long Dress</h6></a>
-                                  <p>Bought item</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td> #dnj480</td>
-                            <td class="text-success">+ $4380</td>
-                            <td>
-                              <div class="d-flex"> 
-                                <div class="flex-grow-1">
-                                  <h6>Oct 25</h6>
-                                  <p>04:39:08</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="text-end">
-                              <div class="btn bg-light-warning border-light-warning text-warning">Pending</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center gap-3">
-                                <div class="flex-shrink-0"><img src="../assets/images/dashboard-1/icon/4.png" alt=""/></div>
-                                <div class="flex-grow-1"><a href="product-page.html">
-                                    <h6>Phillip Lightbulb</h6></a>
-                                  <p>Item Sold</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td> #g189d0</td>
-                            <td class="text-success">+ $246</td>
-                            <td>
-                              <div class="d-flex"> 
-                                <div class="flex-grow-1">
-                                  <h6>Dec 25</h6>
-                                  <p>08:35:65</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="text-end">
-                              <div class="btn bg-light-danger border-light-danger text-danger">Canceled</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center gap-3">
-                                <div class="flex-shrink-0"><img src="../assets/images/dashboard-1/icon/5.png" alt=""/></div>
-                                <div class="flex-grow-1"><a href="product-page.html">
-                                    <h6>Sofa Hauga</h6></a>
-                                  <p>Item Sold</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td> #31d8fs</td>
-                            <td class="text-danger">- $220</td>
-                            <td>
-                              <div class="d-flex"> 
-                                <div class="flex-grow-1">
-                                  <h6>Jan 25</h6>
-                                  <p>10:20:87</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="text-end">
-                              <div class="btn bg-light-success border-light-success text-success">Completed</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center gap-3">
-                                <div class="flex-shrink-0"><img src="../assets/images/dashboard-1/icon/6.png" alt=""/></div>
-                                <div class="flex-grow-1"><a href="product-page.html">
-                                    <h6>Apple iMac 19”</h6></a>
-                                  <p>Item Sold</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td> #g5384h</td>
-                            <td class="text-success">+ $983</td>
-                            <td>
-                              <div class="d-flex"> 
-                                <div class="flex-grow-1">
-                                  <h6>Feb 05</h6>
-                                  <p>10:49:50</p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="text-end">
-                              <div class="btn bg-light-success border-light-success text-success">Completed</div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
+                     <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr class="border-bottom-secondary border-top-0">
+                                <th scope="col">Sn</th>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Gateway</th>
+                                <th scope="col">Remarks</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Subscription</th>
+                                <th scope="col">Reference</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              @if(!is_null($transactions))
+
+                              @php
+                                  // Define an array of background color classes
+                                  $rowColors = [
+                                    'border-bottom-success', 
+                                    'border-bottom-info', 
+                                    'border-bottom-warning', 
+                                    'border-bottom-danger', 
+                                    'border-bottom-secondary',
+                                    'border-bottom-primary',
+                                    'border-bottom-0'
+                                    ];
+
+                                    $sn = 1;
+                              @endphp
+
+                              @foreach($transactions as $value)
+
+                                @php
+            
+                                    $colorClass = $rowColors[$value->id % count($rowColors)];
+                                @endphp
+
+                                <tr class="{{$colorClass}}">
+                                  <th scope="row">{{$sn++}}</th>
+                                  <td>{{$value->user->first_name}} {{$value->user->last_name}}</td>
+                                  <td>{{$value->gateway ?? ''}}</td>
+                                  <td>{{$value->remarks ?? ''}}</td>
+                                  <td>&#8358;{{$value->amount ?? ''}}</td>
+                                  <td>{{$value->subscription->subscription_name ?? 'Not Available'}}</td>
+                                  <td>{{$value->reference ?? 'Not Available'}}</td>
+                                  <td>
+                                    @if($value->status == 'success')
+                                      <span class="badge badge-light-success">{{$value->status}}</span>
+                                    @elseif($value->status == 'pending')
+                                      <span class="badge badge-light-warning">{{$value->status}}</span>
+                                    @elseif($value->status == 'failed')
+                                      <span class="badge badge-light-danger">{{$value->status}}</span>   
+                                    @endif
+                                    
+                                  </td>
+                                  <td>{{\Carbon\Carbon::parse($value->created_at)->format('d/m/Y')}}</td>
+                                </tr>
+
+                              @endforeach
+
+                              @else
+
+                              <p style="text-align:center">No Data avaliable</p>
+
+                              @endif
+                          </tbody>
+                        </table>
+                     </div>   
                   </div>
+                  <!--end of transaction History -->
+
                 </div>
               </div>
 
             </div>
           </div>
         </div>
+@endsection
+
+
+@section('script')
+
+<script>
+var optionscolumnchart = {
+  series: [
+    {
+      name: "Amount",
+      data: @json($chartData),
+    }
+  ],
+  chart: {
+    type: "bar",
+    height: 380,
+    toolbar: { show: false }
+  },
+  plotOptions: {
+    bar: {
+      horizontal: false,
+      columnWidth: "40%",
+      endingShape: "rounded",
+    },
+  },
+  dataLabels: { enabled: false },
+  stroke: {
+    show: true,
+    width: 1,
+    colors: ["transparent"],
+  },
+  xaxis: {
+    categories: [
+      "Jan","Feb","Mar","Apr","May","Jun",
+      "Jul","Aug","Sep","Oct","Nov","Dec"
+    ],
+    axisTicks: { show: false },
+    axisBorder: { color: "#C4C4C4" },
+  },
+  yaxis: {
+    title: {
+      text: "Amount (₦)",
+      style: {
+        fontSize: "14px",
+        fontFamily: "Roboto, sans-serif",
+        fontWeight: 500,
+      },
+    },
+  },
+  colors: [AdmiroAdminConfig.primary],
+  tooltip: {
+    y: {
+      formatter: function (val) {
+        return "₦ " + val.toLocaleString();
+      },
+    },
+  },
+  responsive: [
+    {
+      breakpoint: 576,
+      options: {
+        chart: { height: 200 }
+      }
+    }
+  ]
+};
+
+var chartcolumnchart = new ApexCharts(
+  document.querySelector("#admin_transaction_chart"),
+  optionscolumnchart
+);
+chartcolumnchart.render();
+</script>
+
+
+<script>
+var options = {
+  series: [{
+    name: "Invitations",
+    data: @json($invitationData)
+  }],
+  chart: {
+    type: "line",
+    height: 350,
+    toolbar: { show: false }
+  },
+  stroke: {
+    curve: "smooth",
+    width: 3
+  },
+  markers: {
+    size: 4
+  },
+  xaxis: {
+    categories: @json($invitationLabels),
+  },
+  yaxis: {
+    title: {
+      text: "Number of Invitations"
+    },
+    min: 0
+  },
+  tooltip: {
+    y: {
+      formatter: function (val) {
+        return val + " invitation(s)";
+      }
+    }
+  },
+  colors: [AdmiroAdminConfig.primary],
+  dataLabels: {
+    enabled: false
+  }
+};
+
+var chart = new ApexCharts(
+  document.querySelector("#admin_invitation_chart"),
+  options
+);
+
+chart.render();
+</script>
+
 @endsection

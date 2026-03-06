@@ -2,6 +2,9 @@
         @php 
             $tenant = app('tenant');
             $get_subdomain = $tenant->subdomain;
+            $kyc = \App\Models\Kyc::where('user_id', auth()->id())
+            ->where('tenant_id', $tenant->id)
+            ->first();
         @endphp
         <div class="logo-wrapper d-flex align-items-center col-auto">
             <a href="{{route('tenant_user_dashboard',$get_subdomain)}}">
@@ -110,7 +113,7 @@
                     <li class="d-flex"> 
                       <svg class="svg-color">
                         <use href="https://admin.pixelstrap.net/admiro/assets/svg/iconly-sprite.svg#Profile"></use>
-                      </svg><a class="ms-2" href="#">Account</a>
+                      </svg><a class="ms-2" href="{{$kyc && $kyc->kyc_completed ? route('resident.details',$tenant->subdomain) : '#'}}">Account</a>
                     </li>
                     
                     <li class="d-flex"> 

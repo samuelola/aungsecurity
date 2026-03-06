@@ -11,17 +11,28 @@ use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Services\TransactionGraphService;
+use App\Services\WalletService;
+use App\Services\TransactionService;
 
 class WalletController extends Controller
 {
 
     protected $paymentService;
-    protected $transactionGraphService;
+    protected $invitationGraphService;
+    protected $walletService;
+    protected $transactionService;
 
-    public function __construct(PaystackService $paymentService,TransactionGraphService $transactionGraphService)
+    public function __construct(
+        PaystackService $paymentService,
+        TransactionGraphService $transactionGraphService,
+        WalletService $walletService,
+        TransactionService $transactionService,
+    )
     {
          $this->paymentService = $paymentService;
          $this->transactionGraphService = $transactionGraphService;
+         $this->walletService = $walletService;
+         $this->transactionService = $transactionService;
     }
 
     public function fundWallet(Request $request, $subdomain){
@@ -58,12 +69,11 @@ class WalletController extends Controller
 
         $tenant = app('tenant');
         $user = auth()->user();
-        $wallet = Wallet::where('user_id',$user->id)->first();
-        $transactions = Transaction::where('user_id',auth()->id())
-        ->latest()
-        ->get();
+
+        $wallet = $this->walletService->getUserWallet($user);
+        $transactions = $this->transactionService->getUserTransactions($user);
+        $theTransactionChart = $this->transactionGraphService->transactionChart($user);
         
-        $theTransactionChart = $this->transactionGraphService->trasactionChart($user);
         return view('dashboard.user.wallet.index',[
             'tenant'=>$tenant,
             'wallet'=>$wallet,

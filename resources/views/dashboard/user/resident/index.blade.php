@@ -123,14 +123,14 @@ label { cursor: text !important; }
                                             @if($invitation->visitor)
                                                {{ $guestName }} {{ $guestLast }}
                                             @elseif($invitation->invitedResident)
-                                                {{ ucfirst($invitation->invitedResident->first_name) }} {{ ucfirst($invitation->invitedResident->last_name) }}
+                                                {{ ucfirst($invitation->invitedResident->first_name ?? 'N/A') }} {{ ucfirst($invitation->invitedResident->last_name ?? 'N/A') }}
                                                 <span class="badge bg-info text-dark">Resident</span>
                                             @else
-                                                {{ ucfirst($invitation->resident->first_name) }} {{ ucfirst($invitation->resident->last_name) }}
+                                                {{ ucfirst($invitation->resident->first_name ?? 'N/A') }} {{ ucfirst($invitation->resident->last_name ?? 'N/A') }}
                                                 <span class="badge bg-secondary">Self</span>
                                             @endif
                                         </td>
-                                        <td>{{ $invitation->visit_date }}</td>
+                                        <td>{{ $invitation->visit_date ?? 'N/A' }}</td>
                                         <td>{{ $from }}</td>
                                         <td>{{ $to }}</td>
                                           <td>
@@ -142,7 +142,7 @@ label { cursor: text !important; }
                                                 <span class="badge badge-light-danger">Exited</span>
                                             @endif
                                         </td>
-                                        <td>{{ $invitation->access_code }}</td>
+                                        <td>{{ $invitation->access_code ?? 'N/A' }}</td>
                                         <td>
                                             <div class="mb-2">
                                                 <form method="POST" action="{{ route('resident.invitations.resend', ['invitation'=>$invitation,'tenant'=>$subdomain]) }}" style="display:inline;">

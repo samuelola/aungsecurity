@@ -31,7 +31,7 @@
                 <div class="col-sm-12">
                   <div class="card overflow-hidden">
                     <div class="card-header card-no-border">
-                      <h3>Resident Details</h3>
+                      <h3>Resident Details / Account</h3>
                       <!-- <p class="desc mb-0 mt-1"><span>use a class</span><code>table-*.border-bottom-*</code><span>class for Border bottom color</span></p> -->
                     </div>
                       <!--enter details-->
@@ -87,7 +87,7 @@
                                         </tr>
                                         <tr>
                                             <th>Occupant</th>
-                                            <td>{{ $resident->kyc->occupant ?? 'N/A' }}</td>
+                                            <td>{{ $resident->kyc->occupants ?? 'N/A' }}</td>
                                         </tr>
                                         <tr>
                                             <th>Flat Number</th>

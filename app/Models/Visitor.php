@@ -10,6 +10,7 @@ class Visitor extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $table = 'visitors';
 
     // A visitor can have many invitations
     public function invitations()

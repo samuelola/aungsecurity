@@ -23,7 +23,7 @@ class VisitorInvitationController extends Controller
     {
         $resident = auth()->user();
 
-        $invitations = VisitorInvitation::with(['visitor', 'invitedResident'])
+        $invitations = VisitorInvitation::with(['visitor', 'invitedResident','resident'])
             ->where('resident_id', $resident->id)
             ->where('delete_status', 'no')
             ->latest()

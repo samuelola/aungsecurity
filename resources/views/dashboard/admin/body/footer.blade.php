@@ -2,7 +2,7 @@
           <div class="container-fluid">
             <div class="row"> 
               <div class="col-md-6 footer-copyright">
-                <p class="mb-0">Copyright 2024 © Aungtechnology</p>
+                <p class="mb-0">Copyright {{ date('Y') }} © Aung Solutions Nigeria Limited</p>
               </div>
               
             </div>
