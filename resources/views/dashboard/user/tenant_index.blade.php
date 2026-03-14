@@ -104,23 +104,62 @@
                 </div>
               </div>
               <div class="col-xl-3">
-                <div class="card overflow-hidden" style="background-color: rgba(219, 218, 229, 1) !important;">
-                  <div class="chart-widget-top">
-                    <div class="row card-body pb-0 m-0">
-                      <div class="col-xl-9 col-lg-8 col-9 p-0">
-                        <h3 class="mb-2">Subscription</h3>
-                        <h3 style="font-size: 15px;">Plan: Free</h3>
-                        <h3 style="font-size: 12px;margin-top: 5px;">Expires 1st Dec,2025</h3>
-                        <span></span>
-                      </div>
-                      <div class="col-xl-3 col-lg-4 col-3 text-end p-0">
-                        <h6 class="text-success"><i style="color: #1d194b;font-weight: bolder;" class="fa-solid fa-credit-card"></i></h6>
-                      </div>
-                    </div>
-                    
-                  </div>
+    <div class="card overflow-hidden shadow-sm" style="background-color: rgba(219,218,229,1);">
+        <div class="chart-widget-top">
+
+            <div class="row card-body pb-2 m-0">
+
+                <div class="col-xl-9 col-lg-8 col-9 p-0">
+
+                    <h3 class="mb-2">Subscription</h3>
+
+                    <h3 style="font-size:15px;">
+                        Plan: {{ $subscription?->plan?->name ?? 'None' }}
+                    </h3>
+
+                    <h3 style="font-size:12px; margin-top:5px;">
+                        Expires 
+                        {{ $subscription?->ends_at 
+                            ? \Carbon\Carbon::parse($subscription->ends_at)->format('jS M, Y') 
+                            : 'No Expiry' }}
+                    </h3>
+
                 </div>
-              </div>
+
+                <div class="col-xl-3 col-lg-4 col-3 text-end p-0">
+                    <h6>
+                        <i style="color:#1d194b;font-weight:bolder;" class="fa-solid fa-credit-card"></i>
+                    </h6>
+                </div>
+
+            </div>
+
+           
+
+        </div>
+    </div>
+</div>
+
+
+           @if($subscription)
+
+            <div class="px-3 pb-3">
+
+                <small class="text-muted">
+                    {{ $daysLeft > 0 ? $daysLeft.' days left for subscription' : 'Expired' }}
+                </small>
+
+                <div class="progress mt-1" style="height:6px;">
+                    <div 
+                        class="progress-bar bg-success"
+                        role="progressbar"
+                        style="width: {{ $progress }}%">
+                    </div>
+                </div>
+
+            </div>
+
+            @endif
 
               <div class="row">
               <div class="col-md-12 box-col-12">

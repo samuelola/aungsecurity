@@ -121,13 +121,11 @@ label{
 
                                         
 
-                                        <form method="POST" action="{{route('subscribe', $tenant->subdomain)}}">
+                                        <form method="POST" action="{{route('subscription_checkout', $tenant->subdomain)}}">
                                             @csrf
 
                                             <input type="hidden" name="plan_id" value="{{ $plan->id }}">
-
-                                            
-
+                                            <input type="hidden" name="plan_price" value="{{ $plan->price }}">
                                             <input type="hidden" name="billing_cycle" value="{{ $plan->duration }}">
 
                                             @if($currentSubscription && $currentSubscription->subscription_plan_id == $plan->id)

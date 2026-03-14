@@ -19,7 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
              'role' => \App\Http\Middleware\RoleMiddleware::class,
              'face.verified' => \App\Http\Middleware\EnsureFaceVerified::class,
              'kyc.completed' => \App\Http\Middleware\EnsureKycCompleted::class,
-
+             'superadmin.auth'  => \App\Http\Middleware\SuperadminAuth::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

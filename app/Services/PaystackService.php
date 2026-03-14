@@ -487,7 +487,54 @@ class PaystackService implements PaymentInterface
             
             return $ress_new;
      }
+     
+     public function createSubaccount($client)
+    {
+        $response = Http::withHeaders($this->headers())
+            ->post($this->baseUrl . '/subaccount', [
+                'business_name' => $client->name,
+                'bank_code' => $client->bank_code,
+                'account_number' => $client->account_number,
+                'percentage_charge' => 0
+            ]);
 
+        if (!$response->successful()) {
+            throw new \Exception('Subaccount creation failed');
+        }
+
+        return $response->json()['data']['subaccount_code'];
+    }
+
+
+    public function initializeAungTransaction(
+        $email,
+        $amount,
+        $subaccountCode,
+        $platformEarning,
+        $reference
+    ) {
+        $totalAmount = (int) $amount;
+        $callbackUrl = route('paystack.payment_callback', $subdomain->subdomain);
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $this->secretKey,
+            'Cache-Control' => 'no-cache',
+       
+         ])->asForm()->post($this->baseUrl . '/transaction/initialize', [
+                'email' => $email,
+                'amount' => $totalAmount * 100,
+                'reference' => $reference,
+                'subaccount' => $subaccountCode,
+                'transaction_charge' => $platformEarning * 100,
+                'bearer' => 'account',
+                'callback_url' => $callbackUrl,
+         ]);
+
+        if (!$response->successful()) {
+            throw new \Exception('Transaction initialization failed');
+        }
+
+        return $response->json()['data'];
+    }
      
 }
 

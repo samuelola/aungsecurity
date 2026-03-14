@@ -78,9 +78,8 @@ class TenantUserController extends Controller
 
   public function userLogin(Request $request, $subdomain)
     {
-        //$tenant = Tenant::where('subdomain', $subdomain)->firstOrFail();
+       
         $tenant = app('tenant');
-
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
@@ -93,10 +92,9 @@ class TenantUserController extends Controller
                     
                 
         if ($user && Auth::attempt(['email' => $user->email, 'password' => $credentials['password']])) {
-            // use the service here
-            //$this->authService->addWallet($user->id);
+           
 
-            $request->session()->regenerate();
+            //$request->session()->regenerate();
             if($user->isUser()){
 
                 $get_userwallet = DB::table('resident_wallets')->where('user_id',auth()->id())->first();
@@ -131,8 +129,6 @@ class TenantUserController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
-        $host = request()->getHost();
         return redirect()->route('tenant_user_login', $tenant->subdomain);
         //return redirect()->to("http://{$subdomain}.{$host}/user_login");
     }
@@ -144,7 +140,6 @@ class TenantUserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        $host = request()->getHost();
         return redirect()->route('tenant_user_login', $tenant->subdomain);
         //return redirect()->to("http://{$subdomain}.{$host}/user_login");
     }

@@ -13,7 +13,7 @@
                 </div>
               </li>
                <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
-                <a class="sidebar-link" href="{{route('tenant_admin_dashboard',$tenant->subdomain)}}">
+                <a class="sidebar-link" href="">
                   <i class="ti-dashboard"></i>
                   <h6 class="f-w-600">Dashboard</h6></a>
               </li>
@@ -30,8 +30,8 @@
                   <i class="ti-wallet"></i>
                  <h6 class="f-w-600">Subscription</h6><i class="ti-arrow-right arrow-toggle"></i></a>
                 <ul class="sidebar-submenu">
-                  <li> <a href="{{route('admin_create_plan',$tenant->subdomain)}}">Create Plan</a></li>
-                  <li> <a href="{{route('admin_plans',$tenant->subdomain)}}">Plan List</a></li>
+                  <li> <a href="">Create Plan</a></li>
+                  <li> <a href="">Plan List</a></li>
                 </ul>
 
               </li>
@@ -40,13 +40,13 @@
 
               <li class="sidebar-main-title">
                 <div>
-                  <h5 class="f-w-700 sidebar-title pt-3">Resident Management</h5>
+                  <h5 class="f-w-700 sidebar-title pt-3">Estate Management</h5>
                 </div>
               </li>
               <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
-                <a class="sidebar-link" href="{{route('allresident.details',$tenant->subdomain)}}">
+                <a class="sidebar-link" href="{{route('alltenants')}}">
                   <i class="ti-user"></i>
-                  <h6 class="f-w-600">All Residents </h6></a>
+                  <h6 class="f-w-600">All Estates </h6></a>
               </li>
 
               
@@ -57,7 +57,7 @@
                 </div>
               </li>
               <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
-                <a class="sidebar-link" href="{{route('admin_visitor_logs',$tenant->subdomain)}}">
+                <a class="sidebar-link" href="">
                   <i class="ti-user"></i>
                   <h6 class="f-w-600">All Visitor's Log</h6></a>
               </li>
@@ -68,15 +68,12 @@
                   <h5 class="f-w-700 sidebar-title pt-3">Logout</h5>
                 </div>
               </li>
-              @php 
-                  $tenant = app('tenant');
-                  $get_subdomain = $tenant->subdomain;
-              @endphp
+             
               <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
                 <a class="sidebar-link" href="#" onclick="event.preventDefault(); document.getElementById('admin-logout-form').submit();">
                   <i class="fa-solid fa-sign-out"></i>
                   <h6 class="f-w-600">Logout</h6></a>
-                  <form id="admin-logout-form" method="POST" action="{{ route('admin_tenant.logout',$get_subdomain) }}">
+                  <form id="admin-logout-form" method="POST" action="">
                           @csrf
                           
                   </form>

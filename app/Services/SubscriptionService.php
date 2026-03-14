@@ -20,6 +20,7 @@ class SubscriptionService
 
         $activeSubscription = Subscription::where('user_id', auth()->id())
         ->where('status', 'active')
+        ->where('ends_at', '>', now())
         ->first();
         
          if ($activeSubscription) {
@@ -65,5 +66,46 @@ class SubscriptionService
             ->where('status', 'active')
             ->where('ends_at', '>', now())
             ->exists();
+    }
+
+    public function getSubscription(){
+
+         $subscription = Subscription::with('plan')
+            ->where('user_id', auth()->id())
+            ->where('status', 'active')
+            ->where('ends_at', '>', now())
+            ->first();
+
+         $daysLeft = null;
+         $totalDays = null;
+         $progress = 0;  
+         
+         if ($subscription) {
+            $start = Carbon::parse($subscription->starts_at);
+            $end = Carbon::parse($subscription->ends_at);
+
+            $totalDays = $start->diffInDays($end);
+            $daysLeft = ceil(now()->diffInDays($end, false));
+
+            $usedDays = $totalDays - $daysLeft;
+
+            if ($totalDays > 0) {
+                $progress = ($usedDays / $totalDays) * 100;
+            }
+        }
+
+        return [
+            'subscription'=> $subscription,
+            'daysLeft'    => $daysLeft,
+            'progress'    => $progress
+        ];    
+    }
+
+    public function getUserPlanDetails($id){
+        $subscription = SubscriptionPlan::where('is_active', true)
+            ->where('id',$id)
+            ->first();
+
+        return $subscription;    
     }
 }

@@ -18,7 +18,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\AdminSubscriptionPlanController;
 use App\Http\Controllers\AdminTenantDashboardController;
 use App\Http\Controllers\AdminVisitorInvitationController;
-
+use App\Http\Controllers\SuperAdminController;
 
 
 $domain = parse_url(config('app.url'), PHP_URL_HOST);
@@ -71,6 +71,9 @@ Route::get('/lgas/{state}', [KycController::class, 'lgas'])->name('lgas');
 
 Route::domain('{tenant}.' . $domain)
      ->middleware('tenant')->group(function () {
+
+
+     /* Resident */
 
       Route::get('kyc/document/preview', [KycController::class, 'documentPreview'])
     ->name('kyc.document.preview')->middleware('tenant.auth');
@@ -126,7 +129,7 @@ Route::domain('{tenant}.' . $domain)
           
             Route::post('/estate_logout', [TenantUserController::class, 'logout'])->name('tenant.logout');
            
-        Route::middleware(['tenant.auth', 'role:user','kyc.completed'])->group(function () {
+         Route::middleware(['tenant.auth', 'role:user','kyc.completed'])->group(function () {
               
            
             Route::controller(TenantDashboardController::class)->group(function () {
@@ -168,6 +171,7 @@ Route::domain('{tenant}.' . $domain)
             Route::controller(SubscriptionController::class)->group(function () {
                 
                 Route::get('subscription','allSub')->name('subscription.create');
+                Route::post('subscription_checkout','subCheckout')->name('subscription_checkout');
                 Route::post('/subscribe', 'subscribe')->name('subscribe');
                
             });
@@ -177,7 +181,7 @@ Route::domain('{tenant}.' . $domain)
   
        });
 
-      
+      /* Admin */
        Route::middleware(['tenant.auth', 'role:admin'])->group(function () {
 
        
@@ -209,12 +213,31 @@ Route::domain('{tenant}.' . $domain)
             });
 
 
-            
-
-
-            
-
-            
-
        }); 
 });
+
+
+
+/* Super Admin */
+
+Route::controller(SuperAdminController::class)->group(function () {
+      
+      Route::get('/superadmin_login','showAdminLoginForm')->name('superadmin_login');
+      Route::post('/superadmin_loginn', 'superadminLogin')->name('superadmin_loginn'); // login post
+});
+
+Route::middleware(['superadmin.auth','role:superadmin'])->group(function () {
+    
+   Route::controller(SuperAdminController::class)->group(function () {
+      Route::get('/superadmin_dashboard', 'superAdminIndex')->name('superadmin_dashboard');
+      Route::get('/tenants', 'AllTenantS')->name('alltenants');
+      Route::post('/superadmin_logout','superAdminLogout')->name('superadmin.logout'); 
+      Route::get('/superadmin/estate/{tenant}','estate')->name('superadmin.estate.users');
+     
+});
+         
+});
+
+
+ 
+

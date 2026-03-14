@@ -11,5 +11,8 @@ class Tenant extends Model
      protected $guarded = [];
      protected $table = 'tenants';
 
-     
+     public function users()
+     {
+        return $this->hasMany(User::class);
+     }
 }

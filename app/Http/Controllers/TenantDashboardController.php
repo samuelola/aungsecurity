@@ -15,6 +15,7 @@ use App\Models\VisitorInvitation;
 use App\Services\WalletService;
 use App\Services\TransactionService;
 use App\Services\KycService;
+use App\Services\SubscriptionService;
 
 class TenantDashboardController extends Controller
 {
@@ -24,13 +25,15 @@ class TenantDashboardController extends Controller
     protected $walletService;
     protected $transactionService;
     protected $kycService;
+    protected $subscriptionService;
 
     public function __construct(
         TransactionGraphService $transactionGraphService,
         InvitationGraphService $invitationGraphService,
         WalletService $walletService,
         TransactionService $transactionService,
-        KycService $kycService
+        KycService $kycService,
+        SubscriptionService $subscriptionService
         )
     {
          $this->transactionGraphService = $transactionGraphService;
@@ -38,6 +41,7 @@ class TenantDashboardController extends Controller
          $this->walletService = $walletService;
          $this->transactionService = $transactionService;
          $this->kycService = $kycService;
+         $this->subscriptionService = $subscriptionService;
     }
 
     public function index(Request $request, $subdomain){
@@ -50,6 +54,7 @@ class TenantDashboardController extends Controller
         $transactions = $this->transactionService->getUserTransactions($user);
         $theTransactionChart = $this->transactionGraphService->transactionChart($user);
         $theInvitationChart = $this->invitationGraphService->invitationChart($user);
+        $subscription = $this->subscriptionService->getSubscription();
         
          
         return view('dashboard.user.tenant_index',[
@@ -59,7 +64,10 @@ class TenantDashboardController extends Controller
             'transactions'=> $transactions,
             'chartData' => $theTransactionChart,
             'invitationLabels' => $theInvitationChart['labels'],
-            'invitationData' => $theInvitationChart['data']
+            'invitationData' => $theInvitationChart['data'],
+            'subscription' => $subscription['subscription'],
+            'progress'     => $subscription['progress'],
+            'daysLeft'     => $subscription['daysLeft']
             ]);
     }
 

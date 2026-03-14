@@ -43,4 +43,11 @@ class SubscriptionController extends Controller
         
     }
 
+    public function subCheckout(Request $request){
+         
+      $plan_id = $request->plan_id;
+      $plan = $this->subscriptionService->getUserPlanDetails($plan_id);
+      return view('dashboard.user.subscription.checkout', compact('plan'));
+    }
+
 }

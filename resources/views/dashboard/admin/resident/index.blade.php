@@ -147,7 +147,7 @@ label{
                                                 <td scope="row">{{ucfirst($allresident->first_name ?? 'N/A')}}  {{ucfirst($allresident->last_name ?? 'N/A')}} </td>
                                                 <td scope="row">{{$allresident->kyc->resident_id ?? 'N/A'}} </td>
                                                 <td scope="row">
-                                                     @if($allresident->kyc->current_step == 'completed')
+                                                     @if($allresident?->kyc?->current_step == 'completed')
                                                         <span class="badge badge-light-success">
                                                             Verified
                                                         </span>
@@ -167,19 +167,19 @@ label{
                                                     <button 
                                                         class="btn btn-primary btn-sm viewResidentBtn"
 
-                                                        data-name="{{ ucfirst($allresident->first_name) }} {{ ucfirst($allresident->last_name) }}"
-                                                        data-email="{{ $allresident->email }}"
-                                                        data-phone="{{ $allresident->kyc->phone ?? 'N/A' }}"
-                                                        data-residentid="{{ $allresident->kyc->resident_id ?? 'N/A' }}"
-                                                        data-flat="{{ $allresident->kyc->flat_number ?? 'N/A' }}"
-                                                        data-occupants="{{ $allresident->kyc->occupants ?? 'N/A' }}"
-                                                        data-status="{{ $allresident->kyc->current_step ?? 'N/A' }}"
-                                                        data-address="{{ $allresident->kyc->address ?? 'N/A'}}"
-                                                        data-state="{{ $allresident->kyc->state->name ?? 'N/A' }}"
-                                                        data-lga="{{ $allresident->kyc->lga->name  ?? 'N/A'}}"
+                                                        data-name="{{ ucfirst($allresident?->first_name) }} {{ ucfirst($allresident?->last_name) }}"
+                                                        data-email="{{ $allresident?->email }}"
+                                                        data-phone="{{ $allresident?->kyc->phone ?? 'N/A' }}"
+                                                        data-residentid="{{ $allresident?->kyc->resident_id ?? 'N/A' }}"
+                                                        data-flat="{{ $allresident?->kyc?->flat_number ?? 'N/A' }}"
+                                                        data-occupants="{{ $allresident?->kyc?->occupants ?? 'N/A' }}"
+                                                        data-status="{{ $allresident?->kyc?->current_step ?? 'N/A' }}"
+                                                        data-address="{{ $allresident?->kyc?->address ?? 'N/A'}}"
+                                                        data-state="{{ $allresident?->kyc?->state->name ?? 'N/A' }}"
+                                                        data-lga="{{ $allresident?->kyc?->lga->name  ?? 'N/A'}}"
                                                         data-agentname="{{ $allresident->kyc->agent_name  ?? 'N/A'}}"
-                                                        data-agentnumber="{{ $allresident->kyc->agent_number  ?? 'N/A' }}"
-                                                        data-image="{{ $allresident->kyc->face_image ? asset('storage/'.$allresident->kyc->face_image) : '' }}"
+                                                        data-agentnumber="{{ $allresident?->kyc?->agent_number  ?? 'N/A' }}"
+                                                        data-image="{{ $allresident?->kyc?->face_image ? asset('storage/'.$allresident->kyc->face_image) : '' }}"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#residentModal"
                                                     >
