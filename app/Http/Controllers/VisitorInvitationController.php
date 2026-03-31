@@ -58,7 +58,7 @@ class VisitorInvitationController extends Controller
     {
         
         $resident = auth()->user();
-        $tenant = app('tenant');
+        $tenant = app('tenant'); // this a collection
 
         // ================= VALIDATION =================
         $rules = [
@@ -103,6 +103,7 @@ class VisitorInvitationController extends Controller
             'access_code'   => $accessCode,
             'qr_token'      => $encryptedToken,
             'delete_status' => 'no',
+            'tenant_id'     => $tenant->id
         ];
 
         // ================= HANDLE INVITE TYPES =================

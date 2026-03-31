@@ -40,6 +40,7 @@ class AdminSubscriptionPlanController extends Controller
             $request->price,
             $request->duration,
             $request->description,
+            $tenant
         );
 
         return redirect()->back()->with('success','Subscription Created successfully');

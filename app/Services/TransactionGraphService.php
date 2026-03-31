@@ -63,6 +63,29 @@ class TransactionGraphService {
 
         return $chartData;
     }
+
+
+    public function transactionAllChartY(){
+
+        // Monthly transaction totals (success only)
+        $monthlyTransactions = Transaction::whereYear('created_at', now()->year)
+        ->select(
+            DB::raw('MONTH(created_at) as month'),
+            DB::raw('SUM(amount) as total')
+        )
+        ->groupBy('month')
+        ->pluck('total', 'month');
+        
+        // Prepare 12 months data
+        $chartData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $chartData[] = isset($monthlyTransactions[$i])
+                ? $monthlyTransactions[$i]
+                : 0;
+        }
+
+        return $chartData;
+    }
     
 
    

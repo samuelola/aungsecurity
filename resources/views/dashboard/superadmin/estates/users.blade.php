@@ -87,8 +87,8 @@
                                         <div class="chart-widget-top">
                                             <div class="row card-body pb-0 m-0">
                                             <div class="col-xl-9 col-lg-8 col-9 p-0">
-                                                <h3 class="mb-2">Visitors Daily</h3>
-                                                <h3 style="font-size: 15px;">10</h3>
+                                                <h4 class="mb-2">Visitors Daily</h4>
+                                                <h3 style="font-size: 15px;">{{$invitationsCount}}</h3>
                                                 <h3 style="margin-top: 15px;"></h3>
                                                 <span></span>
                                             </div>
@@ -105,9 +105,9 @@
                                         <div class="chart-widget-top">
                                             <div class="row card-body pb-0 m-0">
                                             <div class="col-xl-9 col-lg-8 col-9 p-0">
-                                                <h3 class="mb-2">Subscription</h3>
-                                                <h3 style="font-size: 15px;">Plan: Free</h3>
-                                                <h3 style="font-size: 12px;margin-top: 5px;">Expires 1st Dec,2025</h3>
+                                                <h4 class="mb-2">Subscription</h4>
+                                                <h3 style="font-size: 15px;">{{$subscriptionsCount}}</h3>
+                                                <h3 style="font-size: 12px;margin-top: 5px;"></h3>
                                                 <span></span>
                                             </div>
                                             <div class="col-xl-3 col-lg-4 col-3 text-end p-0">

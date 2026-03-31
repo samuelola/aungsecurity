@@ -15,4 +15,14 @@ class Tenant extends Model
      {
         return $this->hasMany(User::class);
      }
+
+     public function invitations()
+     {
+         return $this->hasMany(VisitorInvitation::class);
+     }
+
+     public function subscriptions()
+     {
+         return $this->hasMany(SubscriptionPlan::class);
+     }
 }

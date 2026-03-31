@@ -108,4 +108,18 @@ class SubscriptionService
 
         return $subscription;    
     }
+
+    public function allSubscriptions(){
+
+        return Subscription::with('plan')
+            ->where('status', 'active')
+            ->where('ends_at', '>', now())
+            ->simplePaginate(10);
+    }
+
+    public function countActiveSubscriptions(){
+        return Subscription::where('status', 'active')
+            ->where('ends_at', '>', now())
+            ->count();
+    }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('price',10,2);
             $table->enum('duration',['monthly','yearly']);
             $table->boolean('is_active')->default(true);
+            $table->integer('tenant_id')->nullable();
             $table->timestamps();
         });
     }

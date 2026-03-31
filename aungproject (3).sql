@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 30, 2026 at 11:06 AM
+-- Generation Time: Mar 31, 2026 at 04:49 PM
 -- Server version: 8.4.7
 -- PHP Version: 8.3.28
 
@@ -39,7 +39,23 @@ CREATE TABLE IF NOT EXISTS `access_logs` (
   PRIMARY KEY (`id`),
   KEY `access_logs_invitation_id_foreign` (`invitation_id`),
   KEY `access_logs_security_id_foreign` (`security_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `access_logs`
+--
+
+INSERT INTO `access_logs` (`id`, `invitation_id`, `gate_name`, `security_id`, `action`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Main Gate', NULL, 'entry', '2026-02-11 13:56:47', '2026-02-11 13:56:47'),
+(2, 2, 'Main Gate', NULL, 'entry', '2026-02-11 14:45:40', '2026-02-11 14:45:40'),
+(3, 3, 'Main Gate', NULL, 'entry', '2026-02-11 15:17:48', '2026-02-11 15:17:48'),
+(4, 2, 'Main Gate', NULL, 'exit', '2026-02-11 15:18:10', '2026-02-11 15:18:10'),
+(5, 1, 'Main Gate', NULL, 'entry', '2026-02-11 15:19:18', '2026-02-11 15:19:18'),
+(6, 2, 'Main Gate', NULL, 'exit', '2026-02-11 15:21:16', '2026-02-11 15:21:16'),
+(7, 2, 'Main Gate', NULL, 'exit', '2026-02-11 15:24:01', '2026-02-11 15:24:01'),
+(8, 2, 'Main Gate', NULL, 'exit', '2026-02-11 15:26:34', '2026-02-11 15:26:34'),
+(9, 2, 'Main Gate', NULL, 'exit', '2026-02-11 15:27:38', '2026-02-11 15:27:38'),
+(10, 2, 'Main Gate', NULL, 'exit', '2026-02-11 15:28:53', '2026-02-11 15:28:53');
 
 -- --------------------------------------------------------
 
@@ -261,7 +277,14 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   `created_at` int UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
   KEY `jobs_queue_index` (`queue`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `jobs`
+--
+
+INSERT INTO `jobs` (`id`, `queue`, `payload`, `attempts`, `reserved_at`, `available_at`, `created_at`) VALUES
+(17, 'default', '{\"uuid\":\"cef93fbe-ccf7-4a15-8f2d-fbcd7d077c81\",\"displayName\":\"App\\\\Mail\\\\VisitorMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":17:{s:8:\\\"mailable\\\";O:20:\\\"App\\\\Mail\\\\VisitorMail\\\":6:{s:7:\\\"visitor\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:18:\\\"App\\\\Models\\\\Visitor\\\";s:2:\\\"id\\\";i:4;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:10:\\\"invitation\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:28:\\\"App\\\\Models\\\\VisitorInvitation\\\";s:2:\\\"id\\\";i:8;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:6:\\\"tenant\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:17:\\\"App\\\\Models\\\\Tenant\\\";s:2:\\\"id\\\";i:1;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:16:\\\"isResidentInvite\\\";b:0;s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:14:\\\"bobb@gmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:12:\\\"messageGroup\\\";N;s:12:\\\"deduplicator\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:3:\\\"job\\\";N;}\"},\"createdAt\":1774890787,\"delay\":null}', 0, NULL, 1774890787, 1774890787);
 
 -- --------------------------------------------------------
 
@@ -320,14 +343,18 @@ CREATE TABLE IF NOT EXISTS `kycs` (
   UNIQUE KEY `kycs_resident_id_unique` (`resident_id`),
   KEY `kycs_user_id_foreign` (`user_id`),
   KEY `kycs_tenant_id_foreign` (`tenant_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `kycs`
 --
 
 INSERT INTO `kycs` (`id`, `user_id`, `tenant_id`, `phone`, `address`, `state_id`, `lga_id`, `id_type`, `id_document`, `bio_completed`, `doc_completed`, `face_completed`, `kyc_completed`, `current_step`, `created_at`, `updated_at`, `face_image`, `face_confidence`, `face_verified`, `occupants`, `resident_id`, `flat_number`, `agent_name`, `agent_number`) VALUES
-(1, 1, 1, '08067932796', 'This is a test testing', '6', '111', 'Passport', 'kyc_docs/tenant_1/dsaf1wWs0t2vUY8ZvVJeTFIV4mlhFk6ScPfcL6sE.jpg', 1, 1, 1, 1, 'completed', '2026-01-22 15:51:05', '2026-01-22 16:41:00', 'kyc_faces/tenant_1/live_1.jpg', 87.542, 1, 4, 'DEMO-ESTATE-000001', 1, 'peter', '08038372503');
+(1, 1, 1, '08067932796', 'This is a test testing', '6', '111', 'Passport', 'kyc_docs/tenant_1/dsaf1wWs0t2vUY8ZvVJeTFIV4mlhFk6ScPfcL6sE.jpg', 1, 1, 1, 1, 'completed', '2026-01-22 15:51:05', '2026-01-22 16:41:00', 'kyc_faces/tenant_1/live_1.jpg', 87.542, 1, 4, 'DEMO-ESTATE-000001', 1, 'peter', '08038372503'),
+(2, 2, 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 'bio', '2026-02-14 16:31:20', '2026-02-14 16:31:20', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL),
+(3, 3, 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 'bio', '2026-02-15 08:27:29', '2026-02-15 08:27:29', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL),
+(4, 17, 2, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 'bio', '2026-02-24 20:55:05', '2026-02-24 20:55:05', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL),
+(5, 19, 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 'bio', '2026-02-24 21:25:11', '2026-02-24 21:25:11', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1136,7 +1163,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -1167,7 +1194,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (100, '2026_01_22_170504_add_flat_number_agent_name_agent_number_to_kycs_table', 2),
 (103, '2026_01_22_171641_add_name_to_states_table', 3),
 (104, '2026_01_25_174530_create_access_logs_table', 4),
-(105, '2026_01_25_175703_add_exit_fields_to_visitor_invitations', 5);
+(105, '2026_01_25_175703_add_exit_fields_to_visitor_invitations', 5),
+(106, '2026_01_31_092521_add_delete_status_to_visitor_invitation', 6),
+(107, '2026_01_31_101702_add_access_code_to_visitor_invitation', 7),
+(108, '2026_02_14_161109_add_invited_resident_id_to_visitor_invitation', 8),
+(110, '2026_02_24_132738_add_verification_code_to_users_table', 9),
+(115, '2026_03_05_132911_create_subscriptions_table', 10),
+(116, '2026_03_05_143355_create_subscription_plans_table', 10);
 
 -- --------------------------------------------------------
 
@@ -1198,7 +1231,8 @@ INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `
 ('89e0a411-a59a-4ea2-9507-f3641b95661c', 'App\\Notifications\\NewMessageNotification', 'App\\Models\\User', 3, '{\"title\":\"Top-up Successful\",\"message\":\"Your topup of \\u20a6359 is successful\",\"icon\":\"bitcoin-icons:verify-outline\",\"time\":\"0 seconds ago\"}', '2025-12-25 10:08:19', '2025-12-25 08:25:47', '2025-12-25 10:08:19'),
 ('b6598b7f-5177-42f4-a35f-521fac32d8cb', 'App\\Notifications\\NewMessageNotification', 'App\\Models\\User', 3, '{\"title\":\"Top-up Successful\",\"message\":\"Your topup of \\u20a6100 is successful\",\"icon\":\"bitcoin-icons:verify-outline\",\"time\":\"0 seconds ago\"}', '2025-12-25 10:04:02', '2025-12-25 08:26:10', '2025-12-25 10:04:02'),
 ('5e962fe0-7432-4fc2-9a56-e485ff56ce13', 'App\\Notifications\\NewMessageNotification', 'App\\Models\\User', 4, '{\"title\":\"Top-up Successful\",\"message\":\"Your topup of \\u20a63000 is successful\",\"icon\":\"bitcoin-icons:verify-outline\",\"time\":\"0 seconds ago\"}', '2025-12-29 07:53:21', '2025-12-29 07:53:01', '2025-12-29 07:53:21'),
-('30320eed-1835-4011-a646-a9894767f706', 'App\\Notifications\\NewMessageNotification', 'App\\Models\\User', 5, '{\"title\":\"Top-up Successful\",\"message\":\"Your topup of \\u20a63000 is successful\",\"icon\":\"bitcoin-icons:verify-outline\",\"time\":\"0 seconds ago\"}', '2025-12-29 11:13:03', '2025-12-29 11:11:36', '2025-12-29 11:13:03');
+('30320eed-1835-4011-a646-a9894767f706', 'App\\Notifications\\NewMessageNotification', 'App\\Models\\User', 5, '{\"title\":\"Top-up Successful\",\"message\":\"Your topup of \\u20a63000 is successful\",\"icon\":\"bitcoin-icons:verify-outline\",\"time\":\"0 seconds ago\"}', '2025-12-29 11:13:03', '2025-12-29 11:11:36', '2025-12-29 11:13:03'),
+('1c24c439-4261-40e6-9405-a9a24fede149', 'App\\Notifications\\NewMessageNotification', 'App\\Models\\User', 1, '{\"title\":\"Top-up Successful\",\"message\":\"Your topup of \\u20a62000 is successful\",\"icon\":\"bitcoin-icons:verify-outline\",\"time\":\"0 seconds ago\"}', NULL, '2026-02-15 10:18:35', '2026-02-15 10:18:35');
 
 -- --------------------------------------------------------
 
@@ -1259,14 +1293,18 @@ CREATE TABLE IF NOT EXISTS `resident_wallets` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `resident_wallets_uuid_unique` (`uuid`),
   KEY `resident_wallets_user_id_foreign` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `resident_wallets`
 --
 
 INSERT INTO `resident_wallets` (`id`, `uuid`, `user_id`, `currency_code`, `balance`, `minimium_balance`, `status`, `currency_id`, `created_at`, `updated_at`) VALUES
-(1, '8398ece4-4e79-4033-a9a9-d06d6a4d2147', 1, 'NGN', 0.00, 0.00, 1, 87, '2026-01-22 15:51:04', '2026-01-22 15:51:04');
+(1, '8398ece4-4e79-4033-a9a9-d06d6a4d2147', 1, 'NGN', 2000.00, 0.00, 1, 87, '2026-01-22 15:51:04', '2026-01-22 15:51:04'),
+(2, '78a258ba-cb57-4b9e-880d-227294985253', 2, 'NGN', 0.00, 0.00, 1, 87, '2026-02-14 16:31:20', '2026-02-14 16:31:20'),
+(3, '9825e331-b6ab-43a8-8d25-6e4ec65befd0', 3, 'NGN', 0.00, 0.00, 1, 87, '2026-02-15 08:27:29', '2026-02-15 08:27:29'),
+(20, '40c2b41d-ddff-4470-85bc-00e6261d1360', 21, 'NGN', 0.00, 0.00, 1, 87, '2026-02-24 21:29:50', '2026-02-24 21:29:50'),
+(17, '97a05dc5-a78a-4d77-8ed1-941ba0e0a5ba', 17, 'NGN', 0.00, 0.00, 1, 87, '2026-02-24 19:41:41', '2026-02-24 19:41:41');
 
 -- --------------------------------------------------------
 
@@ -1292,12 +1330,9 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('HVYbaua5j8tKTFAXcU0LuRWcSNLZak7zvhRz39VE', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiQTdhbmtIZDdYYTFvTjYydk5EMVVLSDMzRFZZajE0cXpRWmdTamdDeiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1769771165),
-('nsnC4qqfJXjpDhLEYkzxMGBERoYLQzVBCF8HEgIT', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWUZ3OGdLOEtURWNzOE9DSEVpNG1LWnVDV052RFp2VlpwQmZwZ2NKWCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly9kZW1vLmxvY2FsaG9zdDo4MDAwL3Jlc2lkZW50L2ludml0YXRpb25zIjtzOjU6InJvdXRlIjtzOjI2OiJyZXNpZGVudC5pbnZpdGF0aW9ucy5pbmRleCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1769750357),
-('hAX97sTiE7m3rx12LJVLhblOXK6KilRhnC0GaQPW', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoib09sWGZuVXNsTjhYZ2VZZDF2OTUyenJpak9Qd1JPd2JabGUxVXFYUCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDM6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9zZWN1cml0eS9pbnNpZGUtY291bnQiO3M6NToicm91dGUiO047fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1769695171),
-('C4Uxe1PqaOG5rVYd8mvLVQrROjyBzgGiV4WmLkVr', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWFdObUZtS25LTWNGcDJ4SzdrT3IyOU80WXJoYlVtVGxZV3dMMFAzRyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly9kZW1vLmxvY2FsaG9zdDo4MDAwL2VzdGF0ZV9sb2dpbiI7czo1OiJyb3V0ZSI7czoxNzoidGVuYW50X3VzZXJfbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1769771103),
-('AO0AYW3oTk0b912Q8JYnwExxOZtomLgs2CGx6v5l', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiS3lpbldHU3gzcTQ5cDZma1dFOVkxTmxwaFBsQWhhU1BoeHVYaTBjcyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9kZW1vLmxvY2FsaG9zdDo4MDAwL3Zpc2l0b3ItaW52aXRlIjtzOjU6InJvdXRlIjtzOjE0OiJ2aXNpdG9yLmNyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1769700836),
-('sNFDGaMwRInT10y7kpWdQcJgwuY0EE5YKIuz5HDo', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZU1kV2ZQYTUxd1p4SDc4MHpqZ0ZDR00yaDJaWmN4cVE3ZVhERDBPaSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDM6Imh0dHA6Ly9kZW1vLmxvY2FsaG9zdDo4MDAwL2VzdGF0ZV9kYXNoYm9hcmQiO3M6NToicm91dGUiO3M6MjE6InRlbmFudF91c2VyX2Rhc2hib2FyZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1769694528);
+('niIiZalL9FqpFGgJIk0w57Oqj6yD1nnVtAD7sTvM', 22, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiOXlEZ1VrMkRlYWFRQmF2bGpCbmk0a1NaSmhnZTM2cFp6TlZ1cWpPZSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9zdXBlcmFkbWluX2Rhc2hib2FyZCI7czo1OiJyb3V0ZSI7czoyMDoic3VwZXJhZG1pbl9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyMjt9', 1774975756),
+('9jtzEqZsgQhvUeb7gWVtgVmkrHOwJHiMB6OVrf6Y', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibnBhZ1JkYWR6YzBqeGJwdll0dThRSVhBdmliWFk1Y0FBWEFRcW8xNiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9zdXBlcmFkbWluX2Rhc2hib2FyZCI7czo1OiJyb3V0ZSI7czoyMDoic3VwZXJhZG1pbl9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1774975082),
+('RG7gEuwvD2PLXEOcl3WKdHbtClN22s2sImlTfV76', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:149.0) Gecko/20100101 Firefox/149.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTEJXTUduUXR5T2t1bW5nUEpWZGFZU083Wkl6YnFBdUpLR29CeTFyciI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9zdXBlcmFkbWluX2xvZ2luIjtzOjU6InJvdXRlIjtzOjE2OiJzdXBlcmFkbWluX2xvZ2luIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1774975082);
 
 -- --------------------------------------------------------
 
@@ -1358,6 +1393,56 @@ INSERT INTO `states` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `subscriptions`
+--
+
+DROP TABLE IF EXISTS `subscriptions`;
+CREATE TABLE IF NOT EXISTS `subscriptions` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `subscription_plan_id` bigint UNSIGNED NOT NULL,
+  `billing_cycle` enum('monthly','yearly') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `starts_at` timestamp NOT NULL,
+  `ends_at` timestamp NULL DEFAULT NULL,
+  `status` enum('active','cancelled','expired') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `subscriptions_user_id_foreign` (`user_id`),
+  KEY `subscriptions_subscription_plan_id_foreign` (`subscription_plan_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscription_plans`
+--
+
+DROP TABLE IF EXISTS `subscription_plans`;
+CREATE TABLE IF NOT EXISTS `subscription_plans` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `price` decimal(10,2) NOT NULL,
+  `duration` enum('monthly','yearly') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `tenant_id` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subscription_plans`
+--
+
+INSERT INTO `subscription_plans` (`id`, `name`, `description`, `price`, `duration`, `is_active`, `tenant_id`, `created_at`, `updated_at`) VALUES
+(1, 'Test Plan', 'This is a test plan', 200.00, 'monthly', 1, 1, '2026-03-05 18:17:40', '2026-03-05 18:17:40'),
+(2, 'Premium', 'This is a premium', 1200.00, 'yearly', 1, 1, '2026-03-05 18:19:49', '2026-03-05 18:19:49');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tenants`
 --
 
@@ -1373,14 +1458,15 @@ CREATE TABLE IF NOT EXISTS `tenants` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tenants_subdomain_unique` (`subdomain`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tenants`
 --
 
 INSERT INTO `tenants` (`id`, `first_name`, `last_name`, `estate_name`, `subdomain`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'demo', 'doe', 'demoo', 'demo', '2026-01-22 15:50:25', '2026-01-22 15:50:25', NULL);
+(1, 'demo', 'doe', 'demoo', 'demo', '2026-01-22 15:50:25', '2026-01-22 15:50:25', NULL),
+(2, 'Sam', 'Deo', 'Glorious', 'sam', '2026-02-24 10:09:56', '2026-02-24 10:09:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -1405,18 +1491,14 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `transactions`
 --
 
 INSERT INTO `transactions` (`id`, `reference`, `amount`, `user_id`, `receiver_id`, `status`, `currency`, `webhook_status`, `paid_at`, `remarks`, `gateway`, `subscription_id`, `created_at`, `updated_at`) VALUES
-(1, 'yozy97r8ed', 3000, '3', NULL, 'success', 'NGN', NULL, '2025-12-25T09:25:21.000Z', 'Fund wallet', 'Paystack', NULL, '2025-12-25 08:25:22', '2025-12-25 08:25:22'),
-(2, '3lge2hgog6', 359, '3', NULL, 'success', 'NGN', NULL, '2025-12-25T09:25:46.000Z', 'Fund wallet', 'Paystack', NULL, '2025-12-25 08:25:47', '2025-12-25 08:25:47'),
-(3, '8ljshy3bkl', 100, '3', NULL, 'success', 'NGN', NULL, '2025-12-25T09:26:10.000Z', 'Fund wallet', 'Paystack', NULL, '2025-12-25 08:26:10', '2025-12-25 08:26:10'),
-(4, 'r4fmj08hfu', 3000, '4', NULL, 'success', 'NGN', NULL, '2025-12-29T08:52:51.000Z', 'Fund wallet', 'Paystack', NULL, '2025-12-29 07:53:01', '2025-12-29 07:53:01'),
-(5, 'jzh0xb9qrt', 3000, '5', NULL, 'success', 'NGN', NULL, '2025-12-29T12:11:33.000Z', 'Fund wallet', 'Paystack', NULL, '2025-12-29 11:11:36', '2025-12-29 11:11:36');
+(1, 'fq6j4sw2ww', 2000, '1', NULL, 'success', 'NGN', NULL, '2026-02-15T10:18:33.000Z', 'Fund wallet', 'Paystack', NULL, '2026-02-15 10:18:35', '2026-02-15 10:18:35');
 
 -- --------------------------------------------------------
 
@@ -1442,17 +1524,24 @@ CREATE TABLE IF NOT EXISTS `users` (
   `face_image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `fees_status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'clear',
+  `verification_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `verification_code_sent_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `users_tenant_id_foreign` (`tenant_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `tenant_id`, `deleted_at`, `role`, `face_verified`, `face_image`, `status`, `fees_status`) VALUES
-(1, 'jude', 'doe', 'jude@gmail.com', NULL, '$2y$12$4leuSIeZcGMLXdx6NYYtU.NP7Nz1CveI50TlAJcZoVRu75o684UW6', NULL, '2026-01-22 15:51:04', '2026-01-22 15:51:04', 1, NULL, 'user', 0, NULL, 'active', 'clear');
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `tenant_id`, `deleted_at`, `role`, `face_verified`, `face_image`, `status`, `fees_status`, `verification_code`, `verification_code_sent_at`) VALUES
+(1, 'jude', 'doe', 'oladelesamuel48@gmail.com', '2026-02-25 21:51:58', '$2y$12$mMuj2wr1Ih.xPEnFV1jJZ.F9.VKgGNeqKcpgWiO70VzYpqqfGw5uy', NULL, '2026-01-22 15:51:04', '2026-02-25 21:58:23', 1, NULL, 'user', 0, NULL, 'active', 'clear', '8039', '2026-02-25 21:58:23'),
+(2, 'Amos', 'doe', 'oladelesamuel488@gmail.com', NULL, '$2y$12$6eIq86a8j.6FfJEIekLvseWK47yh3/JYeLxBcFzz7hcsN6nXJt/Ta', NULL, '2026-02-14 16:31:19', '2026-02-14 16:31:19', 1, NULL, 'user', 0, NULL, 'active', 'clear', NULL, NULL),
+(3, 'tester', 'deo', 'tester@gmail.com', NULL, '$2y$12$vX3Vpgy61EwcbY6QGRoBj.qKkrpJRFl7N4382zUM7EdF2gSqsMblC', NULL, '2026-02-15 08:27:29', '2026-02-15 08:27:29', 1, NULL, 'user', 0, NULL, 'active', 'clear', NULL, NULL),
+(21, 'demo', 'doe', 'sammyola122@gmail.com', '2026-02-24 21:35:59', '$2y$12$c./tUDzaOcER4dNTBjcmVu8tF5vgPegz4ynR85J77CfIEsfGn2ME6', NULL, '2026-02-24 21:29:50', '2026-02-24 21:35:59', 1, NULL, 'admin', 0, NULL, 'active', 'clear', NULL, NULL),
+(22, 'Super ', 'Admin', 'superadmin@gmail.com', '2026-02-24 20:55:05', '$2y$12$qKsGkUPOq8ed2eagiwKcRe6ReN3ATasPEH088wQEx0idyV8yaQILu', NULL, '2026-02-24 19:41:41', '2026-02-24 20:55:05', NULL, NULL, 'superadmin', 0, NULL, 'active', 'clear', NULL, NULL),
+(17, 'Tester', 'test', 'oladelesamuel448@gmail.com', '2026-02-24 20:55:05', '$2y$12$qKsGkUPOq8ed2eagiwKcRe6ReN3ATasPEH088wQEx0idyV8yaQILu', NULL, '2026-02-24 19:41:41', '2026-02-24 20:55:05', 2, NULL, 'user', 0, NULL, 'active', 'clear', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1473,16 +1562,14 @@ CREATE TABLE IF NOT EXISTS `user_auto_code` (
   `bank` varchar(255) DEFAULT NULL,
   `country_code` varchar(225) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `user_auto_code`
 --
 
 INSERT INTO `user_auto_code` (`id`, `user_id`, `auth_code`, `amount`, `last4`, `exp_month`, `exp_year`, `card_type`, `bank`, `country_code`) VALUES
-(1, '3', 'AUTH_3wqu3uiqsc', '100', '4081', '12', '2030', 'visa ', 'TEST BANK', 'NG'),
-(2, '4', 'AUTH_g3z31a7z20', '3000', '4081', '12', '2030', 'visa ', 'TEST BANK', 'NG'),
-(3, '5', 'AUTH_4m9ms6bhfx', '3000', '4081', '12', '2030', 'visa ', 'TEST BANK', 'NG');
+(1, '1', 'AUTH_59gvk1jgz1', '2000', '4081', '12', '2030', 'visa ', 'TEST BANK', 'NG');
 
 -- --------------------------------------------------------
 
@@ -1523,23 +1610,23 @@ CREATE TABLE IF NOT EXISTS `user_statistics` (
 DROP TABLE IF EXISTS `visitors`;
 CREATE TABLE IF NOT EXISTS `visitors` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `full_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `first_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `visitors`
 --
 
-INSERT INTO `visitors` (`id`, `full_name`, `email`, `phone`, `created_at`, `updated_at`) VALUES
-(1, 'james', 'oladelesamuel48@gmail.com', '08067932791', '2026-01-23 00:04:37', '2026-01-23 00:04:37'),
-(2, 'tester', 'sammyola12@gmail.com', '08167932796', '2026-01-28 15:12:25', '2026-01-28 15:12:25'),
-(3, 'Samuel Oladele', 'oladelesamuel48@gmail.com', '08067932796', '2026-01-28 21:27:30', '2026-01-28 21:27:30'),
-(7, 'wolla', 'sammyola122@gmail.com', '08067932796', '2026-01-30 03:08:32', '2026-01-30 03:08:32');
+INSERT INTO `visitors` (`id`, `first_name`, `last_name`, `email`, `phone`, `created_at`, `updated_at`) VALUES
+(1, 'willo', 'gerr', 'oladelesamuel48@gmail.com', '08067932796', '2026-02-14 19:25:32', '2026-02-14 19:25:32'),
+(3, 'Amos', 'ola', 'oladelesamuel48@gmail.com', NULL, '2026-03-03 14:54:40', '2026-03-03 14:54:40'),
+(4, 'Bobb', 'rawlings', 'bobb@gmail.com', '08067932791', '2026-03-30 17:13:07', '2026-03-30 17:13:07');
 
 -- --------------------------------------------------------
 
@@ -1551,8 +1638,8 @@ DROP TABLE IF EXISTS `visitor_invitation`;
 CREATE TABLE IF NOT EXISTS `visitor_invitation` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `resident_id` bigint UNSIGNED NOT NULL,
-  `visitor_id` bigint UNSIGNED NOT NULL,
-  `purpose` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `visitor_id` bigint UNSIGNED DEFAULT NULL,
+  `purpose` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `visit_date` date NOT NULL,
   `valid_from` time NOT NULL,
   `valid_to` time NOT NULL,
@@ -1562,17 +1649,27 @@ CREATE TABLE IF NOT EXISTS `visitor_invitation` (
   `exited_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `delete_status` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `access_code` longtext COLLATE utf8mb4_unicode_ci,
+  `invited_resident_id` bigint UNSIGNED DEFAULT NULL,
+  `tenant_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `visitor_invitation_resident_id_foreign` (`resident_id`),
-  KEY `visitor_invitation_visitor_id_foreign` (`visitor_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `visitor_invitation_visitor_id_foreign` (`visitor_id`),
+  KEY `visitor_invitation_invited_resident_id_foreign` (`invited_resident_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `visitor_invitation`
 --
 
-INSERT INTO `visitor_invitation` (`id`, `resident_id`, `visitor_id`, `purpose`, `visit_date`, `valid_from`, `valid_to`, `qr_token`, `status`, `used_at`, `exited_at`, `created_at`, `updated_at`) VALUES
-(7, 1, 7, 'This is great', '2026-01-30', '05:08:00', '10:08:00', 'eyJpdiI6ImUrMmkyNGtNTXVTa29QYmt3Q0tUcXc9PSIsInZhbHVlIjoib3phR0R2SDNIMWZ3OWRZbWhsYk11WjExdVFaM0taWEFNVVY3c2NCeFhmbHdBWThqTlNBSVg3YlFDVWJaTHVuOXpUZHNWSlJadWFVM3gyNFZFQ0NNKzhLM1cyelVxWWNQbjVrREdBaWI1T3ZuUm5XZVJjZFo0MWJlZTlPbEZBWVhWZnVrbDRiZmluZmYxbmR4QXZXNUZMYW9BQjJHZzVNUjBSbXUxcWFZNUFZPSIsIm1hYyI6IjIwYmZkOWYwNjJjMDMyMmVlYTVjNDBiYzIxYWYzNGI1OTFjNjZhYTFmYmE0ODViNWM2MWRmZjNhMzNiOWUxY2QiLCJ0YWciOiIifQ==', 'pending', NULL, NULL, '2026-01-30 03:08:32', '2026-01-30 03:08:32');
+INSERT INTO `visitor_invitation` (`id`, `resident_id`, `visitor_id`, `purpose`, `visit_date`, `valid_from`, `valid_to`, `qr_token`, `status`, `used_at`, `exited_at`, `created_at`, `updated_at`, `delete_status`, `access_code`, `invited_resident_id`, `tenant_id`) VALUES
+(1, 1, NULL, NULL, '2026-02-14', '20:24:00', '23:24:00', 'eyJpdiI6InFJWU15VGx1STZFWmFUQ2hHSzRXYUE9PSIsInZhbHVlIjoiQmxBck5BRVdlamVlV1hoQnNTekMvdTV4SmNabTJhK25GSjQ4VE00RzhEWVVEOThWb0MvWk1IZDk2Y1hHd0l3NjgrZTVGVVprZTBqaUxJWXZPQlR6UXZUOFdVVEc2TWFyU29Ya3VLbXNOd0QxaUFKcjdieVNRYVZKelpVS2NZREM5aHlMbjMyRmtuK21kR2MvRnFkUDFRMTg4YnBWQVp0Y0g3a0F3SnRzTEUwPSIsIm1hYyI6IjUyNWRlMTc5ZDZlNDEzZTJlZDQxZTg3MGU4OTk2MWIwOGUzMjM2MmUyY2M2NjZjYWZiOWI1YjAwMzMzOGVlMTMiLCJ0YWciOiIifQ==', 'pending', NULL, NULL, '2026-02-14 19:24:25', '2026-02-14 19:24:25', 'no', '575705', 1, 1),
+(2, 1, NULL, NULL, '2026-02-14', '20:24:00', '23:24:00', 'eyJpdiI6InUwVDlWNEJ6dm9KRy9XaUxQQTNoMWc9PSIsInZhbHVlIjoiaDljWGFqYWJPdVhSSlFISmlUbXNCeXBmYjNIc1Y5NE9wOUlueTgwVmVFVnBiWXJ5ZU81cHYydVBIRWo1Mnd4ZUlWdHZXNzZqRisrZXk0TEh6WlVMK0VicHJhUHNLUW5EdWtNUDNtWTE0SmFxc0F5RU4zaHU0eGU0Y1lzdCtLanhMdWFPd0dWZi9yS3U1a2hRNG9DQkxBeHpCaWFyYmtGbGhEejRTVXQvMFdBPSIsIm1hYyI6IjM5Nzk2MGJhNDM2ODFhOTNhYzg3ZGEyZDIyM2JmZmEyOGQ5N2JjN2UwYjQ2ZGNhMTY4ZjZhMWEzZjFiYmQ4YjMiLCJ0YWciOiIifQ==', 'pending', NULL, NULL, '2026-02-14 19:25:01', '2026-02-15 07:48:06', 'yes', '640854', 2, 1),
+(3, 1, 1, NULL, '2026-02-14', '20:25:00', '23:25:00', 'eyJpdiI6IjBMVUhBbXRFYjRkcURQTmdhNXVGWUE9PSIsInZhbHVlIjoiTm83Q1ZTNHpJdktYQzQ3OXFrYXdabXRVN3dmVHU2eVFhdzVDdHNFRWtNbUNaei9Yb0RkOUtsVXZ0QjJsMnFwRE1NR2FudXRQRVM2MUFGT2Z2cDFtTllBc0dkVEgvbU5kUG5qd1hKRUxUdjZiZU1XQ1c5ZEdLbEJxdzd3cFpoQkhXc3B4Y2hrZXJOV3FxYng3cEVlYUFxN3RodDRMemduVXMzSWZMZkIxS3R3PSIsIm1hYyI6IjhkMmQxYTNkYThkYTMwNzU0OTY4YTM1YTM0YTdhMjdhZWY4YTc4ZWEwM2QwNjg1NmU0MmUwMzU0NDY0NWNjMzgiLCJ0YWciOiIifQ==', 'pending', NULL, NULL, '2026-02-14 19:25:32', '2026-02-14 19:25:32', 'no', '595805', NULL, 1),
+(7, 1, 3, NULL, '2026-03-03', '15:54:00', '18:54:00', 'eyJpdiI6Ik9Ua0VkemRtSkJJazlOSWtGWnZIVEE9PSIsInZhbHVlIjoiY0FzcWhRSWhnN09WdEF4SEdBUlhFY2kxY0FiWmIyS2ZyMXhIRzFLNFdxK2h3SkNmeHNhd21jM3pzMkxveXhIWm1QVm5zNXo3eVFwUmwxbGFVWHROWHlVSW0veUN6SkdxQzhBUjJUMU1YWERGUEI3dHA1dU5Za25oQTVRYVpTc05sWWhqOWNzMWdnUjAzUEprcXVJamw4SnlUa1VnUTVKVUZQUGp1ZW1vWjBZPSIsIm1hYyI6IjRkNzdkY2E1NGI0ZWM3YmNmNjAyY2EwNDczMTAwNjAyODI4ZWZjNjcyMGM5ZmY1YzMxMjQ3ZjcxY2IzMWYyMjQiLCJ0YWciOiIifQ==', 'pending', NULL, NULL, '2026-03-03 14:54:40', '2026-03-03 14:54:40', 'no', '519772', 1, 1),
+(6, 1, NULL, NULL, '2026-03-03', '16:49:00', '19:49:00', 'eyJpdiI6ImZMZVh3QVNtVitGUG9XRVJINFJWY1E9PSIsInZhbHVlIjoiZEFEZitqYytJYjlBVVhHMzhycVdJN2tzQ0o0WmtwMUNFUXBMUnJwZDYwY3ZHK1V1ZEpyZ3E5a2tNQ1g4V0tIeWtHS1JnZC9aRGhqWTFldlpaQVJCeGpYYUM3UjhORGFNaUE3VkV5QkIwNjNpNm5ldmtQMWhvcDJ2dExBbllOUklaZUJGdzI3d3VYYi90TjNpRXJhY0RyMWtVQVVqaldPL0hDczZwaFNWNFJ3PSIsIm1hYyI6ImJmYzUyMDgyMmRiNGU3ZWUwMTE0MDAwYmQ0YzM2OWNjMDUyYWYyMWY2MGIzMTI4ODUyOWY0YjQ4OWE4YTllMzciLCJ0YWciOiIifQ==', 'pending', NULL, NULL, '2026-03-03 14:50:00', '2026-03-03 14:50:00', 'no', '234295', 1, 1),
+(8, 1, 4, NULL, '2026-03-30', '19:13:00', '22:13:00', 'eyJpdiI6InNtK0xQSk1JMGtwMzFOU3l0VS9zNFE9PSIsInZhbHVlIjoiRXRESUxuVFJFVlIvMDBZbmZlMStJeEtMdVRrUGdRQXNTYkg5OHJTdzhXTGlwT2VzeEZxcUF2aVdwUGxYTXloUDRUZzBpZ2t1NytvTFRhZnZPQ3l5T2VOZ1J5S3ZYeEVBbDR5YjlzU2s1NUgvY0RhQngvZ2dwMTh3M1ZkVE9xWHhuTnJDUlVmV1BmZnQxTWJ6bm5FZzVkdld6YjhFUEl4ZlFIRTMzbEx4NlZVPSIsIm1hYyI6IjM0ZjU4ZDY2MzUxODE3ZGY1YTY4MjdjZmZmMjhkMzNmZTExY2Y2YzEyZTdjNDU0YzQ2NDBhZWZlMzM4OWI3MzYiLCJ0YWciOiIifQ==', 'pending', NULL, NULL, '2026-03-30 17:13:07', '2026-03-30 17:13:07', 'no', '147452', NULL, 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -9,13 +9,14 @@ use Carbon\Carbon;
 class PlanService
 {
     
-    public function storePlan($name,$price,$duration, $desc)
+    public function storePlan($name,$price,$duration, $desc,$tenant)
     {
         SubscriptionPlan::create([
             'name'=>$name,
             'price'=>$price,
             'duration'=>$duration,
-            'description' => $desc
+            'description' => $desc,
+            'tenant_id' => $tenant->id
         ]);    
     }
 

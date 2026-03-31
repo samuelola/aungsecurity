@@ -20,6 +20,7 @@ return new class extends Migration
             $table->time('valid_from');
             $table->time('valid_to');
             $table->longText('qr_token');
+            $table->integer('tenant_id')->nullable();
             $table->enum('status', ['pending','used','expired'])->default('pending');
             $table->timestamp('used_at')->nullable();
             $table->timestamps();

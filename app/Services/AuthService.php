@@ -234,5 +234,16 @@ class AuthService implements RegisterInterface{
         
     }
 
+
+    public function getAllUsers(){
+        
+        return User::with(['kyc'])->simplePaginate(10);
+
+    }
+
+    public function countUsers(){
+        return User::where('role','!=','superadmin')->count();
+    }
+
    
 }
