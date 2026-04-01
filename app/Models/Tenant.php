@@ -25,4 +25,9 @@ class Tenant extends Model
      {
          return $this->hasMany(SubscriptionPlan::class);
      }
+
+     public function subaccount()
+    {
+        return $this->hasOne(Subaccount::class);
+    }
 }

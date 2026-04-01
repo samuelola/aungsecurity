@@ -30,6 +30,17 @@
                   <h6 class="f-w-600">All Estates </h6></a>
               </li>
 
+              <li class="sidebar-main-title">
+                <div>
+                  <h5 class="f-w-700 sidebar-title pt-3">SubAccounts</h5>
+                </div>
+              </li>
+              <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
+                <a class="sidebar-link" href="{{route('create_subaccount')}}">
+                  <i class="ti-user"></i>
+                  <h6 class="f-w-600">SubAccounts </h6></a>
+              </li>
+
               
               <li class="sidebar-main-title">
                 <div>

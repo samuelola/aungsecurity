@@ -15,6 +15,7 @@ use App\Services\SubscriptionService;
 use App\Services\AuthService;
 use App\Services\InvitationService;
 use App\Services\TransactionGraphService;
+use DB;
 
 
 class SuperAdminController extends Controller
@@ -145,6 +146,8 @@ class SuperAdminController extends Controller
             'subscriptionsCount'
             ));
     }
+
+    
 
     
 }

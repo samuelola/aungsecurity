@@ -19,6 +19,8 @@ use App\Http\Controllers\AdminSubscriptionPlanController;
 use App\Http\Controllers\AdminTenantDashboardController;
 use App\Http\Controllers\AdminVisitorInvitationController;
 use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\SubaccountController;
+
 
 
 $domain = parse_url(config('app.url'), PHP_URL_HOST);
@@ -233,8 +235,18 @@ Route::middleware(['superadmin.auth','role:superadmin'])->group(function () {
       Route::get('/tenants', 'AllTenantS')->name('alltenants');
       Route::post('/superadmin_logout','superAdminLogout')->name('superadmin.logout'); 
       Route::get('/superadmin/estate/{tenant}','estate')->name('superadmin.estate.users');
-     
+      
 });
+
+
+ Route::controller(SubaccountController::class)->group(function () {
+
+      Route::get('/superadmin/subaccount','createSubAccount')->name('create_subaccount');
+      Route::post('/verify-account','verifyAccount')->name('verify.account');
+      Route::post('/subaccount', 'store')->name('subaccount.store');
+ });
+
+
          
 });
 
