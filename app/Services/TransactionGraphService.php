@@ -1,0 +1,125 @@
+<?php
+
+namespace App\Services;
+
+
+use App\Models\User;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Hash;
+use App\Interfaces\RegisterInterface;
+use DB;
+use App\Models\Wallet;
+use Illuminate\Support\Str;
+use App\Models\Tenant;
+use App\Models\Transaction;
+
+
+class TransactionGraphService {
+
+
+    public function transactionChart($user){
+
+        // Monthly transaction totals (success only)
+        $monthlyTransactions = Transaction::where('user_id', $user->id)
+        ->where('status', 'success')
+        ->whereYear('created_at', now()->year)
+        ->select(
+            DB::raw('MONTH(created_at) as month'),
+            DB::raw('SUM(amount) as total')
+        )
+        ->groupBy('month')
+        ->pluck('total', 'month');
+        
+        // Prepare 12 months data
+        $chartData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $chartData[] = isset($monthlyTransactions[$i])
+                ? $monthlyTransactions[$i]
+                : 0;
+        }
+
+        return $chartData;
+    }
+
+    public function admintransactionAllChart(){
+
+        // Monthly transaction totals (success only)
+        $tenant = app('tenant');
+        $monthlyTransactions = Transaction::where([
+            'status'=>'success',
+            'tenant_id'=>$tenant->id,
+            
+        ])
+        ->whereYear('created_at', now()->year)
+        ->select(
+            DB::raw('MONTH(created_at) as month'),
+            DB::raw('SUM(tenant_earning) as total')
+        )
+        ->groupBy('month')
+        ->pluck('total', 'month');
+        
+        // Prepare 12 months data
+        $chartData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $chartData[] = isset($monthlyTransactions[$i])
+                ? $monthlyTransactions[$i]
+                : 0;
+        }
+
+        return $chartData;
+    }
+
+    public function transactionAllChart(){
+
+        // Monthly transaction totals (success only)
+        $tenant = app('tenant');
+        $monthlyTransactions = Transaction::where([
+            'status'=>'success',
+            'tenant_id'=>$tenant->id,
+            
+        ])
+        ->whereYear('created_at', now()->year)
+        ->select(
+            DB::raw('MONTH(created_at) as month'),
+            DB::raw('SUM(amount) as total')
+        )
+        ->groupBy('month')
+        ->pluck('total', 'month');
+        
+        // Prepare 12 months data
+        $chartData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $chartData[] = isset($monthlyTransactions[$i])
+                ? $monthlyTransactions[$i]
+                : 0;
+        }
+
+        return $chartData;
+    }
+
+
+    public function transactionAllChartY(){
+
+        // Monthly transaction totals (success only)
+        $monthlyTransactions = Transaction::whereYear('created_at', now()->year)
+        ->select(
+            DB::raw('MONTH(created_at) as month'),
+            DB::raw('SUM(amount) as total')
+        )
+        ->groupBy('month')
+        ->pluck('total', 'month');
+        
+        // Prepare 12 months data
+        $chartData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $chartData[] = isset($monthlyTransactions[$i])
+                ? $monthlyTransactions[$i]
+                : 0;
+        }
+
+        return $chartData;
+    }
+    
+
+   
+}

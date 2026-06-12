@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
+
+class VisitorInvitation extends Model
+{
+    use HasFactory;
+
+    protected $guarded = [];
+
+    protected $table = 'visitor_invitation';
+
+    // Invitation belongs to a visitor
+    public function visitor()
+    {
+        return $this->belongsTo(Visitor::class,'visitor_id');
+    }
+
+    // Invitation belongs to a resident (user)
+    public function resident()
+    {
+        return $this->belongsTo(User::class, 'resident_id');
+    }
+
+    // Invitation has many access logs
+    // public function accessLogs()
+    // {
+    //     return $this->hasMany(\App\Models\AccessLog::class, 'invitation_id');
+    // }
+
+    public function invitedResident()
+    {
+        return $this->belongsTo(User::class, 'invited_resident_id');
+    }
+
+    public function accessLogs()
+    {
+        return $this->hasMany(AccessLog::class, 'access_logs');
+    }
+
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class, 'tenant_id');
+    }
+
+
+    protected static function booted()
+    {
+        static::created(function ($model) {
+            Cache::forget("invitations:resident:{$model->resident_id}");
+        });
+
+        // static::updated(function ($model) {
+        //     Cache::forget("invitations:resident:{$model->resident_id}");
+        // });
+
+        // static::deleted(function ($model) {
+        //     Cache::forget("invitations:resident:{$model->resident_id}");
+        // });
+    }
+
+
+}

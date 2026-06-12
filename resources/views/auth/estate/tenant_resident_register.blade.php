@@ -1,0 +1,215 @@
+@extends('auth.auth_master')
+
+@section('content')
+
+<style>
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+}
+input {
+  cursor: text !important;
+}
+
+@media (max-width: 991px) {
+  .login_one_image {
+    display: none !important;
+  }
+}
+</style>
+
+ 
+   
+   <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-7 login_one_image"><img class="bg-img-cover bg-center" src="{{asset('assets/images/login/2.jpg')}}" alt="looginpage"></div>
+        <div class="col-xl-5 p-0">
+          <div class="login-card login-dark login-bg">
+            <div>
+              <div>
+                <a class="logo" href="#">
+                <img class="img-fluid for-light m-auto" style="width:100px;height:100px;" src="{{asset('aung_logo_white.png')}}" alt="looginpage">
+                <img class="for-dark" src="{{asset('aung_logo_blue.png')}}" style="width:120px;height:100px;" alt="logo">
+               </a>
+              </div>
+              <div class="text-center mb-4">
+                  <button id="userBtn" type="button" class="btn btn-outline-primary me-2" onclick="showForm('user')">Register</button>
+                  <button id="adminBtn" type="button" class="btn btn-outline-dark" onclick="showForm('admin')">Login</button>
+              </div>
+              <div id="userForm">
+                <div class="login-main"> 
+                  <form class="theme-form" action="{{route('tenant_user_store_reg',$tenant->subdomain)}}" method="post">
+                      @csrf
+                    <h2 class="text-center" style="font-size: 20px;">Register as a Resident of {{ucfirst($tenant->estate_name)}} Estate</h2>
+                    <p class="text-center">Enter your credentials to Signup</p>
+                    <div class="form-group">
+                      <label class="col-form-label">First Name</label>
+                      <input class="form-control" name="first_name" type="text" value="{{ old('first_name') }}"  placeholder="John">
+                      @error('first_name')
+                      <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+                      @enderror 
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label">Lastname</label>
+                      <input class="form-control" name="last_name" type="text" value="{{ old('last_name') }}" placeholder="Doe">
+                      @error('last_name')
+                      <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+                      @enderror 
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label">Email Address</label>
+                      <input class="form-control" name="email" type="email" value="{{ old('email') }}"  placeholder="Test@gmail.com">
+                      @error('email')
+                          <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+                      @enderror 
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="col-form-label">Password</label>
+                      <div class="form-input position-relative">
+                        <input class="form-control password-field" type="password" name="password" placeholder="*********">
+                        <span class="toggle-password" onclick="togglePassword(this)">
+                          show
+                        </span>
+                      </div>
+                      @error('password')
+                        <span class="invalid-feedback d-block"><strong>{{ $message }}</strong></span>
+                      @enderror
+                    </div>
+
+                    <div class="form-group">
+                    <label class="col-form-label">Confirm Password</label>
+                    <div class="form-input position-relative">
+                      <input class="form-control password-field" type="password" name="password_confirmation" placeholder="*********">
+                      <span class="toggle-password" onclick="togglePassword(this)">
+                        show
+                      </span>
+                    </div>
+                    @error('password_confirmation')
+                      <span class="invalid-feedback d-block"><strong>{{ $message }}</strong></span>
+                    @enderror
+                    </div>
+
+                    <div class="form-group mb-0 checkbox-checked">
+                      <div class="text-end mt-3">
+                        <button class="btn btn-primary btn-block w-100" type="submit">Register                 </button>
+                      </div>
+                    </div>
+                    
+                  <!--<p class="mt-4 mb-0 text-center"><span style="color:#292929">Already have an account?</span><a style="font-weight:600;" class="ms-2" href="{{route('tenant_user_login',$tenant->subdomain)}}">Login Here</a></p>-->
+                  </form>
+                </div>
+              </div>
+
+              <div id="adminForm" style="display:none;">
+                <div class="login-main"> 
+                  
+                  <form class="theme-form" action="{{route('tenant_user_submit',$tenant->subdomain)}}" method="post">
+                  @csrf
+                  <h4 class="text-center">{{ucfirst($tenant->estate_name)}} Estate</h4>
+                  <h2 class="text-center">Login into  your account</h2>
+                  <p class="text-center">Enter your email &amp; password to login</p>
+                  <div class="form-group">
+                    <label class="col-form-label">Email Address</label>
+                    <input class="form-control" name="email" type="email"  placeholder="Test@gmail.com">
+                    @error('email')
+                    <span class="invalid-feedback d-block"><strong>{{ $message }}</strong></span>
+                    @enderror
+                  </div>
+                  <div class="form-group">
+                    <label class="col-form-label">Password</label>
+                    <div class="form-input position-relative">
+                      <input class="form-control password-field" type="password" name="password" placeholder="*********">
+                      <span class="toggle-password" onclick="togglePassword(this)">
+                        show
+                      </span>
+                    </div>
+                    @error('password')
+                      <span class="invalid-feedback d-block"><strong>{{ $message }}</strong></span>
+                    @enderror
+                  </div>
+                  <div class="form-group mb-0 checkbox-checked">
+                    <div class="form-check checkbox-solid-info d-flex justify-content-between align-items-center">
+                      <div class="d-flex align-items-center">
+                          <input class="form-check-input" id="solid6" type="checkbox">
+                          <label style="position: relative;
+    top: 5px;" class="form-check-label ms-2" for="solid6">Remember password</label>
+                      </div>
+                      <a class="link" href="{{route('tenant_forgot_password',$tenant->subdomain)}}">Forgot password?</a>
+                  </div>
+                  
+                    <!-- Cloudflare Turnstile -->
+                     <div id="cf-turnstile-container" style="margin-top:14px">
+                            <div class="cf-turnstile" data-sitekey="{{ config('services.cloudflare_turnstile.site_key') }}"></div>
+                            <input type="hidden" id="turnstile-response" name="cf-turnstile-response" required>
+                    </div>
+                        @if ($errors->has('cf-turnstile-response'))
+                            <div class="text-danger">{{ $errors->first('cf-turnstile-response') }}</div>
+                        @endif
+
+                    <div class="text-end mt-3">
+                      <button class="btn btn-primary btn-block w-100" type="submit">Login</button>
+                    </div>
+                  </div>
+                 
+                  
+                  <!--<p class="mt-4 mb-0 text-center"><span style="color:#292929">Don't have account?<span><a style="font-weight:600;" class="ms-2" href="{{route('tenant_user_reg',$tenant->subdomain)}}">Create Account</a></p>-->
+                </form>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+@endsection
+
+@section('script')
+<script>
+function showForm(type) {
+    const userForm = document.getElementById('userForm');
+    const adminForm = document.getElementById('adminForm');
+    const userBtn = document.getElementById('userBtn');
+    const adminBtn = document.getElementById('adminBtn');
+
+    if (type === 'admin') {
+        adminForm.style.display = 'block';
+        userForm.style.display = 'none';
+        adminBtn.classList.add('active');
+        userBtn.classList.remove('active');
+    } else {
+        adminForm.style.display = 'none';
+        userForm.style.display = 'block';
+        userBtn.classList.add('active');
+        adminBtn.classList.remove('active');
+    }
+}
+
+// Make User button active by default when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    showForm('user');
+});
+</script>
+
+ <script>
+function togglePassword(element) {
+  const input = element.previousElementSibling;
+
+  if (input.type === "password") {
+    input.type = "text";
+    element.textContent = "hide";
+  } else {
+    input.type = "password";
+    element.textContent = "show";
+  }
+}
+</script>
+
+
+@endsection
