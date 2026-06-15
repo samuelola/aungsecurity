@@ -37,6 +37,7 @@ class ResidentsExport implements FromQuery, WithHeadings, WithMapping
             'Resident Emergency Pin',
             'Status',
             'Visitor Emergency Pin',
+            'Estate Name',
             'Remarks'
         ];
     }
@@ -55,6 +56,8 @@ class ResidentsExport implements FromQuery, WithHeadings, WithMapping
             $user->kyc?->emergency_pin,
             $user->kyc?->kyc_completed == true ? 'Verified' : 'Not verified',
             $user->kyc?->emergency_visitor_pin,
+            $user->newtenant?->estate_name,
+
         ];
     }
 }

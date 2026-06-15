@@ -53,4 +53,11 @@ return [
      'secret'   => env('TURNSTILE_SECRET_KEY'),
      ],
 
+    'ocrspace' => [
+    'key' => env('OCRSPACEAPIKEY'),
+    
+    ],
+
+
+
 ];

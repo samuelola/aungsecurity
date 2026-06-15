@@ -11,7 +11,7 @@ class AdminFaceVerificationController extends Controller
      public function index()
     {
          $tenant = app('tenant');
-        return view('dashboard.user.kyc.face_verification',compact('tenant'));
+        return view('dashboard.admin.kyc.face_verification',compact('tenant'));
     }
     
     public function store(Request $request)
@@ -43,6 +43,6 @@ class AdminFaceVerificationController extends Controller
             'face_image' => $path
         ]);
 
-        return redirect()->route('tenant_user_dashboard');
+        return redirect()->route('tenant_admin_dashboard');
     }
 }

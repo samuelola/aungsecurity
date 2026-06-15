@@ -665,6 +665,12 @@ $('#docForm').on('submit', function (e) {
                 return;
             }
 
+            // OCR custom message fallback
+            if (xhr.responseJSON?.message) {
+                alert(xhr.responseJSON.message);
+                return;
+            }
+
             alert('Something went wrong.');
         }
     });

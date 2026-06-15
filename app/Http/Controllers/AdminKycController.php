@@ -15,6 +15,13 @@ use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+use Google\Cloud\Vision\V1\ImageAnnotatorClient;
+//use Google\Cloud\Vision\V1\Client\ImageAnnotatorClient;
+use Google\Cloud\Vision\V1\Feature;
+use Google\Cloud\Vision\V1\AnnotateImageRequest;
+use Google\Cloud\Vision\V1\BatchAnnotateImagesRequest;
+
+
 
 class AdminKycController extends Controller
 {
@@ -133,76 +140,253 @@ class AdminKycController extends Controller
 
 
     public function storeDoc(DocRequest $request)
-    {
-        $tenant = app('tenant');
-        $user = auth()->user();
+{
+    $tenant = app('tenant');
+    $user = auth()->user();
 
-        $kyc = Kyc::where('user_id', $user->id)
-                ->where('tenant_id', $tenant->id)
-                ->firstOrFail();
+    $kyc = Kyc::where('user_id', $user->id)
+        ->where('tenant_id', $tenant->id)
+        ->firstOrFail();
 
-        if (!$kyc->bio_completed) {
-            return response()->json(['message' => 'Complete bio first'], 403);
+    if (!$kyc->bio_completed) {
+        return response()->json(['message' => 'Complete bio first'], 403);
+    }
+
+    $path = $kyc->id_document;
+
+    if ($request->hasFile('id_document')) {
+
+        // Delete old document
+        if ($kyc->id_document && Storage::disk('public')->exists($kyc->id_document)) {
+            Storage::disk('public')->delete($kyc->id_document);
         }
 
-        //face ++ does not support pdf
+        // Store new document
+        $path = $request->file('id_document')->store(
+            "kyc_docs/tenant_{$tenant->id}",
+            'public'
+        );
 
-        // $request->validate([
-        //     'id_type' => 'required|string',
-        //     'id_document' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-        // ]);
-
-
-        $path = $kyc->id_document;
-
-        if ($request->hasFile('id_document')) {
-
-            // Delete old document
-            if ($kyc->id_document && Storage::disk('public')->exists($kyc->id_document)) {
-                Storage::disk('public')->delete($kyc->id_document);
-            }
-
-            // Store new document
-            $path = $request->file('id_document')->store(
-                "kyc_docs/tenant_{$tenant->id}",
-                'public'
-            );
-
-            // Reset face verification only when new doc uploaded
-            if ($kyc->face_image && Storage::disk('public')->exists($kyc->face_image)) {
-                Storage::disk('public')->delete($kyc->face_image);
-            }
-
-            $kyc->face_image = null;
+        // Reset face image if new doc uploaded
+        if ($kyc->face_image && Storage::disk('public')->exists($kyc->face_image)) {
+            Storage::disk('public')->delete($kyc->face_image);
         }
 
-        $docCompleted = $kyc->doc_completed;
-        
-        $kyc->update([
-            'id_type' => $request->id_type,
-            'id_document' => $path,
-            'doc_completed' => true,
-            // 'kyc_completed' => true,
-            'current_step' => 'face',
-        ]);
+        $kyc->face_image = null;
+    }
 
+    
 
-       $docCompleted = $kyc->doc_completed;
-        
-        $kyc->update([
-            'id_type' => $request->id_type,
-            'id_document' => $path,
-            'doc_completed' => true,
-            // 'kyc_completed' => true,
-            'current_step' => 'face',
-        ]);
+    /*
+    |--------------------------------------------------------------------------
+    | OCR TEXT EXTRACTION
+    |--------------------------------------------------------------------------
+    */
+    $fullPath = Storage::disk('public')->path($path);
+
+    $ocrText = $this->extractDocumentText($fullPath);
+
+    \Log::info($ocrText);
+
+    if (!$ocrText) {
+        return response()->json([
+            'message' => 'Unable to read document text. Try a clearer image.'
+        ], 422);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | EXTRACT STRUCTURED DATA
+    |--------------------------------------------------------------------------
+    */
+    $ocrName = $this->extractNameFromOCR($ocrText);
+    $ocrGender = $this->extractGenderFromOCR($ocrText);
+
+    /*
+    |--------------------------------------------------------------------------
+    | NORMALIZE USER DATA
+    |--------------------------------------------------------------------------
+    */
+    $accountName = strtoupper(trim($user->first_name . ' ' . $user->last_name));
+    $accountGender = strtolower($kyc->gender ?? '');
+
+    /*
+    |--------------------------------------------------------------------------
+    | NAME VALIDATION
+    |--------------------------------------------------------------------------
+    */
+    if ($ocrName) {
+
+        $ocrParts = $this->normalizeName($ocrName);
+        $accountParts = $this->normalizeName($accountName);
+
+        $intersection = array_intersect($ocrParts, $accountParts);
+
+        $score = (count($intersection) / max(count($accountParts), 1)) * 100;
+
+        if ($score < 80) {
+            return response()->json([
+                'message' => "Document Names ". $ocrName. " does not match Kyc names: ". $accountName. " provided",
+                'ocr_name' => $ocrName,
+                'account_name' => $accountName,
+                'match_score' => round($score, 2)
+            ], 422);
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | GENDER VALIDATION
+    |--------------------------------------------------------------------------
+    */
+
+    $ocrGender = $this->normalizeGender($ocrGender);
+    $accountGender = $this->normalizeGender($accountGender);
+
+    if ($ocrGender && $accountGender && $ocrGender !== $accountGender) {
 
         return response()->json([
-            'success' => true,
-            'next' => 'face',
-            'doc_already_completed' => $docCompleted
+            'message' => "Document gender: ".$ocrGender. " does not match Kyc gender: ".$accountGender. " provided" ,
+            'ocr_gender' => $ocrGender,
+            'profile_gender' => $accountGender
+        ], 422);
+    }
+
+   
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | SAVE OCR DATA (PRODUCTION SAFE)
+    |--------------------------------------------------------------------------
+    */
+
+    $docCompleted = $kyc->doc_completed;
+
+    $kyc->update([
+        'ocr_name' => $ocrName,
+        'ocr_gender' => $ocrGender,
+        'ocr_text' => $ocrText,
+        'ocr_verified' => true,
+        'id_type' => $request->id_type,
+        'id_document' => $path,
+        'doc_completed' => true,
+        'current_step' => 'face',
+    ]);
+
+    return response()->json([
+        'success' => true,
+        'next' => 'face',
+        'ocr_name' => $ocrName,
+        'ocr_gender' => $ocrGender,
+        'doc_already_completed' => $docCompleted
+    ]);
+}
+
+
+
+    private function normalizeName($name)
+    {
+        $name = strtoupper($name);
+        $name = preg_replace('/[^A-Z ]/', '', $name);
+        $parts = array_filter(explode(' ', $name));
+
+        sort($parts); // ignore order differences
+        return $parts;
+    }
+
+    private function normalizeGender($gender)
+    {
+        $gender = strtoupper(trim($gender));
+
+        return match ($gender) {
+            'M', 'MALE' => 'male',
+            'F', 'FEMALE' => 'female',
+            default => null,
+        };
+    }
+
+    
+    private function extractDocumentText(string $imagePath): ?string
+    {
+
+
+         $response = Http::asForm()->post('https://api.ocr.space/parse/image', [
+                'apikey' => config('services.ocrspace.key'),
+                'language' => 'eng',
+                'isOverlayRequired' => 'false',
+                'detectOrientation' => 'true',
+                'scale' => 'true',
+                'OCREngine' => 2,
+                'base64Image' => 'data:image/jpeg;base64,' . base64_encode(file_get_contents($imagePath)),
+            ]);
             
-        ]);
+            $result = $response->json();
+
+            return $result['ParsedResults'][0]['ParsedText'] ?? null;
+
+        // try {
+        
+
+            
+
+        // } catch (\Exception $e) {
+
+        //     \Log::error('OCR.Space Error', [
+        //         'error' => $e->getMessage()
+        //     ]);
+
+        //     return null;
+        // }
+    }
+
+
+    private function extractNameFromOCR(string $text): ?string
+{
+    $surname = null;
+    $firstName = null;
+    // $middleName = null;
+
+    preg_match('/Surname\s*:?\s*(.+)/i', $text, $surnameMatch);
+    preg_match('/First\s*Name\s*:?\s*(.+)/i', $text, $firstNameMatch);
+    // preg_match('/Middle\s*Name\s*:?\s*(.+)/i', $text, $middleNameMatch);
+
+    $surname = isset($surnameMatch[1]) ? trim(explode("\n", $surnameMatch[1])[0]) : null;
+    $firstName = isset($firstNameMatch[1]) ? trim(explode("\n", $firstNameMatch[1])[0]) : null;
+    // $middleName = isset($middleNameMatch[1]) ? trim(explode("\n", $middleNameMatch[1])[0]) : null;
+
+    $name = implode(' ', array_filter([
+        $firstName,
+        // $middleName,
+        $surname,
+    ]));
+
+    return $name ?: null;
+}
+
+    private function extractGenderFromOCR(string $text): ?string
+    {
+        $text = strtoupper($text);
+
+        if (preg_match('/\b(GENDER|SEX)\b\s*[:\-]?\s*(MALE|FEMALE|M|F)\b/', $text, $m)) {
+
+            return match ($m[2]) {
+                'M', 'MALE' => 'male',
+                'F', 'FEMALE' => 'female',
+                default => null,
+            };
+        }
+
+        // fallback (sometimes standalone)
+        if (preg_match('/\b(MALE|FEMALE)\b/', $text, $m)) {
+            return strtolower($m[1]);
+        }
+
+        if (preg_match('/\bM\b/', $text)) return 'male';
+        if (preg_match('/\bF\b/', $text)) return 'female';
+
+        return null;
     }
 
 
