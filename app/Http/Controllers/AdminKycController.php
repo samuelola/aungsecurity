@@ -15,11 +15,6 @@ use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-use Google\Cloud\Vision\V1\ImageAnnotatorClient;
-//use Google\Cloud\Vision\V1\Client\ImageAnnotatorClient;
-use Google\Cloud\Vision\V1\Feature;
-use Google\Cloud\Vision\V1\AnnotateImageRequest;
-use Google\Cloud\Vision\V1\BatchAnnotateImagesRequest;
 
 
 
