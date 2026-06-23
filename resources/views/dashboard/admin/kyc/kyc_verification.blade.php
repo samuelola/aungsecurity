@@ -98,12 +98,12 @@ label{
                                       @csrf
                                       <div class="col-sm-6">
                                         <label class="form-label" for="customFirstname">First Name<span class="text-danger">*</span></label>
-                                        <input class="form-control" id="customFirstname" name="first_name"  type="text" placeholder="Enter first name" value="{{$user->first_name}}" readonly>
+                                        <input class="form-control" id="customFirstname" name="first_name"  type="text" placeholder="Enter first name" value="{{$user->first_name}}">
                                         <div class="valid-feedback">Looks good!</div>
                                       </div>
                                       <div class="col-sm-6">
                                         <label class="form-label" for="customLastname">Last Name<span class="text-danger">*</span></label>
-                                        <input class="form-control" id="customLastname" name="last_name" type="text" placeholder="Enter last name" value="{{$user->last_name}}" readonly>
+                                        <input class="form-control" id="customLastname" name="last_name" type="text" placeholder="Enter last name" value="{{$user->last_name}}">
                                         <div class="valid-feedback">Looks good!</div>
                                       </div>
                                       <div class="col-sm-6">
@@ -270,10 +270,16 @@ label{
                                                       
 
                                                       @if($user->role == 'admin')
+                                                          
+                                                            @php
+                                                                
+                                                                $storageUrl = env('R2_PUBLIC_URL');
+                                                            @endphp
 
                                                              @if($kyc->id_document && in_array($ext, ['jpg','jpeg','png']))
+                                                                   
                                                                     <img id="previewImg"
-                                                                        src="{{ Storage::url($kyc->id_document) }}"
+                                                                        src="{{ $storageUrl. '/' .$kyc->id_document }}"
                                                                         class="img-fluid rounded shadow-sm mb-2"
                                                                         style="max-height:180px">
                                                                 @else
@@ -309,7 +315,7 @@ label{
                                                   <i class="fa-solid fa-arrow-right proceed-next me-1"></i> Back
                                               </button>
 
-                                              <button type="submit" class="btn btn-primary">
+                                              <button type="submit" class="btn btn-primary" id="submitBtn">
                                                   proceed to Capture <i class="fa-solid fa-square-check proceed-next pe-2"></i>
                                               </button>
                                            </div>
@@ -619,6 +625,14 @@ $('#docForm').on('submit', function (e) {
 
     let formData = new FormData(this);
 
+    // START LOADING STATE
+    let $btn = $('#submitBtn');
+    $btn.prop('disabled', true);
+    $btn.html(`
+        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        Uploading...
+    `);
+
     $.ajax({
 
         url: $(this).attr('action'),
@@ -672,6 +686,14 @@ $('#docForm').on('submit', function (e) {
             }
 
             alert('Something went wrong.');
+        },
+
+        complete: function () {
+            // RESTORE BUTTON (runs on success OR error)
+            $btn.prop('disabled', false);
+            $btn.html(`
+                <span class="btn-text">Upload Document</span>
+            `);
         }
     });
 });

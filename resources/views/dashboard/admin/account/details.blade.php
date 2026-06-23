@@ -1,7 +1,7 @@
 @extends('dashboard.admin.admin_master')
 
 @section('title')
-    Resident
+    Admin
 @endsection
 
 
@@ -12,7 +12,7 @@
             <div class="page-title">
               <div class="row">
                 <div class="col-sm-6 col-12"> 
-                  <h2>Resident</h2>
+                  <h2>Admin</h2>
                   
                 </div>
                 <div class="col-sm-6 col-12">
@@ -40,8 +40,12 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <h4>Photo</h4>
+                                             @php
+                                                                
+                                                $storageUrl = env('R2_PUBLIC_URL');
+                                            @endphp
                                             @if($resident->kyc->face_image)
-                                                <img src="{{ asset('storage/'.$resident->kyc->face_image) }}"
+                                                <img src="{{ $storageUrl. '/' .$resident->kyc->face_image }}"
                                                     class="img-fluid rounded-circle mb-3"
                                                     style="width:150px; height:150px; object-fit:cover;">
                                             @else

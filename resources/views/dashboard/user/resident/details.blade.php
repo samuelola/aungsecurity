@@ -39,9 +39,13 @@
                                 <div class="col-md-4 text-center">
                                     <div class="row">
                                         <div class="col-md-12">
+                                            @php
+                                                                
+                                                $storageUrl = env('R2_PUBLIC_URL');
+                                            @endphp
                                             <h4>Photo</h4>
-                                            @if($resident->kyc->face_image)
-                                                <img src="{{ asset('storage/'.$resident->kyc->face_image) }}"
+                                            @if($resident?->kyc?->face_image)
+                                                <img src="{{$storageUrl. '/' .$resident->kyc->face_image }}"
                                                     class="img-fluid rounded-circle mb-3"
                                                     style="width:150px; height:150px; object-fit:cover;">
                                             @else

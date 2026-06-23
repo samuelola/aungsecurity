@@ -178,6 +178,10 @@ label{
                                                 <td scope="row">{{$allresident->kyc->occupants ?? 'N/A'}} </td>
                                                 <td scope="row">{{$allresident->kyc->flat_number ?? 'N/A'}} </td>
                                                 <td>
+                                                    @php
+                                                                
+                                                        $storageUrl = env('R2_PUBLIC_URL');
+                                                    @endphp
                                                     <button 
                                                         class="btn btn-primary btn-sm viewResidentBtn"
 
@@ -193,7 +197,7 @@ label{
                                                         data-lga="{{ $allresident?->kyc?->lga->name  ?? 'N/A'}}"
                                                         data-agentname="{{ $allresident->kyc->agent_name  ?? 'N/A'}}"
                                                         data-agentnumber="{{ $allresident?->kyc?->agent_number  ?? 'N/A' }}"
-                                                        data-image="{{ $allresident?->kyc?->face_image ? asset('storage/'.$allresident->kyc->face_image) : '' }}"
+                                                        data-image="{{ $allresident?->kyc?->face_image ? $storageUrl. '/' .$allresident->kyc->face_image : '' }}"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#residentModal"
                                                     >

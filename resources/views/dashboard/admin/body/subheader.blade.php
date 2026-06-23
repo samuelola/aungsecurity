@@ -5,6 +5,7 @@
             $kyc = \App\Models\Kyc::where('user_id', auth()->id())
             ->where('tenant_id', $tenant->id)
             ->first();
+            $storageUrl = env('R2_PUBLIC_URL');
         @endphp
         <div class="logo-wrapper d-flex align-items-center col-auto">
             <a href="{{route('tenant_admin_dashboard',$get_subdomain)}}">
@@ -104,7 +105,7 @@
                 <div class="user-wrap">
                   <div class="user-img">
                       <img src="{{ $kyc?->face_image 
-                          ? asset('storage/' . $kyc->face_image) 
+                          ? $storageUrl. '/' .$kyc->face_image
                           : asset('assets/images/profile.png') }}"
                           alt="user">
                   </div>

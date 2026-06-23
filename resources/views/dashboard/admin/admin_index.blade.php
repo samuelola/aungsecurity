@@ -125,7 +125,7 @@
                 </div>
               </div>
 
-              <div class="col-xl-3">
+              {{-- <div class="col-xl-3">
                 <div class="card overflow-hidden">
                   <div class="chart-widget-top">
                     <div class="row card-body pb-0 m-0">
@@ -133,7 +133,7 @@
                       <div class="col-12 p-0" style="padding-top: 10px !important;">
                             <h3 class="mb-2">Offline Emergency Access Pin</h3>
 
-                            <!-- Input + Copy Button -->
+                           
                             <div class="input-group mb-2">
                               <input type="text" id="EmergencyLink" class="form-control"
                                 value="{{$getkyc?->emergency_pin}}" readonly>
@@ -141,7 +141,7 @@
                               <button class="btn btn-success" onclick="copyEmergencyLink()">Copy</button>
                             </div>
 
-                            <!-- Popup message -->
+                           
                             <small id="copyEmergencyMsg" style="color: green; display: none;">
                               Copied!
                             </small>
@@ -167,7 +167,7 @@
                       <div class="col-12 p-0" style="padding-top: 10px !important;">
                             <h3 class="mb-2">Offline Visitor Access Pin</h3>
 
-                            <!-- Input + Copy Button -->
+                            
                             <div class="input-group mb-2">
                               <input type="text" id="EmergencyvisitorLink" class="form-control"
                                 value="{{$getkyc?->emergency_visitor_pin}}" readonly>
@@ -175,7 +175,7 @@
                               <button class="btn btn-success" onclick="copyEmergencyvisitorLink()">Copy</button>
                             </div>
 
-                            <!-- Popup message -->
+                            
                             <small id="copyEmergencyvisitorMsg" style="color: green; display: none;">
                               Copied!
                             </small>
@@ -191,7 +191,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> --}}
 
               
 

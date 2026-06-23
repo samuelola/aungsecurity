@@ -5,6 +5,7 @@
 @endsection
 
 
+
 @section('content')
 <style>
     .avatar-circle{
@@ -121,11 +122,18 @@
                             </div>
 
                             <div class="row">
+                                <div class="card-no-border d-flex justify-content-between align-items-center">
+    
+                                    
+                                    {{-- <button onclick="startExport()" class="btn btn-success">
+                                        Export Residents <i class="ti-export"></i>
+                                    </button> --}}
+                                </div>
                                
                                  <div class="col-sm-12">
                                     <div class="card overflow-hidden">
                                     <div class="card-header card-no-border">
-                                        <h3>All Users</h3>
+                                        <h3>All Users/Residents</h3>
                                         
                                     </div>
                                         <div class="table-responsive signal-table">
@@ -136,8 +144,11 @@
                                                 <th scope="col">Full Name</th>
                                                 <th scope="col">Email</th>
                                                 <th scope="col">Phone Number</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Subscription Status</th>
                                                 <th scope="col">Role</th>
                                                 <th scope="col">Created</th>
+                                                <th scope="col">Get Emergency code</th>
                                                 <th scope="col">Action</th>
                                                 
                                                 </tr>
@@ -147,13 +158,58 @@
                                                     $sn = 1;
                                                 @endphp
                                                 @foreach($users as $user)
+                                                @php
+                                                $hasSubscription = \App\Models\Subscription::where('user_id',$user->id)
+                                                    ->where('status','active')
+                                                    ->where('ends_at','>', now())
+                                                    ->exists();
+                                                @endphp
                                                 <tr>
                                                     <th scope="row">{{$sn++}}</th>
                                                     <td scope="row">{{ucfirst($user->first_name ?? 'N/A')}} {{ucfirst($user->last_name ?? 'N/A')}} </td>
                                                     <td scope="row">{{$user->email ?? 'N/A'}} </td>
                                                     <td scope="row">{{$user->kyc->phone ?? 'N/A'}}</td>
+                                                    <td scope="row">
+                                                     @if($user?->kyc?->kyc_completed == true)
+                                                        <span class="badge badge-light-success">
+                                                            Verified
+                                                        </span>
+                                                     @else 
+                                                         <span class="badge badge-light-danger">
+                                                            Not Verified
+                                                        </span>  
+                                                     @endif
+                                                   
+                                                    </td>
+                                                     <td scope="row">
+                                                     @if($hasSubscription)
+                                                        <span class="badge badge-light-success">
+                                                            Active
+                                                        </span>
+                                                     @else 
+                                                         <span class="badge badge-light-danger">
+                                                            Not Active
+                                                        </span>  
+                                                     @endif
+                                                   
+                                                    </td>
                                                     <td scope="row">{{$user->role ?? 'N/A'}}</td>
                                                     <td>{{ $tenant->created_at->format('d M Y') }}</td>
+                                                    <td>
+                                                        @if($user?->kyc?->kyc_completed && $hasSubscription)
+                                                            <a href="{{route('emergency_code',[
+                                                               'tenant'=> $tenant->id,
+                                                               'user'=>$user->id
+                                                               ])
+                                                            }}" 
+                                                            class="btn btn-success btn-sm d-inline-flex align-items-center gap-1">
+                                                                Admin Emergency code
+                                                            </a>
+                                                        @else
+                                                            
+                                                        @endif
+                                                        
+                                                    </td>
                                                     <td>
 
                                                         <button

@@ -67,12 +67,14 @@ Route::controller(MainController::class)->group(function () {
       Route::get('/blog_details', 'BlogDetails')->name('blog_details');
       Route::get('/privacy_policy', 'PrivacyPolicy')->name('privacy_policy');
       Route::get('/terms', 'TermService')->name('terms');
+      Route::get('/privacy_pdf/{file}','newPrivacyPolicy')->name('new_privacy_policy');
 });
 
 Route::controller(TenantController::class)->group(function () {
       
       Route::get('/register', 'create')->name('tenant_create');
       Route::post('/register', 'store')->name('tenant_store');
+      Route::get('/service_pdf/{servicefile}','newServiceAgreement')->name('new_service_agreement');
 });
 
 
@@ -96,6 +98,7 @@ Route::domain('{tenant}.' . $domain)
          Route::post('/estate_registerr', 'storeRegister')->name('tenant_user_store_reg');
          Route::post('/estate_register_admin', 'storeRegisterAdmin')->name('estate_register_admin');
          Route::get('/estate_login','showLoginForm')->name('tenant_user_login');
+         Route::get('/useragreement_pdf/{useragreefile}','newUserAgreement')->name('new_user_agreement');
          
         Route::middleware(['block.ip'])->group(function () {
          Route::post('/estate_loginn', 'userLogin')->name('tenant_user_submit'); // login post
@@ -302,7 +305,9 @@ Route::middleware(['superadmin.auth'])->group(function () {
       Route::get('/tenants', 'AllTenantS')->name('alltenants');
       Route::post('/superadmin_logout','superAdminLogout')->name('superadmin.logout'); 
       Route::get('/superadmin/estate/{tenant}','estate')->name('superadmin.estate.users');
-      
+      Route::get('/superadmin/estate/{tenant}/{user}','getSuperEmergency')->name('emergency_code');
+      Route::post('/super-admin-emergency-pin/{tenant}/{user}', 'regenerateSuperAdminEmergencyPin')->name('super.admin.emergency.pin.regenerate'); 
+      Route::post('/super-admin-emergency-visitor-pin/{tenant}/{user}', 'regenerateSuperAdminVisitorEmergencyPin')->name('super.admin.visitor.emergency.pin.regenerate');
 });
 
 

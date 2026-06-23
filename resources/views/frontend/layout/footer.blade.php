@@ -90,23 +90,13 @@
 
                                         <ul class="links-list">
                                             <li>
-                                                <a href="/mod/page/view.php?id=21">About Us</a>
+                                                <a href="#">Home</a>
                                             </li>
                                             <li>
-                                                <a href="/course/index.php?categoryid=2">All Courses</a>
+                                                <a href="#">About Us</a>
                                             </li>
-                                            <li>
-                                                <a href="/mod/page/view.php?id=25">Become An Instructor</a>
-                                            </li>
-                                            <li>
-                                                <a href="/blog/">Our Blog</a>
-                                            </li>
-                                            <li>
-                                                <a href="/mod/page/view.php?id=40">Contact Us</a>
-                                            </li>
-                                            <li>
-                                                <a href="/mod/page/view.php?id=40">Help Center</a>
-                                            </li>
+                                            
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -116,27 +106,19 @@
                                     style="animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function: ease; animation-delay: 300ms; animation-direction: normal; animation-fill-mode: both;">
                                     <div class="single-footer-widget">
 
-                                        <h3>Top Categories</h3>
+                                        <h3>Top Pages</h3>
 
                                         <ul class="links-list">
                                             <li>
-                                                <a href="/course/index.php?categoryid=2">Data Science</a>
+                                                <a href="#">Price</a>
                                             </li>
                                             <li>
-                                                <a href="/course/index.php?categoryid=3">Web Development</a>
+                                                <a href="#">Product</a>
                                             </li>
                                             <li>
-                                                <a href="/course/index.php?categoryid=18">Graphic Design</a>
+                                                <a href="#">Blog</a>
                                             </li>
-                                            <li>
-                                                <a href="/course/index.php?categoryid=13">Business &amp; Marketing</a>
-                                            </li>
-                                            <li>
-                                                <a href="/course/index.php?categoryid=7">Personal Growth</a>
-                                            </li>
-                                            <li>
-                                                <a href="/course/index.php?categoryid=9">Science &amp; Research</a>
-                                            </li>
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -153,14 +135,14 @@
                                                 <a href="#">Terms of Service</a>
                                             </li>
                                             <li>
-                                                <a href="#">Privacy Policy</a>
+                                                {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#privacypolicyModal">Privacy Policy</a> --}}
+                                                <a href="#" 
+                                                  class="view-pdf"
+                                                  data-pdf="{{ route('new_privacy_policy', 'aung_privacy_policy.pdf') }}">
+                                                  Privacy Policy
+                                                </a>
                                             </li>
-                                            <li>
-                                                <a href="#">Instructors</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Success Story</a>
-                                            </li>
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -193,6 +175,8 @@
                             </div>
                         </div>
 
+                          
+
                         <!-- Copyright Area -->
                         <div class="copyright-area">
                             <p>
@@ -208,6 +192,8 @@
                     </div>
 
                 </footer>
+
+                
 
 
 
@@ -257,6 +243,23 @@ window.addEventListener("scroll", () => {
 
 backToTop.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
+});
+</script>
+
+<script>
+document.querySelectorAll('.view-pdf').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        document.getElementById('pdfFrame').src =
+            this.dataset.pdf;
+
+        const modal = new bootstrap.Modal(
+            document.getElementById('pdfModal')
+        );
+
+        modal.show();
+    });
 });
 </script>
 

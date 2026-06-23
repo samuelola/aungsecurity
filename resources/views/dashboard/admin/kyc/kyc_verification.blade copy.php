@@ -1,4 +1,4 @@
-@extends('dashboard.user.tenant_master')
+@extends('dashboard.admin.admin_master')
 
 @section('title')
     Kyc Verification
@@ -94,7 +94,7 @@ label{
                                   <div class="tab-pane fade show active" id="bio" role="tabpanel" aria-labelledby="bio-tab">
                                     <h5 class="f-w-600">Bio Data Information </h5>
                                     <p>Fill up the following information</p>
-                                    <form method="post" action="{{route('kyc.bio',$tenant->subdomain)}}" class="row g-3 needs-validation basic-form" id="bioForm">
+                                    <form method="post" action="{{route('adminkyc.bio',$tenant->subdomain)}}" class="row g-3 needs-validation basic-form" id="bioForm">
                                       @csrf
                                       <div class="col-sm-6">
                                         <label class="form-label" for="customFirstname">First Name<span class="text-danger">*</span></label>
@@ -183,18 +183,6 @@ label{
                                         </select>
                                       </div>
 
-                                      <div class="col-sm-4">
-                                        <label class="form-label" for="customEmail01">Agent Name<span class="text-danger">*</span></label>
-                                        <input class="form-control" id="customEmail01" name="agent_name" type="text"   value="{{$kyc->agent_name ?? ''}}" >
-                                        <div style="color:#dc3545;" class="valid-feedback">Looks good!</div>
-                                      </div>
-
-                                      <div class="col-sm-4">
-                                        <label class="form-label" for="customEmail01">Agent Number<span class="text-danger">*</span></label>
-                                        <input class="form-control" id="customEmail01" name="agent_number" type="number"   value="{{$kyc->agent_number ?? ''}}" >
-                                        <div style="color:#dc3545;" class="valid-feedback">Looks good!</div>
-                                      </div>
-                                     
                                       
                                       <div class="col-12 text-end">
                                         
@@ -212,7 +200,7 @@ label{
 
                                     <div class="row g-3">
 
-                                        <form method="post" action="{{route('kyc.doc',$tenant->subdomain)}}" class="row g-3 needs-validation basic-form" id="docForm" enctype="multipart/form-data">
+                                        <form method="post" action="{{route('adminkyc.doc',$tenant->subdomain)}}" class="row g-3 needs-validation basic-form" id="docForm" enctype="multipart/form-data">
                                            @csrf
                                             <div class="col-sm-3"></div>
                                             <div class="col-sm-6 mx-auto">
@@ -279,36 +267,32 @@ label{
                                                       @php
                                                           $ext = $kyc->id_document ? pathinfo($kyc->id_document, PATHINFO_EXTENSION) : '';
                                                       @endphp
+                                                      
 
-                                                      @if($user->role == 'user')
+                                                      @if($user->role == 'admin')
+                                                      
 
-                                                              @php
-                                                                
-                                                                $storageUrl = env('R2_PUBLIC_URL');
-                                                            @endphp
+                                                             @if($kyc->id_document && in_array($ext, ['jpg','jpeg','png']))
+                                                                    <img id="previewImg"
+                                                                        src="{{ Storage::url($kyc->id_document) }}"
+                                                                        class="img-fluid rounded shadow-sm mb-2"
+                                                                        style="max-height:180px">
+                                                                @else
+                                                                    <img id="previewImg" class="img-fluid rounded shadow-sm mb-2" style="max-height:180px; display:none;">
+                                                                @endif
 
-                                                              @if($kyc->id_document && in_array($ext, ['jpg','jpeg','png']))
-                                                              <img id="previewImg"
-                                                                  src="{{ $storageUrl. '/' .$kyc->id_document }}"
-                                                                  class="img-fluid rounded shadow-sm mb-2"
-                                                                  style="max-height:180px">
-                                                              @else
-                                                                  <img id="previewImg" class="img-fluid rounded shadow-sm mb-2" style="max-height:180px; display:none;">
-                                                              @endif
+                                                                @if($kyc->id_document && !in_array($ext, ['jpg','jpeg','png']))
+                                                                    <p class="fw-medium text-success">
+                                                                        <i class="fa-solid fa-file-pdf me-1"></i>
+                                                                        Document uploaded successfully
+                                                                    </p>
+                                                                @endif
 
-                                                              @if($kyc->id_document && !in_array($ext, ['jpg','jpeg','png']))
-                                                                  <p class="fw-medium text-success">
-                                                                      <i class="fa-solid fa-file-pdf me-1"></i>
-                                                                      Document uploaded successfully
-                                                                  </p>
-                                                              @endif
+                                                                @if($kyc->id_document)
+                                                                    <p class="small text-muted mb-0">Previously uploaded document</p>
+                                                                @endif
 
-                                                              @if($kyc->id_document)
-                                                                  <p class="small text-muted mb-0">Previously uploaded document</p>
-                                                              @endif
-
-                                                      @endif
-
+                                                            @endif
                                                       
                                                   </div>
 
@@ -344,7 +328,7 @@ label{
 
 
                                     
-                                     <form id="faceForm" action="{{ route('kyc.face.compare', $tenant->subdomain) }}">
+                                     <form id="faceForm" action="{{ route('adminkyc.face.compare', $tenant->subdomain) }}">
                                       @csrf
                                       <input type="hidden" name="image" id="image">
 
@@ -698,6 +682,7 @@ $('#docForm').on('submit', function (e) {
 
             alert('Something went wrong.');
         },
+
         complete: function () {
             // RESTORE BUTTON (runs on success OR error)
             $btn.prop('disabled', false);
@@ -767,7 +752,7 @@ $('#capture').on('click', function () {
     $('#image').val(canvas.toDataURL('image/jpeg'));
 
     $.ajax({
-        url: "{{ route('kyc.face.compare', $tenant->subdomain) }}",
+        url: "{{ route('adminkyc.face.compare', $tenant->subdomain) }}",
         method: 'POST',
         data: $('#faceForm').serialize(),
 
@@ -778,7 +763,7 @@ $('#capture').on('click', function () {
             stopCamera(); // stop webcam stream
 
             window.location.href =
-                "{{ route('tenant_user_dashboard', app('tenant')->subdomain) }}";
+                "{{ route('tenant_admin_dashboard', app('tenant')->subdomain) }}";
         },
 
         error: function (xhr) {

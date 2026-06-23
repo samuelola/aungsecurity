@@ -394,4 +394,18 @@ class TenantUserController extends Controller
         }
     }
 
+
+    
+    public function newUserAgreement(Request $request,$tenant,$useragreefile){
+
+         $path = storage_path(
+           "app/public/pdfs/{$useragreefile}"
+         );
+
+         return response()->file($path,[
+          'Content-Type' => 'application/pdf',
+          'Content-Disposition' => 'inline; filename="' . basename($path) . '"'
+         ]);
+    }
+
 }

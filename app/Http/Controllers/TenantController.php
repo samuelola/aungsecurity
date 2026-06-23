@@ -57,4 +57,16 @@ class TenantController extends Controller
         return view('auth.tenant_register');
     }
 
+    public function newServiceAgreement(Request $request,$servicefile){
+
+         $path = storage_path(
+           "app/public/pdfs/{$servicefile}"
+         );
+
+         return response()->file($path,[
+          'Content-Type' => 'application/pdf',
+          'Content-Disposition' => 'inline; filename="' . basename($path) . '"'
+         ]);
+    }
+
 }

@@ -66,7 +66,7 @@
                                                     <td>
                                                         <a href="{{ route('superadmin.estate.users', $tenant->id) }}" 
                                                         class="btn btn-info btn-sm d-inline-flex align-items-center gap-1">
-                                                            <i class="bi bi-people-fill"></i> View Estates
+                                                            <i class="bi bi-people-fill"></i> View Residents
                                                         </a>
                                                     </td>
                                                 

@@ -148,11 +148,16 @@
 
                                                         <div class="card-body-section">
 
+                                                            @php
+                                                                
+                                                                $storageUrl = env('R2_PUBLIC_URL');
+                                                            @endphp
+
                                                             <div class="photo-section">
 
                                                                 @if($kyc->face_image)
                                                                     <img
-                                                                        src="{{ asset('storage/'.$kyc->face_image) }}"
+                                                                        src="{{ $storageUrl. '/' .$kyc->face_image }}"
                                                                         alt="Resident Photo">
                                                                 @endif
 
@@ -178,10 +183,10 @@
                                                                     <strong>Phone Number:</strong>
                                                                     {{ $kyc?->phone }}
                                                                 </p>
-                                                                <p>
+                                                                {{-- <p>
                                                                     <strong>Emergency Pin:</strong>
                                                                     {{ $kyc?->emergency_pin }}
-                                                                </p>
+                                                                </p> --}}
                                                                 <p>
                                                                     <strong>Address:</strong>
                                                                     {{ $kyc?->address }}

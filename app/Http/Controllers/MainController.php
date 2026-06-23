@@ -57,5 +57,20 @@ class MainController extends Controller
          return "hello worldd";
     }
 
+
+    public function newPrivacyPolicy(Request $request,$file){
+
+         $path = storage_path(
+           "app/public/pdfs/{$file}"
+         );
+
+         return response()->file($path,[
+          'Content-Type' => 'application/pdf',
+          'Content-Disposition' => 'inline; filename="' . basename($path) . '"'
+         ]);
+    }
+
+    
+
     
 }

@@ -57,6 +57,8 @@ class AuthService implements RegisterInterface{
             'password' => bcrypt($userRequest->password),
             'tenant_id' => $tenant->id,
             'role' => 'user',
+            'user_agreement_accepted' => true,
+            'user_agreement_accepted_at' => now()
         ]);
 
         $this->generateVerificationCode($user);

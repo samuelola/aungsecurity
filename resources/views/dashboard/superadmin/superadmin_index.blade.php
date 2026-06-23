@@ -219,10 +219,10 @@
                               <td>{{$value->user->first_name}} {{$value->user->last_name}}</td>
                              
                               <td>{{$value->tenant->estate_name ?? ''}}</td>
-                              <td>&#8358;{{$value->amount ?? ''}}</td>
-                              <td>&#8358;{{$value->platform_earning ?? ''}}</td>
-                              <td>&#8358;{{$value->tenant_earning  ?? ''}}</td>
-                              <td>&#8358;{{$value->fees  ?? ''}}</td>
+                              <td>&#8358;{{ number_format($value->amount ?? 0.00) }}</td>
+                              <td>&#8358;{{$value->platform_earning ?? 0.00}}</td>
+                              <td>&#8358;{{$value->tenant_earning  ?? 0.00}}</td>
+                              <td>&#8358;{{$value->fees  ?? 0.00}}</td>
                               <td>{{$value->subscription->plan->name ?? 'Not Available'}}</td>
                               <td>{{$value->reference ?? 'Not Available'}}</td>
                               <td>

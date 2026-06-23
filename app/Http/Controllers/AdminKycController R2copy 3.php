@@ -8,18 +8,17 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Kyc;
 use App\Models\State;
 use App\Models\Lga;
-use App\Http\Requests\BioRequest;
+use App\Http\Requests\AdminBioRequest;
 use App\Http\Requests\DocRequest;
 use App\Models\Tenant;
 use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Notifications\NewMessageNotification;
 
 
 
 
-class KycController extends Controller
+class AdminKycController extends Controller
 {
      
         public function index()
@@ -40,7 +39,7 @@ class KycController extends Controller
             $lgas = Lga::where('state_id', $kyc->state_id)->get();
         }
 
-        return view('dashboard.user.kyc.kyc_verification', compact(
+        return view('dashboard.admin.kyc.kyc_verification', compact(
             'kyc',
             'user',
             'allStates',
@@ -57,7 +56,7 @@ class KycController extends Controller
     }
     
     
-    public function storeBio(BioRequest $request)
+    public function storeBio(AdminBioRequest $request)
     {
         $tenant = app('tenant');
         $user = auth()->user();
@@ -108,12 +107,6 @@ class KycController extends Controller
                 'current_step' => 'document',
                 'bio_completed' => true,
                 
-            ]);
-
-            $user->update([
-                'first_name' => $request->first_name,
-                'last_name'  => $request->last_name,
-                'email' => $request->email
             ]);
 
         } catch (\Illuminate\Database\QueryException $e) {
@@ -194,8 +187,6 @@ class KycController extends Controller
 
     @unlink($tempPath);
 
-    \Log::info($ocrText);
-
     if (!$ocrText) {
         return response()->json([
             'message' => 'Unable to read document text. Try a clearer image.'
@@ -217,8 +208,7 @@ class KycController extends Controller
 
         if ($score < 80) {
             return response()->json([
-                // 'message' => "Document name does not match KYC name",
-                'message' => "Document Names ". $ocrName. " does not match Kyc names: ". $accountName. " provided",
+                'message' => "Document name does not match KYC name",
                 'ocr_name' => $ocrName,
                 'account_name' => $accountName,
                 'match_score' => round($score, 2)
@@ -231,8 +221,7 @@ class KycController extends Controller
 
     if ($ocrGender && $accountGender && $ocrGender !== $accountGender) {
         return response()->json([
-            // 'message' => "Gender mismatch",
-            'message' => "Document gender: ".$ocrGender. " does not match Kyc gender: ".$accountGender. " provided" ,
+            'message' => "Gender mismatch",
             'ocr_gender' => $ocrGender,
             'profile_gender' => $accountGender
         ], 422);
@@ -340,25 +329,28 @@ class KycController extends Controller
 }
 
     private function extractGenderFromOCR(string $text): ?string
-{
-    $text = strtoupper($text);
+    {
+        $text = strtoupper($text);
 
-    if (preg_match('/(?:GENDER|SEX)\s*[:\-]?\s*([A-Z]{1,10})/', $text, $matches)) {
+        if (preg_match('/\b(GENDER|SEX)\b\s*[:\-]?\s*(MALE|FEMALE|M|F)\b/', $text, $m)) {
 
-        $value = trim($matches[1]);
-
-        if (str_starts_with($value, 'F')) {
-            return 'female';
+            return match ($m[2]) {
+                'M', 'MALE' => 'male',
+                'F', 'FEMALE' => 'female',
+                default => null,
+            };
         }
 
-        if (str_starts_with($value, 'M')) {
-            return 'male';
+        // fallback (sometimes standalone)
+        if (preg_match('/\b(MALE|FEMALE)\b/', $text, $m)) {
+            return strtolower($m[1]);
         }
+
+        if (preg_match('/\bM\b/', $text)) return 'male';
+        if (preg_match('/\bF\b/', $text)) return 'female';
+
+        return null;
     }
-
-    return null;
-}
-
 
 
     public function compareFace(Request $request)
@@ -504,26 +496,13 @@ class KycController extends Controller
     |-------------------------
     */
 
-    // $plainPin = random_int(100000, 999999);
-    // $vistorEmergencyPin = random_int(100000, 999999);
-
     $kyc->update([
         'face_image' => $liveFacePath,
         'face_confidence' => $confidence,
         'face_verified' => true,
         'kyc_completed' => true,
-        // 'emergency_pin' => $plainPin,
-        // 'emergency_pin_used_at' => now(),
-        // 'emergency_visitor_pin' => $vistorEmergencyPin,
         'current_step' => 'completed',
     ]);
-
-    $user->notify(
-        new NewMessageNotification(
-            'KYC Successful',
-            "Your KYC  is successful"
-        )
-    );
 
     return response()->json([
         'success' => true,
@@ -556,7 +535,8 @@ public function documentPreview(Request $request)
 }
 
 
-public function regenerateResidentEmergencyPin(Request $request)
+
+public function regenerateEmergencyPin(Request $request)
 {
     $tenant = app('tenant');
     $user = auth()->user();
@@ -579,8 +559,7 @@ public function regenerateResidentEmergencyPin(Request $request)
 }
 
 
-
-public function regenerateResidentEmergencyVisitorPin(Request $request)
+public function regenerateEmergencyVisitorPin(Request $request)
 {
     $tenant = app('tenant');
     $user = auth()->user();

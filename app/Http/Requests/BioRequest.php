@@ -31,6 +31,9 @@ class BioRequest extends FormRequest
             
         return [
             
+            'first_name'=> 'required',
+            'last_name' => 'required',
+            'email'     => 'required',
             'phone'=> 'required|digits:11',
             // 'phone' => [
             //     'required',

@@ -17,11 +17,13 @@ use App\Services\InvitationService;
 use App\Services\TransactionGraphService;
 use App\Services\ActivityService;
 use DB;
+use App\Models\Kyc;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use App\Models\BlockedIp;
 use App\Http\Requests\SuperadminLoginRequest;
+use Carbon\Carbon;
 
 
 class SuperAdminController extends Controller
@@ -250,6 +252,63 @@ class SuperAdminController extends Controller
             'subscriptionsCount'
             ));
     }
+
+    public function getSuperEmergency($tenant,$user)
+    {
+        
+        $emergency = Kyc::with(['user','tenant'])
+                          ->where('tenant_id',$tenant)
+                          ->where('user_id',$user)
+                          ->first();
+
+        return view('dashboard.superadmin.estates.emergency', compact(
+            'emergency'
+        ));               
+    }
+
+    public function regenerateSuperAdminEmergencyPin($tenant, $user)
+    {
+        $kyc = Kyc::where('user_id', $user)
+        ->where('tenant_id', $tenant)
+        ->firstOrFail();
+
+        // Generate new secure pin
+        $newPin = random_int(100000, 999999);
+
+        $kyc->update([
+            'emergency_pin' => $newPin,
+            'emergency_pin_expires_at' => now()->addHours(3),
+            //'emergency_pin_expires_at' => now()->addMinutes(2),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'emergency_pin' => $newPin,
+            'expires_at' => $kyc->fresh()->emergency_pin_expires_at,
+        ]);
+    }
+
+    public function regenerateSuperAdminVisitorEmergencyPin($tenant, $user)
+    {
+        
+        $kyc = Kyc::where('user_id', $user)
+            ->where('tenant_id', $tenant)
+            ->firstOrFail();
+
+        // Generate new secure pin
+        $newPin = random_int(100000, 999999);
+
+        $kyc->update([
+            'emergency_visitor_pin' => $newPin
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'emergency_visitor_pin' => $newPin
+        ]);
+    }
+
+    
 
     
 

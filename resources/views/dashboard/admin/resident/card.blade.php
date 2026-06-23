@@ -1,7 +1,7 @@
 @extends('dashboard.admin.admin_master')
 
 @section('title')
-    Resident ID Card
+    Admin ID Card
 @endsection
 
 
@@ -108,7 +108,7 @@
             <div class="page-title">
               <div class="row">
                 <div class="col-sm-6 col-12"> 
-                  <h2>Resident ID Card</h2>
+                  <h2>Admin ID Card</h2>
                   
                 </div>
                 <div class="col-sm-6 col-12">
@@ -143,16 +143,23 @@
 
                                                         <div class="card-header-section">
                                                             <h4>{{ strtoupper($tenant->subdomain) }} ESTATE</h4>
-                                                            <span>RESIDENT ID CARD</span>
+                                                            <span>Admin ID CARD</span>
                                                         </div>
 
                                                         <div class="card-body-section">
 
                                                             <div class="photo-section">
 
+                                                                @php
+                                                                
+                                                                   $storageUrl = env('R2_PUBLIC_URL');
+                                                                @endphp
+
+                                                                
+
                                                                 @if($kyc->face_image)
                                                                     <img
-                                                                        src="{{ asset('storage/'.$kyc->face_image) }}"
+                                                                        src="{{ $storageUrl. '/' .$kyc->face_image }}"
                                                                         alt="Resident Photo">
                                                                 @endif
 

@@ -98,7 +98,7 @@ label{
                                 $vat = \App\Enums\Fee::vat;
                                 $payAsYouGoo = \App\Enums\Fee::payAsYouGoo;
 
-                                // Adjust access fee based on billing cycle #20000
+                                // Adjust access fee based on billing cycle #10000
                                 $accessFee = $plan->duration === 'monthly'
                                             ? round($accessFeeYearly / 12, 2)
                                             : $accessFeeYearly;
@@ -108,10 +108,12 @@ label{
 
                                 $subtotal = $basePrice + $accessFee + $payAsYouGo;
 
-                                $vat = ($subtotal * vat) / 100;
+                                $vat = ($basePrice * $vat) / 100;
+
+                                $newvat = $basePrice + $vat;
 
                                 // Total Payable = base price + all fees
-                                $total = $subtotal + $vat;
+                                $total = $subtotal + $newvat;
 
                                 // Paystack charge or transaction fee
                                 $fee = ($total * 1.5) / 100;
@@ -154,7 +156,7 @@ label{
 
                                 <div class="mb-3 d-flex justify-content-between">
                                     <span>Vat (7.5%):</span>
-                                    <span class="fw-semibold">₦{{ number_format($vat,2) }}</span>
+                                    <span class="fw-semibold">₦{{ number_format($newvat,2) }}</span>
                                 </div>
 
                                 <!-- Paystack Fee -->
@@ -181,7 +183,7 @@ label{
                                         <input type="hidden" name="pay_as_you_go" value="{{ $payAsYouGo }}">
                                         <input type="hidden" name="access_fee" value="{{ $accessFee }}">
                                         <input type="hidden" name="base_price" value="{{ $basePrice }}">
-                                        <input type="hidden" name="vatt" value="{{ $vat }}">
+                                        <input type="hidden" name="vatt" value="{{ $newvat }}">
                                         <input type="hidden" name="paystackFee" value="{{ $paystackFee }}">
                                         
                                         

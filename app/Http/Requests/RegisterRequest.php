@@ -26,7 +26,21 @@ class RegisterRequest extends FormRequest
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|string|email|max:255|unique:users,email,NULL,id,tenant_id,' . $tenant->id,
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:8|confirmed',
+            'user_agreement' => 'accepted',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'first_name.required' => 'First name is required',
+            'first_name.min' => 'First name must not be less than 3 characters.',
+            'last_name.required' => 'Last name is required',
+            'last_name.min' => 'Last name must not be less than 3 characters.',
+            'email.required" => "Email is required',
+            'email.unique" => "Email is already taken',
+            'user_agreement.accepted' => 'You must accept the User Agreement to continue.',
         ];
     }
 }

@@ -32,6 +32,8 @@
 
         @yield('content')
 
+         
+
 
         
         @include('frontend.layout.footer')

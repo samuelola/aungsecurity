@@ -21,7 +21,12 @@ input {
     display: none !important;
   }
 }
+
+#userAgreement{
+  cursor: pointer !important;
+}
 </style>
+
 
  
    
@@ -94,6 +99,31 @@ input {
                       <span class="invalid-feedback d-block"><strong>{{ $message }}</strong></span>
                     @enderror
                     </div>
+
+                    <div class="form-group mb-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="userAgreement" name="user_agreement" value="1">
+                        <label class="form-check-label" for="userAgreement">
+                          I agree to the &nbsp;
+                          
+                          <a href="#"  style="color:#1d194b !important; font-weight: 700;"
+                            class="view-pdfff"
+                            data-pdf="{{ route('new_user_agreement', 
+                            [
+                                'tenant' => $tenant->subdomain,
+                                'useragreefile' => 'aung_one_end_user_agreement.pdf'
+                            ]) }}">
+                            User Agreement
+                          </a>
+                          
+                        </label>
+                      </div>
+                      @error('user_agreement')
+                        <span class="invalid-feedback d-block" role="alert">
+                          <strong>{{ $message }}</strong>
+                        </span>
+                      @enderror
+                    </div>  
 
                     <div class="form-group mb-0 checkbox-checked">
                       <div class="text-end mt-3">
@@ -168,9 +198,55 @@ input {
           </div>
         </div>
       </div>
+
+      <!--user aggrement-->
+
+        <!-- User Agreement Link -->
+
+
+          <div class="modal fade" id="pdfModal" tabindex="-1">
+              <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title">PDF Viewer</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                      </div>
+                      <div class="modal-body p-0">
+                          <iframe id="pdfFrame"
+                                  width="100%"
+                                  height="600px"
+                                  frameborder="0">
+                          </iframe>
+                      </div>
+                  </div>
+              </div>
+           </div>
+
+        
+
+      <!-- end user aggrement-->
 @endsection
 
 @section('script')
+
+<script>
+document.querySelectorAll('.view-pdfff').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        document.getElementById('pdfFrame').src =
+            this.dataset.pdf;
+
+        const modal = new bootstrap.Modal(
+            document.getElementById('pdfModal')
+        );
+
+        modal.show();
+    });
+});
+</script>
+
+
 <script>
 function showForm(type) {
     const userForm = document.getElementById('userForm');

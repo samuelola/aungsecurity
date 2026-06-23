@@ -109,6 +109,12 @@ class AdminKycController extends Controller
                 
             ]);
 
+            $user->update([
+                'first_name' => $request->first_name,
+                'last_name'  => $request->last_name,
+                'email' => $request->email
+            ]);
+
         } catch (\Illuminate\Database\QueryException $e) {
 
             if ($e->getCode() == 23000) {
@@ -151,35 +157,41 @@ class AdminKycController extends Controller
 
     if ($request->hasFile('id_document')) {
 
-        // Delete old document
-        if ($kyc->id_document && Storage::disk('public')->exists($kyc->id_document)) {
-            Storage::disk('public')->delete($kyc->id_document);
+        // Delete old file from R2
+        if ($kyc->id_document && Storage::disk('r2')->exists($kyc->id_document)) {
+            Storage::disk('r2')->delete($kyc->id_document);
         }
 
-        // Store new document
+        // Upload new file to R2
         $path = $request->file('id_document')->store(
             "kyc_docs/tenant_{$tenant->id}",
-            'public'
+            'r2'
         );
 
         // Reset face image if new doc uploaded
-        if ($kyc->face_image && Storage::disk('public')->exists($kyc->face_image)) {
-            Storage::disk('public')->delete($kyc->face_image);
+        if ($kyc->face_image && Storage::disk('r2')->exists($kyc->face_image)) {
+            Storage::disk('r2')->delete($kyc->face_image);
         }
 
         $kyc->face_image = null;
     }
 
-    
-
     /*
-    |--------------------------------------------------------------------------
-    | OCR TEXT EXTRACTION
-    |--------------------------------------------------------------------------
+    |-----------------------------
+    | DOWNLOAD TEMP FILE (OCR)
+    |-----------------------------
     */
-    $fullPath = Storage::disk('public')->path($path);
 
-    $ocrText = $this->extractDocumentText($fullPath);
+    $tempPath = storage_path('app/temp_' . basename($path));
+
+    file_put_contents(
+        $tempPath,
+        Storage::disk('r2')->get($path)
+    );
+
+    $ocrText = $this->extractDocumentText($tempPath);
+
+    @unlink($tempPath);
 
     \Log::info($ocrText);
 
@@ -189,38 +201,22 @@ class AdminKycController extends Controller
         ], 422);
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | EXTRACT STRUCTURED DATA
-    |--------------------------------------------------------------------------
-    */
     $ocrName = $this->extractNameFromOCR($ocrText);
     $ocrGender = $this->extractGenderFromOCR($ocrText);
 
-    /*
-    |--------------------------------------------------------------------------
-    | NORMALIZE USER DATA
-    |--------------------------------------------------------------------------
-    */
     $accountName = strtoupper(trim($user->first_name . ' ' . $user->last_name));
     $accountGender = strtolower($kyc->gender ?? '');
 
-    /*
-    |--------------------------------------------------------------------------
-    | NAME VALIDATION
-    |--------------------------------------------------------------------------
-    */
     if ($ocrName) {
-
         $ocrParts = $this->normalizeName($ocrName);
         $accountParts = $this->normalizeName($accountName);
 
         $intersection = array_intersect($ocrParts, $accountParts);
-
         $score = (count($intersection) / max(count($accountParts), 1)) * 100;
 
         if ($score < 80) {
             return response()->json([
+                // 'message' => "Document name does not match KYC name",
                 'message' => "Document Names ". $ocrName. " does not match Kyc names: ". $accountName. " provided",
                 'ocr_name' => $ocrName,
                 'account_name' => $accountName,
@@ -229,33 +225,17 @@ class AdminKycController extends Controller
         }
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | GENDER VALIDATION
-    |--------------------------------------------------------------------------
-    */
-
     $ocrGender = $this->normalizeGender($ocrGender);
     $accountGender = $this->normalizeGender($accountGender);
 
     if ($ocrGender && $accountGender && $ocrGender !== $accountGender) {
-
         return response()->json([
+            // 'message' => "Gender mismatch",
             'message' => "Document gender: ".$ocrGender. " does not match Kyc gender: ".$accountGender. " provided" ,
             'ocr_gender' => $ocrGender,
             'profile_gender' => $accountGender
         ], 422);
     }
-
-   
-
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | SAVE OCR DATA (PRODUCTION SAFE)
-    |--------------------------------------------------------------------------
-    */
 
     $docCompleted = $kyc->doc_completed;
 
@@ -273,8 +253,6 @@ class AdminKycController extends Controller
     return response()->json([
         'success' => true,
         'next' => 'face',
-        'ocr_name' => $ocrName,
-        'ocr_gender' => $ocrGender,
         'doc_already_completed' => $docCompleted
     ]);
 }
@@ -361,28 +339,25 @@ class AdminKycController extends Controller
 }
 
     private function extractGenderFromOCR(string $text): ?string
-    {
-        $text = strtoupper($text);
+{
+    $text = strtoupper($text);
 
-        if (preg_match('/\b(GENDER|SEX)\b\s*[:\-]?\s*(MALE|FEMALE|M|F)\b/', $text, $m)) {
+    if (preg_match('/(?:GENDER|SEX)\s*[:\-]?\s*([A-Z]{1,10})/', $text, $matches)) {
 
-            return match ($m[2]) {
-                'M', 'MALE' => 'male',
-                'F', 'FEMALE' => 'female',
-                default => null,
-            };
+        $value = trim($matches[1]);
+
+        if (str_starts_with($value, 'F')) {
+            return 'female';
         }
 
-        // fallback (sometimes standalone)
-        if (preg_match('/\b(MALE|FEMALE)\b/', $text, $m)) {
-            return strtolower($m[1]);
+        if (str_starts_with($value, 'M')) {
+            return 'male';
         }
-
-        if (preg_match('/\bM\b/', $text)) return 'male';
-        if (preg_match('/\bF\b/', $text)) return 'female';
-
-        return null;
     }
+
+    return null;
+}
+
 
 
     public function compareFace(Request $request)
@@ -395,9 +370,7 @@ class AdminKycController extends Controller
         ->firstOrFail();
 
     if (!$kyc->doc_completed) {
-        return response()->json([
-            'message' => 'Upload ID first'
-        ], 403);
+        return response()->json(['message' => 'Upload ID first'], 403);
     }
 
     $request->validate([
@@ -405,264 +378,137 @@ class AdminKycController extends Controller
     ]);
 
     /*
-    |--------------------------------------------------------------------------
-    | SAVE LIVE SELFIE
-    |--------------------------------------------------------------------------
+    |-------------------------
+    | SAVE LIVE SELFIE (R2)
+    |-------------------------
     */
-
     $imageData = preg_replace('/^data:image\/\w+;base64,/', '', $request->image);
     $imageData = base64_decode($imageData);
 
     $liveFacePath = "kyc_faces/tenant_{$tenant->id}/live_{$user->id}.jpg";
 
-    Storage::disk('public')->put($liveFacePath, $imageData);
+    Storage::disk('r2')->put($liveFacePath, $imageData);
 
-    $liveFullPath = Storage::disk('public')->path($liveFacePath);
-
-    /*
-    |--------------------------------------------------------------------------
-    | GET ORIGINAL ID IMAGE
-    |--------------------------------------------------------------------------
-    */
-
-    $idImagePath = Storage::disk('public')->path($kyc->id_document);
-
-    if (!file_exists($idImagePath)) {
-        return response()->json([
-            'message' => 'ID document not found'
-        ], 422);
-    }
+    $liveTemp = storage_path('app/live_' . $user->id . '.jpg');
+    file_put_contents($liveTemp, $imageData);
 
     /*
-    |--------------------------------------------------------------------------
-    | STEP 1: RESIZE + COMPRESS ID IMAGE
-    |--------------------------------------------------------------------------
+    |-------------------------
+    | DOWNLOAD ID FROM R2
+    |-------------------------
     */
 
-    $compressedPath = storage_path(
-        "app/public/temp_id_{$user->id}.jpg"
+    $idTemp = storage_path('app/id_' . $user->id . '.jpg');
+
+    file_put_contents(
+        $idTemp,
+        Storage::disk('r2')->get($kyc->id_document)
     );
 
-    try {
-
-        $image = Image::read($idImagePath);
-
-        /*
-        |--------------------------------------------------------------------------
-        | Resize if too large
-        |--------------------------------------------------------------------------
-        */
-
-        if ($image->width() > 1200) {
-            $image->scaleDown(width: 1200);
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Save compressed image
-        |--------------------------------------------------------------------------
-        */
-
-        $image->save($compressedPath, quality: 80);
-
-    } catch (\Exception $e) {
-
-        return response()->json([
-            'message' => 'Unable to process ID image',
-            'error' => $e->getMessage()
-        ], 422);
-    }
-
     /*
-    |--------------------------------------------------------------------------
-    | STEP 2: DETECT FACE ON ID CARD
-    |--------------------------------------------------------------------------
+    |-------------------------
+    | FACE DETECTION (ID)
+    |-------------------------
     */
 
+    $compressedPath = storage_path("app/temp_id_{$user->id}.jpg");
+
+    $image = Image::read($idTemp);
+
+    if ($image->width() > 1200) {
+        $image->scaleDown(width: 1200);
+    }
+
+    $image->save($compressedPath, quality: 80);
+
     $detectResponse = Http::withoutVerifying()
-        ->attach(
-            'image_file',
-            fopen($compressedPath, 'r'),
-            'id.jpg'
-        )
+        ->attach('image_file', fopen($compressedPath, 'r'), 'id.jpg')
         ->post(config('services.facepp.detect'), [
             'api_key' => config('services.facepp.key'),
             'api_secret' => config('services.facepp.secret'),
-            'return_landmark' => 0,
         ]);
-
-    if (!$detectResponse->successful()) {
-
-        @unlink($compressedPath);
-
-        return response()->json([
-            'message' => 'Face detection failed on ID card',
-            'error' => $detectResponse->body()
-        ], 422);
-    }
 
     $detectResult = $detectResponse->json();
 
-    if (
-        !isset($detectResult['faces']) ||
-        empty($detectResult['faces'])
-    ) {
-
-        @unlink($compressedPath);
-
-        return response()->json([
-            'message' => 'No face detected on ID card'
-        ], 422);
+    if (empty($detectResult['faces'])) {
+        return response()->json(['message' => 'No face detected'], 422);
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | GET FACE RECTANGLE
-    |--------------------------------------------------------------------------
-    */
 
     $face = $detectResult['faces'][0]['face_rectangle'];
 
-    // $top = $face['top'];
-    // $left = $face['left'];
-    // $width = $face['width'];
-    // $height = $face['height'];
-
-    $padding = 25; // adjust 15–40 depending on ID quality
+    $padding = 25;
 
     $top = max(0, $face['top'] - $padding);
     $left = max(0, $face['left'] - $padding);
-
     $width = $face['width'] + ($padding * 2);
     $height = $face['height'] + ($padding * 2);
 
-    
-
     /*
-    |--------------------------------------------------------------------------
-    | STEP 3: CROP FACE FROM ID
-    |--------------------------------------------------------------------------
+    |-------------------------
+    | CROP FACE
+    |-------------------------
     */
 
-    $croppedPath = "kyc_faces/tenant_{$tenant->id}/cropped_id_{$user->id}.jpg";
+    $croppedPath = storage_path("app/cropped_{$user->id}.jpg");
 
-    $croppedFullPath = Storage::disk('public')->path($croppedPath);
+    $cropImage = Image::read($compressedPath);
 
-    try {
+    $cropImage->crop($width, $height, $left, $top);
 
-        $cropImage = Image::read($compressedPath);
-
-        $cropImage->crop(
-            $width,
-            $height,
-            $left,
-            $top
-        );
-
-        /*
-        |--------------------------------------------------------------------------
-        | Optional upscale for better comparison
-        |--------------------------------------------------------------------------
-        */
-
-        if ($cropImage->width() < 200) {
-            $cropImage->resize(200, 200);
-        }
-
-        $cropImage->save($croppedFullPath, quality: 90);
-
-    } catch (\Exception $e) {
-
-        @unlink($compressedPath);
-
-        return response()->json([
-            'message' => 'Unable to crop face from ID',
-            'error' => $e->getMessage()
-        ], 422);
+    if ($cropImage->width() < 200) {
+        $cropImage->resize(200, 200);
     }
 
+    $cropImage->save($croppedPath, 90);
+
     /*
-    |--------------------------------------------------------------------------
-    | STEP 4: COMPARE FACES
-    |--------------------------------------------------------------------------
+    |-------------------------
+    | COMPARE FACES
+    |-------------------------
     */
 
     $compareResponse = Http::withoutVerifying()
-        ->attach(
-            'image_file1',
-            fopen($croppedFullPath, 'r'),
-            'cropped.jpg'
-        )
-        ->attach(
-            'image_file2',
-            fopen($liveFullPath, 'r'),
-            'live.jpg'
-        )
+        ->attach('image_file1', fopen($croppedPath, 'r'), 'id.jpg')
+        ->attach('image_file2', fopen($liveTemp, 'r'), 'live.jpg')
         ->post(config('services.facepp.compare'), [
             'api_key' => config('services.facepp.key'),
             'api_secret' => config('services.facepp.secret'),
         ]);
 
-    if (!$compareResponse->successful()) {
-
-        @unlink($compressedPath);
-
-        return response()->json([
-            'message' => 'Face comparison failed',
-            'error' => $compareResponse->body()
-        ], 422);
-    }
-
     $result = $compareResponse->json();
 
-    if (!isset($result['confidence'])) {
-
-        @unlink($compressedPath);
-
-        return response()->json([
-            'message' => 'Unable to compare faces'
-        ], 422);
-    }
-
-    $confidence = $result['confidence'];
-
-    /*
-    |--------------------------------------------------------------------------
-    | STEP 5: VERIFY CONFIDENCE
-    |--------------------------------------------------------------------------
-    */
+    $confidence = $result['confidence'] ?? 0;
 
     if ($confidence < 70) {
-
-        @unlink($compressedPath);
-
         return response()->json([
-            'message' => 'Face does not match ID',
+            'message' => 'Face does not match',
             'confidence' => $confidence
         ], 422);
     }
 
     /*
-    |--------------------------------------------------------------------------
-    | SUCCESS
-    |--------------------------------------------------------------------------
+    |-------------------------
+    | CLEANUP
+    |-------------------------
     */
 
     @unlink($compressedPath);
+    @unlink($croppedPath);
+    @unlink($liveTemp);
+    @unlink($idTemp);
 
-    $plainPin = random_int(100000, 999999);
-    $vistorEmergencyPin = random_int(100000, 999999);
+    /*
+    |-------------------------
+    | SAVE RESULT
+    |-------------------------
+    */
 
     $kyc->update([
-        'face_image'      => $liveFacePath,
+        'face_image' => $liveFacePath,
         'face_confidence' => $confidence,
-        'face_verified'   => true,
-        'face_completed'  => true,
-        'kyc_completed'   => true,
-        'emergency_pin' => $plainPin,
-        'emergency_pin_used_at' => now(),
-        'emergency_visitor_pin' => $vistorEmergencyPin,
-        'current_step'    => 'completed',
+        'face_verified' => true,
+        'kyc_completed' => true,
+        'current_step' => 'completed',
     ]);
 
     return response()->json([
@@ -673,27 +519,26 @@ class AdminKycController extends Controller
     
 
     // KycController.php
-    public function documentPreview(Request $request)
+public function documentPreview(Request $request)
 {
     $user = auth()->user();
     $tenant = app('tenant');
 
     $kyc = Kyc::where('user_id', $user->id)
-              ->where('tenant_id', $tenant->id)
-              ->firstOrFail();
+        ->where('tenant_id', $tenant->id)
+        ->firstOrFail();
 
     $path = $kyc->id_document;
 
-    if (!$path || !Storage::exists($path)) {
+    if (!$path || !Storage::disk('r2')->exists($path)) {
         abort(404);
     }
 
-    $fullPath = storage_path("app/$path");
-    $mime = Storage::mimeType($path);
-
-    return response()->file($fullPath, [
-        'Content-Type' => $mime,
-    ]);
+    return response(
+        Storage::disk('r2')->get($path),
+        200,
+        ['Content-Type' => 'image/jpeg']
+    );
 }
 
 
@@ -711,12 +556,14 @@ public function regenerateEmergencyPin(Request $request)
     $newPin = random_int(100000, 999999);
 
     $kyc->update([
-        'emergency_pin' => $newPin
+        'emergency_pin' => $newPin,
+        'emergency_pin_expires_at' => now()->addHours(3),
     ]);
 
     return response()->json([
         'success' => true,
-        'emergency_pin' => $newPin
+        'emergency_pin' => $newPin,
+        'expires_at' => $kyc->fresh()->emergency_pin_expires_at,
     ]);
 }
 

@@ -52,6 +52,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/iconly@2.0.1/iconly.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
     @yield('style')
 
 
