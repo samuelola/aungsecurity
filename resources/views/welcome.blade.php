@@ -2207,6 +2207,25 @@ animation-name: slideInUp; animation-duration: 1000ms; animation-timing-function
                     </div>
                 </div>
 
+
+                <div class="modal fade" id="pdfModall" tabindex="-1">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">PDF Viewer</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body p-0">
+                                <iframe id="pdfFramee"
+                                        width="100%"
+                                        height="600px"
+                                        frameborder="0">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- end pdf -->
                 
             </div>

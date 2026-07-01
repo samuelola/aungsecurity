@@ -45,6 +45,7 @@
            <div class="container-fluid default-dashboard">
                    <!--start-->
                         <div class="row g-4 justify-content-center">
+                            
 
                            <div class="container-fluid table-space basic_table">
                              <div class="row">
@@ -125,9 +126,9 @@
                                 <div class="card-no-border d-flex justify-content-between align-items-center">
     
                                     
-                                    {{-- <button onclick="startExport()" class="btn btn-success">
+                                    <button onclick="startSuperExport()" class="btn btn-success">
                                         Export Residents <i class="ti-export"></i>
-                                    </button> --}}
+                                    </button>
                                 </div>
                                
                                  <div class="col-sm-12">
@@ -344,6 +345,41 @@
 
 
 @section('script')
+
+<script>
+    function startSuperExport() {
+
+    let subdomain = "{{$tenant->subdomain}}";
+
+    let tenantId = "{{$tenant->id}}";
+    let userId  = "{{$user->id}}"
+
+    $.post('/superadmin/residents/export/' + tenantId + '/' + userId, {
+        _token: $('meta[name="csrf-token"]').attr('content'),
+        subdomain: subdomain
+    }, function (res) {
+
+        alert(res.message); 
+
+        let exportId = res.export_id;
+
+        let interval = setInterval(function () {
+
+            $.get('/superadmin_export_status/' + subdomain + '/' + exportId, {
+                subdomain: subdomain
+            }, function (data) {
+
+                if (data.status === 'done') {
+                    clearInterval(interval);
+                    window.location.href = data.download_url;
+                }
+
+            });
+
+        }, 3000);
+    });
+}
+ </script>
 
 <script>
 

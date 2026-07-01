@@ -132,7 +132,11 @@
 
                                         <ul class="links-list">
                                             <li>
-                                                <a href="#">Terms of Service</a>
+                                                <a href="#" 
+                                                  class="view-pdff"
+                                                  data-pdf="{{ route('new_terms', 'aung_one_terms.pdf') }}">
+                                                  Terms of Service
+                                                </a>
                                             </li>
                                             <li>
                                                 {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#privacypolicyModal">Privacy Policy</a> --}}
@@ -261,6 +265,43 @@ document.querySelectorAll('.view-pdf').forEach(link => {
         modal.show();
     });
 });
+</script>
+
+<script>
+document.querySelectorAll('.view-pdff').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        document.getElementById('pdfFramee').src =
+            this.dataset.pdf;
+
+        const modal = new bootstrap.Modal(
+            document.getElementById('pdfModall')
+        );
+
+        modal.show();
+    });
+});
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (const registration of registrations) {
+            registration.unregister();
+        }
+    });
+}
+</script>
+
+<script>
+if ('caches' in window) {
+    caches.keys().then(function(names) {
+        names.forEach(function(name) {
+            caches.delete(name);
+        });
+    });
+}
 </script>
 
 </body>

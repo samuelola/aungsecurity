@@ -68,6 +68,7 @@ Route::controller(MainController::class)->group(function () {
       Route::get('/privacy_policy', 'PrivacyPolicy')->name('privacy_policy');
       Route::get('/terms', 'TermService')->name('terms');
       Route::get('/privacy_pdf/{file}','newPrivacyPolicy')->name('new_privacy_policy');
+      Route::get('/terms_pdf/{file}','newTerms')->name('new_terms');
 });
 
 Route::controller(TenantController::class)->group(function () {
@@ -308,6 +309,9 @@ Route::middleware(['superadmin.auth'])->group(function () {
       Route::get('/superadmin/estate/{tenant}/{user}','getSuperEmergency')->name('emergency_code');
       Route::post('/super-admin-emergency-pin/{tenant}/{user}', 'regenerateSuperAdminEmergencyPin')->name('super.admin.emergency.pin.regenerate'); 
       Route::post('/super-admin-emergency-visitor-pin/{tenant}/{user}', 'regenerateSuperAdminVisitorEmergencyPin')->name('super.admin.visitor.emergency.pin.regenerate');
+      Route::post('/superadmin/residents/export/{tenant_id}/{user_id}', 'superAdminExportResidents')->name('superadmin.residents.export');
+      Route::get('/superadmin_export_status/{tenant_domain}/{export_id}', 'exportSuperAdminStatus')->name('superadmin_residents.export.status');
+      Route::get('/superadmin_export_download/{tenant_domain}/{id}' ,'downloadSuperAdminExport')->name('superadmin.residents.exports.download');
 });
 
 

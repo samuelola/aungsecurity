@@ -354,8 +354,8 @@ class SuperAdminController extends Controller
         if ($export->status !== 'done') {
             return response()->json(['message' => 'File not ready'], 422);
         }
-        
-        return redirect(Storage::disk('r2')->url($export->file_path));
+
+        return response()->download(storage_path("app/public/" . $export->file_path));
     }
     
 }
