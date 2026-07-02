@@ -8,6 +8,7 @@ use App\Models\VisitorInvitation;
 use App\Models\AccessLog;
 use Illuminate\Support\Facades\DB;
 use App\Models\EmergencyPinLog;
+use App\Models\Tenant;
 
 class SecurityController extends Controller
 {
@@ -19,13 +20,14 @@ class SecurityController extends Controller
 
     public function verify(Request $request)
 {
-    
+        
     $request->validate([
         'code' => 'required|digits:6'
     ], [
         'code.required' => 'Please enter access code',
         'code.digits' => 'Access code must be 6 digits'
     ]);
+
     
     $gateName = $request->gate_name;
     $invitation = VisitorInvitation::with(['visitor', 'resident'])
@@ -58,6 +60,8 @@ class SecurityController extends Controller
             'used_at' => $now
         ]);
 
+        
+
     DB::table('access_logs')->insert([
         'invitation_id' => $invitation->id,
         'gate_name'     => $gateName,
@@ -73,10 +77,15 @@ class SecurityController extends Controller
     return response()->json([
         'status' => 'success',
         'type' => 'entry',
-        'visitor' => ucfirst($invitation->visitor->first_name) ." ". ucfirst($invitation->visitor->last_name),
+        'visitor' => optional($invitation->visitor)->first_name
+        ? ucfirst($invitation->visitor->first_name).' '.ucfirst($invitation->visitor->last_name)
+        : 'Myself',
         'visitor_date' =>  $invitation->visit_date,
         'visit_time' => $from ." - ". $to,
-        'resident_name' => ucfirst($invitation->resident->first_name) ." ". ucfirst($invitation->resident->last_name),
+        'resident_name' => optional($invitation->resident)->first_name
+        ? ucfirst($invitation->resident->first_name).' '.ucfirst($invitation->resident->last_name)
+        : 'Unknown Resident',
+        
         'resident_phone' => $invitation->resident->kyc->phone,
         'flat_number' => $invitation->resident->kyc->flat_number,
         'address' => $invitation->resident->kyc->address,
@@ -107,13 +116,18 @@ class SecurityController extends Controller
 
        $from = \Carbon\Carbon::createFromFormat('H:i:s', $invitation->valid_from)->format('g:i A');
        $to = \Carbon\Carbon::createFromFormat('H:i:s', $invitation->valid_to)->format('g:i A');
+       $tenant = app('tenant');
         return response()->json([
             'status' => 'success',
             'type' => 'exit',
-            'visitor' => ucfirst($invitation->visitor->first_name) ." ". ucfirst($invitation->visitor->last_name),
+            'visitor' => optional($invitation->visitor)->first_name
+            ? ucfirst($invitation->visitor->first_name).' '.ucfirst($invitation->visitor->last_name)
+            : 'Myself',
             'visitor_date' =>  $invitation->visit_date,
             'visit_time' => $from ." - ". $to,
-            'resident_name' => ucfirst($invitation->resident->first_name) ." ". ucfirst($invitation->resident->last_name),
+            'resident_name' => optional($invitation->resident)->first_name
+            ? ucfirst($invitation->resident->first_name).' '.ucfirst($invitation->resident->last_name)
+            : 'Unknown Resident',
             'resident_phone' => $invitation->resident->kyc->phone,
             'flat_number' => $invitation->resident->kyc->flat_number,
             'address' => $invitation->resident->kyc->address,

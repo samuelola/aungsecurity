@@ -105,7 +105,7 @@
                               : '#' }}">
 
                       <i class="ti-user"></i>
-                      <h6 class="f-w-600">Create Invitation</h6>
+                      <h6 class="f-w-600">Generate Access Code</h6>
                   </a>
               </li>
 

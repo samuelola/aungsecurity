@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gate Access Verification</title>
+    <title>Aungsecurity Gate Access Verification</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="apple-touch-icon" sizes="57x57" href="{{asset('aung_favicon/apple-icon-57x57.png')}}">
     <link rel="apple-touch-icon" sizes="60x60" href="{{asset('aung_favicon/apple-icon-60x60.png')}}">
     <link rel="apple-touch-icon" sizes="72x72" href="{{asset('aung_favicon/apple-icon-72x72.png')}}">
@@ -58,7 +59,9 @@
             <div class="card-header bg-dark text-white text-center rounded-top-4">
                 <h4 class="mb-0">🛂 Gate Access Verification</h4>
             </div>
-
+             @php 
+               $tenant = app('tenant');
+             @endphp
             <div class="card-body p-4">
 
                 <form id="verifyForm">
@@ -125,16 +128,17 @@ $(document).ready(function () {
 
     $("#verifyForm").on("submit", function(e) {
         e.preventDefault();
-
         
-
         $.ajax({
-            url: "{{ route('security.verify') }}",
+            url: "{{ route('security.verify', $tenant->subdomain) }}",
             type: "POST",
             data: {
                 code: codeInput.val(),
                 gate_name: "Main Gate",
-                _token: "{{ csrf_token() }}"
+                
+            },
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
             },
             success: function(data) {
 
@@ -181,6 +185,7 @@ $(document).ready(function () {
                 codeInput.val("").focus();
             },
             error: function(xhr) {
+                
                 resultBox.show();
             
                 let message = "Server Error";

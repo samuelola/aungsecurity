@@ -44,12 +44,7 @@ Route::get('/link', [CacheController::class, 'storageLink'])->name('link');
 //     Route::post('/security/verify','verify')->name('verifyscan');
 // });
 
- Route::controller(SecurityController::class)->group(function () {         
-        Route::get('/security/scan_verify', 'form')->name('security.form');
-        Route::post('/security/verify', 'verify')->name('security.verify');
-        Route::get('/security/emergency_scan', 'emergencyForm')->name('emergency_scan');
-        Route::post('/security/emergency_verify', 'verifyEmergencyPin')->name('emergency_verify');
-});
+ 
 
 Route::get('/security/inside-count', function() {
     $count = \App\Models\VisitorInvitation::where('status', 'used')->count();
@@ -86,6 +81,14 @@ Route::get('/lgas/{state}', [KycController::class, 'lgas'])->name('lgas');
 
 Route::domain('{tenant}.' . $domain)
      ->middleware('tenant')->group(function () {
+
+
+     Route::controller(SecurityController::class)->group(function () {         
+        Route::get('/security/scan_verify', 'form')->name('security.form');
+        Route::post('/security/verify', 'verify')->name('security.verify');
+        Route::get('/security/emergency_scan', 'emergencyForm')->name('emergency_scan');
+        Route::post('/security/emergency_verify', 'verifyEmergencyPin')->name('emergency_verify');
+     });
 
 
      /* Resident */

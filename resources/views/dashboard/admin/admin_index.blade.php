@@ -102,7 +102,7 @@
                     <div class="row card-body pb-0 m-0">
                       
                       <div class="col-12 p-0" style="padding-top: 10px !important;">
-                        <h3 class="mb-2">Copy URL Link</h3>
+                        <h4 class="mb-2">Copy Residents Register Link</h4>
 
                         <!-- Input + Copy Button -->
                         <div class="input-group mb-2">
@@ -114,6 +114,36 @@
 
                         <!-- Popup message -->
                         <small id="copyMsg" style="color: green; display: none;">
+                          Copied!
+                        </small>
+
+                        
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-xl-3">
+                <div class="card overflow-hidden">
+                  <div class="chart-widget-top">
+                    <div class="row card-body pb-0 m-0">
+                      
+                      <div class="col-12 p-0" style="padding-top: 10px !important;">
+                        <h4 class="mb-2">Copy Scanner Link</h4>
+
+                        <!-- Input + Copy Button -->
+                        <div class="input-group mb-2">
+                          <input type="text" id="scannerLink" class="form-control"
+                            value="{{ url('/security/scan_verify')}}" readonly>
+
+                          <button class="btn btn-success" onclick="scannercopyLink()">Copy</button>
+                        </div>
+
+                        <!-- Popup message -->
+                        <small id="scannercopyMsg" style="color: green; display: none;">
                           Copied!
                         </small>
 
@@ -405,6 +435,21 @@
     navigator.clipboard.writeText(copyText.value);
 
     const msg = document.getElementById("copyMsg");
+    msg.style.display = "inline";
+
+    setTimeout(() => {
+      msg.style.display = "none";
+    }, 2000);
+  }
+</script>
+
+<script>
+  function scannercopyLink() {
+    const copyText = document.getElementById("scannerLink");
+
+    navigator.clipboard.writeText(copyText.value);
+
+    const msg = document.getElementById("scannercopyMsg");
     msg.style.display = "inline";
 
     setTimeout(() => {

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Wallet extends Model
 {
     protected $table ='resident_wallets';
+    protected $guarded = [];
 
     public function user()
     {
