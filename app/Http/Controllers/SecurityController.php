@@ -55,6 +55,7 @@ class SecurityController extends Controller
 
     // ENTRY
     if ($invitation->status === 'pending') {
+        $tenant = app('tenant');
         $invitation->update([
             'status' => 'used',
             'used_at' => $now
@@ -69,6 +70,7 @@ class SecurityController extends Controller
         'action'        => 'entry',
         'created_at'    => now(),
         'updated_at'    => now(),
+        'tenant_id'     => $tenant->id
     ]);
 
     $from = \Carbon\Carbon::createFromFormat('H:i:s', $invitation->valid_from)->format('g:i A');
@@ -97,6 +99,7 @@ class SecurityController extends Controller
 
     // EXIT
     if ($invitation->status === 'used') {
+        $tenant = app('tenant');
         $invitation->update([
             'status' => 'exited',
             'exited_at' => $now
@@ -111,6 +114,7 @@ class SecurityController extends Controller
         'action'        => 'exit',
         'created_at'    => now(),
         'updated_at'    => now(),
+        'tenant_id'     => $tenant->id
        ]);
 
 

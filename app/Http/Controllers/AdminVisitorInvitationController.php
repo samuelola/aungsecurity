@@ -15,9 +15,9 @@ class AdminVisitorInvitationController extends Controller
      */
     public function adminVisitorLog(Request $request, $subdomain)
     {
-        
+        $tenant = app('tenant');
         $accesslogs = AccessLog::with('Invitation')
-            ->latest()
+            ->where('tenant_id',$tenant->id)
             ->get();  
 
         return view('dashboard.admin.visitor.index', compact('accesslogs'));
@@ -26,9 +26,10 @@ class AdminVisitorInvitationController extends Controller
     public function adminInviteLog(Request $request, $subdomain)
     {
         
-        $invitelogs = VisitorInvitation::with(['Visitor','resident','invitedResident'])
-            ->latest()
-            ->get();  
+         $tenant = app('tenant');
+         $invitelogs = VisitorInvitation::with(['Visitor','resident','invitedResident'])
+            ->where('tenant_id',$tenant->id)
+            ->get(); 
         
         return view('dashboard.admin.visitor.invite', compact('invitelogs'));
     }

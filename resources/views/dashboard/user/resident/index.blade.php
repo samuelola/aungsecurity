@@ -134,6 +134,7 @@ label { cursor: text !important; }
                                         <td>{{ $from }}</td>
                                         <td>{{ $to }}</td>
                                           <td>
+                                            
                                             @if($invitation->status == 'pending')
                                                 <span class="badge badge-light-warning">Pending</span>
                                             @elseif($invitation->status == 'used')

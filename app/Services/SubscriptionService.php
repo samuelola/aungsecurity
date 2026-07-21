@@ -309,7 +309,8 @@ public function verifyPaymentAndCreateSubscription($reference)
 
     public function allPlans(){
 
-       return SubscriptionPlan::where('is_active', true)->get();
+       $tenant = app('tenant');
+       return SubscriptionPlan::where(['is_active'=> true,'tenant_id'=>$tenant->id])->get();
     }
 
     public function currentSubscription(){

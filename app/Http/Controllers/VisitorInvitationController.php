@@ -27,28 +27,31 @@ class VisitorInvitationController extends Controller
      */
     public function index(Request $request, $subdomain)
     {
+        $tenant = app('tenant');
         $resident = auth()->user();
 
-        $cacheKey = "invitations:resident:{$resident->id}";
+        // $cacheKey = "invitations:resident:{$resident->id}";
 
-        // $invitations = VisitorInvitation::with(['visitor', 'invitedResident','resident'])
-        //     ->where('resident_id', $resident->id)
-        //     ->where('delete_status', 'no')
-        //     ->latest()
-        //     ->get();
+        $invitations = VisitorInvitation::with(['visitor', 'invitedResident','resident'])
+            ->where('resident_id', $resident->id)
+             ->where('tenant_id', $tenant->id)
+            ->where('delete_status', 'no')
+            ->latest()
+            ->get();
 
-        $invitations = Cache::remember($cacheKey, 300, function () use ($resident) {
+        // $invitations = Cache::remember($cacheKey, 300, function () use ($resident,$tenant) {
 
-            return VisitorInvitation::with([
-                    'visitor',
-                    'invitedResident',
-                    'resident'
-                ])
-                ->where('resident_id', $resident->id)
-                ->where('delete_status', 'no')
-                ->latest()
-                ->get();
-        });
+        //     return VisitorInvitation::with([
+        //             'visitor',
+        //             'invitedResident',
+        //             'resident'
+        //         ])
+        //         ->where('resident_id', $resident->id)
+        //         ->where('tenant_id', $tenant->id)
+        //         ->where('delete_status', 'no')
+        //         ->latest()
+        //         ->get();
+        // });
 
         return view('dashboard.user.resident.index', compact('invitations', 'subdomain'));
     }

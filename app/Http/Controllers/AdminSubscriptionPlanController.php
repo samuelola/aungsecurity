@@ -22,7 +22,8 @@ class AdminSubscriptionPlanController extends Controller
     
     public function index()
     {
-        $plans = SubscriptionPlan::latest()->get();
+        $tenant = app('tenant');
+        $plans = SubscriptionPlan::where('tenant_id',$tenant->id)->get();
 
         return view('dashboard.admin.plans.index', compact('plans'));
     }

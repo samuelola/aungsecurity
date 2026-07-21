@@ -11,7 +11,7 @@ class ActivityService
 
           return Activity::with('causer')
             ->latest()
-            ->paginate(50);
+            ->simplePaginate(10);
 
     }
 }

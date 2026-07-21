@@ -110,7 +110,7 @@ label{
 
                                 $vat = ($basePrice * $vat) / 100;
 
-                                $newvat = $basePrice + $vat;
+                                $newvat = $vat;
 
                                 // Total Payable = base price + all fees
                                 $total = $subtotal + $newvat;
