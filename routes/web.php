@@ -24,6 +24,7 @@ use App\Http\Controllers\AdminKycController;
 use App\Http\Controllers\AdminFaceVerificationController;
 use App\Http\Controllers\CacheController;
 use App\Http\Controllers\IdcardController;
+use App\Http\Controllers\BillingImportController;
 
 
 $domain = parse_url(config('app.url'), PHP_URL_HOST);
@@ -315,7 +316,26 @@ Route::middleware(['superadmin.auth'])->group(function () {
       Route::post('/superadmin/residents/export/{tenant_id}/{user_id}', 'superAdminExportResidents')->name('superadmin.residents.export');
       Route::get('/superadmin_export_status/{tenant_domain}/{export_id}', 'exportSuperAdminStatus')->name('superadmin_residents.export.status');
       Route::get('/superadmin_export_download/{tenant_domain}/{id}' ,'downloadSuperAdminExport')->name('superadmin.residents.exports.download');
+      // KYC
+      Route::post('/superadmin/tenant/{tenant}/toggle-kyc', 'toggleTenantKyc')->name('superadmin.tenant.toggle.kyc');
+      // Trial settings
+      Route::get('/superadmin/tenant/{tenant}/trial-settings','trialSettings')->name('superadmin.tenant.trial.settings');
+      Route::post('/superadmin/tenant/{tenant}/trial-settings','updateTrialSettings')->name('superadmin.tenant.trial.update');
+      Route::get('/superadmin/tenant/{tenant}/access-fee-settings','accessFeeSettings')->name('superadmin.tenant.access.fee.settings');
+      Route::post('/superadmin/tenant/{tenant}/access-fee-settings','updateAccessFeeSettings')->name('superadmin.tenant.access.fee.update');
+      // Billing import
+      Route::post('/superadmin/tenant/{tenant}/toggle-billing-import','toggleBillingImport')->name('superadmin.tenant.toggle.billing.import');
+      Route::get('/superadmin/tenant/{tenant}/billing-import','billingImport')->name('superadmin.tenant.billing.import');
+      Route::get('/superadmin/tenant/{tenant}/billing-import/template','downloadBillingTemplate')->name('superadmin.tenant.billing.template');
+      
 });
+
+
+ Route::controller(BillingImportController::class)->group(function () {
+
+      Route::post('/superadmin/tenant/{tenant}/billing-import/preview','preview')->name('superadmin.tenant.billing.preview');
+      Route::post('/superadmin/tenant/{tenant}/billing-import/confirm','confirm')->name('superadmin.tenant.billing.import.confirm');
+ });
 
 
  Route::controller(SubaccountController::class)->group(function () {

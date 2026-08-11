@@ -1,13 +1,3 @@
- @php
-    $tenant = app('tenant');
-    $kyc = \App\Models\Kyc::where('user_id', auth()->id())
-        ->where('tenant_id', $tenant->id)
-        ->first();
-
-@endphp
-
-
-
 
 <aside class="page-sidebar"> 
           <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
@@ -29,6 +19,7 @@
                   <h6 class="f-w-600">Dashboard</h6></a>
               </li>
 
+              @if($tenant->kyc_required)
               <li class="sidebar-main-title">
                 <div>
                   <h5 class="f-w-700 sidebar-title">KYC</h5>
@@ -45,6 +36,8 @@
 
               </li>
 
+              @endif
+
 
               <li class="sidebar-main-title">
                 <div>
@@ -58,8 +51,8 @@
                  <h6 class="f-w-600">Subscription</h6><i class="ti-arrow-right arrow-toggle"></i></a>
                 <ul class="sidebar-submenu">
                   
-                  <li> <a href="{{$kyc && $kyc->kyc_completed ? route('admin_create_plan',$tenant->subdomain) : '#'}}">Create Plan</a></li>
-                  <li> <a href="{{$kyc && $kyc->kyc_completed ? route('admin_plans',$tenant->subdomain) : '#'}}">Plan List</a></li>
+                  <li> <a href="{{$canAccessProtectedFeatures ? route('admin_create_plan',$tenant->subdomain) : '#'}}">Create Plan</a></li>
+                  <li> <a href="{{$canAccessProtectedFeatures ? route('admin_plans',$tenant->subdomain) : '#'}}">Plan List</a></li>
                 </ul>
 
               </li>
@@ -71,7 +64,7 @@
                 </div>
               </li>
               <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
-                <a class="sidebar-link" href="{{$kyc && $kyc->kyc_completed ? route('allresident.details',$tenant->subdomain) : '#'}}">
+                <a class="sidebar-link" href="{{$canAccessProtectedFeatures ? route('allresident.details',$tenant->subdomain) : '#'}}">
                   <i class="ti-user"></i>
                   <h6 class="f-w-600">All Residents </h6></a>
               </li>
@@ -84,7 +77,7 @@
                 </div>
               </li>
               <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
-                <a class="sidebar-link" href="{{$kyc && $kyc->kyc_completed ? route('admin_visitor_logs',$tenant->subdomain) : '#'}}">
+                <a class="sidebar-link" href="{{$canAccessProtectedFeatures ? route('admin_visitor_logs',$tenant->subdomain) : '#'}}">
                   <i class="ti-user"></i>
                   <h6 class="f-w-600">All Visitor's Log</h6></a>
               </li>

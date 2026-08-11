@@ -68,11 +68,15 @@
                       <div class="col-xl-9 col-lg-8 col-9 p-0">
                         <h3 class="mb-2">Status </h3>
                         <h3 style="font-size: 15px;">
-                           @if($kyc->kyc_completed == 1)
-                              Verified
-                           @else
-                              Not Verified   
-                           @endif
+                            @if($tenant->kyc_required)
+                                @if($kyc?->kyc_completed)
+                                    Verified
+                                @else
+                                    Not Verified
+                                @endif
+                            @else
+                                KYC Not Required
+                            @endif
                         </h3>
                         <h3 style="margin-top: 15px;"></h3>
                         <span></span>
@@ -104,63 +108,125 @@
                 </div>
               </div>
 
-              <div class="col-xl-3">
-                  <div class="card overflow-hidden shadow-sm" style="background-color: rgba(219,218,229,1);">
-                    <div class="chart-widget-top">
+              {{--sub--}}
+                 
+                    <div class="col-xl-3">
+    <div class="card overflow-hidden shadow-sm"
+         style="background-color: rgba(219,218,229,1);">
 
-                        <div class="row card-body pb-2 m-0">
+        <div class="chart-widget-top">
 
-                            <div class="col-xl-9 col-lg-8 col-9 p-0">
+            <div class="row card-body pb-2 m-0">
 
-                                <h3 class="mb-2">Subscription</h3>
+                <div class="col-xl-9 col-lg-8 col-9 p-0">
 
-                                <h3 style="font-size:15px;">
-                                    Plan: {{ $subscription?->plan?->name ?? 'None' }}
-                                </h3>
+                    <h3 class="mb-2">Subscription</h3>
 
-                                <h3 style="font-size:12px; margin-top:5px;">
-                                    Expires 
-                                    {{ $subscription?->ends_at 
-                                        ? \Carbon\Carbon::parse($subscription->ends_at)->format('jS M, Y') 
-                                        : 'No Expiry' }}
-                                </h3>
+                    @if($subscription)
 
-                            </div>
+                        <h3 style="font-size:15px;">
+                            Plan: {{ $subscription->plan?->name ?? 'None' }}
+                        </h3>
 
-                            <div class="col-xl-3 col-lg-4 col-3 text-end p-0">
-                                <h6>
-                                    <i style="color:#1d194b;font-weight:bolder;" class="fa-solid fa-credit-card"></i>
-                                </h6>
-                            </div>
+                        <h3 style="font-size:12px; margin-top:5px;">
+                            Expires
+                            {{ $subscription->ends_at
+                                ? \Carbon\Carbon::parse($subscription->ends_at)->format('jS M, Y')
+                                : 'No Expiry' }}
+                        </h3>
 
-                        </div>
+                    @elseif($trialActive)
 
-                      
+                        <h3 style="font-size:15px;">
+                            Plan: Free Trial
+                        </h3>
 
-                    </div>
+                        <h3 style="font-size:12px; margin-top:5px;">
+                            Trial ends
+                            {{ \Carbon\Carbon::parse($tenant->trial_end_date)->format('jS M, Y') }}
+                        </h3>
+
+                    @else
+
+                        <h3 style="font-size:15px;">
+                            Plan: None
+                        </h3>
+
+                        <h3 style="font-size:12px; margin-top:5px;">
+                            No active subscription
+                        </h3>
+
+                    @endif
+
                 </div>
-              </div>
 
-              
-           @if($subscription)
+                <div class="col-xl-3 col-lg-4 col-3 text-end p-0">
 
-            <div class="px-3 pb-3">
+                    <h6>
+                        <i style="color:#1d194b;font-weight:bolder;"
+                           class="fa-solid fa-credit-card"></i>
+                    </h6>
 
-                <small class="text-muted">
-                    {{ $daysLeft > 0 ? $daysLeft.' days left for subscription' : 'Expired' }}
-                </small>
-
-                <div class="progress mt-1" style="height:6px;">
-                    <div 
-                        class="progress-bar bg-success"
-                        role="progressbar"
-                        style="width: {{ $progress }}%">
-                    </div>
                 </div>
 
             </div>
 
-            @endif
+        </div>
+
+
+        {{-- Paid Subscription --}}
+        @if($subscription)
+
+            <div class="px-3 pb-3">
+
+                <small class="text-muted">
+                    {{ $daysLeft > 0
+                        ? $daysLeft.' days left for subscription'
+                        : 'Expired' }}
+                </small>
+
+                <div class="progress mt-1" style="height:6px;">
+
+                    <div
+                        class="progress-bar bg-success"
+                        role="progressbar"
+                        style="width: {{ $progress }}%">
+                    </div>
+
+                </div>
+
+            </div>
+
+        {{-- Free Trial --}}
+        @elseif($trialActive)
+
+            <div class="px-3 pb-3">
+
+                <small class="text-muted">
+                    {{ $trialDaysLeft }} days left for free trial
+                </small>
+
+                <div class="progress mt-1" style="height:6px;">
+
+                    <div
+                        class="progress-bar bg-info"
+                        role="progressbar"
+                        style="width: {{ $trialProgress }}%">
+                    </div>
+
+                </div>
+
+            </div>
+
+        @endif
+
+    </div>
+</div>
+               
+              {{--endsub--}}
+
+              
+            
 
             {{-- <div class="row">
 

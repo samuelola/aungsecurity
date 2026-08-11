@@ -1,18 +1,4 @@
- @php
-    $tenant = app('tenant');
-    $kyc = \App\Models\Kyc::where('user_id', auth()->id())
-        ->where('tenant_id', $tenant->id)
-        ->first();
 
-    $hasSubscription = \App\Models\Subscription::where('user_id', auth()->id())
-    ->where('status','active')
-    ->where('ends_at','>', now())
-    ->exists();    
-@endphp
-
-
-
- 
  <aside class="page-sidebar"> 
           <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
           <div class="main-sidebar" id="main-sidebar">
@@ -34,6 +20,8 @@
                   <h6 class="f-w-600">Dashboard</h6></a>
               </li>
 
+              @if($tenant->kyc_required)
+
                <li class="sidebar-main-title">
                 <div>
                   <h5 class="f-w-700 sidebar-title">KYC</h5>
@@ -49,6 +37,8 @@
                 </ul>
 
               </li>
+
+              @endif
             
 
               <li class="sidebar-main-title">
@@ -56,14 +46,14 @@
                   <h5 class="f-w-700 sidebar-title">Wallet</h5>
                 </div>
               </li>
-              <li class="sidebar-list {{ !$kyc || !$kyc->kyc_completed ? 'disabled' : '' }}"> 
+              <li class="sidebar-list {{ !$canAccessProtectedFeatures ? 'disabled' : '' }}"> 
                 <i class="fa-solid fa-thumbtack"></i><a class="sidebar-link" href="javascript:void(0)">
                   <i class="ti-wallet"></i>
                  <h6 class="f-w-600">Wallet</h6><i class="ti-arrow-right arrow-toggle"></i></a>
                 <ul class="sidebar-submenu">
-                  <li> <a href="{{$kyc && $kyc->kyc_completed ? route('allwallet',$tenant->subdomain) : '#'}}">Wallet</a></li>
-                  <li><a href="{{$kyc && $kyc->kyc_completed ? route('fundwallet',$tenant->subdomain) : '#'}}">Fund Wallet</a></li>
-                  <li><a href="{{$kyc && $kyc->kyc_completed ? route('resident_transaction',$tenant->subdomain) : '#'}}">Transaction</a></li>
+                  <li> <a href="{{$canAccessProtectedFeatures ? route('allwallet',$tenant->subdomain) : '#'}}">Wallet</a></li>
+                  <li><a href="{{$canAccessProtectedFeatures ? route('fundwallet',$tenant->subdomain) : '#'}}">Fund Wallet</a></li>
+                  <li><a href="{{$canAccessProtectedFeatures ? route('resident_transaction',$tenant->subdomain) : '#'}}">Transaction</a></li>
                 </ul>
 
               </li>
@@ -75,7 +65,7 @@
                 </div>
               </li>
               <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
-                <a class="sidebar-link" href="{{$kyc && $kyc->kyc_completed ? route('resident.details',$tenant->subdomain) : '#'}}">
+                <a class="sidebar-link" href="{{$canAccessProtectedFeatures ? route('resident.details',$tenant->subdomain) : '#'}}">
                   <i class="ti-user"></i>
                   <h6 class="f-w-600">Resident Details</h6></a>
               </li>
@@ -87,7 +77,7 @@
               </li>
               <li class="sidebar-list"> <i class="fa-solid fa-thumbtack"></i>
                 <a class="sidebar-link" 
-                  href="{{$kyc && $kyc->kyc_completed ? route('subscription.create',$tenant->subdomain) : '#'}}">
+                  href="{{$canAccessProtectedFeatures ? route('subscription.create',$tenant->subdomain) : '#'}}">
                   <i class="ti-receipt"></i>
                   <h6 class="f-w-600">Subscription</h6></a>
               </li>
@@ -99,8 +89,8 @@
                 </div>
               </li>
               <li class="sidebar-list">
-                  <a class="sidebar-link {{ !$hasSubscription ? 'disabled text-muted' : '' }}"
-                    href="{{ ($kyc && $kyc->kyc_completed && $hasSubscription) 
+                  <a class="sidebar-link {{ !$hasSubscriptionAccess ? 'disabled text-muted' : '' }}"
+                    href="{{ ($canAccessProtectedFeatures && $hasSubscriptionAccess) 
                               ? route('visitor.create',$tenant->subdomain) 
                               : '#' }}">
 
@@ -110,8 +100,8 @@
               </li>
 
               <li class="sidebar-list">
-                  <a class="sidebar-link {{ !$hasSubscription ? 'disabled text-muted' : '' }}"
-                    href="{{ ($kyc && $kyc->kyc_completed && $hasSubscription) 
+                  <a class="sidebar-link {{ !$hasSubscriptionAccess ? 'disabled text-muted' : '' }}"
+                    href="{{ ($canAccessProtectedFeatures && $hasSubscriptionAccess) 
                               ? route('resident.invitations.index',$tenant->subdomain) 
                               : '#' }}">
 

@@ -357,5 +357,284 @@ class SuperAdminController extends Controller
         
         return redirect(Storage::disk('r2')->url($export->file_path));
     }
+
+    public function toggleTenantKyc($tenant)
+    {
+        $tenantModel = Tenant::findOrFail($tenant);
+
+        $tenantModel->update([
+            'kyc_required' => !$tenantModel->kyc_required,
+        ]);
+
+        return back()->with(
+            'success',
+            $tenantModel->kyc_required
+                ? 'KYC has been enabled for '.$tenantModel->estate_name.' Estate'
+                : 'KYC has been disabled for '.$tenantModel->estate_name.' Estate'
+        );
+    }
+
+    public function trialSettings($tenant)
+    {
+        $tenant = Tenant::findOrFail($tenant);
+
+        return view(
+            'dashboard.superadmin.estates.trial_settings',
+            compact('tenant')
+        );
+    }
+
+    public function updateTrialSettings(Request $request, $tenant)
+        {
+        $tenant = Tenant::findOrFail($tenant);
+
+        $validated = $request->validate([
+            'trial_duration' => [
+                'required',
+                'in:7,14,30,60,custom'
+            ],
+
+            'custom_trial_days' => [
+                'nullable',
+                'required_if:trial_duration,custom',
+                'integer',
+                'min:1'
+            ],
+
+            'trial_start_date' => [
+                'required',
+                'date'
+            ],
+        ]);
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Trial Enabled
+        |--------------------------------------------------------------------------
+        */
+
+        $trialEnabled = $request->boolean('trial_enabled');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Determine Trial Duration
+        |--------------------------------------------------------------------------
+        */
+
+        if ($validated['trial_duration'] === 'custom') {
+
+            $trialDays = (int) $validated['custom_trial_days'];
+
+        } else {
+
+            $trialDays = (int) $validated['trial_duration'];
+
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Calculate Trial Start Date
+        |--------------------------------------------------------------------------
+        */
+
+        $startDate = Carbon::parse(
+            $validated['trial_start_date']
+        )->startOfDay();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Calculate Trial End Date
+        |--------------------------------------------------------------------------
+        |
+        | Example:
+        |
+        | Start:    2026-08-03
+        | Duration: 7 days
+        |
+        | End:      2026-08-10
+        |
+        */
+
+        $endDate = $startDate
+            ->copy()
+            ->addDays($trialDays);
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Save Trial Settings
+        |--------------------------------------------------------------------------
+        */
+
+        $tenant->update([
+
+            'free_trial_enabled' => $trialEnabled,
+
+            'trial_duration_days' => $validated['trial_duration'],
+            'custom_trial_days' =>
+                $validated['trial_duration'] === 'custom'
+                    ? $validated['custom_trial_days']
+                    : null,
+
+            'trial_start_date' => $startDate,
+
+            'trial_end_date' => $endDate,
+
+        ]);
+
+
+        return redirect()
+            ->route(
+                'superadmin.tenant.trial.settings',
+                $tenant->id
+            )
+            ->with(
+                'success',
+                'Trial settings updated successfully.'
+            );
+
+        }
+
+        public function accessFeeSettings($tenant)
+        {
+            $tenant = Tenant::findOrFail($tenant);
+
+            return view(
+                'dashboard.superadmin.estates.tenant_access_fee_settings',
+                compact('tenant')
+            );
+        }
+
+        public function updateAccessFeeSettings(Request $request, $tenant)
+        {
+            $tenant = Tenant::findOrFail($tenant);
+
+            $validated = $request->validate([
+                'access_fee_amount' => [
+                    'required',
+                    'numeric',
+                    'min:0',
+                ],
+
+                'access_fee_timing' => [
+                    'required',
+                    'in:immediately,after_trial',
+                ],
+            ]);
+
+            $accessFeeEnabled = $request->boolean('access_fee_enabled');
+
+            $tenant->update([
+                'access_fee_enabled' => $accessFeeEnabled,
+                'access_fee_amount' => $validated['access_fee_amount'],
+                'access_fee_timing' => $validated['access_fee_timing'],
+            ]);
+
+            return redirect()
+                ->route(
+                    'superadmin.tenant.access.fee.settings',
+                    $tenant->id
+                )
+                ->with(
+                    'success',
+                    'Resident access enablement fee settings updated successfully.'
+                );
+        }
+
+
+        public function toggleBillingImport($tenantId)
+        {
+            $tenant = Tenant::findOrFail($tenantId);
+
+            $tenant->update([
+                'import_existing_subscription_billing' =>
+                    !$tenant->import_existing_subscription_billing
+            ]);
+
+            return back()->with(
+                'success',
+                $tenant->import_existing_subscription_billing
+                    ? 'Existing billing import has been enabled.'
+                    : 'Existing billing import has been disabled.'
+            );
+
+            // return back()->with(
+            //     'success',
+            //     'Existing billing import setting updated successfully.'
+            // );
+        }
+
+
+        public function billingImport($tenant)
+        {
+            $tenant = Tenant::findOrFail($tenant);
+
+            abort_unless($tenant->import_existing_subscription_billing, 403);
+
+            $plans = SubscriptionPlan::where('tenant_id', $tenant->id)
+                ->where('is_active', true)
+                ->orderBy('name')
+                ->get();
+
+            return view(
+                'dashboard.superadmin.estates.billing_import',
+                compact('tenant', 'plans')
+            );
+        }
+
+        public function downloadBillingTemplate($tenant)
+        {
+            $tenant = Tenant::findOrFail($tenant);
+
+            abort_unless($tenant->import_existing_subscription_billing, 403);
+
+            $headers = [
+                'user_id',
+                'email',
+                'plan_id',
+                'billing_cycle',
+                'starts_at',
+                'ends_at',
+                'amount',
+                'reference',
+                'gateway',
+            ];
+
+            $filename = 'billing_import_template.csv';
+
+            $callback = function () use ($headers) {
+
+                $file = fopen('php://output', 'w');
+
+                fputcsv($file, $headers);
+
+                fputcsv($file, [
+                    '1',
+                    'resident@example.com',
+                    '1',
+                    'yearly',
+                    '2026-01-01',
+                    '2026-12-31',
+                    '10000',
+                    'MANUAL-000001',
+                    'manual',
+                ]);
+
+                fclose($file);
+            };
+
+            return response()->streamDownload(
+                $callback,
+                $filename,
+                [
+                    'Content-Type' => 'text/csv',
+                ]
+            );
+        }
+
     
 }

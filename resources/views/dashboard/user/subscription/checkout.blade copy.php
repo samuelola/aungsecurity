@@ -94,34 +94,16 @@ label{
 
                            @php
                                 $basePrice = $plan->price; // base price for selected duration
-                               
+                                $accessFeeYearly = \App\Enums\Fee::accessFeeYearly;
                                 $vat = \App\Enums\Fee::vat;
                                 $payAsYouGoo = \App\Enums\Fee::payAsYouGoo;
 
-                                /*
-                                |--------------------------------------------------------------------------
-                                | Access Enablement Fee
-                                |--------------------------------------------------------------------------
-                                */     
-                                
-                                $accessFee = 0;
+                                // Adjust access fee based on billing cycle #10000
+                                $accessFee = $plan->duration === 'monthly'
+                                            ? round($accessFeeYearly / 12, 2)
+                                            : $accessFeeYearly;
 
-                                if ($tenant->access_fee_enabled &&
-                                     $tenant->access_fee_timing === 'immediately') 
-                                {
-
-                                    $accessFeeYearly = $tenant->access_fee_amount;
-
-                                    $accessFee = $plan->duration === 'monthly'
-                                        ? round($accessFeeYearly / 12, 2)
-                                        : $accessFeeYearly;
-                                }
-
-                                 /*
-                                |--------------------------------------------------------------------------
-                                | Pay As You Go  7% of base price
-                                |--------------------------------------------------------------------------
-                                */
+                                // Pay-as-you-go: 7% of base price
                                 $payAsYouGo = round(($basePrice * $payAsYouGoo) / 100, 2);
 
                                 $subtotal = $basePrice + $accessFee + $payAsYouGo;
@@ -164,17 +146,7 @@ label{
 
                                 <div class="mb-2 d-flex justify-content-between">
                                     <span>Access Code Generation Fee:</span>
-                                    <span class="fw-semibold">
-                                        @if($tenant->access_fee_enabled)
-
-                                            ₦{{ number_format($accessFee, 2) }}
-
-                                        @else
-
-                                            ₦0.00
-
-                                        @endif
-                                    </span>
+                                    <span class="fw-semibold">₦{{ number_format($accessFee,2) }}</span>
                                 </div>
 
                                 <div class="mb-2 d-flex justify-content-between">

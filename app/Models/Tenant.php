@@ -30,4 +30,16 @@ class Tenant extends Model
     {
         return $this->hasOne(Subaccount::class);
     }
+
+    protected $casts = [
+      'kyc_required' => 'boolean',
+      'free_trial_enabled' => 'boolean',
+      'trial_duration_days' => 'integer',
+      'trial_start_date' => 'datetime',
+      'trial_end_date' => 'datetime',
+      'auto_convert_to_paid' => 'boolean',
+      'access_fee_enabled' => 'boolean',
+      'access_fee_amount' => 'decimal:2',
+      'import_existing_subscription_billing' => 'boolean',
+    ];
 }

@@ -38,7 +38,7 @@
                            <div class="row">
                                 <div class="col-md-4 text-center">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        {{-- <div class="col-md-12">
                                             @php
                                                                 
                                                 $storageUrl = env('R2_PUBLIC_URL');
@@ -52,18 +52,68 @@
                                                 <img src="https://placeholder.com/150"
                                                     class="img-fluid rounded-circle mb-3">
                                             @endif
+                                        </div> --}}
+
+                                        <div class="col-md-12">
+                                            @php
+                                                $storageUrl = env('R2_PUBLIC_URL');
+                                            @endphp
+
+                                            <h4>Photo</h4>
+
+                                            @if(
+                                                $tenant->kyc_required &&
+                                                $resident?->kyc?->kyc_completed &&
+                                                $resident?->kyc?->face_image
+                                            )
+
+                                                <img src="{{ $storageUrl . '/' . $resident->kyc->face_image }}"
+                                                    class="img-fluid rounded-circle mb-3"
+                                                    style="width:150px; height:150px; object-fit:cover;">
+
+                                            @else
+
+                                                <img src="{{asset('assets/images/profile.png')}}"
+                                                    class="img-fluid rounded-circle mb-3"
+                                                    style="width:50px; height:50px; object-fit:cover;">
+
+                                            @endif
                                         </div>
                                         
 
                                     </div>
                                      <div class="row mt-3">
+                                        {{-- @if($resident?->kyc->kyc_completed == true)
                                         <div class="col-md-12">
                                             <h5>Kyc Status</h5>
                                             <span class="badge badge-light-success">
-                                                @if($resident?->kyc->kyc_completed == true)
-                                                    Verified
-                                                @endif
+                                                 Verified
                                             </span>
+                                        </div>
+                                        @endif --}}
+
+                                        <div class="col-md-12">
+                                            <h5>KYC Status</h5>
+
+                                            @if(!$tenant->kyc_required)
+
+                                                <span class="badge badge-light-secondary">
+                                                    Not Required
+                                                </span>
+
+                                            @elseif($resident?->kyc?->kyc_completed)
+
+                                                <span class="badge badge-light-success">
+                                                    Verified
+                                                </span>
+
+                                            @else
+
+                                                <span class="badge badge-light-warning">
+                                                    Not Verified
+                                                </span>
+
+                                            @endif
                                         </div>
                                         
 

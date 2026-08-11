@@ -4,32 +4,50 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use App\Models\Kyc;
 
 class EnsureKycCompleted
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         $tenant = app('tenant');
-        $user = auth()->user();
-        
-        $kyc = Kyc::where('user_id', $user->id)
-                ->where('tenant_id', $tenant->id)
-                ->first();
-                
+        $user = $request->user();
 
-        if (!$kyc || !$kyc->kyc_completed) {
-            return redirect()->route('kyc.verify', $tenant->subdomain);
+        if (!$user) {
+            return redirect()->route(
+                'tenant_user_login',
+                $tenant->subdomain
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | KYC DISABLED FOR THIS TENANT
+        |--------------------------------------------------------------------------
+        */
+
+        if (!$tenant->kyc_required) {
+            return $next($request);
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | KYC REQUIRED
+        |--------------------------------------------------------------------------
+        */
+
+        $kycCompleted = Kyc::where('user_id', $user->id)
+            ->where('tenant_id', $tenant->id)
+            ->where('kyc_completed', true)
+            ->exists();
+
+        if (!$kycCompleted) {
+            return redirect()->route(
+                'kyc.verify',
+                $tenant->subdomain
+            );
         }
 
         return $next($request);
     }
-
-
 }
